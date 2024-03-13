@@ -31,7 +31,7 @@
             <x-input-error for="anomalia"/>
         </div>
         <div class="mb-3">
-            <x-label for="nolectura" value="Imposibilidad de toma de lecturas" class="mb-2" />
+            <x-label for="obstaculo" value="Imposibilidad de toma de lecturas" class="mb-2" />
             <div class="">
                 {{-- obstaculos --}}
                 <div>
@@ -57,7 +57,7 @@
                 {{-- usuario no lectura --}}
                 <div>
                     <label>
-                        <input type="radio" name="motivo" id="lectura" value="lectura" class="px-2">
+                        <input type="radio" name="motivo" id="lectura_m" value="lectura" class="px-2">
                         Usuario no Permite Lectura
                     </label>
                 </div>
@@ -66,7 +66,7 @@
         <div class="mb-3">
             <div class="mb-3">
                 <div class="mb-3">
-                    <x-label for="image" value="Fotos de Observacion" class="mb-2" />
+                    <x-label for="foto1" value="Fotos de Observacion" class="mb-2" />
                     <div id="image">
                         <input capture="camera" class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none dark:border-white/70 dark:text-white  file:dark:text-white" id="foto1" name="foto1" type="file" accept="image/*"/>
                         <x-input-error for="foto1"/>
@@ -83,7 +83,6 @@
                 </div>
             </div>
         </div>
-
         <x-button type='submit'>
             Enviar
         </x-button>
