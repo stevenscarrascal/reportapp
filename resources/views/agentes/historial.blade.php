@@ -69,7 +69,7 @@
                                                 <td class=" lg:px-8  py-2 text-sm w-auto">
                                                     <a href="{{ route('reportes.show', $historial->id) }}" class="bg-blue-600 text-white hover:text-blue-800 mr-1 rounded px-4 py-1 inline-block sm:px-2 sm:py-2 mb-1">Ver</a>
                                                     @if ($historial->estado == 9)
-                                                        <a href="{{ route('reportes.edit', $historial->id) }}" class="bg-red-600 hover:text-red-900 rounded px-2 py-1 inline-block sm:px-2 sm:py-2 text-white">Editar</a>
+                                                        <a href="{{ route('reportes.edit', $historial->id) }}" class="bg-green-600 hover:text-green-900 rounded px-2 py-1 inline-block sm:px-2 sm:py-2 text-white">Editar</a>
                                                     @endif
                                                 </td>
                                             </tr>

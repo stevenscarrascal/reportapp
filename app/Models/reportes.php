@@ -21,6 +21,19 @@ class reportes extends Model
         'foto4'=>'required|image|max:2048',
         'foto5'=>'required|image|max:2048'
     ];
+    static $rulesupdate =[
+        'contrato'=>'required',
+        'lectura'=>'required',
+        'anomalia'=>'required',
+        'imposibilidad'=>'nullable',
+        'observacion'=>'nullable',
+        'motivo'=>'nullable',
+        'foto1'=>'image|max:2048',
+        'foto2'=>'image|max:2048',
+        'foto3'=>'image|max:2048',
+        'foto4'=>'image|max:2048',
+        'foto5'=>'image|max:2048'
+    ];
 
     protected $fillable = [
         'personal_id',
@@ -32,7 +45,8 @@ class reportes extends Model
         'foto2',
         'foto3',
         'foto4',
-        'foto5'
+        'foto5',
+        'estado'
     ];
 
     public function personal()

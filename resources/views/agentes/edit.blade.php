@@ -41,7 +41,8 @@
                                 <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                                     <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                                         <div class="overflow-hidden px-6">
-                                            <form action="{{ route('reportes.update',$reporte) }}" method="post" enctype="multipart/form-data">
+                                            <form action="{{ route('reportes.update', $reporte) }}" method="post"
+                                                enctype="multipart/form-data">
                                                 @method('PATCH')
                                                 @csrf
                                                 <div class="mb-3">
@@ -80,16 +81,24 @@
                                                         placeholder="Ingrese su Observacion">{{ $reporte->anomalia }}</textarea>
                                                     <x-input-error for="anomalia" />
                                                 </div>
-
                                                 <div class="mb-3">
                                                     <x-label for="obstaculo" value="Imposibilidad de toma de lecturas"
                                                         class="mb-2" />
                                                     <div class="">
+                                                        {{-- ninguna --}}
+                                                        <div>
+                                                            <label for="obstaculo">
+                                                                <input type="radio" name="motivo" id="obstaculo"
+                                                                    value="ninguna" class="px-2 mb-1"
+                                                                    @if ($reporte->imposibilidad === 'ninguna') checked @endif>
+                                                                Ninguna
+                                                            </label>
+                                                        </div>
                                                         {{-- obstaculos --}}
                                                         <div>
                                                             <label for="obstaculo">
-                                                                <input type="radio" name="motivo" id="obstaculo"   value="obstaculo"
-                                                                    class="px-2 mb-1"
+                                                                <input type="radio" name="motivo" id="obstaculo"
+                                                                    value="obstaculo" class="px-2 mb-1"
                                                                     @if ($reporte->imposibilidad === 'obstaculo') checked @endif>
                                                                 Obstaculos
                                                             </label>
@@ -126,26 +135,26 @@
                                                 <div class="mb-3">
                                                     <x-label for="foto1" value="Fotos de Observacion"
                                                         class="mb-2" />
-                                                        <input
-                                                            class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                            name="foto1" type="file" accept="image/*" />
-                                                        <x-input-error for="foto1" />
-                                                        <input
-                                                            class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                            name="foto2" type="file" accept="image/*" />
-                                                        <x-input-error for="foto2" />
-                                                        <input
-                                                            class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                            name="foto3" type="file" accept="image/*" />
-                                                        <x-input-error for="foto3" />
-                                                        <input
-                                                            class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                            name="foto4" type="file" accept="image/*" />
-                                                        <x-input-error for="foto4" />
-                                                        <input
-                                                            class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                            name="foto5" type="file" accept="image/*" />
-                                                        <x-input-error for="foto5" />
+                                                    <input
+                                                        class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
+                                                        name="foto1" type="file" accept="image/*" />
+                                                    <x-input-error for="foto1" />
+                                                    <input
+                                                        class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
+                                                        name="foto2" type="file" accept="image/*" />
+                                                    <x-input-error for="foto2" />
+                                                    <input
+                                                        class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
+                                                        name="foto3" type="file" accept="image/*" />
+                                                    <x-input-error for="foto3" />
+                                                    <input
+                                                        class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
+                                                        name="foto4" type="file" accept="image/*" />
+                                                    <x-input-error for="foto4" />
+                                                    <input
+                                                        class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
+                                                        name="foto5" type="file" accept="image/*" />
+                                                    <x-input-error for="foto5" />
                                                 </div>
                                                 <x-button class="mb-3">
                                                     Enviar

@@ -32,6 +32,13 @@
         <div class="mb-3">
             <x-label for="obstaculo" value="Imposibilidad de toma de lecturas" class="mb-2" />
             <div class="">
+                {{-- ninguna --}}
+                <div>
+                    <label for="obstaculo">
+                        <input type="radio" name="motivo" id="obstaculo" value="ninguna" class="px-2 mb-1">
+                        Ninguna
+                    </label>
+                </div>
                 {{-- obstaculos --}}
                 <div>
                     <label for="obstaculo">
