@@ -24,6 +24,11 @@
                             data-twe-toggle="pill" data-twe-target="#tabs-profile01" role="tab"
                             aria-controls="tabs-profile01" aria-selected="false">Fotos</a>
                     </li>
+                    <li role="presentation" class="flex-auto text-center">
+                        <a href="{{ route('reportes.index') }}"
+                            class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[twe-nav-active]:border-primary data-[twe-nav-active]:text-primary dark:text-white/50 dark:hover:bg-neutral-700/60 dark:data-[twe-nav-active]:text-primary"
+                            role="tab">regresar</a>
+                    </li>
 
                 </ul>
 
@@ -35,7 +40,8 @@
                             <div class="flex flex-col">
                                 <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                                     <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                                        <div class="overflow-hidden">
+                                        <div class="overflow-hidden px-6">
+
                                             <table
                                                 class="min-w-full  table-auto border border-neutral-200 text-center text-sm font-light text-surface">
                                                 <thead
@@ -57,11 +63,11 @@
 
                                                         <td
                                                             class="whitespace-nowrap border-e border-neutral-200 px-6 py-4 dark:border-white/10">
-                                                            {{$reporte->lectura}}
+                                                            {{ $reporte->lectura }}
                                                         </td>
                                                         <td
                                                             class="whitespace-nowrap border-e border-neutral-200 px-6 py-4 dark:border-white/10">
-                                                            {{$reporte->created_at}}
+                                                            {{ $reporte->created_at }}
                                                         </td>
 
                                                     </tr>
@@ -71,7 +77,8 @@
                                                         <td colspan="2"
                                                             class="whitespace-nowrap border-e border-neutral-200 px-6 py-4 dark:border-white/10">
                                                             <dl class=" font-normal items-center">
-                                                                <dt class=" text-black"> <strong>Observacion</strong></dt>
+                                                                <dt class=" text-black"> <strong>Observacion</strong>
+                                                                </dt>
                                                                 <dd class=" text-black">{{ $reporte->observacion }}</dd>
                                                             </dl>
                                                         </td>
