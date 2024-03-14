@@ -11,16 +11,15 @@ class reportes extends Model
     use HasFactory;
 
     static $rules =[
-        'personal_id'=> 'required',
         'contrato'=>'required',
         'lectura'=>'required',
         'anomalia'=>'required',
         'imposibilidad'=>'nullable',
-        'foto1'=>'required',
-        'foto2'=>'required',
-        'foto3'=>'required',
-        'foto4'=>'required',
-        'foto5'=>'nullable'
+        'foto1'=>'required|image|max:2048',
+        'foto2'=>'required|image|max:2048',
+        'foto3'=>'required|image|max:2048',
+        'foto4'=>'required|image|max:2048',
+        'foto5'=>'required|image|max:2048'
     ];
 
     protected $fillable = [
