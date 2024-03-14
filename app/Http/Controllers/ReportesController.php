@@ -92,37 +92,57 @@ class ReportesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $reportes)
     {
-        $reportes = reportes::findOrFail($id);
-        $data = $request->validate(reportes::$rulesupdate);
+        $reportes = reportes::find($reportes);
+        // Verificar si se han proporcionado nuevas imágenes en los campos de archivo
 
-        // Manejar la carga de imágenes
         if ($request->hasFile('foto1') || $request->hasFile('foto2') || $request->hasFile('foto3') || $request->hasFile('foto4') || $request->hasFile('foto5')) {
+            // Borrar las imágenes antiguas si existen
+
             foreach (['foto1', 'foto2', 'foto3','foto4','foto5'] as $field) {
                 $foto = str_replace('/storage/imagenes/', '/public/imagenes/', $reportes->$field);
                 if (Storage::exists($foto))
                 {
                     Storage::delete($foto);
                 }
+            }
+            // Almacenar las nuevas imágenes
+            $Path1 = $request->file('foto1')->store('public/imagenes');
+            // $Path2 = $request->file('foto2')->store('public/imagenes');
+            // $Path3 = $request->file('foto3')->store('public/imagenes');
+            // $Path4 = $request->file('foto4')->store('public/imagenes');
+            // $Path5 = $request->file('foto5')->store('public/imagenes');
+            $url1 = Storage::url($Path1);
+            // $url2 = Storage::url($Path2);
+            // $url3 = Storage::url($Path3);
+            // $url4 = Storage::url($Path4);
+            // $url5 = Storage::url($Path5);
+            // Actualizar el modelo reportes con las nuevas imágenes
+            $reportes->update([
+                'contrato' => $request->input('contrato'),
+                'lectura' => $request->input('lectura'),
+                'anomalia' => $request->input('anomalia'),
+                'imposibilidad' => $request->input('motivo'),
+                'foto1' => $url1,
+                // 'foto2' => $url2,
+                // 'foto3' => $url3,
+                // 'foto4' => $url4,
+                // 'foto5' => $url5
+            ]);
+            notify()->success('Información actualizada con éxito');
+        } else {
+            // Si no se proporcionan nuevas imágenes, solo actualizar los otros campos del modelo reportes
+            $reportes->update([
+                'contrato' => $request->input('contrato'),
+                'lectura' => $request->input('lectura'),
+                'anomalia' => $request->input('anomalia'),
+                'imposibilidad' => $request->input('motivo')
+            ]);
+            notify()->success('Información actualizada sin cambios en las imágenes');
         }
-
-        // Actualizar los datos del reporte
-        $reportes->personal_id =  Auth::user()->personal->id;
-        $reportes->observaciones = $data['observacion'];
-        $reportes->contrato = $data['contrato'];
-        $reportes->lectura = $data['lectura'];
-        $reportes->anomalia = $data['anomalia'];
-        $reportes->imposibilidad = $data['motivo'];
-        $reportes->estado = '7';
-        }
-        // Guardar el reporte actualizado
-        $reportes->save();
-        notify()->success('Reporte Actualizado Con Exito');
         return redirect()->route('reportes.index');
     }
-
-
     /**
      * Remove the specified resource from storage.
      */
