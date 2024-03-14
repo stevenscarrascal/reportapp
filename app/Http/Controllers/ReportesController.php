@@ -93,14 +93,18 @@ class ReportesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, reportes $reportes)
+    public function update(Request $request, $reportes)
     {
-        dd($request);
+        $reportes = reportes::find($reportes);
         // Verificar si se han proporcionado nuevas imágenes en los campos de archivo
-        if ($request->hasFile('foto1') && $request->hasFile('foto2') && $request->hasFile('foto3') && $request->hasFile('foto4') && $request->hasFile('foto5')) {
+        if ($request->hasFile('foto1') || $request->hasFile('foto2') || $request->hasFile('foto3') || $request->hasFile('foto4') || $request->hasFile('foto5')) {
             // Borrar las imágenes antiguas si existen
-            foreach (['foto1', 'foto2', 'foto3', 'foto4', 'foto5'] as $field) {
-                Storage::delete(str_replace('/storage', 'public', $reportes->$field));
+            foreach (['foto1', 'foto2', 'foto3','foto4','foto5'] as $field) {
+                $foto = str_replace('/storage/imagenes/', '/public/imagenes/', $reportes->$field);
+                if (Storage::exists($foto))
+                {
+                    Storage::delete($foto);
+                }
             }
 
             // Almacenar las nuevas imágenes
