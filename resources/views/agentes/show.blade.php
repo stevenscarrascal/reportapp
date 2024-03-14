@@ -99,7 +99,7 @@
                                 <div class="w-full lg:w-1/3 p-1 md:p-2">
                                     <img alt="gallery"
                                         class="block h-full w-full rounded-lg object-cover object-center"
-                                        src="{{ asset($reporte->foto1) }}" />
+                                        src="{{ asset('/storage' . $reporte->foto3) }}" />
                                 </div>
                                 <div class="w-full lg:w-1/3 p-1 md:p-2">
                                     <img alt="gallery"
