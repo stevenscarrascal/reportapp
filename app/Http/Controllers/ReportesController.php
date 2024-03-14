@@ -53,16 +53,16 @@ class ReportesController extends Controller
         $reportes = new reportes($data);
 
         $reportes->create([
-            'personal_id'=> $request->input('personal_id'),
-            'contrato'=>$request->input('contrato'),
-            'lectura'=>$request->input('lectura'),
-            'anomalia'=>$request->input('anomalia'),
-            'imposibilidad'=>$request->input('motivo'),
-            'foto1'=>$url1,
-            'foto2'=>$url2,
-            'foto3'=>$url3,
-            'foto4'=>$url4,
-            'foto5'=>$url5
+            'personal_id' => Auth::user()->personal->id,
+            'contrato' => $request->input('contrato'),
+            'lectura' => $request->input('lectura'),
+            'anomalia' => $request->input('anomalia'),
+            'imposibilidad' => $request->input('motivo'),
+            'foto1' => $url1,
+            'foto2' => $url2,
+            'foto3' => $url3,
+            'foto4' => $url4,
+            'foto5' => $url5
         ]);
 
         notify()->success('Lectura Guardada Con Exito');
@@ -73,9 +73,12 @@ class ReportesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(reportes $reportes)
+    public function show($id)
     {
-        //
+        $reporte = reportes::find($id);
+
+        
+        return view('agentes.show', compact('reporte'));
     }
 
     /**

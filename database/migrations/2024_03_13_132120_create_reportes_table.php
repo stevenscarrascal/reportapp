@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('lectura',125);
             $table->string('anomalia');
             $table->string('imposibilidad')->nullable();
+            $table->string('observaciones')->nullable();
             $table->string('foto1')->nullable();
             $table->string('foto2')->nullable();
             $table->string('foto3')->nullable();

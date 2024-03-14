@@ -11,7 +11,6 @@ class reportes extends Model
     use HasFactory;
 
     static $rules =[
-        'personal_id'=> 'required',
         'contrato'=>'required',
         'lectura'=>'required',
         'anomalia'=>'required',
