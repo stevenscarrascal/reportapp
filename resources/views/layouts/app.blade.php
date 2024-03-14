@@ -5,17 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link rel="stylesheet" href="{{asset('/vendor/css/dropzone.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('/vendor/css/dropzone.min.css') }}">
 
     <!-- Scripts -->
     @notifyCss
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script type="text/javascript" src="{{asset('/vendor/js/tw-elements.umd.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('/vendor/js/tw-elements.umd.min.js') }}"></script>
     <!-- Styles -->
     @livewireStyles
 </head>

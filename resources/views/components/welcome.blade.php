@@ -26,7 +26,7 @@
             <x-label for='anomalia' value='Observacion de Anomalia' class=" mb-2" />
             <textarea name="anomalia" id="anomalia" rows="5"
                 class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                placeholder="   Ingrese su Observacion"></textarea>
+                placeholder="Ingrese su Observacion"></textarea>
             <x-input-error for="anomalia" />
         </div>
         <div class="mb-3">

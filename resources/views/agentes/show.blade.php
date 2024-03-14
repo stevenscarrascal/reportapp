@@ -79,7 +79,7 @@
                                                             <dl class=" font-normal items-center">
                                                                 <dt class=" text-black"> <strong>Observacion</strong>
                                                                 </dt>
-                                                                <dd class=" text-black">{{ $reporte->observacion }}</dd>
+                                                                <dd class=" text-black">{{ $reporte->observaciones }}</dd>
                                                             </dl>
                                                         </td>
 
