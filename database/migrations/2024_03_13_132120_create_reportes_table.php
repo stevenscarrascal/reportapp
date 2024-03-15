@@ -25,6 +25,9 @@ return new class extends Migration
             $table->string('foto3')->nullable();
             $table->string('foto4')->nullable();
             $table->string('foto5')->nullable();
+            $table->string('foto6')->nullable();
+            $table->unsignedInteger('localizacion')->nullable();
+            $table->foreign('localizacion')->references('id')->on('localizaciones')->delete('cascade');
             $table->string('estado')->default('7');
             $table->timestamps();
         });

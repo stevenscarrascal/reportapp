@@ -40,6 +40,7 @@ class reportes extends Model
         'contrato',
         'lectura',
         'anomalia',
+        'localizacion',
         'imposibilidad',
         'direccion',
         'foto1',
@@ -59,5 +60,9 @@ class reportes extends Model
     public function EstadoReporte()
     {
         return $this->hasOne(vs_estado::class, 'id', 'estado');
+    }
+
+    public function localizacion(){
+        return $this->belongsTo(Localizacion::class);
     }
 }

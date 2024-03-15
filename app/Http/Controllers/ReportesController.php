@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Localizacion;
 use App\Models\reportes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,17 +39,16 @@ class ReportesController extends Controller
     {
         $latitud = $request->input('latitud');
         $longitud = $request->input('longitud');
-
+        $localizacion = Localizacion::create([
+            'latitud' => $latitud,
+            'longitud' => $longitud
+        ]);
         $response = Http::withoutVerifying()->get("https://revgeocode.search.hereapi.com/v1/revgeocode?apikey=auuOOORgqWd_T4DFf0onY2JlvMDhz4tP0G0o7fRYDRU&at=$latitud,$longitud&lang=es-ES");
         $data = $response->json();
-
-        $direccion = $data['items'][0]['address']['label'];
-
-
+        $direccion = $data['items'][0]['address']['street']. '-' .$data['items'][0]['address']['houseNumber']. ' ' .$data['items'][0]['address']['city'].','.' '.$data['items'][0]['address']['countryName'];
         $request->validate(reportes::$rules);
-
         $reportes = $request->all();
-
+        $reportes['localizacion'] = $localizacion->id;
         $reportes['direccion'] = $direccion;
 
         if ($imagen = $request->file('foto1')) {
@@ -81,11 +81,14 @@ class ReportesController extends Controller
             $imagen5->move($Path5, $foto5);
             $reportes['foto5'] = $foto5;
         }
-
+        if ($imagen6 = $request->file('foto6')) {
+            $Path6 = 'imagen/';
+            $foto6 = rand(1000, 9999) . "_" . date('YmdHis') . "." . $imagen6->getClientOriginalExtension();
+            $imagen6->move($Path6, $foto6);
+            $reportes['foto6'] = $foto6;
+        }
         reportes::create($reportes);
-
         notify()->success('Lectura Guardada Con Exito');
-
         return redirect()->route('reportes.index');
     }
 
@@ -116,6 +119,8 @@ class ReportesController extends Controller
         $request->validate(reportes::$rulesupdate);
         $reportes = reportes::find($reporte);
         $report = $request->all();
+        $estado = '7';
+        $reportes['estado'] =  $estado;
 
         if ($imagen = $request->file('foto1')) {
             $Path1 = 'imagen/';
