@@ -7,8 +7,7 @@ use App\Models\reportes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
-use Intervention\Image\ImageManager;
-use Intervention\Image\Drivers\Imagick\Driver;
+
 
 
 
@@ -68,7 +67,7 @@ class ReportesController extends Controller
         $foto1 = rand(1000, 9999) . "_" . date('YmdHis') . "." . $imagen->getClientOriginalExtension();
         $imagen->move($path1, $foto1);
         $reporte['foto1'] = $foto1;
-        
+
         // Abrir la imagen utilizando GD
         $imagenGD = imagecreatefromjpeg(public_path($path1 . $foto1));
 
