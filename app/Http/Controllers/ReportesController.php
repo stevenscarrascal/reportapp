@@ -7,6 +7,8 @@ use App\Models\reportes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Imagick\Driver;
 
 
 
@@ -37,52 +39,59 @@ class ReportesController extends Controller
      */
     public function store(Request $request)
     {
-        $latitud = $request->input('latitud');
-        $longitud = $request->input('longitud');
-        $localizacion = Localizacion::create([
-            'latitud' => $latitud,
-            'longitud' => $longitud
-        ]);
-        $response = Http::withoutVerifying()->get("https://revgeocode.search.hereapi.com/v1/revgeocode?apikey=auuOOORgqWd_T4DFf0onY2JlvMDhz4tP0G0o7fRYDRU&at=$latitud,$longitud&lang=es-ES");
-        $data = $response->json();
-        $direccion = $data['items'][0]['address']['label'];
-        $request->validate(reportes::$rules);
-        $reportes = $request->all();
-        $reportes['localizacion'] = $localizacion->id;
-        $reportes['direccion'] = $direccion;
+        // Obtener latitud y longitud del request
+    $latitud = $request->input('latitud');
+    $longitud = $request->input('longitud');
 
-        if ($imagen = $request->file('foto1')) {
-            $Path1 = 'imagen/';
-            $foto1 = rand(1000, 9999) . "_" . date('YmdHis') . "." . $imagen->getClientOriginalExtension();
-            $imagen->move($Path1, $foto1);
-            $reportes['foto1'] = $foto1;
-        }
-        // Cargar la imagen con GD
-        $imagePath = public_path($Path1 . $foto1);
-        $image = imagecreatefromjpeg($imagePath);
+    // Crear registro de localización
+    $localizacion = Localizacion::create([
+        'latitud' => $latitud,
+        'longitud' => $longitud
+    ]);
 
-        $imageWidth = imagesx($image);
-        $imageHeight = imagesy($image);
+    // Obtener dirección desde API
+    $response = Http::withoutVerifying()->get("https://revgeocode.search.hereapi.com/v1/revgeocode?apikey=auuOOORgqWd_T4DFf0onY2JlvMDhz4tP0G0o7fRYDRU&at=$latitud,$longitud&lang=es-ES");
+    $data = $response->json();
+    $direccion = $data['items'][0]['address']['label'];
 
-        $fontSize = 50;
-        $textDimensions = imagettfbbox($fontSize, 0, public_path('font/arial.ttf'), "direccion: $direccion");
-        $textWidth = $textDimensions[2] - $textDimensions[0]; // Anchura del texto
-        $textHeight = $textDimensions[1] - $textDimensions[7]; // Altura del texto
+    // Validar el request
+    $request->validate(reportes::$rules);
 
-        // Coordenadas a incrustar
+    // Crear el reporte
+    $reporte = $request->all();
+    $reporte['localizacion'] = $localizacion->id;
+    $reporte['direccion'] = $direccion;
 
-        $textColor = imagecolorallocate($image, 255, 255, 255); // Color blanco
-        $textY = $imageHeight  - 30;
-        $textX = $imageWidth - $textWidth - 50;
+    // Obtener la imagen del request
+    if ($imagen = $request->file('foto1')) {
+        $path1 = 'imagen/';
+        $foto1 = rand(1000, 9999) . "_" . date('YmdHis') . "." . $imagen->getClientOriginalExtension();
+        $imagen->move($path1, $foto1);
+        $reporte['foto1'] = $foto1;
+        
+        // Abrir la imagen utilizando GD
+        $imagenGD = imagecreatefromjpeg(public_path($path1 . $foto1));
 
-        // Incrustar las coordenadas en la imagen
-        imagettftext($image, $fontSize, 0, $textX, $textY, $textColor, public_path('font/arial.ttf'), "direccion: $direccion");
+        // Añadir texto de coordenadas a la imagen
+        $textoCoordenadas = "Direccion: $direccion";
+        $colorTexto = imagecolorallocate($imagenGD, 255, 255, 255); // Color blanco
+        $posXCoordenadas = 10; // Ajusta según tu diseño
+        $posYCoordenadas = imagesy($imagenGD) - 20; // Ajusta según tu diseño
+        imagettftext($imagenGD, 60, 0, $posXCoordenadas, $posYCoordenadas, $colorTexto, public_path('font/arial.ttf'), $textoCoordenadas);
 
-        // Guardar la imagen con las coordenadas incrustadas
-        imagejpeg($image, $imagePath);
+        // Añadir texto de fecha a la imagen
+        $fechaActual = date("Y-m-d H:i:s");
+        $posXFecha = 10; // Ajusta según tu diseño
+        $posYFecha = imagesy($imagenGD) - 130; // Ajusta según tu diseño
+        imagettftext($imagenGD, 60, 0, $posXFecha, $posYFecha, $colorTexto, public_path('font/arial.ttf'), "Fecha: $fechaActual");
 
-        // Liberar memoria
-        imagedestroy($image);
+        // Guardar la imagen modificada
+        imagejpeg($imagenGD, public_path($path1 . $foto1));
+
+        // Liberar la memoria
+        imagedestroy($imagenGD);}
+
+
 
         // if ($imagen2 = $request->file('foto2')) {
         //     $Path2 = 'imagen/';
@@ -114,7 +123,7 @@ class ReportesController extends Controller
         //     $imagen6->move($Path6, $foto6);
         //     $reportes['foto6'] = $foto6;
         // }
-        reportes::create($reportes);
+        reportes::create($reporte);
         notify()->success('Lectura Guardada Con Exito');
         return redirect()->route('reportes.index');
     }
