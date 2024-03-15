@@ -43,7 +43,7 @@
                                         <div class="overflow-hidden px-6">
                                             <form action="{{ route('reportes.update', $reporte) }}" method="post"
                                                 enctype="multipart/form-data">
-                                                @method('PATCH')
+                                                @method('PUT')
                                                 @csrf
                                                 <div class="mb-3">
                                                     <x-label for='observacion' value='Observacion del Coordinador'
@@ -60,7 +60,7 @@
                                                         name="contrato" id="contrato"
                                                         placeholder="Ingrese su Numero de Contrato"
                                                         oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                                        value="{{ $reporte->contrato }}">
+                                                        value="{{ $reporte->contrato }}" readonly>
                                                     <x-input-error for="contrato" />
                                                 </div>
                                                 <div class=" mb-3">
