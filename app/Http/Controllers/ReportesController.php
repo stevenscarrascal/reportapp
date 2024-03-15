@@ -64,12 +64,16 @@ class ReportesController extends Controller
         $imageWidth = imagesx($image);
         $imageHeight = imagesy($image);
 
+        $fontSize = 50;
+        $textDimensions = imagettfbbox($fontSize, 0, public_path('font/arial.ttf'), "direccion: $direccion");
+        $textWidth = $textDimensions[2] - $textDimensions[0]; // Anchura del texto
+        $textHeight = $textDimensions[1] - $textDimensions[7]; // Altura del texto
 
         // Coordenadas a incrustar
-        $fontSize = 70;
+
         $textColor = imagecolorallocate($image, 255, 255, 255); // Color blanco
-        $textY = $imageHeight - 30;
-        $textX = $imageWidth - 50;
+        $textY = $imageHeight  - 30;
+        $textX = $imageWidth - $textWidth - 50;
 
         // Incrustar las coordenadas en la imagen
         imagettftext($image, $fontSize, 0, $textX, $textY, $textColor, public_path('font/arial.ttf'), "direccion: $direccion");
