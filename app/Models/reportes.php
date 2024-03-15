@@ -10,31 +10,31 @@ class reportes extends Model
 {
     use HasFactory;
 
-    static $rules =[
-        'contrato'=>'required',
-        'lectura'=>'required',
-        'anomalia'=>'required',
-        'imposibilidad'=>'nullable',
-        'foto1'=>'required|image|max:5120',
-        'foto2'=>'required|image|max:5120',
-        'foto3'=>'required|image|max:5120',
-        'foto4'=>'required|image|max:5120',
-        'foto5'=>'image|max:5120',
-        'foto6'=>'image|max:5120'
+    static $rules = [
+        'contrato' => 'required',
+        'lectura' => 'required',
+        'anomalia' => 'required',
+        'imposibilidad' => 'nullable',
+        'foto1' => 'required|image|max:5120',
+        'foto2' => 'required|image|max:5120',
+        'foto3' => 'required|image|max:5120',
+        'foto4' => 'required|image|max:5120',
+        'foto5' => 'image|max:5120',
+        'foto6' => 'image|max:5120'
     ];
-    static $rulesupdate =[
-        'contrato'=>'required',
-        'lectura'=>'required',
-        'anomalia'=>'required',
-        'imposibilidad'=>'nullable',
-        'observacion'=>'nullable',
-        'motivo'=>'nullable',
-        'foto1'=>'image|max:5120',
-        'foto2'=>'image|max:5120',
-        'foto3'=>'image|max:5120',
-        'foto4'=>'image|max:5120',
-        'foto5'=>'image|max:5120',
-        'foto6'=>'image|max:5120',
+    static $rulesupdate = [
+        'contrato' => 'required',
+        'lectura' => 'required',
+        'anomalia' => 'required',
+        'imposibilidad' => 'nullable',
+        'observacion' => 'nullable',
+        'motivo' => 'nullable',
+        'foto1' => 'image|max:5120',
+        'foto2' => 'image|max:5120',
+        'foto3' => 'image|max:5120',
+        'foto4' => 'image|max:5120',
+        'foto5' => 'image|max:5120',
+        'foto6' => 'image|max:5120',
     ];
 
     protected $fillable = [
@@ -63,5 +63,4 @@ class reportes extends Model
     {
         return $this->hasOne(vs_estado::class, 'id', 'estado');
     }
-
 }

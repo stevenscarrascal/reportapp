@@ -127,21 +127,21 @@
         </div>
     </div>
     @section('js')
-    <script>
-        // Función para manejar la obtención de la ubicación actual
-        function obtenerUbicacion() {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                // Obtener latitud y longitud
-                var latitud = position.coords.latitude;
-                var longitud = position.coords.longitude;
+        <script>
+            // Función para manejar la obtención de la ubicación actual
+            function obtenerUbicacion() {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    // Obtener latitud y longitud
+                    var latitud = position.coords.latitude;
+                    var longitud = position.coords.longitude;
 
-                // Colocar latitud y longitud en los elementos de entrada
-                document.getElementById('latitud').value = latitud;
-                document.getElementById('longitud').value = longitud;
-            });
-        }
-        // Llamar a la función para obtener la ubicación al cargar la página
-        window.onload = obtenerUbicacion;
-    </script>
+                    // Colocar latitud y longitud en los elementos de entrada
+                    document.getElementById('latitud').value = latitud;
+                    document.getElementById('longitud').value = longitud;
+                });
+            }
+            // Llamar a la función para obtener la ubicación al cargar la página
+            window.onload = obtenerUbicacion;
+        </script>
     @endsection
 </x-app-layout>

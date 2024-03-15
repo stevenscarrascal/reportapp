@@ -62,23 +62,23 @@ class ReportesController extends Controller
             //  Abrir la imagen utilizando GD
             $imagenGD = imagecreatefromjpeg(public_path($path1 . $foto1));
             // // Añadir texto de coordenadas a la imagen
-             $textoCoordenadas = "Direccion: $direccion";
-             $colorTexto = imagecolorallocate($imagenGD, 255, 255, 255); // Color blanco
-             $posXCoordenadas = 10; // Ajusta según tu diseño
-             $posYCoordenadas = imagesy($imagenGD) - 20; // Ajusta según tu diseño
-             imagettftext($imagenGD, $fontSize, 0, $posXCoordenadas, $posYCoordenadas, $colorTexto, public_path('font/arial.ttf'), $textoCoordenadas);
+            $textoCoordenadas = "Direccion: $direccion";
+            $colorTexto = imagecolorallocate($imagenGD, 255, 255, 255); // Color blanco
+            $posXCoordenadas = 10; // Ajusta según tu diseño
+            $posYCoordenadas = imagesy($imagenGD) - 20; // Ajusta según tu diseño
+            imagettftext($imagenGD, $fontSize, 0, $posXCoordenadas, $posYCoordenadas, $colorTexto, public_path('font/arial.ttf'), $textoCoordenadas);
 
             //Añadir texto de fecha a la imagen
-             $fechaActual = date("Y-m-d H:i:s");
-             $posXFecha = 10; // Ajusta según tu diseño
-             $posYFecha = imagesy($imagenGD) - 130; // Ajusta según tu diseño
-             imagettftext($imagenGD, $fontSize, 0, $posXFecha, $posYFecha, $colorTexto, public_path('font/arial.ttf'), "Fecha: $fechaActual");
+            $fechaActual = date("Y-m-d H:i:s");
+            $posXFecha = 10; // Ajusta según tu diseño
+            $posYFecha = imagesy($imagenGD) - 130; // Ajusta según tu diseño
+            imagettftext($imagenGD, $fontSize, 0, $posXFecha, $posYFecha, $colorTexto, public_path('font/arial.ttf'), "Fecha: $fechaActual");
 
-             // Guardar la imagen modificada
-             imagejpeg($imagenGD, public_path($path1 . $foto1));
+            // Guardar la imagen modificada
+            imagejpeg($imagenGD, public_path($path1 . $foto1));
 
-             // Liberar la memoria
-             imagedestroy($imagenGD);
+            // Liberar la memoria
+            imagedestroy($imagenGD);
         }
 
         if ($imagen2 = $request->file('foto2')) {
@@ -86,26 +86,26 @@ class ReportesController extends Controller
             $foto2 = rand(1000, 9999) . "_" . date('YmdHis') . "." . $imagen2->getClientOriginalExtension();
             $imagen2->move($path2, $foto2);
             $reportes['foto2'] = $foto2;
-             //  Abrir la imagen utilizando GD
-             $imagenGD = imagecreatefromjpeg(public_path($path2 . $foto2));
-             // // Añadir texto de coordenadas a la imagen
-              $textoCoordenadas = "Direccion: $direccion";
-              $colorTexto = imagecolorallocate($imagenGD, 255, 255, 255); // Color blanco
-              $posXCoordenadas = 10; // Ajusta según tu diseño
-              $posYCoordenadas = imagesy($imagenGD) - 20; // Ajusta según tu diseño
-              imagettftext($imagenGD, $fontSize, 0, $posXCoordenadas, $posYCoordenadas, $colorTexto, public_path('font/arial.ttf'), $textoCoordenadas);
+            //  Abrir la imagen utilizando GD
+            $imagenGD = imagecreatefromjpeg(public_path($path2 . $foto2));
+            // // Añadir texto de coordenadas a la imagen
+            $textoCoordenadas = "Direccion: $direccion";
+            $colorTexto = imagecolorallocate($imagenGD, 255, 255, 255); // Color blanco
+            $posXCoordenadas = 10; // Ajusta según tu diseño
+            $posYCoordenadas = imagesy($imagenGD) - 20; // Ajusta según tu diseño
+            imagettftext($imagenGD, $fontSize, 0, $posXCoordenadas, $posYCoordenadas, $colorTexto, public_path('font/arial.ttf'), $textoCoordenadas);
 
-             //Añadir texto de fecha a la imagen
-              $fechaActual = date("Y-m-d H:i:s");
-              $posXFecha = 10; // Ajusta según tu diseño
-              $posYFecha = imagesy($imagenGD) - 130; // Ajusta según tu diseño
-              imagettftext($imagenGD, $fontSize, 0, $posXFecha, $posYFecha, $colorTexto, public_path('font/arial.ttf'), "Fecha: $fechaActual");
+            //Añadir texto de fecha a la imagen
+            $fechaActual = date("Y-m-d H:i:s");
+            $posXFecha = 10; // Ajusta según tu diseño
+            $posYFecha = imagesy($imagenGD) - 130; // Ajusta según tu diseño
+            imagettftext($imagenGD, $fontSize, 0, $posXFecha, $posYFecha, $colorTexto, public_path('font/arial.ttf'), "Fecha: $fechaActual");
 
-              // Guardar la imagen modificada
-              imagejpeg($imagenGD, public_path($path2 . $foto2));
+            // Guardar la imagen modificada
+            imagejpeg($imagenGD, public_path($path2 . $foto2));
 
-              // Liberar la memoria
-              imagedestroy($imagenGD);
+            // Liberar la memoria
+            imagedestroy($imagenGD);
         }
         if ($imagen3 = $request->file('foto3')) {
             $path3 = 'imagen/';
@@ -115,23 +115,23 @@ class ReportesController extends Controller
             //  Abrir la imagen utilizando GD
             $imagenGD = imagecreatefromjpeg(public_path($path3 . $foto3));
             // // Añadir texto de coordenadas a la imagen
-             $textoCoordenadas = "Direccion: $direccion";
-             $colorTexto = imagecolorallocate($imagenGD, 255, 255, 255); // Color blanco
-             $posXCoordenadas = 10; // Ajusta según tu diseño
-             $posYCoordenadas = imagesy($imagenGD) - 20; // Ajusta según tu diseño
-             imagettftext($imagenGD, $fontSize, 0, $posXCoordenadas, $posYCoordenadas, $colorTexto, public_path('font/arial.ttf'), $textoCoordenadas);
+            $textoCoordenadas = "Direccion: $direccion";
+            $colorTexto = imagecolorallocate($imagenGD, 255, 255, 255); // Color blanco
+            $posXCoordenadas = 10; // Ajusta según tu diseño
+            $posYCoordenadas = imagesy($imagenGD) - 20; // Ajusta según tu diseño
+            imagettftext($imagenGD, $fontSize, 0, $posXCoordenadas, $posYCoordenadas, $colorTexto, public_path('font/arial.ttf'), $textoCoordenadas);
 
             //Añadir texto de fecha a la imagen
-             $fechaActual = date("Y-m-d H:i:s");
-             $posXFecha = 10; // Ajusta según tu diseño
-             $posYFecha = imagesy($imagenGD) - 130; // Ajusta según tu diseño
-             imagettftext($imagenGD, $fontSize, 0, $posXFecha, $posYFecha, $colorTexto, public_path('font/arial.ttf'), "Fecha: $fechaActual");
+            $fechaActual = date("Y-m-d H:i:s");
+            $posXFecha = 10; // Ajusta según tu diseño
+            $posYFecha = imagesy($imagenGD) - 130; // Ajusta según tu diseño
+            imagettftext($imagenGD, $fontSize, 0, $posXFecha, $posYFecha, $colorTexto, public_path('font/arial.ttf'), "Fecha: $fechaActual");
 
-             // Guardar la imagen modificada
-             imagejpeg($imagenGD, public_path($path3 . $foto3));
+            // Guardar la imagen modificada
+            imagejpeg($imagenGD, public_path($path3 . $foto3));
 
-             // Liberar la memoria
-             imagedestroy($imagenGD);
+            // Liberar la memoria
+            imagedestroy($imagenGD);
         }
         if ($imagen4 = $request->file('foto4')) {
             $path4 = 'imagen/';
@@ -141,23 +141,23 @@ class ReportesController extends Controller
             //  Abrir la imagen utilizando GD
             $imagenGD = imagecreatefromjpeg(public_path($path4 . $foto4));
             // // Añadir texto de coordenadas a la imagen
-             $textoCoordenadas = "Direccion: $direccion";
-             $colorTexto = imagecolorallocate($imagenGD, 255, 255, 255); // Color blanco
-             $posXCoordenadas = 10; // Ajusta según tu diseño
-             $posYCoordenadas = imagesy($imagenGD) - 20; // Ajusta según tu diseño
-             imagettftext($imagenGD, $fontSize, 0, $posXCoordenadas, $posYCoordenadas, $colorTexto, public_path('font/arial.ttf'), $textoCoordenadas);
+            $textoCoordenadas = "Direccion: $direccion";
+            $colorTexto = imagecolorallocate($imagenGD, 255, 255, 255); // Color blanco
+            $posXCoordenadas = 10; // Ajusta según tu diseño
+            $posYCoordenadas = imagesy($imagenGD) - 20; // Ajusta según tu diseño
+            imagettftext($imagenGD, $fontSize, 0, $posXCoordenadas, $posYCoordenadas, $colorTexto, public_path('font/arial.ttf'), $textoCoordenadas);
 
             //Añadir texto de fecha a la imagen
-             $fechaActual = date("Y-m-d H:i:s");
-             $posXFecha = 10; // Ajusta según tu diseño
-             $posYFecha = imagesy($imagenGD) - 130; // Ajusta según tu diseño
-             imagettftext($imagenGD, $fontSize, 0, $posXFecha, $posYFecha, $colorTexto, public_path('font/arial.ttf'), "Fecha: $fechaActual");
+            $fechaActual = date("Y-m-d H:i:s");
+            $posXFecha = 10; // Ajusta según tu diseño
+            $posYFecha = imagesy($imagenGD) - 130; // Ajusta según tu diseño
+            imagettftext($imagenGD, $fontSize, 0, $posXFecha, $posYFecha, $colorTexto, public_path('font/arial.ttf'), "Fecha: $fechaActual");
 
-             // Guardar la imagen modificada
-             imagejpeg($imagenGD, public_path($path4 . $foto4));
+            // Guardar la imagen modificada
+            imagejpeg($imagenGD, public_path($path4 . $foto4));
 
-             // Liberar la memoria
-             imagedestroy($imagenGD);
+            // Liberar la memoria
+            imagedestroy($imagenGD);
         }
         if ($imagen5 = $request->file('foto5')) {
             $path5 = 'imagen/';
@@ -167,23 +167,23 @@ class ReportesController extends Controller
             //  Abrir la imagen utilizando GD
             $imagenGD = imagecreatefromjpeg(public_path($path5 . $foto5));
             // // Añadir texto de coordenadas a la imagen
-             $textoCoordenadas = "Direccion: $direccion";
-             $colorTexto = imagecolorallocate($imagenGD, 255, 255, 255); // Color blanco
-             $posXCoordenadas = 10; // Ajusta según tu diseño
-             $posYCoordenadas = imagesy($imagenGD) - 20; // Ajusta según tu diseño
-             imagettftext($imagenGD, $fontSize, 0, $posXCoordenadas, $posYCoordenadas, $colorTexto, public_path('font/arial.ttf'), $textoCoordenadas);
+            $textoCoordenadas = "Direccion: $direccion";
+            $colorTexto = imagecolorallocate($imagenGD, 255, 255, 255); // Color blanco
+            $posXCoordenadas = 10; // Ajusta según tu diseño
+            $posYCoordenadas = imagesy($imagenGD) - 20; // Ajusta según tu diseño
+            imagettftext($imagenGD, $fontSize, 0, $posXCoordenadas, $posYCoordenadas, $colorTexto, public_path('font/arial.ttf'), $textoCoordenadas);
 
             //Añadir texto de fecha a la imagen
-             $fechaActual = date("Y-m-d H:i:s");
-             $posXFecha = 10; // Ajusta según tu diseño
-             $posYFecha = imagesy($imagenGD) - 130; // Ajusta según tu diseño
-             imagettftext($imagenGD, $fontSize, 0, $posXFecha, $posYFecha, $colorTexto, public_path('font/arial.ttf'), "Fecha: $fechaActual");
+            $fechaActual = date("Y-m-d H:i:s");
+            $posXFecha = 10; // Ajusta según tu diseño
+            $posYFecha = imagesy($imagenGD) - 130; // Ajusta según tu diseño
+            imagettftext($imagenGD, $fontSize, 0, $posXFecha, $posYFecha, $colorTexto, public_path('font/arial.ttf'), "Fecha: $fechaActual");
 
-             // Guardar la imagen modificada
-             imagejpeg($imagenGD, public_path($path5 . $foto5));
+            // Guardar la imagen modificada
+            imagejpeg($imagenGD, public_path($path5 . $foto5));
 
-             // Liberar la memoria
-             imagedestroy($imagenGD);
+            // Liberar la memoria
+            imagedestroy($imagenGD);
         }
         if ($imagen6 = $request->file('foto6')) {
             $path6 = 'imagen/';
@@ -193,23 +193,23 @@ class ReportesController extends Controller
             //  Abrir la imagen utilizando GD
             $imagenGD = imagecreatefromjpeg(public_path($path6 . $foto6));
             // // Añadir texto de coordenadas a la imagen
-             $textoCoordenadas = "Direccion: $direccion";
-             $colorTexto = imagecolorallocate($imagenGD, 255, 255, 255); // Color blanco
-             $posXCoordenadas = 10; // Ajusta según tu diseño
-             $posYCoordenadas = imagesy($imagenGD) - 20; // Ajusta según tu diseño
-             imagettftext($imagenGD, $fontSize, 0, $posXCoordenadas, $posYCoordenadas, $colorTexto, public_path('font/arial.ttf'), $textoCoordenadas);
+            $textoCoordenadas = "Direccion: $direccion";
+            $colorTexto = imagecolorallocate($imagenGD, 255, 255, 255); // Color blanco
+            $posXCoordenadas = 10; // Ajusta según tu diseño
+            $posYCoordenadas = imagesy($imagenGD) - 20; // Ajusta según tu diseño
+            imagettftext($imagenGD, $fontSize, 0, $posXCoordenadas, $posYCoordenadas, $colorTexto, public_path('font/arial.ttf'), $textoCoordenadas);
 
             //Añadir texto de fecha a la imagen
-             $fechaActual = date("Y-m-d H:i:s");
-             $posXFecha = 10; // Ajusta según tu diseño
-             $posYFecha = imagesy($imagenGD) - 130; // Ajusta según tu diseño
-             imagettftext($imagenGD, $fontSize, 0, $posXFecha, $posYFecha, $colorTexto, public_path('font/arial.ttf'), "Fecha: $fechaActual");
+            $fechaActual = date("Y-m-d H:i:s");
+            $posXFecha = 10; // Ajusta según tu diseño
+            $posYFecha = imagesy($imagenGD) - 130; // Ajusta según tu diseño
+            imagettftext($imagenGD, $fontSize, 0, $posXFecha, $posYFecha, $colorTexto, public_path('font/arial.ttf'), "Fecha: $fechaActual");
 
-             // Guardar la imagen modificada
-             imagejpeg($imagenGD, public_path($path6 . $foto6));
+            // Guardar la imagen modificada
+            imagejpeg($imagenGD, public_path($path6 . $foto6));
 
-             // Liberar la memoria
-             imagedestroy($imagenGD);
+            // Liberar la memoria
+            imagedestroy($imagenGD);
         }
 
 
