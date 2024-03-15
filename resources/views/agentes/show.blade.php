@@ -96,35 +96,43 @@
                         id="tabs-profile01" role="tabpanel" aria-labelledby="tabs-profile-tab01">
                         <div class="container mx-auto px-5 py-2 lg:px-32 lg:pt-10 mb-6">
                             <div class="-m-1 flex flex-wrap md:-m-2">
-                                <div class="w-full lg:w-1/3 p-1 md:p-2">
-                                    <img alt="gallery"
-                                        class="block h-full w-full rounded-lg object-cover object-center"
-                                        src="{{ asset('/storage' . $reporte->foto3) }}" />
-                                </div>
-                                <div class="w-full lg:w-1/3 p-1 md:p-2">
-                                    <img alt="gallery"
-                                        class="block h-full w-full rounded-lg object-cover object-center"
-                                        src="{{ asset($reporte->foto2) }}" />
-                                </div>
-                                <div class="w-full lg:w-1/3 p-1 md:p-2">
-                                    <img alt="gallery"
-                                        class="block h-full w-full rounded-lg object-cover object-center"
-                                        src="{{ asset($reporte->foto3) }}" />
-                                </div>
-                                <div class="w-full lg:w-1/3 p-1 md:p-2">
-                                    <img alt="gallery"
-                                        class="block h-full w-full rounded-lg object-cover object-center"
-                                        src="{{ asset($reporte->foto4) }}" />
-                                </div>
-                                <div class="w-full lg:w-1/3 p-1 md:p-2">
-                                    <img alt="gallery"
-                                        class="block h-full w-full rounded-lg object-cover object-center"
-                                        src="{{ asset($reporte->foto5) }}" />
-                                </div>
+                                @if ($reporte->foto1)
+                                    <div class="w-full lg:w-1/3 p-1 md:p-2">
+                                        <img alt="gallery"
+                                            class="block h-full w-full rounded-lg object-cover object-center"
+                                            src="/imagen/{{ $reporte->foto1 }}" />
+                                    </div>
+                                @endif
+                                @if ($reporte->foto2)
+                                    <div class="w-full lg:w-1/3 p-1 md:p-2">
+                                        <img alt="gallery"
+                                            class="block h-full w-full rounded-lg object-cover object-center"
+                                            src="/imagen/{{ $reporte->foto2 }}" />
+                                    </div>
+                                @endif
+                                @if ($reporte->foto3)
+                                    <div class="w-full lg:w-1/3 p-1 md:p-2">
+                                        <img alt="gallery"
+                                            class="block h-full w-full rounded-lg object-cover object-center"
+                                            src="/imagen/{{ $reporte->foto3 }}" />
+                                    </div>
+                                @endif
+                                @if ($reporte->foto4)
+                                    <div class="w-full lg:w-1/3 p-1 md:p-2">
+                                        <img alt="gallery"
+                                            class="block h-full w-full rounded-lg object-cover object-center"
+                                            src="/imagen/{{ $reporte->foto4 }}" />
+                                    </div>
+                                @endif
+                                @if ($reporte->foto5)
+                                    <div class="w-full lg:w-1/3 p-1 md:p-2">
+                                        <img alt="gallery"
+                                            class="block h-full w-full rounded-lg object-cover object-center"
+                                            src="/imagen/{{ $reporte->foto5 }}" />
+                                    </div>
+                                @endif
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>

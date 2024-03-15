@@ -88,7 +88,7 @@
                                                         {{-- ninguna --}}
                                                         <div>
                                                             <label for="obstaculo">
-                                                                <input type="radio" name="motivo" id="obstaculo"
+                                                                <input type="radio" name="imposibilidad" id="obstaculo"
                                                                     value="ninguna" class="px-2 mb-1"
                                                                     @if ($reporte->imposibilidad === 'ninguna') checked @endif>
                                                                 Ninguna
@@ -97,7 +97,7 @@
                                                         {{-- obstaculos --}}
                                                         <div>
                                                             <label for="obstaculo">
-                                                                <input type="radio" name="motivo" id="obstaculo"
+                                                                <input type="radio" name="imposibilidad" id="obstaculo"
                                                                     value="obstaculo" class="px-2 mb-1"
                                                                     @if ($reporte->imposibilidad === 'obstaculo') checked @endif>
                                                                 Obstaculos
@@ -106,7 +106,7 @@
                                                         {{-- rejas --}}
                                                         <div>
                                                             <label>
-                                                                <input type="radio" name="motivo" id="reja"
+                                                                <input type="radio" name="imposibilidad" id="reja"
                                                                     value="reja" class="px-2 mb-1"
                                                                     @if ($reporte->imposibilidad === 'reja') checked @endif>
                                                                 Rejas
@@ -115,7 +115,7 @@
                                                         {{-- no medidor --}}
                                                         <div>
                                                             <label>
-                                                                <input type="radio" name="motivo" id="medidor"
+                                                                <input type="radio" name="imposibilidad" id="medidor"
                                                                     value="medidor" class="px-2 mb-1"
                                                                     @if ($reporte->imposibilidad === 'medidor') checked @endif>
                                                                 Sin Medidor
@@ -124,7 +124,7 @@
                                                         {{-- usuario no lectura --}}
                                                         <div>
                                                             <label>
-                                                                <input type="radio" name="motivo" id="lectura_m"
+                                                                <input type="radio" name="imposibilidad" id="lectura_m"
                                                                     value="lectura" class="px-2"
                                                                     @if ($reporte->imposibilidad === 'lectura') checked @endif>
                                                                 Usuario no Permite Lectura
@@ -170,31 +170,41 @@
                         id="tabs-profile01" role="tabpanel" aria-labelledby="tabs-profile-tab01">
                         <div class="container mx-auto px-5 py-2 lg:px-32 lg:pt-10 mb-6">
                             <div class="-m-1 flex flex-wrap md:-m-2">
-                                <div class="w-full lg:w-1/3 p-1 md:p-2">
-                                    <img alt="gallery"
-                                        class="block h-full w-full rounded-lg object-cover object-center"
-                                        src="{{ asset($reporte->foto1) }}" />
-                                </div>
-                                <div class="w-full lg:w-1/3 p-1 md:p-2">
-                                    <img alt="gallery"
-                                        class="block h-full w-full rounded-lg object-cover object-center"
-                                        src="{{ asset($reporte->foto2) }}" />
-                                </div>
-                                <div class="w-full lg:w-1/3 p-1 md:p-2">
-                                    <img alt="gallery"
-                                        class="block h-full w-full rounded-lg object-cover object-center"
-                                        src="{{ asset($reporte->foto3) }}" />
-                                </div>
-                                <div class="w-full lg:w-1/3 p-1 md:p-2">
-                                    <img alt="gallery"
-                                        class="block h-full w-full rounded-lg object-cover object-center"
-                                        src="{{ asset($reporte->foto4) }}" />
-                                </div>
-                                <div class="w-full lg:w-1/3 p-1 md:p-2">
-                                    <img alt="gallery"
-                                        class="block h-full w-full rounded-lg object-cover object-center"
-                                        src="{{ asset($reporte->foto5) }}" />
-                                </div>
+                                @if ($reporte->foto1)
+                                    <div class="w-full lg:w-1/3 p-1 md:p-2">
+                                        <img alt="gallery"
+                                            class="block h-full w-full rounded-lg object-cover object-center"
+                                            src="/imagen/{{ $reporte->foto1 }}" />
+                                    </div>
+                                @endif
+                                @if ($reporte->foto2)
+                                    <div class="w-full lg:w-1/3 p-1 md:p-2">
+                                        <img alt="gallery"
+                                            class="block h-full w-full rounded-lg object-cover object-center"
+                                            src="/imagen/{{ $reporte->foto2 }}" />
+                                    </div>
+                                @endif
+                                @if ($reporte->foto3)
+                                    <div class="w-full lg:w-1/3 p-1 md:p-2">
+                                        <img alt="gallery"
+                                            class="block h-full w-full rounded-lg object-cover object-center"
+                                            src="/imagen/{{ $reporte->foto3 }}" />
+                                    </div>
+                                @endif
+                                @if ($reporte->foto4)
+                                    <div class="w-full lg:w-1/3 p-1 md:p-2">
+                                        <img alt="gallery"
+                                            class="block h-full w-full rounded-lg object-cover object-center"
+                                            src="/imagen/{{ $reporte->foto4 }}" />
+                                    </div>
+                                @endif
+                                @if ($reporte->foto5)
+                                    <div class="w-full lg:w-1/3 p-1 md:p-2">
+                                        <img alt="gallery"
+                                            class="block h-full w-full rounded-lg object-cover object-center"
+                                            src="/imagen/{{ $reporte->foto5 }}" />
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

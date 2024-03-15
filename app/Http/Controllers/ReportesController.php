@@ -16,10 +16,7 @@ class ReportesController extends Controller
      */
     public function index()
     {
-        $historiales = reportes::with('personal', 'EstadoReporte')
-            ->where('personal_id', Auth::user()->personal->id)
-            ->get();
-        return view('agentes.historial', compact('historiales'));
+        return view('agentes.index');
     }
 
     /**
@@ -27,7 +24,10 @@ class ReportesController extends Controller
      */
     public function create()
     {
-        //
+        $historiales = reportes::with('personal', 'EstadoReporte')
+            ->where('personal_id', Auth::user()->personal->id)
+            ->get();
+        return view('agentes.historial', compact('historiales'));
     }
 
     /**
@@ -35,38 +35,47 @@ class ReportesController extends Controller
      */
     public function store(Request $request)
     {
+
         $data = $request->validate(reportes::$rules);
 
-        $Path1 = $request->file('foto1')->store('public/imagenes');
-        $Path2 = $request->file('foto2')->store('public/imagenes');
-        $Path3 = $request->file('foto3')->store('public/imagenes');
-        $Path4 = $request->file('foto4')->store('public/imagenes');
-        $Path5 = $request->file('foto5')->store('public/imagenes');
+        $reportes = $request->all();
 
-        // $url1 = Storage::url($Path1);
-        // $url2 = Storage::url($Path2);
-        // $url3 = Storage::url($Path3);
-        // $url4 = Storage::url($Path4);
-        // $url5 = Storage::url($Path5);
+        if ($imagen = $request->file('foto1')) {
+            $Path1 = 'imagen/';
+            $foto1 = rand(1000, 9999) . "_" . date('YmdHis') . "." . $imagen->getClientOriginalExtension();
+            $imagen->move($Path1, $foto1);
+            $reportes['foto1'] = $foto1;
+        }
+        if ($imagen2 = $request->file('foto2')) {
+            $Path2 = 'imagen/';
+            $foto2 = rand(1000, 9999) . "_" . date('YmdHis') . "." . $imagen2->getClientOriginalExtension();
+            $imagen2->move($Path2, $foto2);
+            $reportes['foto2'] = $foto2;
+        }
+        if ($imagen3 = $request->file('foto3')) {
+            $Path3 = 'imagen/';
+            $foto3 = rand(1000, 9999) . "_" . date('YmdHis') . "." . $imagen3->getClientOriginalExtension();
+            $imagen3->move($Path3, $foto3);
+            $reportes['foto3'] = $foto3;
+        }
+        if ($imagen4 = $request->file('foto4')) {
+            $Path4 = 'imagen/';
+            $foto4 = rand(1000, 9999) . "_" . date('YmdHis') . "." . $imagen4->getClientOriginalExtension();
+            $imagen4->move($Path4, $foto4);
+            $reportes['foto4'] = $foto4;
+        }
+        if ($imagen5 = $request->file('foto5')) {
+            $Path5 = 'imagen/';
+            $foto5 = rand(1000, 9999) . "_" . date('YmdHis') . "." . $imagen5->getClientOriginalExtension();
+            $imagen5->move($Path5, $foto5);
+            $reportes['foto5'] = $foto5;
+        }
 
-        $reportes = new reportes($data);
-
-        $reportes->create([
-            'personal_id' => Auth::user()->personal->id,
-            'contrato' => $request->input('contrato'),
-            'lectura' => $request->input('lectura'),
-            'anomalia' => $request->input('anomalia'),
-            'imposibilidad' => $request->input('motivo'),
-            'foto1' => $Path1,
-            'foto2' => $Path2,
-            'foto3' => $Path3,
-            'foto4' => $Path4,
-            'foto5' => $Path5
-        ]);
+        reportes::create($reportes);
 
         notify()->success('Lectura Guardada Con Exito');
 
-        return redirect()->route('dashboard');
+        return redirect()->route('reportes.index');
     }
 
     /**
@@ -75,8 +84,6 @@ class ReportesController extends Controller
     public function show($id)
     {
         $reporte = reportes::find($id);
-
-
         return view('agentes.show', compact('reporte'));
     }
 
@@ -94,54 +101,6 @@ class ReportesController extends Controller
      */
     public function update(Request $request, $reportes)
     {
-        $reportes = reportes::find($reportes);
-        // Verificar si se han proporcionado nuevas imágenes en los campos de archivo
-
-        if ($request->hasFile('foto1') || $request->hasFile('foto2') || $request->hasFile('foto3') || $request->hasFile('foto4') || $request->hasFile('foto5')) {
-            // Borrar las imágenes antiguas si existen
-
-            foreach (['foto1', 'foto2', 'foto3','foto4','foto5'] as $field) {
-                $foto = str_replace('/storage/imagenes/', '/public/imagenes/', $reportes->$field);
-                if (Storage::exists($foto))
-                {
-                    Storage::delete($foto);
-                }
-            }
-            // Almacenar las nuevas imágenes
-            $Path1 = $request->file('foto1')->store('public/imagenes');
-            // $Path2 = $request->file('foto2')->store('public/imagenes');
-            // $Path3 = $request->file('foto3')->store('public/imagenes');
-            // $Path4 = $request->file('foto4')->store('public/imagenes');
-            // $Path5 = $request->file('foto5')->store('public/imagenes');
-            $url1 = Storage::url($Path1);
-            // $url2 = Storage::url($Path2);
-            // $url3 = Storage::url($Path3);
-            // $url4 = Storage::url($Path4);
-            // $url5 = Storage::url($Path5);
-            // Actualizar el modelo reportes con las nuevas imágenes
-            $reportes->update([
-                'contrato' => $request->input('contrato'),
-                'lectura' => $request->input('lectura'),
-                'anomalia' => $request->input('anomalia'),
-                'imposibilidad' => $request->input('motivo'),
-                'foto1' => $url1,
-                // 'foto2' => $url2,
-                // 'foto3' => $url3,
-                // 'foto4' => $url4,
-                // 'foto5' => $url5
-            ]);
-            notify()->success('Información actualizada con éxito');
-        } else {
-            // Si no se proporcionan nuevas imágenes, solo actualizar los otros campos del modelo reportes
-            $reportes->update([
-                'contrato' => $request->input('contrato'),
-                'lectura' => $request->input('lectura'),
-                'anomalia' => $request->input('anomalia'),
-                'imposibilidad' => $request->input('motivo')
-            ]);
-            notify()->success('Información actualizada sin cambios en las imágenes');
-        }
-        return redirect()->route('reportes.index');
     }
     /**
      * Remove the specified resource from storage.
