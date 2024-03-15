@@ -16,10 +16,11 @@ class reportes extends Model
         'anomalia'=>'required',
         'imposibilidad'=>'nullable',
         'foto1'=>'required|image|max:2048',
-        'foto2'=>'required|image|max:2048',
-        'foto3'=>'required|image|max:2048',
-        'foto4'=>'required|image|max:2048',
-        'foto5'=>'required|image|max:2048'
+        // 'foto2'=>'required|image|max:2048',
+        // 'foto3'=>'required|image|max:2048',
+        // 'foto4'=>'required|image|max:2048',
+        // 'foto5'=>'image|max:2048',
+        // 'foto6'=>'image|max:2048'
     ];
     static $rulesupdate =[
         'contrato'=>'required',
@@ -32,7 +33,8 @@ class reportes extends Model
         'foto2'=>'image|max:2048',
         'foto3'=>'image|max:2048',
         'foto4'=>'image|max:2048',
-        'foto5'=>'image|max:2048'
+        'foto5'=>'image|max:2048',
+        'foto6'=>'image|max:2048',
     ];
 
     protected $fillable = [
@@ -48,6 +50,7 @@ class reportes extends Model
         'foto3',
         'foto4',
         'foto5',
+        'foto6',
         'estado'
     ];
 
@@ -63,6 +66,7 @@ class reportes extends Model
     }
 
     public function localizacion(){
+
         return $this->belongsTo(Localizacion::class);
     }
 }

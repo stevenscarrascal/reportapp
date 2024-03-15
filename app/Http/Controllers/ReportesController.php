@@ -45,7 +45,7 @@ class ReportesController extends Controller
         ]);
         $response = Http::withoutVerifying()->get("https://revgeocode.search.hereapi.com/v1/revgeocode?apikey=auuOOORgqWd_T4DFf0onY2JlvMDhz4tP0G0o7fRYDRU&at=$latitud,$longitud&lang=es-ES");
         $data = $response->json();
-        $direccion = $data['items'][0]['address']['street']. '-' .$data['items'][0]['address']['houseNumber']. ' ' .$data['items'][0]['address']['city'].','.' '.$data['items'][0]['address']['countryName'];
+        $direccion = $data['items'][0]['address']['label'];
         $request->validate(reportes::$rules);
         $reportes = $request->all();
         $reportes['localizacion'] = $localizacion->id;
@@ -57,50 +57,71 @@ class ReportesController extends Controller
             $imagen->move($Path1, $foto1);
             $reportes['foto1'] = $foto1;
         }
-        if ($imagen2 = $request->file('foto2')) {
-            $Path2 = 'imagen/';
-            $foto2 = rand(1000, 9999) . "_" . date('YmdHis') . "." . $imagen2->getClientOriginalExtension();
-            $imagen2->move($Path2, $foto2);
-            $reportes['foto2'] = $foto2;
-        }
-        if ($imagen3 = $request->file('foto3')) {
-            $Path3 = 'imagen/';
-            $foto3 = rand(1000, 9999) . "_" . date('YmdHis') . "." . $imagen3->getClientOriginalExtension();
-            $imagen3->move($Path3, $foto3);
-            $reportes['foto3'] = $foto3;
-        }
-        if ($imagen4 = $request->file('foto4')) {
-            $Path4 = 'imagen/';
-            $foto4 = rand(1000, 9999) . "_" . date('YmdHis') . "." . $imagen4->getClientOriginalExtension();
-            $imagen4->move($Path4, $foto4);
-            $reportes['foto4'] = $foto4;
-        }
-        if ($imagen5 = $request->file('foto5')) {
-            $Path5 = 'imagen/';
-            $foto5 = rand(1000, 9999) . "_" . date('YmdHis') . "." . $imagen5->getClientOriginalExtension();
-            $imagen5->move($Path5, $foto5);
-            $reportes['foto5'] = $foto5;
-        }
-        if ($imagen6 = $request->file('foto6')) {
-            $Path6 = 'imagen/';
-            $foto6 = rand(1000, 9999) . "_" . date('YmdHis') . "." . $imagen6->getClientOriginalExtension();
-            $imagen6->move($Path6, $foto6);
-            $reportes['foto6'] = $foto6;
-        }
+        // Cargar la imagen con GD
+        $imagePath = public_path($Path1 . $foto1);
+        $image = imagecreatefromjpeg($imagePath);
+
+        $imageWidth = imagesx($image);
+        $imageHeight = imagesy($image);
+
+
+        // Coordenadas a incrustar
+        $fontSize = 70;
+        $textColor = imagecolorallocate($image, 255, 255, 255); // Color blanco
+        $textY = $imageHeight - 30;
+        $textX = $imageWidth - 50;
+
+        // Incrustar las coordenadas en la imagen
+        imagettftext($image, $fontSize, 0, $textX, $textY, $textColor, public_path('font/arial.ttf'), "direccion: $direccion");
+
+        // Guardar la imagen con las coordenadas incrustadas
+        imagejpeg($image, $imagePath);
+
+        // Liberar memoria
+        imagedestroy($image);
+
+        // if ($imagen2 = $request->file('foto2')) {
+        //     $Path2 = 'imagen/';
+        //     $foto2 = rand(1000, 9999) . "_" . date('YmdHis') . "." . $imagen2->getClientOriginalExtension();
+        //     $imagen2->move($Path2, $foto2);
+        //     $reportes['foto2'] = $foto2;
+        // }
+        // if ($imagen3 = $request->file('foto3')) {
+        //     $Path3 = 'imagen/';
+        //     $foto3 = rand(1000, 9999) . "_" . date('YmdHis') . "." . $imagen3->getClientOriginalExtension();
+        //     $imagen3->move($Path3, $foto3);
+        //     $reportes['foto3'] = $foto3;
+        // }
+        // if ($imagen4 = $request->file('foto4')) {
+        //     $Path4 = 'imagen/';
+        //     $foto4 = rand(1000, 9999) . "_" . date('YmdHis') . "." . $imagen4->getClientOriginalExtension();
+        //     $imagen4->move($Path4, $foto4);
+        //     $reportes['foto4'] = $foto4;
+        // }
+        // if ($imagen5 = $request->file('foto5')) {
+        //     $Path5 = 'imagen/';
+        //     $foto5 = rand(1000, 9999) . "_" . date('YmdHis') . "." . $imagen5->getClientOriginalExtension();
+        //     $imagen5->move($Path5, $foto5);
+        //     $reportes['foto5'] = $foto5;
+        // }
+        // if ($imagen6 = $request->file('foto6')) {
+        //     $Path6 = 'imagen/';
+        //     $foto6 = rand(1000, 9999) . "_" . date('YmdHis') . "." . $imagen6->getClientOriginalExtension();
+        //     $imagen6->move($Path6, $foto6);
+        //     $reportes['foto6'] = $foto6;
+        // }
         reportes::create($reportes);
         notify()->success('Lectura Guardada Con Exito');
         return redirect()->route('reportes.index');
     }
-
     /**
      * Display the specified resource.
      */
     public function show($id)
     {
-        $reporte = reportes::find($id);
+        $reporte = reportes::with('localizacion')->find($id);
         return view('agentes.show', compact('reporte'));
     }
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -109,7 +130,6 @@ class ReportesController extends Controller
         $reporte = reportes::find($id);
         return view('agentes.edit', compact('reporte'));
     }
-
     /**
      * Update the specified resource in storage.
      */

@@ -15,8 +15,8 @@ class Localizacion extends Model
     ];
 
     public function reportes(){
-        
-        return $this->hasOne(reportes::class);
+
+        return $this->hasOne(reportes::class,'localizacion', 'id');
     }
 
 }
