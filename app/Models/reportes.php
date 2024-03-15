@@ -16,10 +16,10 @@ class reportes extends Model
         'anomalia'=>'required',
         'imposibilidad'=>'nullable',
         'foto1'=>'required|image|max:2048',
-        // 'foto2'=>'required|image|max:2048',
-        // 'foto3'=>'required|image|max:2048',
-        // 'foto4'=>'required|image|max:2048',
-        // 'foto5'=>'required|image|max:2048'
+        'foto2'=>'required|image|max:2048',
+        'foto3'=>'required|image|max:2048',
+        'foto4'=>'required|image|max:2048',
+        'foto5'=>'required|image|max:2048'
     ];
     static $rulesupdate =[
         'contrato'=>'required',
@@ -41,6 +41,7 @@ class reportes extends Model
         'lectura',
         'anomalia',
         'imposibilidad',
+        'direccion',
         'foto1',
         'foto2',
         'foto3',

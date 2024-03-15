@@ -41,51 +41,24 @@
                                 <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                                     <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                                         <div class="overflow-hidden px-6">
-
-                                            <table
-                                                class="min-w-full  table-auto border border-neutral-200 text-center text-sm font-light text-surface">
-                                                <thead
-                                                    class="border-b border-neutral-200 font-medium dark:border-white/10">
-                                                    <tr>
-                                                        <th scope="col"
-                                                            class="border-e border-neutral-200 px-6 py-4 dark:border-white/10">
-                                                            Lectura
-                                                        </th>
-                                                        <th scope="col"
-                                                            class="border-e border-neutral-200 px-6 py-4 dark:border-white/10">
-                                                            Fecha
-                                                        </th>
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr class="border-b border-neutral-200 dark:border-white/10">
-
-                                                        <td
-                                                            class="whitespace-nowrap border-e border-neutral-200 px-6 py-4 dark:border-white/10">
-                                                            {{ $reporte->lectura }}
-                                                        </td>
-                                                        <td
-                                                            class="whitespace-nowrap border-e border-neutral-200 px-6 py-4 dark:border-white/10">
-                                                            {{ $reporte->created_at }}
-                                                        </td>
-
-                                                    </tr>
-
-                                                    <tr class="border-b border-neutral-200 dark:border-white/10">
-
-                                                        <td colspan="2"
-                                                            class="whitespace-nowrap border-e border-neutral-200 px-6 py-4 dark:border-white/10">
-                                                            <dl class=" font-normal items-center">
-                                                                <dt class=" text-black"> <strong>Observacion</strong>
-                                                                </dt>
-                                                                <dd class=" text-black">{{ $reporte->observaciones }}</dd>
-                                                            </dl>
-                                                        </td>
-
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                            <ul class="w-full text-surface text-center">
+                                                <li class="w-full border-b-2 border-neutral-100 py-4">
+                                                    <h2 class=" text-black uppercase">Direccion de Residencia</h2>
+                                                    <strong>{{ $reporte->direccion }}</strong>
+                                                </li>
+                                                <li class="w-full border-b-2 border-neutral-100 py-4">
+                                                    <h2 class=" text-black uppercase">Lectura</h2>
+                                                    <strong>{{ $reporte->lectura }}</strong>
+                                                </li>
+                                                <li class="w-full border-b-2 border-neutral-100 py-4">
+                                                    <h2 class=" text-black uppercase">Fecha</h2> <strong>
+                                                        {{ $reporte->created_at }}</strong>
+                                                </li>
+                                                <li class="w-full border-b-2 border-neutral-100 py-4">
+                                                    <h2 class=" text-black uppercase">Observaciones</h2> <strong>
+                                                        {{ $reporte->observaciones }}</strong>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('personal_id',125);
             $table->string('contrato',125);
             $table->string('lectura',125);
+            $table->string('direccion')->nullable();
             $table->string('anomalia');
             $table->string('imposibilidad')->nullable();
             $table->string('observaciones')->nullable();
