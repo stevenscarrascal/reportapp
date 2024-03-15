@@ -46,6 +46,10 @@
                                                 @method('PUT')
                                                 @csrf
                                                 <div class="mb-3">
+                                                    <input type="text" hidden id="latitud" name="latitud"
+                                                        value="">
+                                                    <input type="text" hidden id="longitud" name="longitud"
+                                                        value="">
                                                     <x-label for='observacion' value='Observacion del Coordinador'
                                                         class="mb-2" />
                                                     <textarea name="observacion" id="observacion" rows="5"
@@ -88,8 +92,8 @@
                                                         {{-- ninguna --}}
                                                         <div>
                                                             <label for="obstaculo">
-                                                                <input type="radio" name="imposibilidad" id="obstaculo"
-                                                                    value="ninguna" class="px-2 mb-1"
+                                                                <input type="radio" name="imposibilidad"
+                                                                    id="obstaculo" value="ninguna" class="px-2 mb-1"
                                                                     @if ($reporte->imposibilidad === 'ninguna') checked @endif>
                                                                 Ninguna
                                                             </label>
@@ -97,8 +101,9 @@
                                                         {{-- obstaculos --}}
                                                         <div>
                                                             <label for="obstaculo">
-                                                                <input type="radio" name="imposibilidad" id="obstaculo"
-                                                                    value="obstaculo" class="px-2 mb-1"
+                                                                <input type="radio" name="imposibilidad"
+                                                                    id="obstaculo" value="obstaculo"
+                                                                    class="px-2 mb-1"
                                                                     @if ($reporte->imposibilidad === 'obstaculo') checked @endif>
                                                                 Obstaculos
                                                             </label>
@@ -106,8 +111,8 @@
                                                         {{-- rejas --}}
                                                         <div>
                                                             <label>
-                                                                <input type="radio" name="imposibilidad" id="reja"
-                                                                    value="reja" class="px-2 mb-1"
+                                                                <input type="radio" name="imposibilidad"
+                                                                    id="reja" value="reja" class="px-2 mb-1"
                                                                     @if ($reporte->imposibilidad === 'reja') checked @endif>
                                                                 Rejas
                                                             </label>
@@ -115,8 +120,8 @@
                                                         {{-- no medidor --}}
                                                         <div>
                                                             <label>
-                                                                <input type="radio" name="imposibilidad" id="medidor"
-                                                                    value="medidor" class="px-2 mb-1"
+                                                                <input type="radio" name="imposibilidad"
+                                                                    id="medidor" value="medidor" class="px-2 mb-1"
                                                                     @if ($reporte->imposibilidad === 'medidor') checked @endif>
                                                                 Sin Medidor
                                                             </label>
@@ -124,8 +129,8 @@
                                                         {{-- usuario no lectura --}}
                                                         <div>
                                                             <label>
-                                                                <input type="radio" name="imposibilidad" id="lectura_m"
-                                                                    value="lectura" class="px-2"
+                                                                <input type="radio" name="imposibilidad"
+                                                                    id="lectura_m" value="lectura" class="px-2"
                                                                     @if ($reporte->imposibilidad === 'lectura') checked @endif>
                                                                 Usuario no Permite Lectura
                                                             </label>
@@ -212,4 +217,22 @@
             </div>
         </div>
     </div>
+    @section('js')
+    <script>
+        // Función para manejar la obtención de la ubicación actual
+        function obtenerUbicacion() {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                // Obtener latitud y longitud
+                var latitud = position.coords.latitude;
+                var longitud = position.coords.longitude;
+
+                // Colocar latitud y longitud en los elementos de entrada
+                document.getElementById('latitud').value = latitud;
+                document.getElementById('longitud').value = longitud;
+            });
+        }
+        // Llamar a la función para obtener la ubicación al cargar la página
+        window.onload = obtenerUbicacion;
+    </script>
+    @endsection
 </x-app-layout>

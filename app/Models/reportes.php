@@ -15,12 +15,12 @@ class reportes extends Model
         'lectura'=>'required',
         'anomalia'=>'required',
         'imposibilidad'=>'nullable',
-        'foto1'=>'required|image|max:2048',
-        // 'foto2'=>'required|image|max:2048',
-        // 'foto3'=>'required|image|max:2048',
-        // 'foto4'=>'required|image|max:2048',
-        // 'foto5'=>'image|max:2048',
-        // 'foto6'=>'image|max:2048'
+        'foto1'=>'required|image|max:5120',
+        'foto2'=>'required|image|max:5120',
+        'foto3'=>'required|image|max:5120',
+        'foto4'=>'required|image|max:5120',
+        'foto5'=>'image|max:5120',
+        'foto6'=>'image|max:5120'
     ];
     static $rulesupdate =[
         'contrato'=>'required',
@@ -29,12 +29,12 @@ class reportes extends Model
         'imposibilidad'=>'nullable',
         'observacion'=>'nullable',
         'motivo'=>'nullable',
-        'foto1'=>'image|max:2048',
-        'foto2'=>'image|max:2048',
-        'foto3'=>'image|max:2048',
-        'foto4'=>'image|max:2048',
-        'foto5'=>'image|max:2048',
-        'foto6'=>'image|max:2048',
+        'foto1'=>'image|max:5120',
+        'foto2'=>'image|max:5120',
+        'foto3'=>'image|max:5120',
+        'foto4'=>'image|max:5120',
+        'foto5'=>'image|max:5120',
+        'foto6'=>'image|max:5120',
     ];
 
     protected $fillable = [
@@ -42,7 +42,6 @@ class reportes extends Model
         'contrato',
         'lectura',
         'anomalia',
-        'localizacion',
         'imposibilidad',
         'direccion',
         'foto1',
@@ -65,8 +64,4 @@ class reportes extends Model
         return $this->hasOne(vs_estado::class, 'id', 'estado');
     }
 
-    public function localizacion(){
-
-        return $this->belongsTo(Localizacion::class);
-    }
 }
