@@ -11,14 +11,9 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link rel="stylesheet" href="{{ asset('plugins/DataTables/datatables.min.css') }}">
-
-
-
-
     <!-- Scripts -->
     @notifyCss
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script type="text/javascript" src="{{ asset('/vendor/js/tw-elements.umd.min.js') }}"></script>
     <!-- Styles -->
     @livewireStyles
 </head>
@@ -46,10 +41,8 @@
 
 
     <x-notify::notify />
-
     <script type="text/javascript" src="{{ asset('js/jquery-3.7.1.js') }}"></script>
     <script type="text/javascript" src="{{ asset('plugins/DataTables/datatables.min.js') }}"></script>
-
     @notifyJs
     @stack('modals')
     @include('notify::components.notify')

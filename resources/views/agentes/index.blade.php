@@ -151,10 +151,6 @@
         <script>
             $(document).ready(function() {
         $('#example').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'excel', 'pdf'
-            ],
             borderCollapse: true,
             "language": {
                 "lengthMenu": "Mostrar _MENU_ registros por página",
