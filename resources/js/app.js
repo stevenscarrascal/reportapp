@@ -3,7 +3,8 @@ import './bootstrap';
 import {
     Tab,
     Ripple,
+    Tooltip,
     initTWE,
   } from "tw-elements";
 
-  initTWE({ Tab ,Ripple });
+  initTWE({ Tab ,Ripple,Tooltip });

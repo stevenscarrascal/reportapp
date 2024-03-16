@@ -19,7 +19,11 @@ class ReportesController extends Controller
      */
     public function index()
     {
-        return view('agentes.index');
+        $historiales = reportes::with('personal', 'EstadoReporte')
+            ->where('personal_id', Auth::user()->personal->id)
+            ->whereIn('estado', [7,9])
+            ->get();
+        return view('agentes.index', compact('historiales'));
     }
 
     /**
@@ -27,10 +31,7 @@ class ReportesController extends Controller
      */
     public function create()
     {
-        $historiales = reportes::with('personal', 'EstadoReporte')
-            ->where('personal_id', Auth::user()->personal->id)
-            ->get();
-        return view('agentes.historial', compact('historiales'));
+        return view('agentes.create');
     }
 
     /**
@@ -63,7 +64,7 @@ class ReportesController extends Controller
             $imagenGD = imagecreatefromjpeg(public_path($path1 . $foto1));
 
             // Añadir texto del contrato  a la imagen
-            $textoContrato = "Contrato N°:". $request->input('contrato');
+            $textoContrato = "Contrato N°:" . $request->input('contrato');
             $colorTexto = imagecolorallocate($imagenGD, 255, 255, 255); // Color blanco
             $posXContrato = 10; // Ajusta según tu diseño
             $posYContrato = imagesy($imagenGD) - 170; // Ajusta según tu diseño
