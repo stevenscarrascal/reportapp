@@ -10,8 +10,10 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/DataTables/datatables.min.css') }}">
+
+
+
 
     <!-- Scripts -->
     @notifyCss
@@ -46,9 +48,8 @@
     <x-notify::notify />
 
     <script type="text/javascript" src="{{ asset('js/jquery-3.7.1.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/dataTables.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/dataTables.bootstrap5.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/DataTables/datatables.min.js') }}"></script>
+
     @notifyJs
     @stack('modals')
     @include('notify::components.notify')
