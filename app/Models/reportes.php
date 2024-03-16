@@ -16,9 +16,9 @@ class reportes extends Model
         'anomalia' => 'required',
         'imposibilidad' => 'nullable',
         'foto1' => 'required|image|max:5120',
-        'foto2' => 'required|image|max:5120',
-        'foto3' => 'required|image|max:5120',
-        'foto4' => 'required|image|max:5120',
+        'foto2' => 'image|max:5120',
+        'foto3' => 'image|max:5120',
+        'foto4' => 'image|max:5120',
         'foto5' => 'image|max:5120',
         'foto6' => 'image|max:5120'
     ];

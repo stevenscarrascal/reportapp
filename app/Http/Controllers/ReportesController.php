@@ -61,7 +61,15 @@ class ReportesController extends Controller
 
             //  Abrir la imagen utilizando GD
             $imagenGD = imagecreatefromjpeg(public_path($path1 . $foto1));
-            // // Añadir texto de coordenadas a la imagen
+
+            // Añadir texto del contrato  a la imagen
+            $textoContrato = "Contrato N°:". $request->input('contrato');
+            $colorTexto = imagecolorallocate($imagenGD, 255, 255, 255); // Color blanco
+            $posXContrato = 10; // Ajusta según tu diseño
+            $posYContrato = imagesy($imagenGD) - 170; // Ajusta según tu diseño
+            imagettftext($imagenGD, $fontSize, 0, $posXContrato, $posYContrato, $colorTexto, public_path('font/arial.ttf'), $textoContrato);
+
+            // Añadir texto de coordenadas a la imagen
             $textoCoordenadas = "Direccion: $direccion";
             $colorTexto = imagecolorallocate($imagenGD, 255, 255, 255); // Color blanco
             $posXCoordenadas = 10; // Ajusta según tu diseño
@@ -71,7 +79,7 @@ class ReportesController extends Controller
             //Añadir texto de fecha a la imagen
             $fechaActual = date("Y-m-d H:i:s");
             $posXFecha = 10; // Ajusta según tu diseño
-            $posYFecha = imagesy($imagenGD) - 130; // Ajusta según tu diseño
+            $posYFecha = imagesy($imagenGD) - 90; // Ajusta según tu diseño
             imagettftext($imagenGD, $fontSize, 0, $posXFecha, $posYFecha, $colorTexto, public_path('font/arial.ttf'), "Fecha: $fechaActual");
 
             // Guardar la imagen modificada
