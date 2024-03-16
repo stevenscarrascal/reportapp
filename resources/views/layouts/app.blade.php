@@ -7,13 +7,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>{{ config('app.name', 'Laravel') }}</title>
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link rel="stylesheet" href="{{ asset('plugins/DataTables/datatables.min.css') }}">
     <!-- Scripts -->
     @notifyCss
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="{{ asset('plugins/DataTables/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/fontawesome/css/all.min.css') }}">
     <!-- Styles -->
     @livewireStyles
 </head>
@@ -39,8 +39,9 @@
         </main>
     </div>
     <x-notify::notify />
-    <script type="text/javascript" src="{{ asset('js/jquery-3.7.1.js') }}"></script>
+
     <script type="text/javascript" src="{{ asset('plugins/DataTables/datatables.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/fontawesome/js/all.min.js') }}"></script>
     @notifyJs
     @stack('modals')
     @include('notify::components.notify')

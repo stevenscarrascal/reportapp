@@ -13,14 +13,10 @@
                         <div class="flex justify-between items-center">
                             <h1 class="text-lg font-bold text-gray-800 mb-3">Reportes Activos</h1>
                             <a href="{{ route('reportes.create') }}"
-                                class="bg-blue-600 text-center mb-2 text-white hover:text-blue-800 rounded px-4 py-1 inline-block sm:px-2 sm:py-2"
+                                class="btn btn-primary"
                                 data-twe-toggle="tooltip" data-twe-placement="top" data-twe-ripple-init
                                 data-twe-ripple-color="light" title="Agregar Nuevo Reporte">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M12 10.5v6m3-3H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
-                                </svg>
+                                <i class="fas fa-folder-plus"></i>
                             </a>
                         </div>
                         <!-- Versión de escritorio -->
@@ -37,7 +33,7 @@
                                             Estado
                                         </th>
                                         <th>
-                                            <p>Accion</p>
+                                            Accion
                                         </th>
                                     </tr>
                                 </thead>
@@ -79,10 +75,11 @@
                                                 </td>
                                                 <td>
                                                     <a href="{{ route('reportes.show', $historial->id) }}"
-                                                        class="bg-blue-600 text-white hover:text-blue-800 mr-1 rounded px-4 py-1 inline-block sm:px-2 sm:py-2 mb-1">Ver</a>
+                                                        class="btn btn-primary  mb-1"><i class="far fa-eye"></i> Ver
+                                                    </a>
                                                     @if ($historial->estado == 9)
                                                         <a href="{{ route('reportes.edit', $historial->id) }}"
-                                                            class="bg-green-600 hover:text-green-900 rounded px-2 py-1 inline-block sm:px-2 sm:py-2 text-white">Editar</a>
+                                                            class="btn btn-warning "><i class="far fa-edit"></i> Editar</a>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -146,22 +143,49 @@
             </div>
         </div>
     </div>
-
-    @section('js')
-        <script>
-            $(document).ready(function() {
-        $('#example').DataTable({
-            borderCollapse: true,
-            "language": {
-                "lengthMenu": "Mostrar _MENU_ registros por página",
-                "zeroRecords": "No se encontraron resultados",
-                "info": "Mostrando la página _PAGE_ de _PAGES_",
-                "infoEmpty": "No hay registros disponibles",
-                "infoFiltered": "(filtrado de _MAX_ registros totales)",
-                "search": "Buscar:",
+    @section('css')
+        <style>
+            .dt-button {
+                background-color: #4CAF50;
+                /* Cambia el color de fondo a verde */
+                color: white;
+                /* Cambia el color del texto a blanco */
             }
-        });
-    });
-        </script>
+        </style>
     @endsection
+    @section('js')
+    <script>
+        $(document).ready(function() {
+            var table = $('#example').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'excel',
+                        text: '<i class="fas fa-file-excel"></i> Excel', // Agrega un icono de Excel antes del texto
+                        className: 'dt-button'
+                    },
+                    {
+                        extend: 'pdf',
+                        text: '<i class="fas fa-file-pdf"></i> PDF', // Agrega un icono de PDF antes del texto
+                        className: 'dt-button'
+                    },
+                    {
+                        extend: 'print',
+                        text: '<i class="fas fa-print"></i> Imprimir', // Agrega un icono de impresora antes del texto
+                        className: 'dt-button'
+                    }
+                ],
+                borderCollapse: true,
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando la página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay registros disponibles",
+                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                    "search": "Buscar:",
+                }
+            });
+        });
+    </script>
+@endsection
 </x-app-layout>
