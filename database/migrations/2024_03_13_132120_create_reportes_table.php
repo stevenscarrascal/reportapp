@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('direccion')->nullable();
             $table->string('anomalia');
             $table->string('imposibilidad')->nullable();
-            $table->string('observaciones')->nullable();
+            $table->text('observaciones')->nullable();
+            $table->string('latitud');
+            $table->string('longitud');
             $table->string('foto1')->nullable();
             $table->string('foto2')->nullable();
             $table->string('foto3')->nullable();

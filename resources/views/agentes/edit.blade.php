@@ -1,10 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Modificacion Contrato N°:@if ($reporte->contrato)
-                {{ $reporte->contrato }}
-            @endif
+            <h2 class="font-semibold text-gray-800 leading-tight">
+               <p class="text-sm">Modificacion Contrato</p>  <p class=" uppercase">N°: @if ($reporte->contrato){{ $reporte->contrato }}@endif</p> 
             </h2>
             <a href="{{ route('reportes.index') }}" class="btn btn-primary btn-md flex items-center">
                 <i class="fas fa-arrow-left"></i> Regresar
@@ -222,6 +220,13 @@
                                         <img alt="gallery"
                                             class="block h-full w-full rounded-lg object-cover object-center"
                                             src="/imagen/{{ $reporte->foto5 }}" />
+                                    </div>
+                                @endif
+                                @if ($reporte->foto6)
+                                    <div class="w-full lg:w-1/3 p-1 md:p-2">
+                                        <img alt="gallery"
+                                            class="block h-full w-full rounded-lg object-cover object-center"
+                                            src="/imagen/{{ $reporte->foto6 }}" />
                                     </div>
                                 @endif
                             </div>

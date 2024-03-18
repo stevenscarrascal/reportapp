@@ -11,12 +11,10 @@
                 <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
                     <div class="table-responsive">
                         <div class="flex justify-between items-center">
-                            <h1 class="text-lg font-bold text-gray-800 mb-3">Reportes Activos</h1>
-                            <a href="{{ route('reportes.create') }}"
-                                class="btn btn-primary"
+                            <a href="{{ route('reportes.create') }}" class="btn btn-primary mb-1"
                                 data-twe-toggle="tooltip" data-twe-placement="top" data-twe-ripple-init
                                 data-twe-ripple-color="light" title="Agregar Nuevo Reporte">
-                                <i class="fas fa-folder-plus"></i>
+                                <i class="fas fa-folder-plus"></i> Agregar Reporte
                             </a>
                         </div>
                         <!-- Versión de escritorio -->
@@ -79,7 +77,8 @@
                                                     </a>
                                                     @if ($historial->estado == 9)
                                                         <a href="{{ route('reportes.edit', $historial->id) }}"
-                                                            class="btn btn-warning "><i class="far fa-edit"></i> Editar</a>
+                                                            class="btn btn-warning "><i class="far fa-edit"></i>
+                                                            Editar</a>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -154,38 +153,37 @@
         </style>
     @endsection
     @section('js')
-    <script>
-        $(document).ready(function() {
-            var table = $('#example').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    {
-                        extend: 'excel',
-                        text: '<i class="fas fa-file-excel"></i> Excel', // Agrega un icono de Excel antes del texto
-                        className: 'dt-button'
-                    },
-                    {
-                        extend: 'pdf',
-                        text: '<i class="fas fa-file-pdf"></i> PDF', // Agrega un icono de PDF antes del texto
-                        className: 'dt-button'
-                    },
-                    {
-                        extend: 'print',
-                        text: '<i class="fas fa-print"></i> Imprimir', // Agrega un icono de impresora antes del texto
-                        className: 'dt-button'
+        <script>
+            $(document).ready(function() {
+                var table = $('#example').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [{
+                            extend: 'excel',
+                            text: '<i class="fas fa-file-excel"></i> Excel', // Agrega un icono de Excel antes del texto
+                            className: 'dt-button'
+                        },
+                        {
+                            extend: 'pdf',
+                            text: '<i class="fas fa-file-pdf"></i> PDF', // Agrega un icono de PDF antes del texto
+                            className: 'dt-button'
+                        },
+                        {
+                            extend: 'print',
+                            text: '<i class="fas fa-print"></i> Imprimir', // Agrega un icono de impresora antes del texto
+                            className: 'dt-button'
+                        }
+                    ],
+                    borderCollapse: true,
+                    "language": {
+                        "lengthMenu": "Mostrar _MENU_ registros por página",
+                        "zeroRecords": "No se encontraron resultados",
+                        "info": "Mostrando la página _PAGE_ de _PAGES_",
+                        "infoEmpty": "No hay registros disponibles",
+                        "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                        "search": "Buscar:",
                     }
-                ],
-                borderCollapse: true,
-                "language": {
-                    "lengthMenu": "Mostrar _MENU_ registros por página",
-                    "zeroRecords": "No se encontraron resultados",
-                    "info": "Mostrando la página _PAGE_ de _PAGES_",
-                    "infoEmpty": "No hay registros disponibles",
-                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
-                    "search": "Buscar:",
-                }
+                });
             });
-        });
-    </script>
-@endsection
+        </script>
+    @endsection
 </x-app-layout>
