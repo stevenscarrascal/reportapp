@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CoordinadorController;
 use App\Http\Controllers\ReportesController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,4 +21,5 @@ Route::get('/', function () {
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::resource('/reportes', ReportesController::class)->names('reportes');
+    Route::resource('/coordinador',CoordinadorController::class)->names('coordinador');
 });

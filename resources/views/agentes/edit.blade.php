@@ -2,9 +2,9 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-gray-800 leading-tight">
-               <p class="text-sm">Modificacion Contrato</p>  <p class=" uppercase">N°: @if ($reporte->contrato){{ $reporte->contrato }}@endif</p> 
+               <p class="text-sm">Modificacion Contrato</p>  <p class=" uppercase">N°: @if ($reporte->contrato){{ $reporte->contrato }}@endif</p>
             </h2>
-            <a href="{{ route('reportes.index') }}" class="btn btn-primary btn-md flex items-center">
+            <a href="{{ route('reportes.index') }}" class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none mb-2">
                 <i class="fas fa-arrow-left"></i> Regresar
             </a>
         </div>
