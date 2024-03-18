@@ -2,9 +2,14 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-gray-800 leading-tight">
-               <p class="text-sm">Modificacion Contrato</p>  <p class=" uppercase">N°: @if ($reporte->contrato){{ $reporte->contrato }}@endif</p>
+                <p class="text-sm">Modificacion Contrato</p>
+                <p class=" uppercase">N°: @if ($reporte->contrato)
+                        {{ $reporte->contrato }}
+                    @endif
+                </p>
             </h2>
-            <a href="{{ route('reportes.index') }}" class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none mb-2">
+            <a href="{{ route('reportes.index') }}"
+                class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none mb-2">
                 <i class="fas fa-arrow-left"></i> Regresar
             </a>
         </div>
@@ -27,7 +32,7 @@
                             data-twe-toggle="pill" data-twe-target="#tabs-profile01" role="tab"
                             aria-controls="tabs-profile01" aria-selected="false">Fotos</a>
                     </li>
-                     </ul>
+                </ul>
 
                 <!--Tabs content-->
                 <div class="mb-6">
@@ -139,37 +144,43 @@
                                                         <x-label for="foto1" value="Numero de lectura" />
                                                         <input capture="camera"
                                                             class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                            id="foto1" name="foto1" type="file" accept="image/*" />
+                                                            id="foto1" name="foto1" type="file"
+                                                            accept="image/*" />
                                                         <x-input-error for="foto1" />
 
                                                         <x-label for="foto2" value="Numero de Serial" />
                                                         <input capture="camera"
                                                             class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                            id="foto2" name="foto2" type="file" accept="image/*" />
+                                                            id="foto2" name="foto2" type="file"
+                                                            accept="image/*" />
                                                         <x-input-error for="foto2" />
 
                                                         <x-label for="foto3" value="Estado del Medidor" />
                                                         <input capture="camera"
                                                             class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                            id="foto3" name="foto3" type="file" accept="image/*" />
+                                                            id="foto3" name="foto3" type="file"
+                                                            accept="image/*" />
                                                         <x-input-error for="foto3" />
 
                                                         <x-label for="foto4" value="Numero del Medidor" />
                                                         <input capture="camera"
                                                             class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                            id="foto4" name="foto4" type="file" accept="image/*" />
+                                                            id="foto4" name="foto4" type="file"
+                                                            accept="image/*" />
                                                         <x-input-error for="foto4" />
 
                                                         <x-label for="foto5" value="Vivienda" />
                                                         <input capture="camera"
                                                             class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                            id="foto5" name="foto5" type="file" accept="image/*" />
+                                                            id="foto5" name="foto5" type="file"
+                                                            accept="image/*" />
                                                         <x-input-error for="foto5" />
 
                                                         <x-label for="foto6" value="Opcional" />
                                                         <input capture="camera"
                                                             class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                            id="foto6" name="foto6" type="file" accept="image/*" />
+                                                            id="foto6" name="foto6" type="file"
+                                                            accept="image/*" />
                                                         <x-input-error for="foto6" />
                                                     </div>
                                                 </div>
@@ -185,50 +196,15 @@
                     </div>
                     <div class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
                         id="tabs-profile01" role="tabpanel" aria-labelledby="tabs-profile-tab01">
-                        <div class="container mx-auto px-5 py-2 lg:px-32 lg:pt-10 mb-6">
-                            <div class="-m-1 flex flex-wrap md:-m-2">
-                                @if ($reporte->foto1)
-                                    <div class="w-full lg:w-1/3 p-1 md:p-2">
-                                        <img alt="gallery"
-                                            class="block h-full w-full rounded-lg object-cover object-center"
-                                            src="/imagen/{{ $reporte->foto1 }}" />
-                                    </div>
-                                @endif
-                                @if ($reporte->foto2)
-                                    <div class="w-full lg:w-1/3 p-1 md:p-2">
-                                        <img alt="gallery"
-                                            class="block h-full w-full rounded-lg object-cover object-center"
-                                            src="/imagen/{{ $reporte->foto2 }}" />
-                                    </div>
-                                @endif
-                                @if ($reporte->foto3)
-                                    <div class="w-full lg:w-1/3 p-1 md:p-2">
-                                        <img alt="gallery"
-                                            class="block h-full w-full rounded-lg object-cover object-center"
-                                            src="/imagen/{{ $reporte->foto3 }}" />
-                                    </div>
-                                @endif
-                                @if ($reporte->foto4)
-                                    <div class="w-full lg:w-1/3 p-1 md:p-2">
-                                        <img alt="gallery"
-                                            class="block h-full w-full rounded-lg object-cover object-center"
-                                            src="/imagen/{{ $reporte->foto4 }}" />
-                                    </div>
-                                @endif
-                                @if ($reporte->foto5)
-                                    <div class="w-full lg:w-1/3 p-1 md:p-2">
-                                        <img alt="gallery"
-                                            class="block h-full w-full rounded-lg object-cover object-center"
-                                            src="/imagen/{{ $reporte->foto5 }}" />
-                                    </div>
-                                @endif
-                                @if ($reporte->foto6)
-                                    <div class="w-full lg:w-1/3 p-1 md:p-2">
-                                        <img alt="gallery"
-                                            class="block h-full w-full rounded-lg object-cover object-center"
-                                            src="/imagen/{{ $reporte->foto6 }}" />
-                                    </div>
-                                @endif
+                        {{-- Galery --}}
+                        <div class="px-5 py-4">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                @foreach (range(1, 6) as $i)
+                                    @if ($reporte->{'foto' . $i})
+                                        <img alt="gallery" class="h-auto max-w-full rounded-lg"
+                                            src="/imagen/{{ $reporte->{'foto' . $i} }}" />
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -237,21 +213,21 @@
         </div>
     </div>
     @section('js')
-    <script>
-        // Función para manejar la obtención de la ubicación actual
-        function obtenerUbicacion() {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                // Obtener latitud y longitud
-                var latitud = position.coords.latitude;
-                var longitud = position.coords.longitude;
+        <script>
+            // Función para manejar la obtención de la ubicación actual
+            function obtenerUbicacion() {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    // Obtener latitud y longitud
+                    var latitud = position.coords.latitude;
+                    var longitud = position.coords.longitude;
 
-                // Colocar latitud y longitud en los elementos de entrada
-                document.getElementById('latitud').value = latitud;
-                document.getElementById('longitud').value = longitud;
-            });
-        }
-        // Llamar a la función para obtener la ubicación al cargar la página
-        window.onload = obtenerUbicacion;
-    </script>
+                    // Colocar latitud y longitud en los elementos de entrada
+                    document.getElementById('latitud').value = latitud;
+                    document.getElementById('longitud').value = longitud;
+                });
+            }
+            // Llamar a la función para obtener la ubicación al cargar la página
+            window.onload = obtenerUbicacion;
+        </script>
     @endsection
 </x-app-layout>
