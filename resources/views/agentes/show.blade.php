@@ -30,7 +30,7 @@
                     <div class="hidden opacity-100 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
                         id="tabs-home01" role="tabpanel" aria-labelledby="tabs-home-tab01" data-twe-tab-active>
                         <div class="px-4 mb-2">
-                            <a href="{{ route('reportes.index') }}" class="btn btn-primary  flex items-center ">
+                            <a href="{{ route('reportes.index') }}" class="btn btn-primary w-full items-center flex">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2">
                                     <path stroke-linecap="round" stroke-linejoin="round"
