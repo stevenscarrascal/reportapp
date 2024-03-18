@@ -44,7 +44,6 @@ class ReportesController extends Controller
         $longitud = $request->input('longitud');
         $fontSize = 50;
 
-
         $response = Http::withoutVerifying()->get("https://revgeocode.search.hereapi.com/v1/revgeocode?apikey=auuOOORgqWd_T4DFf0onY2JlvMDhz4tP0G0o7fRYDRU&at=$latitud,$longitud&lang=es-ES");
         $data = $response->json();
 
@@ -123,7 +122,6 @@ class ReportesController extends Controller
         $estado = '7';
         $fontSize = 50;
         $reportes['estado'] =  $estado;
-
         foreach (range(1, 6) as $i) {
             if ($imagen = $request->file('foto' . $i)) {
                 $path = 'imagen/';

@@ -87,21 +87,19 @@
                                                         placeholder="Ingrese su Observacion">{{ $reporte->anomalia }}</textarea>
                                                     <x-input-error for="anomalia" />
                                                 </div>
-                                                <div class="mb-3">
-                                                    <x-label for="obstaculo" value="Imposibilidad de toma de lecturas"
-                                                        class="mb-2" />
-                                                    <div class="">
-                                                        {{-- ninguna --}}
-                                                        <div>
+                                                <div class="mb-4">
+                                                    <label for="obstaculo" class="mb-4">Imposibilidad de toma de
+                                                        Lectura</label>
+                                                    <div class="mb-3">
+                                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                                            {{-- ninguna --}}
                                                             <label for="obstaculo">
                                                                 <input type="radio" name="imposibilidad"
                                                                     id="obstaculo" value="ninguna" class="px-2 mb-1"
                                                                     @if ($reporte->imposibilidad === 'ninguna') checked @endif>
                                                                 Ninguna
                                                             </label>
-                                                        </div>
-                                                        {{-- obstaculos --}}
-                                                        <div>
+                                                            {{-- obstaculos --}}
                                                             <label for="obstaculo">
                                                                 <input type="radio" name="imposibilidad"
                                                                     id="obstaculo" value="obstaculo"
@@ -109,27 +107,21 @@
                                                                     @if ($reporte->imposibilidad === 'obstaculo') checked @endif>
                                                                 Obstaculos
                                                             </label>
-                                                        </div>
-                                                        {{-- rejas --}}
-                                                        <div>
+                                                            {{-- rejas --}}
                                                             <label>
                                                                 <input type="radio" name="imposibilidad"
                                                                     id="reja" value="reja" class="px-2 mb-1"
                                                                     @if ($reporte->imposibilidad === 'reja') checked @endif>
                                                                 Rejas
                                                             </label>
-                                                        </div>
-                                                        {{-- no medidor --}}
-                                                        <div>
+                                                            {{-- no medidor --}}
                                                             <label>
                                                                 <input type="radio" name="imposibilidad"
                                                                     id="medidor" value="medidor" class="px-2 mb-1"
                                                                     @if ($reporte->imposibilidad === 'medidor') checked @endif>
                                                                 Sin Medidor
                                                             </label>
-                                                        </div>
-                                                        {{-- usuario no lectura --}}
-                                                        <div>
+                                                            {{-- usuario no lectura --}}
                                                             <label>
                                                                 <input type="radio" name="imposibilidad"
                                                                     id="lectura_m" value="lectura" class="px-2"
@@ -141,47 +133,48 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <div class="flex flex-wrap gap-2">
-                                                        <x-label for="foto1" value="Numero de lectura" />
-                                                        <input capture="camera"
-                                                            class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                            id="foto1" name="foto1" type="file"
-                                                            accept="image/*" />
-                                                        <x-input-error for="foto1" />
-
-                                                        <x-label for="foto2" value="Numero de Serial" />
-                                                        <input capture="camera"
-                                                            class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                            id="foto2" name="foto2" type="file"
-                                                            accept="image/*" />
-                                                        <x-input-error for="foto2" />
-
-                                                        <x-label for="foto3" value="Estado del Medidor" />
-                                                        <input capture="camera"
-                                                            class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                            id="foto3" name="foto3" type="file"
-                                                            accept="image/*" />
-                                                        <x-input-error for="foto3" />
-
-                                                        <x-label for="foto4" value="Numero del Medidor" />
-                                                        <input capture="camera"
-                                                            class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                            id="foto4" name="foto4" type="file"
-                                                            accept="image/*" />
-                                                        <x-input-error for="foto4" />
-
-                                                        <x-label for="foto5" value="Vivienda" />
-                                                        <input capture="camera"
-                                                            class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                            id="foto5" name="foto5" type="file"
-                                                            accept="image/*" />
-                                                        <x-input-error for="foto5" />
-
-                                                        <x-label for="foto6" value="Opcional" />
-                                                        <input capture="camera"
-                                                            class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                            id="foto6" name="foto6" type="file"
-                                                            accept="image/*" />
-                                                        <x-input-error for="foto6" />
+                                                        <label for="foto1" class="file-label">Foto del inmueble
+                                                            <input capture="camera"
+                                                                class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
+                                                                id="foto1" name="foto1" type="file"
+                                                                accept="image/*" />
+                                                            <x-input-error for="foto1" />
+                                                        </label>
+                                                        <label for="foto2" class="file-label">Numero de Serial
+                                                            <input capture="camera"
+                                                                class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
+                                                                id="foto2" name="foto2" type="file"
+                                                                accept="image/*" />
+                                                            <x-input-error for="foto2" />
+                                                        </label>
+                                                        <label for="foto3" class="file-label">Numero de Lectura
+                                                            <input capture="camera"
+                                                                class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
+                                                                id="foto3" name="foto3" type="file"
+                                                                accept="image/*" />
+                                                            <x-input-error for="foto3" />
+                                                        </label>
+                                                        <label for="foto4" class="file-label">Numero del medidor
+                                                            <input capture="camera"
+                                                                class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
+                                                                id="foto4" name="foto4" type="file"
+                                                                accept="image/*" />
+                                                            <x-input-error for="foto4" />
+                                                        </label>
+                                                        <label for="foto5" class="file-label">Estado del Medidor
+                                                            <input capture="camera"
+                                                                class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
+                                                                id="foto5" name="foto5" type="file"
+                                                                accept="image/*" />
+                                                            <x-input-error for="foto5" />
+                                                        </label>
+                                                        <label for="foto6" class="file-label">Opcional
+                                                            <input capture="camera"
+                                                                class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
+                                                                id="foto6" name="foto6" type="file"
+                                                                accept="image/*" />
+                                                            <x-input-error for="foto6" />
+                                                        </label>
                                                     </div>
                                                 </div>
                                                 <x-button class="mb-3">
@@ -214,13 +207,50 @@
     </div>
     @section('js')
         <script>
+            // Obtén todos los botones de radio, los campos de entrada de archivos y las etiquetas
+            var radios = document.querySelectorAll('input[type=radio][name="imposibilidad"]');
+            var fileInputs = document.querySelectorAll('input[type=file]');
+            var fileLabels = document.querySelectorAll('.file-label');
+            // Función para manejar el cambio de estado de los botones de radio
+            function handleRadioChange(event) {
+                // Si el valor del botón de radio es 'ninguna', muestra todos los campos de entrada de archivos y sus etiquetas
+                if (event.target.value === 'ninguna') {
+                    fileInputs.forEach(function(input) {
+                        input.style.display = 'block';
+                    });
+                    fileLabels.forEach(function(label) {
+                        label.style.display = 'block';
+                    });
+                } else {
+                    // De lo contrario, solo muestra el primer campo de entrada de archivos y su etiqueta
+                    fileInputs.forEach(function(input, index) {
+                        if (index === 0) {
+                            input.style.display = 'block';
+                        } else {
+                            input.style.display = 'none';
+                        }
+                    });
+                    fileLabels.forEach(function(label, index) {
+                        if (index === 0) {
+                            label.style.display = 'block';
+                        } else {
+                            label.style.display = 'none';
+                        }
+                    });
+                }
+            }
+            // Agrega el controlador de eventos a todos los botones de radio
+            radios.forEach(function(radio) {
+                radio.addEventListener('change', handleRadioChange);
+            });
+        </script>
+        <script>
             // Función para manejar la obtención de la ubicación actual
             function obtenerUbicacion() {
                 navigator.geolocation.getCurrentPosition(function(position) {
                     // Obtener latitud y longitud
                     var latitud = position.coords.latitude;
                     var longitud = position.coords.longitude;
-
                     // Colocar latitud y longitud en los elementos de entrada
                     document.getElementById('latitud').value = latitud;
                     document.getElementById('longitud').value = longitud;
