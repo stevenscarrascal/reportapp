@@ -56,7 +56,7 @@
                                             <td>{{ $pendiente->personal->apellidos }}</td>
                                             <td>{{ $pendiente->contrato }}</td>
                                             <td>{{ $pendiente->lectura }}</td>
-                                            <td>{{ $pendiente->latitud . ',' . $revisado->longitud }}</td>
+                                            <td>{{ $pendiente->latitud . ',' . $pendiente->longitud }}</td>
                                             <td>{{ $pendiente->created_at }}</td>
                                             <td>{{ $pendiente->direccion }}</td>
                                             <td>
@@ -67,7 +67,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('coordinador.show', $pendiente->id) }}"
+                                                <a href="{{ route('reportes.show', $pendiente->id) }}"
                                                     class="inline-block rounded bg-success p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-green-500 focus:outline-none focus:ring-0 active:bg-green-600 mb-1"><i
                                                         class="far fa-eye"></i></a>
 
@@ -103,7 +103,7 @@
                                             <td>{{ $rechazado->personal->apellidos }}</td>
                                             <td>{{ $rechazado->contrato }}</td>
                                             <td>{{ $rechazado->lectura }}</td>
-                                            <td>{{ $rechazado->latitud . ',' . $revisado->longitud }}</td>
+                                            <td>{{ $rechazado->latitud . ',' . $rechazado->longitud }}</td>
                                             <td>{{ $rechazado->created_at }}</td>
                                             <td>{{ $rechazado->direccion }}</td>
                                             <td>
@@ -114,7 +114,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('coordinador.show', $rechazado->id) }}"
+                                                <a href="{{ route('reportes.show', $rechazado->id) }}"
                                                     class="inline-block rounded bg-success p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-green-500 focus:outline-none focus:ring-0 active:bg-green-600 mb-1"><i
                                                         class="far fa-eye"></i></a>
 
@@ -161,7 +161,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('coordinador.show', $revisado->id) }}"
+                                                <a href="{{ route('reportes.show', $revisado->id) }}"
                                                     class="inline-block rounded bg-success p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-green-500 focus:outline-none focus:ring-0 active:bg-green-600 mb-1"><i
                                                         class="far fa-eye"></i></a>
 
