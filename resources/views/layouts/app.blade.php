@@ -16,6 +16,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="{{ asset('plugins/DataTables/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/fontawesome/css/all.min.css') }}">
     <!-- Styles -->
     @livewireStyles
 </head>
