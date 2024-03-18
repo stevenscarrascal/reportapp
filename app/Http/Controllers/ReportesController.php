@@ -90,7 +90,6 @@ class ReportesController extends Controller
             imagedestroy($imagenGD);
         }
     }
-
         reportes::create($reportes);
         notify()->success('Lectura Guardada Con Exito');
         return redirect()->route('reportes.index');
