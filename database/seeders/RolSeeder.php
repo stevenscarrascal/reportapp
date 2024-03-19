@@ -13,20 +13,25 @@ class RolSeeder extends Seeder
      */
     public function run(): void
     {
-        Role::create([
+        $admin = Role::create([
             'name' => 'Administrador',
             'guard_name' => 'web',
             'estado' => 1,
         ]);
-        Role::create([
+        $admin->syncPermissions(['administrador','','coordinador','agente']);
+
+        $coordinador = Role::create([
             'name' => 'Coordinador',
             'guard_name' => 'web',
             'estado' => 1,
         ]);
-        Role::create([
+        $coordinador->syncPermissions(['coordinador']);
+
+        $agente = Role::create([
             'name' => 'Agente de campo',
             'guard_name' => 'web',
             'estado' => 1,
         ]);
+        $agente->syncPermissions(['agente']);
     }
 }

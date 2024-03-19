@@ -23,7 +23,9 @@ class UserSeeder extends Seeder
         ]);
 
         // Asigna el rol de administrador al usuario
-        $Role = Role::where('name', 'Administrador')->first();
+        $Role = Role::where('name', 'administrador')->first();
         $user->assignRole($Role);
+
+
     }
 }
