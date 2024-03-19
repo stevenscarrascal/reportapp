@@ -23,5 +23,8 @@ class EncabezadosSeeder extends Seeder
         encabezados::create([
             'nombre'=>'estado',
         ]);
+        encabezados::create([
+            'nombre'=>'anomalia',
+        ]);
         }
 }

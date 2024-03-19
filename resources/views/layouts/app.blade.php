@@ -17,6 +17,7 @@
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="{{ asset('plugins/DataTables/datatables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/Select2/dist/css/select2.min.css') }}">
     <!-- Styles -->
     @livewireStyles
 </head>
@@ -45,6 +46,7 @@
  <!-- DataTables JS  y jquery 3.7 -->
     <script type="text/javascript" src="{{ asset('js/jquery-3.7.1.js') }}"></script>
     <script type="text/javascript" src="{{ asset('plugins/DataTables/datatables.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/Select2/dist/js/select2.min.js') }}"></script>
 
     @notifyJs
     @stack('modals')

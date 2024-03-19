@@ -4,156 +4,167 @@
             <h2 class="font-semibold text-gray-800 leading-tight">
                 {{ __('Agentes de Campo') }}
             </h2>
-            <button type="button"
-                class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
-                data-twe-toggle="modal" data-twe-target="#nuevoagente" data-twe-ripple-init data-twe-ripple-color="light">
-                <i class="fas fa-user-plus"></i> Crear Nuevo Agente
-            </button>
+            <a href="{{ route('coordinador.index') }}"
+                class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none mb-2">
+                <i class="fas fa-arrow-left"></i> Regresar
+            </a>
         </div>
+        <!--Verically centered scrollable modal-->
+        <div data-twe-modal-init
+            class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+            id="nuevoagente" tabindex="-1" aria-labelledby="exampleModalCenteredScrollableLabel" aria-modal="true"
+            role="dialog">
+            <div data-twe-modal-dialog-ref
+                class="pointer-events-none relative flex min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[800px]">
+                <div
+                    class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none dark:bg-surface-dark">
+                    <div
+                        class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 p-4 dark:border-white/10">
+                        <!-- Modal title -->
+                        <h5 class="text-xl font-medium leading-normal text-surface dark:text-white"
+                            id="exampleModalCenteredScrollableLabel">
+                            Agragar Nuevo Agente de Campo
+                        </h5>
+                        <!-- Close button -->
+                        <button type="button"
+                            class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
+                            data-twe-modal-dismiss aria-label="Close">
+                            <span class="[&>svg]:h-6 [&>svg]:w-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                    <!-- Modal body -->
+                    <form class="mt-3">
+                        <div class="px-4">
+                            <div class="grid gap-6 mb-6 md:grid-cols-2 px-4">
+                                <div>
+                                    <label for="tipo_documento"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Tipo de
+                                        Documento</label>
+                                    <select id="tipo_documento" name="tipo_documento"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                        <option selected>Seleccione su tipo de documento</option>
+                                        @foreach ($tipodocumento as $id => $nombre )
+                                        <option value="{{$id}}">{{$nombre}}</option>
+                                        @endforeach
 
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="numero_documento"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero de Documento</label>
+                                    <input type="text" id="numero_documento" name="numero_documento"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Ingrese su numero de documento"  />
+                                </div>
+                                <div>
+                                    <label for="nombres"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombres</label>
+                                    <input type="text" id="nombres" name="nombres"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="ingrese Nombres Completos"  />
+                                </div>
+                                <div>
+                                    <label for="apellidos"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Apellidos</label>
+                                    <input type="text" id="apellidos" name="apellidos"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Flowbite"  />
+                                </div>
+                                <div>
+                                    <label for="telefono"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">numero de telefono</label>
+                                    <input type="tel" id="telefono" name="telefono"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="(123-45-678)" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" />
+                                </div>
+                                <div>
+                                    <label for="countries"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Tipo de
+                                        Documento</label>
+                                    <select id="tipo_documento" name="tipo_documento"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                        <option selected>Seleccione su tipo de documento</option>
+                                        @foreach ($tipodocumento as $id => $nombre )
+                                        <option value="{{$id}}">{{$nombre}}</option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="visitors"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unique
+                                        visitors
+                                        (per month)</label>
+                                    <input type="number" id="visitors"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="" />
+                                </div>
+                            </div>
+                            <div class="mb-6 px-4">
+                                <label for="email"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email
+                                    address</label>
+                                <input type="email" id="email"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="john.doe@company.com"  />
+                            </div>
+                            <div class="mb-6 px-4">
+                                <label for="password"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                                <input type="password" id="password"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="•••••••••"  />
+                            </div>
+                            <div class="mb-6 px-4">
+                                <label for="confirm_password"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm
+                                    password</label>
+                                <input type="password" id="confirm_password"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="•••••••••"  />
+                            </div>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div
+                            class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 p-4 dark:border-white/10">
+                            <button type="button"
+                                class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-200 focus:bg-primary-accent-200 focus:outline-none focus:ring-0 active:bg-primary-accent-200 dark:bg-primary-300 dark:hover:bg-primary-400 dark:focus:bg-primary-400 dark:active:bg-primary-400"
+                                data-twe-modal-dismiss data-twe-ripple-init data-twe-ripple-color="light">
+                                Cancelar
+                            </button>
+                            <button type="submit"
+                                class="ms-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
+                                data-twe-ripple-init data-twe-ripple-color="light">
+                                Gruardar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </x-slot>
 
 
-    <!--Verically centered scrollable modal-->
-    <div data-twe-modal-init
-        class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
-        id="nuevoagente" tabindex="-1" aria-labelledby="exampleModalCenteredScrollableLabel" aria-modal="true"
-        role="dialog">
-        <div data-twe-modal-dialog-ref
-            class="pointer-events-none relative flex min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[800px]">
-            <div
-                class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none dark:bg-surface-dark">
-                <div
-                    class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 p-4 dark:border-white/10">
-                    <!-- Modal title -->
-                    <h5 class="text-xl font-medium leading-normal text-surface dark:text-white"
-                        id="exampleModalCenteredScrollableLabel">
-                        Agragar Nuevo Agente de Campo
-                    </h5>
-                    <!-- Close button -->
-                    <button type="button"
-                        class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
-                        data-twe-modal-dismiss aria-label="Close">
-                        <span class="[&>svg]:h-6 [&>svg]:w-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </span>
-                    </button>
-                </div>
-                <!-- Modal body -->
-
-                <form class="mt-3">
-                    <div class="px-4">
-                        <div class="grid gap-6 mb-6 md:grid-cols-2 px-4">
-                            <div>
-                                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de Documento</label>
-                                <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                  <option selected>Choose a country</option>
-                                  <option value="US">United States</option>
-                                  <option value="CA">Canada</option>
-                                  <option value="FR">France</option>
-                                  <option value="DE">Germany</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="first_name"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First
-                                    name</label>
-                                <input type="text" id="first_name"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="John" required />
-                            </div>
-                            <div>
-                                <label for="last_name"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last
-                                    name</label>
-                                <input type="text" id="last_name"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Doe" required />
-                            </div>
-                            <div>
-                                <label for="company"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company</label>
-                                <input type="text" id="company"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Flowbite" required />
-                            </div>
-                            <div>
-                                <label for="phone"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone
-                                    number</label>
-                                <input type="tel" id="phone"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required />
-                            </div>
-                            <div>
-                                <label for="website"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Website
-                                    URL</label>
-                                <input type="url" id="website"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="flowbite.com" required />
-                            </div>
-                            <div>
-                                <label for="visitors"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unique visitors
-                                    (per month)</label>
-                                <input type="number" id="visitors"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="" required />
-                            </div>
-                        </div>
-                        <div class="mb-6 px-4">
-                            <label for="email"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email
-                                address</label>
-                            <input type="email" id="email"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="john.doe@company.com" required />
-                        </div>
-                        <div class="mb-6 px-4">
-                            <label for="password"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                            <input type="password" id="password"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="•••••••••" required />
-                        </div>
-                        <div class="mb-6 px-4">
-                            <label for="confirm_password"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm
-                                password</label>
-                            <input type="password" id="confirm_password"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="•••••••••" required />
-                        </div>
-                    </div>
-
-                    <!-- Modal footer -->
-                    <div
-                        class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 p-4 dark:border-white/10">
-                        <button type="button"
-                            class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-200 focus:bg-primary-accent-200 focus:outline-none focus:ring-0 active:bg-primary-accent-200 dark:bg-primary-300 dark:hover:bg-primary-400 dark:focus:bg-primary-400 dark:active:bg-primary-400"
-                            data-twe-modal-dismiss data-twe-ripple-init data-twe-ripple-color="light">
-                            Cancelar
-                        </button>
-                        <button type="submit"
-                            class="ms-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
-                            data-twe-ripple-init data-twe-ripple-color="light">
-                            Gruardar
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
     <div class="py-12">
         <div class=" mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
+                    <div class="flex justify-end">
+                        <button type="button"
+                            class=" mb-2 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2"
+                            data-twe-toggle="modal" data-twe-target="#nuevoagente" data-twe-ripple-init
+                            data-twe-ripple-color="light">
+                            <i class="fas fa-user-plus"></i> Crear Nuevo Agente
+                        </button>
+                    </div>
                     <table id="tableagentes" class="table table-striped" style="width:100%">
+
                         <thead>
                             <tr>
                                 <th>Tipo de Documento</th>
@@ -198,7 +209,7 @@
         <script>
             $(document).ready(function() {
                 var table = $('#tableagentes').DataTable({
-                    dom: 'Bfrtip',
+                    dom: 'fBrtp',
                     buttons: [{
                             extend: 'excel',
                             text: '<i class="fas fa-file-excel"></i> Excel', // Agrega un icono de Excel antes del texto
@@ -225,7 +236,10 @@
                         "search": "Buscar:",
                     }
                 });
+
+                $('.dt-buttons').addClass('flex justify-end');
             });
         </script>
+
     @endsection
 </x-app-layout>

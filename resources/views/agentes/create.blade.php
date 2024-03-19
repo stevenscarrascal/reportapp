@@ -32,6 +32,14 @@
                             <x-input-error for="contrato" />
                         </div>
                         <div class=" mb-3">
+                            <x-label for='medidor' value='Numero de medidor' class="mb-2" />
+                            <input type="text"
+                                class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                name="medidor" id="medidor" placeholder="Ingrese su Numero de Medidor"
+                                value="{{ old('medidor') }}">
+                            <x-input-error for="medidor" />
+                        </div>
+                        <div class=" mb-3">
                             <x-label for='lectura' value='Numero de lectura' class="mb-2" />
                             <input type="text"
                                 class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
@@ -40,10 +48,17 @@
                             <x-input-error for="lectura" />
                         </div>
                         <div class=" mb-3">
-                            <x-label for='anomalia' value='Observacion de Anomalia' class=" mb-2" />
-                            <textarea name="anomalia" id="anomalia" rows="5"
-                                class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                                placeholder="Ingrese su Observacion"></textarea>
+                            <label for="countries"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opciones de Anomalia</label>
+                            <select id="countries" name="anomalia"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option selected>Seleccione Su Anomalia</option>
+                                <option value="US">United States</option>
+                                <option value="CA">Canada</option>
+                                <option value="FR">France</option>
+                                <option value="DE">Germany</option>
+                            </select>
+
                             <x-input-error for="anomalia" />
                         </div>
                         <div class="mb-4">

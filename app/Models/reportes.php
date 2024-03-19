@@ -39,6 +39,7 @@ class reportes extends Model
     protected $fillable = [
         'personal_id',
         'contrato',
+        'medidor',
         'lectura',
         'anomalia',
         'imposibilidad',

@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('reportes', function (Blueprint $table) {
             $table->smallIncrements('id');
-            $table->string('personal_id',125);
+            $table->string('personal_id');
             $table->string('contrato',125);
+            $table->string('medidor',125);
             $table->string('lectura',125);
-            $table->string('direccion')->nullable();
+            $table->text('tipo_comercio');
+            $table->string('direccion');
             $table->string('anomalia');
-            $table->string('imposibilidad')->nullable();
+            $table->string('imposibilidad');
             $table->text('observaciones')->nullable();
             $table->string('latitud');
             $table->string('longitud');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\personals;
 use App\Models\reportes;
+use App\Models\vs_tipo_documento;
 use Illuminate\Http\Request;
 
 class CoordinadorController extends Controller
@@ -26,7 +27,8 @@ class CoordinadorController extends Controller
     public function create()
     {
         $personals = personals::with('cargos','estado','tipodocumento')->get();
-        return view('coordinador.create',compact('personals'));
+        $tipodocumento = vs_tipo_documento::pluck('nombre','id');
+        return view('coordinador.create',compact('personals','tipodocumento'));
     }
 
     /**

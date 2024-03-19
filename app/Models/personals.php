@@ -15,6 +15,7 @@ class personals extends Model
         'tipo_documento',
         'numero_documento',
         'nombres',
+        'telefono', // 'telefono' was missing
         'apellidos',
         'correo',
         'cargo',

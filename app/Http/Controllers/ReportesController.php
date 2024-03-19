@@ -40,6 +40,8 @@ class ReportesController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
+    
         $latitud = $request->input('latitud');
         $longitud = $request->input('longitud');
         $fontSize = 50;
