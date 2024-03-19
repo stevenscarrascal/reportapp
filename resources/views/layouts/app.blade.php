@@ -44,7 +44,7 @@
     </div>
     <x-notify::notify />
  <!-- DataTables JS  y jquery 3.7 -->
-    <script type="text/javascript" src="{{ asset('js/jquery-3.7.1.js') }}"></script>
+   
     <script type="text/javascript" src="{{ asset('plugins/DataTables/datatables.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('plugins/Select2/dist/js/select2.min.js') }}"></script>
 

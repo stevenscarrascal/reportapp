@@ -21,6 +21,7 @@ class reportes extends Model
         'foto5' => 'image|max:5120',
         'foto6' => 'image|max:5120'
     ];
+    
     static $rulesupdate = [
         'contrato' => 'required',
         'lectura' => 'required',
@@ -66,5 +67,10 @@ class reportes extends Model
     public function EstadoReporte()
     {
         return $this->hasOne(vs_estado::class, 'id', 'estado');
+    }
+
+    public function AnomaliaReporte()
+    {
+        return $this->hasOne(vs_anomalias::class, 'id', 'anomalia');
     }
 }
