@@ -67,7 +67,7 @@ class PersonalsController extends Controller
         $user->save();
 
         notify()->success('Personal creado con éxito');
-        return  redirect()->route('coordinador.create');
+        return  redirect()->route('personals.index');
     }
 
     /**
@@ -97,8 +97,44 @@ class PersonalsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(personals $personals)
+    public function destroy(string $id)
     {
-        //
+       // Buscar el registro personal
+       $personal = personals::find($id);
+
+    
+
+       // Verificar si el registro personal existe
+       if (!$personal) {
+           // Manejar el caso cuando el registro no se encuentra
+           // Por ejemplo, puedes redirigir de vuelta con un mensaje de error
+           notify()->success('Registro personal no encontrado.');
+           return redirect()->back();
+       }
+
+       // Buscar el registro de usuario asociado con el registro personal
+       $usuario = User::where('personal_id', $personal->id)->first();
+
+
+       // Verificar si el registro de usuario existe
+       if (!$usuario) {
+           // Manejar el caso cuando el registro no se encuentra
+           // Por ejemplo, puedes redirigir de vuelta con un mensaje de error
+           notify()->success('Registro de usuario no encontrado.');
+           return redirect()->back();
+       }
+
+       // Actualizar la propiedad estado para ambos registros
+       $personal->estado = 4;
+       $personal->update();
+
+       $usuario->estado = 0;
+       $usuario->update();
+
+       // Notificar éxito
+       notify()->success('Usuario eliminado con éxito');
+
+       // Redirigir a la ruta de índice
+       return redirect()->route('personals.index');
     }
 }

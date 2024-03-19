@@ -39,7 +39,7 @@
                     </div>
                     <!-- Modal body -->
 
-                    <form action="{{ route('coordinador.store') }}" method="POST" class="mt-3">
+                    <form action="{{ route('personals.store') }}" method="POST" class="mt-3">
                         @csrf
                         <div class="px-4">
                             <div class="grid gap-6 mb-6 md:grid-cols-2 px-4">
@@ -81,7 +81,8 @@
                                 </div>
                                 <div>
                                     <label for="phone-input"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero de Telefono:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero de
+                                        Telefono:</label>
                                     <div class="relative">
                                         <div
                                             class="absolute inset-y-0 start-0 top-0 flex items-center ps-3.5 pointer-events-none">
@@ -95,7 +96,8 @@
                                         <input type="text" id="phone-input" name="telefono"
                                             aria-describedby="helper-text-explanation"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="123-456-7890" />
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                            placeholder="123-456-7890" />
                                     </div>
                                 </div>
                                 <div>
@@ -172,6 +174,7 @@
                                 <th>Nombre</th>
                                 <th>Apellido</th>
                                 <th>correo</th>
+                                <th>estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -183,15 +186,32 @@
                                     <td>{{ $personal->nombres }}</td>
                                     <td>{{ $personal->apellidos }}</td>
                                     <td>{{ $personal->correo }}</td>
+                                    <td> @switch($personal->estado)
+                                            @case(3)
+                                                <strong class="text-white bg-green-500 rounded px-2 py-1">
+                                                    Activo
+                                                </strong>
+                                            @break
+
+                                            @case(4)
+                                                <strong class="text-white bg-red-500 rounded px-2 py-1">
+                                                    Inactivo
+                                                </strong>
+                                            @break
+
+                                            @default
+                                                {{ $personal->estado }}
+                                        @endswitch
+                                    </td>
                                     <td>
-                                        <a href="{{ route('reportes.show', $personal->id) }}"
+                                        <a href="{{ route('personals.show', $personal->id) }}"
                                             class="inline-block rounded bg-success p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-green-500 focus:outline-none focus:ring-0 active:bg-green-600 mb-1"><i
                                                 class="far fa-eye"></i></a>
 
-                                        <a href="{{ route('coordinador.edit', $personal->id) }}"
+                                        <a href="{{ route('personals.edit', $personal->id) }}"
                                             class="inline-block rounded bg-warning p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-yellow-500 focus:outline-none focus:ring-0 active:bg-yellow-600"><i
                                                 class="far fa-edit"></i></a>
-                                        <form action="{{ route('coordinador.destroy', $personal->id) }}" method="POST"
+                                        <form action="{{ route('personals.destroy', $personal) }}" method="POST"
                                             class="inline-block">
                                             @csrf
                                             @method('DELETE')

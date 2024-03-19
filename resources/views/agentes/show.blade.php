@@ -43,12 +43,14 @@
                                 <div class="grid md:grid-cols-2 grid-cols-1 gap-4">
                                     <div>
                                         <div
-                                            class="block rounded-lg bg-white p-6 text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
-                                            <h5 class="mb-2 text-xl font-medium leading-tight">Numero de Lectura:
-                                                {{ $reporte->lectura }}</h5>
-                                            <p class="mb-2 text-base">Fecha y Hora: {{ $reporte->created_at }}</p>
-                                            <p class="mb-4 text-base">Direccion: {{ $reporte->direccion }}</p>
-                                        </div>
+                                        class="block mb-3 rounded-lg bg-white p-6 text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
+                                        <h5 class="mb-2 text-xl font-medium leading-tight">Numero de Lectura:
+                                            {{ $reporte->lectura }}</h5>
+                                        <p class="mb-2 text-base">Fecha y Hora: {{ $reporte->created_at }}</p>
+                                        <p class="mb-2 text-base">Direccion: {{ $reporte->direccion }}</p>
+                                        <p class="mb-2 text-base">Anomalia Detectada: {{ $reporte->anomalia }}</p>
+                                        <p class="mb-2 text-base">Imposibilidad: {{ $reporte->imposibilidad }}</p>
+                                    </div>
                                     </div>
                                     <div>
                                         <div

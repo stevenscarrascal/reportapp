@@ -42,20 +42,26 @@
                             <div class="px-5 py-4">
                                 <div class="grid md:grid-cols-2 grid-cols-1 gap-4">
                                     <div>
-                                        <div class="block mb-3 rounded-lg bg-white p-6 text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
+                                        <div
+                                            class="block mb-3 rounded-lg bg-white p-6 text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
                                             <h5 class="mb-2 text-xl font-medium leading-tight">Numero de Lectura:
                                                 {{ $reporte->lectura }}</h5>
                                             <p class="mb-2 text-base">Fecha y Hora: {{ $reporte->created_at }}</p>
-                                            <p class="mb-4 text-base">Direccion: {{ $reporte->direccion }}</p>
+                                            <p class="mb-2 text-base">Direccion: {{ $reporte->direccion }}</p>
+                                            <p class="mb-2 text-base">Anomalia Detectada: {{ $reporte->anomalia }}</p>
+                                            <p class="mb-2 text-base">Imposibilidad: {{ $reporte->imposibilidad }}</p>
                                         </div>
-                                        <div class="block rounded-lg bg-white p-6 text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
+                                        <div
+                                            class="block rounded-lg bg-white p-6 text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
                                             <h5 class="mb-2 text-xl font-medium leading-tight">Observaciones</h5>
-                                            <p class="mb-2 text-base">  {{ $reporte->observaciones }}</p>
+                                            <p class="mb-2 text-base"> {{ $reporte->observaciones }}</p>
 
                                         </div>
                                     </div>
                                     <div>
                                         <div>
+                                            @if ($reporte->estado == 5 || $reporte->estado == 7)
+
                                             <form action="{{ route('coordinador.update', $reporte) }}" method="post">
                                                 @csrf
                                                 @method('PUT')
@@ -78,17 +84,18 @@
                                                             </button>
                                                         @endif
                                                         @if ($reporte->estado == 5)
-                                                        <button type="submit" onclick="cambiarEstado(6)"
-                                                            class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-green-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-green-900 hover:bg-green-800">
-                                                            Revisado
-                                                        </button>
-                                                    @endif
+                                                            <button type="submit" onclick="cambiarEstado(6)"
+                                                                class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-green-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-green-900 hover:bg-green-800">
+                                                                Revisado
+                                                            </button>
+                                                        @endif
+
                                                     </div>
                                                 </div>
+                                                <p class="ms-auto text-xs text-gray-500 dark:text-gray-400">Aqui podra
+                                                    colocar Las observaciones referentes a esta lectura</p>
                                             </form>
-
-                                            <p class="ms-auto text-xs text-gray-500 dark:text-gray-400">Aqui podra
-                                                colocar Las observaciones referentes a esta lectura</p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -139,6 +146,5 @@
                     document.getElementsByName('estado')[0].value = estado;
                 }
             </script>
-
         @endsection
 </x-app-layout>

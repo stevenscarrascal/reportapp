@@ -43,7 +43,6 @@ class ReportesController extends Controller
     public function store(Request $request)
     {
 
-
         $latitud = $request->input('latitud');
         $longitud = $request->input('longitud');
         $fontSize = 50;
