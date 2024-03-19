@@ -10,6 +10,10 @@ use Spatie\Permission\Models\Role;
 
 class PersonalsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:administrador,coordinador');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -102,7 +106,7 @@ class PersonalsController extends Controller
        // Buscar el registro personal
        $personal = personals::find($id);
 
-    
+
 
        // Verificar si el registro personal existe
        if (!$personal) {

@@ -192,13 +192,11 @@
                                                     Activo
                                                 </strong>
                                             @break
-
                                             @case(4)
                                                 <strong class="text-white bg-red-500 rounded px-2 py-1">
                                                     Inactivo
                                                 </strong>
                                             @break
-
                                             @default
                                                 {{ $personal->estado }}
                                         @endswitch

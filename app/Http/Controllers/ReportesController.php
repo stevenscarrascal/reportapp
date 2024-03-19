@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Http;
 
 class ReportesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:agente');
+    }
     /**
      * Display a listing of the resource.
      */

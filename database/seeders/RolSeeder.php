@@ -28,7 +28,7 @@ class RolSeeder extends Seeder
         $coordinador->syncPermissions(['coordinador']);
 
         $agente = Role::create([
-            'name' => 'Agente de campo',
+            'name' => 'Lector',
             'guard_name' => 'web',
             'estado' => 1,
         ]);

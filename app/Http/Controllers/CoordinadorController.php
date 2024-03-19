@@ -12,6 +12,11 @@ use Illuminate\Http\Request;
 
 class CoordinadorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:coordinador');
+       
+    }
     /**
      * Display a listing of the resource.
      */
@@ -79,6 +84,6 @@ class CoordinadorController extends Controller
      */
     public function destroy(string $id)
     {
-        
+
     }
 }
