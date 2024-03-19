@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\reportes;
+use App\Models\vs_anomalias;
 use App\Models\vs_estado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +31,7 @@ class ReportesController extends Controller
             ->whereIn('estado', [5, 7])
             ->get();
             $estados = vs_estado::all();
+
         return view('agentes.index', compact('historiales','estados'));
     }
 
@@ -38,7 +40,8 @@ class ReportesController extends Controller
      */
     public function create()
     {
-        return view('agentes.create');
+        $anomalias = vs_anomalias::pluck('nombre','id');
+        return view('agentes.create',compact('anomalias'));
     }
 
     /**

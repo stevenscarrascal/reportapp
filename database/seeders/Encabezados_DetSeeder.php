@@ -49,6 +49,76 @@ class Encabezados_DetSeeder extends Seeder
             'nombre' => 'Rechazado',
             'nomenclatura'=>'RC'
         ]);
+        encabezados_dets::create([
+            'encabezados_id' => '3',
+            'nombre' => 'Sin Anomalias',
+            'nomenclatura'=>'NA'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '3',
+            'nombre' => 'Bypass',
+            'nomenclatura'=>'BY'
+        ]);
+
+        encabezados_dets::create([
+            'encabezados_id' => '3',
+            'nombre' => 'Medidor al revés (invertido)',
+            'nomenclatura'=>'MRI'
+        ]);
+
+        encabezados_dets::create([
+            'encabezados_id' => '3',
+            'nombre' => 'Medidor manipulado (sellos)',
+            'nomenclatura'=>'MMS'
+        ]);
+
+        encabezados_dets::create([
+            'encabezados_id' => '3',
+            'nombre' => 'Medidor sin sellos o rotos',
+            'nomenclatura'=>'MSSR'
+        ]);
+
+        encabezados_dets::create([
+            'encabezados_id' => '3',
+            'nombre' => 'Medidor sin talco',
+            'nomenclatura'=>'MST'
+        ]);
+
+        encabezados_dets::create([
+            'encabezados_id' => '3',
+            'nombre' => 'Medidor enterrado',
+            'nomenclatura'=>'ME'
+        ]);
+
+        encabezados_dets::create([
+            'encabezados_id' => '3',
+            'nombre' => 'Conexión directa',
+            'nomenclatura'=>'CD'
+        ]);
+
+        encabezados_dets::create([
+            'encabezados_id' => '3',
+            'nombre' => 'Medidor frenado',
+            'nomenclatura'=>'MF'
+        ]);
+
+        encabezados_dets::create([
+            'encabezados_id' => '3',
+            'nombre' => 'Medidor gira hacia atrás',
+            'nomenclatura'=>'MGHA'
+        ]);
+
+        encabezados_dets::create([
+            'encabezados_id' => '3',
+            'nombre' => 'Medidor fuera de ruta',
+            'nomenclatura'=>'MFR'
+        ]);
+
+        encabezados_dets::create([
+            'encabezados_id' => '3',
+            'nombre' => 'Medidor trocado',
+            'nomenclatura'=>'MT'
+        ]);
 
 
     }

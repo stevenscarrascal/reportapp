@@ -13,7 +13,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     @can('agente')
-                        <x-nav-link href="{{ route('reportes.index') }}" :active="request()->routeIs('reportes.index')">
+                        <x-nav-link href="{{ route('reportes.index') }}" :active="request()->routeIs(['reportes.index','reportes.create'])">
                             {{ __('Agentes') }}
                         </x-nav-link>
                     @endcan
