@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         DB::statement('DROP VIEW IF EXISTS vs_estado');
-        DB::statement('CREATE VIEW vs_estado AS SELECT id, nombre,nomenclatura FROM encabezados_dets WHERE encabezados_id = 3');
+        DB::statement('CREATE VIEW vs_estado AS SELECT id, nombre,nomenclatura FROM encabezados_dets WHERE encabezados_id = 2');
     }
 
     /**

@@ -44,6 +44,7 @@ class reportes extends Model
         'anomalia',
         'imposibilidad',
         'direccion',
+        'tipo_comercio',
         'observaciones',
         'latitud',
         'longitud',

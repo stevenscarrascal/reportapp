@@ -48,6 +48,14 @@
                             <x-input-error for="lectura" />
                         </div>
                         <div class=" mb-3">
+                            <x-label for='comercio' value='Tipo de Comercio' class="mb-2" />
+                            <input type="text"
+                                class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                name="tipo_comercio" id="comercio" placeholder="Ingrese su tipo de comercio"
+                                value="{{ old('comercio') }}">
+                            <x-input-error for="comercio" />
+                        </div>
+                        <div class=" mb-3">
                             <label for="countries"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opciones de Anomalia</label>
                             <select id="countries" name="anomalia"

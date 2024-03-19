@@ -19,8 +19,7 @@ return new class extends Migration
             $table->string('telefono')->nullable();
             $table->string('apellidos');
             $table->string('correo');
-            $table->string('cargo');
-            $table->string('estado',9)->default('5');
+            $table->string('estado',9)->default('3');
             $table->timestamps();
         });
     }

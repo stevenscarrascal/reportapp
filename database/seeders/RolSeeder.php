@@ -24,7 +24,7 @@ class RolSeeder extends Seeder
             'estado' => 1,
         ]);
         Role::create([
-            'name' => 'Agente',
+            'name' => 'Agente de campo',
             'guard_name' => 'web',
             'estado' => 1,
         ]);

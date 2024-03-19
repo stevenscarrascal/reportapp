@@ -38,7 +38,9 @@
                         </button>
                     </div>
                     <!-- Modal body -->
-                    <form class="mt-3">
+
+                    <form action="{{ route('coordinador.store') }}" method="POST" class="mt-3">
+                        @csrf
                         <div class="px-4">
                             <div class="grid gap-6 mb-6 md:grid-cols-2 px-4">
                                 <div>
@@ -48,86 +50,84 @@
                                     <select id="tipo_documento" name="tipo_documento"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                         <option selected>Seleccione su tipo de documento</option>
-                                        @foreach ($tipodocumento as $id => $nombre )
-                                        <option value="{{$id}}">{{$nombre}}</option>
+                                        @foreach ($tipodocumento as $id => $nombre)
+                                            <option value="{{ $id }}">{{ $nombre }}</option>
                                         @endforeach
 
                                     </select>
                                 </div>
                                 <div>
                                     <label for="numero_documento"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero de Documento</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero de
+                                        Documento</label>
                                     <input type="text" id="numero_documento" name="numero_documento"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="Ingrese su numero de documento"  />
+                                        placeholder="Ingrese su numero de documento"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
                                 </div>
                                 <div>
                                     <label for="nombres"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombres</label>
                                     <input type="text" id="nombres" name="nombres"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="ingrese Nombres Completos"  />
+                                        placeholder="ingrese Nombres Completos" />
                                 </div>
                                 <div>
                                     <label for="apellidos"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Apellidos</label>
                                     <input type="text" id="apellidos" name="apellidos"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="Flowbite"  />
+                                        placeholder="Ingrese sus Apellidos Completos" />
                                 </div>
                                 <div>
-                                    <label for="telefono"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">numero de telefono</label>
-                                    <input type="tel" id="telefono" name="telefono"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="(123-45-678)" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" />
+                                    <label for="phone-input"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero de Telefono:</label>
+                                    <div class="relative">
+                                        <div
+                                            class="absolute inset-y-0 start-0 top-0 flex items-center ps-3.5 pointer-events-none">
+                                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                viewBox="0 0 19 18">
+                                                <path
+                                                    d="M18 13.446a3.02 3.02 0 0 0-.946-1.985l-1.4-1.4a3.054 3.054 0 0 0-4.218 0l-.7.7a.983.983 0 0 1-1.39 0l-2.1-2.1a.983.983 0 0 1 0-1.389l.7-.7a2.98 2.98 0 0 0 0-4.217l-1.4-1.4a2.824 2.824 0 0 0-4.218 0c-3.619 3.619-3 8.229 1.752 12.979C6.785 16.639 9.45 18 11.912 18a7.175 7.175 0 0 0 5.139-2.325A2.9 2.9 0 0 0 18 13.446Z" />
+                                            </svg>
+                                        </div>
+                                        <input type="text" id="phone-input" name="telefono"
+                                            aria-describedby="helper-text-explanation"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="123-456-7890" />
+                                    </div>
                                 </div>
                                 <div>
-                                    <label for="countries"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Tipo de
-                                        Documento</label>
-                                    <select id="tipo_documento" name="tipo_documento"
+                                    <label for="rol"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Cargos</label>
+                                    <select id="rol" name="rol"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                                        <option selected>Seleccione su tipo de documento</option>
-                                        @foreach ($tipodocumento as $id => $nombre )
-                                        <option value="{{$id}}">{{$nombre}}</option>
+                                        <option selected>Seleccione su Cargo</option>
+                                        @foreach ($roles as $id => $nombre)
+                                            <option value="{{ $id }}">{{ $nombre }}</option>
                                         @endforeach
 
                                     </select>
                                 </div>
-                                <div>
-                                    <label for="visitors"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unique
-                                        visitors
-                                        (per month)</label>
-                                    <input type="number" id="visitors"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" />
-                                </div>
+
                             </div>
                             <div class="mb-6 px-4">
                                 <label for="email"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email
-                                    address</label>
-                                <input type="email" id="email"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo
+                                    Electronico - Usuario</label>
+                                <input type="email" id="email" name="correo"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="john.doe@company.com"  />
+                                    placeholder="example@company.com" />
                             </div>
                             <div class="mb-6 px-4">
                                 <label for="password"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                                <input type="password" id="password"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contraseña</label>
+                                <input type="password" id="password" name="password"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="•••••••••"  />
+                                    placeholder="•••••••••" readonly value="" />
                             </div>
-                            <div class="mb-6 px-4">
-                                <label for="confirm_password"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm
-                                    password</label>
-                                <input type="password" id="confirm_password"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="•••••••••"  />
-                            </div>
+
                         </div>
 
                         <!-- Modal footer -->
@@ -172,7 +172,6 @@
                                 <th>Nombre</th>
                                 <th>Apellido</th>
                                 <th>correo</th>
-                                <th>Cargo</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -184,8 +183,6 @@
                                     <td>{{ $personal->nombres }}</td>
                                     <td>{{ $personal->apellidos }}</td>
                                     <td>{{ $personal->correo }}</td>
-                                    <td>{{ $personal->cargos->nombre }}</td>
-
                                     <td>
                                         <a href="{{ route('reportes.show', $personal->id) }}"
                                             class="inline-block rounded bg-success p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-green-500 focus:outline-none focus:ring-0 active:bg-green-600 mb-1"><i
@@ -194,6 +191,14 @@
                                         <a href="{{ route('coordinador.edit', $personal->id) }}"
                                             class="inline-block rounded bg-warning p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-yellow-500 focus:outline-none focus:ring-0 active:bg-yellow-600"><i
                                                 class="far fa-edit"></i></a>
+                                        <form action="{{ route('coordinador.destroy', $personal->id) }}" method="POST"
+                                            class="inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="inline-block rounded bg-danger p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-red-500 focus:outline-none focus:ring-0 active:bg-red-600"><i
+                                                    class="far fa-trash-alt"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -207,25 +212,14 @@
 
     @section('js')
         <script>
+            document.getElementById('numero_documento').addEventListener('input', function() {
+                document.getElementById('password').value = this.value;
+            });
+        </script>
+        <script>
             $(document).ready(function() {
                 var table = $('#tableagentes').DataTable({
-                    dom: 'fBrtp',
-                    buttons: [{
-                            extend: 'excel',
-                            text: '<i class="fas fa-file-excel"></i> Excel', // Agrega un icono de Excel antes del texto
-                            className: 'bg-sinline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none mb-2uccess'
-                        },
-                        {
-                            extend: 'pdf',
-                            text: '<i class="fas fa-file-pdf"></i> PDF', // Agrega un icono de PDF antes del texto
-                            className: 'inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none mb-2'
-                        },
-                        {
-                            extend: 'print',
-                            text: '<i class="fas fa-print"></i> Imprimir', // Agrega un icono de impresora antes del texto
-                            className: 'inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none mb-2'
-                        }
-                    ],
+                    dom: 'frtp',
                     borderCollapse: true,
                     "language": {
                         "lengthMenu": "Mostrar _MENU_ registros por página",
@@ -240,6 +234,5 @@
                 $('.dt-buttons').addClass('flex justify-end');
             });
         </script>
-
     @endsection
 </x-app-layout>

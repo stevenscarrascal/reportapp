@@ -26,36 +26,26 @@ class Encabezados_DetSeeder extends Seeder
         ]);
         encabezados_dets::create([
             'encabezados_id' => '2',
-            'nombre' => 'Coordinador',
-            'nomenclatura'=>'COOR'
-        ]);
-        encabezados_dets::create([
-            'encabezados_id' => '2',
-            'nombre' => 'Agente de campo',
-            'nomenclatura'=>'AGE'
-        ]);
-        encabezados_dets::create([
-            'encabezados_id' => '3',
             'nombre' => 'Activo',
             'nomenclatura'=>'AC'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '3',
+            'encabezados_id' => '2',
             'nombre' => 'Inactivo',
             'nomenclatura'=>'IN'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '3',
+            'encabezados_id' => '2',
             'nombre' => 'Pendiente',
             'nomenclatura'=>'PD'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '3',
+            'encabezados_id' => '2',
             'nombre' => 'Revisado',
             'nomenclatura'=>'RV'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '3',
+            'encabezados_id' => '2',
             'nombre' => 'Rechazado',
             'nomenclatura'=>'RC'
         ]);

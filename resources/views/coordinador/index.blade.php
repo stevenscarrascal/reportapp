@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-gray-800 leading-tight">
                 {{ __('Historial de Registros') }}
             </h2>
-            <a href="{{ route('coordinador.create') }}"
+            <a href="{{ route('personals.index') }}"
                 class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none mb-2">
                 <i class="fas fa-list"></i>  Lista de Agentes de Campo
             </a>
@@ -66,18 +66,14 @@
                                             <td>{{ $pendiente->created_at }}</td>
                                             <td>{{ $pendiente->direccion }}</td>
                                             <td>
-                                                @if ($pendiente->estado == 7)
+                                                @if ($pendiente->estado == 5)
                                                     <strong class="text-white bg-yellow-500 rounded px-2 py-1">
                                                         Pendiente
                                                     </strong>
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('reportes.show', $pendiente->id) }}"
-                                                    class="inline-block rounded bg-success p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-green-500 focus:outline-none focus:ring-0 active:bg-green-600 mb-1"><i
-                                                        class="far fa-eye"></i></a>
-
-                                                <a href="{{ route('coordinador.edit', $pendiente->id) }}"
+                                            <a href="{{ route('coordinador.show', $pendiente->id) }}"
                                                     class="inline-block rounded bg-warning p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-yellow-500 focus:outline-none focus:ring-0 active:bg-yellow-600"><i
                                                         class="far fa-edit"></i></a>
                                             </td>
@@ -113,18 +109,14 @@
                                             <td>{{ $rechazado->created_at }}</td>
                                             <td>{{ $rechazado->direccion }}</td>
                                             <td>
-                                                @if ($rechazado->estado == 9)
+                                                @if ($rechazado->estado == 7)
                                                     <strong class="text-white bg-danger rounded px-2 py-1">
                                                         Rechazado
                                                     </strong>
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('reportes.show', $rechazado->id) }}"
-                                                    class="inline-block rounded bg-success p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-green-500 focus:outline-none focus:ring-0 active:bg-green-600 mb-1"><i
-                                                        class="far fa-eye"></i></a>
-
-                                                <a href="{{ route('coordinador.edit', $rechazado->id) }}"
+                                             <a href="{{ route('coordinador.show', $rechazado->id) }}"
                                                     class="inline-block rounded bg-warning p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-yellow-500 focus:outline-none focus:ring-0 active:bg-yellow-600"><i
                                                         class="far fa-edit"></i></a>
                                             </td>
@@ -160,20 +152,16 @@
                                             <td>{{ $revisado->created_at }}</td>
                                             <td>{{ $revisado->direccion }}</td>
                                             <td>
-                                                @if ($revisado->estado == 8)
+                                                @if ($revisado->estado == 6)
                                                     <strong class="text-white bg-success rounded px-2 py-1">
                                                         Revisado
                                                     </strong>
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('reportes.show', $revisado->id) }}"
+                                                <a href="{{ route('coordinador.show', $revisado->id) }}"
                                                     class="inline-block rounded bg-success p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-green-500 focus:outline-none focus:ring-0 active:bg-green-600 mb-1"><i
                                                         class="far fa-eye"></i></a>
-
-                                                <a href="{{ route('coordinador.edit', $revisado->id) }}"
-                                                    class="inline-block rounded bg-warning p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-yellow-500 focus:outline-none focus:ring-0 active:bg-yellow-600"><i
-                                                        class="far fa-edit"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -20,7 +20,6 @@ class PersonalSeeder extends Seeder
             'nombres'=>'Administrador',
             'apellidos'=>'Sistema',
             'correo'=>'admin@proderi.com',
-            'cargo'=>'4',
             'estado'=>'5'
         ]);
 

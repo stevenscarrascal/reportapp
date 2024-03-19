@@ -38,19 +38,19 @@
                                         <td>{{ $historial->created_at }}</td>
                                         <td>
                                             @switch($historial->EstadoReporte->id)
-                                                @case(7)
+                                                @case(5)
                                                     <strong class="text-white bg-yellow-500 rounded px-2 py-1">
                                                         {{ $historial->EstadoReporte->nombre }}
                                                     </strong>
                                                 @break
 
-                                                @case(8)
+                                                @case(6)
                                                     <strong class="text-white bg-green-500 rounded px-2 py-1">
                                                         {{ $historial->EstadoReporte->nombre }}
                                                     </strong>
                                                 @break
 
-                                                @case(9)
+                                                @case(7)
                                                     <strong class="text-white bg-red-500 rounded px-2 py-1">
                                                         {{ $historial->EstadoReporte->nombre }}
                                                     </strong>
@@ -65,7 +65,7 @@
                                                 class="inline-block rounded bg-success p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-green-500 focus:outline-none focus:ring-0 active:bg-green-600"><i
                                                     class="far fa-eye"></i>
                                             </a>
-                                            @if ($historial->estado == 9)
+                                            @if ($historial->estado == 7)
                                                 <a href="{{ route('reportes.edit', $historial->id) }}"
                                                     class="inline-block rounded bg-warning p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-yellow-500 focus:outline-none focus:ring-0 active:bg-yellow-600"><i
                                                         class="far fa-edit"></i></a>
@@ -90,12 +90,12 @@
                                     {{ $historial->contrato }}</h5>
                                 <p class="mb-2 text-base">Fecha y hora: {{ $historial->created_at }}</p>
                                 <p class="mb-2 text-base">Estado: @switch($historial->EstadoReporte->id)
-                                        @case(7)
+                                        @case(5)
                                             <strong class="text-white bg-yellow-500 rounded px-2 py-1">
                                                 {{ $historial->EstadoReporte->nombre }}
                                             </strong>
                                         @break
-                                        @case(9)
+                                        @case(7)
                                             <strong class="text-white bg-red-500 rounded px-2 py-1">
                                                 {{ $historial->EstadoReporte->nombre }}
                                             </strong>
@@ -108,7 +108,8 @@
                                     class="inline-block rounded bg-success p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-green-500 focus:outline-none focus:ring-0 active:bg-green-600"><i
                                         class="far fa-eye"></i>
                                 </a>
-                                @if ($historial->estado == 9)
+
+                                @if ($historial->estado == 7)
                                     <a href="{{ route('reportes.edit', $historial->id) }}"
                                         class="inline-block rounded bg-warning p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-yellow-500 focus:outline-none focus:ring-0 active:bg-yellow-600"><i
                                             class="far fa-edit"></i></a>

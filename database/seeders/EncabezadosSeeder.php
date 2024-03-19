@@ -18,9 +18,6 @@ class EncabezadosSeeder extends Seeder
             'nombre'=>'Tipo de Documento',
         ]);
         encabezados::create([
-            'nombre'=>'Cargo',
-        ]);
-        encabezados::create([
             'nombre'=>'estado',
         ]);
         encabezados::create([

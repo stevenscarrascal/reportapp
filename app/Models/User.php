@@ -26,9 +26,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'personal_id',
         'email',
+        'personal_id',
         'password',
     ];
 
@@ -63,6 +62,7 @@ class User extends Authenticatable
     ];
 
     public function personal(){
-        return $this->belongsTo(personals::class);
+        return $this->hasOne(personals::class, 'id', 'personal_id'); // Cambia personals por personal
     }
+
 }

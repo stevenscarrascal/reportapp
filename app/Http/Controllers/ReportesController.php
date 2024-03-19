@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\reportes;
+use App\Models\vs_estado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -22,9 +23,10 @@ class ReportesController extends Controller
     {
         $historiales = reportes::with('personal', 'EstadoReporte')
             ->where('personal_id', Auth::user()->personal->id)
-            ->whereIn('estado', [7, 9])
+            ->whereIn('estado', [5, 7])
             ->get();
-        return view('agentes.index', compact('historiales'));
+            $estados = vs_estado::all();
+        return view('agentes.index', compact('historiales','estados'));
     }
 
     /**
@@ -40,8 +42,8 @@ class ReportesController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
-    
+
+
         $latitud = $request->input('latitud');
         $longitud = $request->input('longitud');
         $fontSize = 50;
@@ -120,7 +122,7 @@ class ReportesController extends Controller
         $request->validate(reportes::$rulesupdate);
         $reportes = reportes::find($reporte);
         $report = $request->all();
-        $estado = '7';
+        $estado = '5';
         $fontSize = 50;
         $reportes['estado'] =  $estado;
         foreach (range(1, 6) as $i) {
