@@ -173,6 +173,7 @@
                                 <th>Numero de Documento</th>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
+                                <th>Telefono</th>
                                 <th>correo</th>
                                 <th>estado</th>
                                 <th>Acciones</th>
@@ -185,6 +186,7 @@
                                     <td>{{ $personal->numero_documento }}</td>
                                     <td>{{ $personal->nombres }}</td>
                                     <td>{{ $personal->apellidos }}</td>
+                                    <td>{{ $personal->telefono }}</td>
                                     <td>{{ $personal->correo }}</td>
                                     <td> @switch($personal->estado)
                                             @case(3)
@@ -202,9 +204,6 @@
                                         @endswitch
                                     </td>
                                     <td>
-                                        <a href="{{ route('personals.show', $personal->id) }}"
-                                            class="inline-block rounded bg-success p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-green-500 focus:outline-none focus:ring-0 active:bg-green-600 mb-1"><i
-                                                class="far fa-eye"></i></a>
 
                                         <a href="{{ route('personals.edit', $personal->id) }}"
                                             class="inline-block rounded bg-warning p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-yellow-500 focus:outline-none focus:ring-0 active:bg-yellow-600"><i

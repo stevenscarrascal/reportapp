@@ -48,7 +48,7 @@
                                             {{ $reporte->lectura }}</h5>
                                         <p class="mb-2 text-base">Fecha y Hora: {{ $reporte->created_at }}</p>
                                         <p class="mb-2 text-base">Direccion: {{ $reporte->direccion }}</p>
-                                        <p class="mb-2 text-base">Anomalia Detectada: {{ $reporte->anomalia }}</p>
+                                        <p class="mb-2 text-base">Anomalia Detectada: {{ $reporte->AnomaliaReporte->nombre }}</p>
                                         <p class="mb-2 text-base">Imposibilidad: {{ $reporte->imposibilidad }}</p>
                                     </div>
                                     </div>

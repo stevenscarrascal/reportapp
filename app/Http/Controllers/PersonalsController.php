@@ -85,17 +85,44 @@ class PersonalsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(personals $personals)
+    public function edit(string $id, User $user)
     {
-        //
+        $personal = personals::find($id);
+
+        // Verificar si el registro "personals" existe
+        if (!$personal) {
+            // Redirige a una página de error o a otra página si el registro "personals" no se encuentra
+            notify()->error('Registro personal no encontrado.');
+            return redirect()->back();
+        }
+
+        // Buscar el registro de usuario asociado con el registro personal
+        $roles = Role::pluck('name', 'name')->all();
+
+        $user = User::where('personal_id', $personal->id)->first();
+        // Verificar si el registro de usuario existe
+        $userRoles = $user->roles->pluck('name')->toArray();
+
+        // Verificar si el registro de usuario existe
+        $tipodocumento = vs_tipo_documento::pluck('nombre', 'id');
+        return view('personals.edit', compact('personal', 'tipodocumento', 'roles', 'user', 'userRoles'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, personals $personals)
+    public function update(Request $request,  $id)
     {
-        //
+        $personal = personals::find($id);
+
+        if ($personal) {
+            $personal->update($request->all());
+            notify()->success('Personal actualizado con éxito');
+        } else {
+            notify()->error('No se encontró el registro personal');
+        }
+
+        return redirect()->route('personals.index');
     }
 
     /**
@@ -103,42 +130,42 @@ class PersonalsController extends Controller
      */
     public function destroy(string $id)
     {
-       // Buscar el registro personal
-       $personal = personals::find($id);
+        // Buscar el registro personal
+        $personal = personals::find($id);
 
 
 
-       // Verificar si el registro personal existe
-       if (!$personal) {
-           // Manejar el caso cuando el registro no se encuentra
-           // Por ejemplo, puedes redirigir de vuelta con un mensaje de error
-           notify()->success('Registro personal no encontrado.');
-           return redirect()->back();
-       }
+        // Verificar si el registro personal existe
+        if (!$personal) {
+            // Manejar el caso cuando el registro no se encuentra
+            // Por ejemplo, puedes redirigir de vuelta con un mensaje de error
+            notify()->success('Registro personal no encontrado.');
+            return redirect()->back();
+        }
 
-       // Buscar el registro de usuario asociado con el registro personal
-       $usuario = User::where('personal_id', $personal->id)->first();
+        // Buscar el registro de usuario asociado con el registro personal
+        $usuario = User::where('personal_id', $personal->id)->first();
 
 
-       // Verificar si el registro de usuario existe
-       if (!$usuario) {
-           // Manejar el caso cuando el registro no se encuentra
-           // Por ejemplo, puedes redirigir de vuelta con un mensaje de error
-           notify()->success('Registro de usuario no encontrado.');
-           return redirect()->back();
-       }
+        // Verificar si el registro de usuario existe
+        if (!$usuario) {
+            // Manejar el caso cuando el registro no se encuentra
+            // Por ejemplo, puedes redirigir de vuelta con un mensaje de error
+            notify()->success('Registro de usuario no encontrado.');
+            return redirect()->back();
+        }
 
-       // Actualizar la propiedad estado para ambos registros
-       $personal->estado = 4;
-       $personal->update();
+        // Actualizar la propiedad estado para ambos registros
+        $personal->estado = 4;
+        $personal->update();
 
-       $usuario->estado = 0;
-       $usuario->update();
+        $usuario->estado = 0;
+        $usuario->update();
 
-       // Notificar éxito
-       notify()->success('Usuario eliminado con éxito');
+        // Notificar éxito
+        notify()->success('Usuario eliminado con éxito');
 
-       // Redirigir a la ruta de índice
-       return redirect()->route('personals.index');
+        // Redirigir a la ruta de índice
+        return redirect()->route('personals.index');
     }
 }
