@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('personal_id');
             $table->string('contrato',125);
             $table->string('medidor',125);
-            $table->string('lectura',125);
+            $table->integer('lectura');
             $table->text('tipo_comercio');
             $table->string('direccion');
             $table->string('anomalia');

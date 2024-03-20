@@ -20,7 +20,12 @@
                 </div>
                 @can('coordinador')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link href="{{ route('coordinador.index') }}" :active="request()->routeIs(['coordinador.index', 'coordinador.create','personals.index','personals.edit'])">
+                        <x-nav-link href="{{ route('coordinador.index') }}" :active="request()->routeIs([
+                            'coordinador.index',
+                            'coordinador.create',
+                            'personals.index',
+                            'personals.edit',
+                        ])">
                             {{ __('Coordinador') }}
                         </x-nav-link>
                     </div>
@@ -45,7 +50,8 @@
                                     <button type="button"
                                         class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
                                         {{ Auth::user()->currentTeam->name }}
-                                        <img src="{{asset('images/icons/splash-828x1792.png')}}" alt="" srcset="">
+                                        <img src="{{ asset('images/icons/splash-828x1792.png') }}" alt=""
+                                            srcset="">
                                     </button>
                                 </span>
                             </x-slot>
@@ -168,14 +174,20 @@
                 </x-responsive-nav-link>
             </div>
         @endcan
-        @can(['coordinador', 'administrador'])
+        @can('coordinador')
             <div class="pt-2 pb-3 space-y-1">
                 <x-responsive-nav-link href="{{ route('coordinador.index') }}" :active="request()->routeIs('coordinador.index')">
                     {{ __('Coordinador') }}
                 </x-responsive-nav-link>
             </div>
         @endcan
-
+        @can('coordinador')
+            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <x-nav-link href="{{ route('informes.index') }}" :active="request()->routeIs(['informes.index'])">
+                    {{ __('Informes') }}
+                </x-nav-link>
+            </div>
+        @endcan
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

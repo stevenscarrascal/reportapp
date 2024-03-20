@@ -23,5 +23,6 @@ class PersonalSeeder extends Seeder
             'estado'=>'3'
         ]);
 
+
     }
 }
