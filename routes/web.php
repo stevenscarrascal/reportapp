@@ -4,6 +4,7 @@ use App\Http\Controllers\CoordinadorController;
 use App\Http\Controllers\PersonalsController;
 use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\InformesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::resource('/reportes', ReportesController::class)->names('reportes');
         Route::resource('/coordinador', CoordinadorController::class)->names('coordinador');
         Route::resource('/personals', PersonalsController::class)->names('personals');
-        Route::get('/admin', adminController::class)->name('admin'); 
+        Route::resource('/informes', InformesController::class)->names('informes');
+        Route::get('/admin', adminController::class)->name('admin');
     });
 });
