@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-gray-800 leading-tight">
-                
+
             </h2>
             <a href="{{ route('personals.index') }}"
                 class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none mb-2">
@@ -162,6 +162,10 @@
                                                 <a href="{{ route('coordinador.show', $revisado->id) }}"
                                                     class="inline-block rounded bg-success p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-green-500 focus:outline-none focus:ring-0 active:bg-green-600 mb-1"><i
                                                         class="far fa-eye"></i></a>
+                                                        @if ($revisado->estado == 6)
+                                                        <a href="{{ route('coordinador.edit', $revisado->id) }}"
+                                                        class="inline-block rounded bg-danger p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-red-500 focus:outline-none focus:ring-0 active:bg-red-600"><i class="far fa-file-pdf"></i></a>
+                                                        @endif
                                             </td>
                                         </tr>
                                     @endforeach

@@ -48,164 +48,238 @@
                             <x-input-error for="lectura" />
                         </div>
                         <div class=" mb-3">
-                            <x-label for='comercio' value='Tipo de Comercio' class="mb-2" />
-                            <input type="text"
-                                class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                                name="tipo_comercio" id="comercio" placeholder="Ingrese su tipo de comercio"
-                                value="{{ old('comercio') }}">
-                            <x-input-error for="comercio" />
-                        </div>
-                        <div class=" mb-3">
-                            <label for="countries"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opciones de Anomalia</label>
-                            <select id="countries" name="anomalia"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option selected>Seleccione Su Anomalia</option>
-                                @foreach ( $anomalias as $id => $nombre )
-                                <option value="{{$id}}">{{$nombre}}</option>
+                            <x-label for='comercio' class="mb-2" value="Tipo de Comercio" />
+                            <select id="comercio" name="tipo_comercio"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3">
+                                <option selected>Seleccione tipo de Comercio</option>
+                                @foreach ($comercios as $id => $nombre)
+                                    <option value="{{ $id }}">{{ $nombre }}</option>
                                 @endforeach
-
                             </select>
 
+                            <x-input-error for="comercio" />
+                            <!-- Añade aquí tu input -->
+                            <input id="input-comercio" placeholder="Ingrese el tipo de Comercio" name="tipo_Comercio"
+                                type="text" hidden
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full p-2.5  " />
+                        </div>
+                        <div class=" mb-3">
+                            <label for="anomalia"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opciones de
+                                Anomalia</label>
+                            <select id="anomalia" name="anomalia"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option selected>Seleccione Su Anomalia</option>
+                                @foreach ($anomalias as $id => $nombre)
+                                    <option value="{{ $id }}">{{ $nombre }}</option>
+                                @endforeach
+                            </select>
                             <x-input-error for="anomalia" />
                         </div>
                         <div class="mb-4">
-                            <label for="obstaculo" class="mb-4">Imposibilidad de toma de
+                            <label for="obstaculos" class="mb-4">Imposibilidad de toma de
                                 Lectura</label>
                             <div class="mb-3">
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    {{-- ninguna --}}
-                                    <label for="obstaculo">
-                                        <input type="radio" name="imposibilidad" id="obstaculo" value="ninguna"
-                                            class="px-2 mb-1">
-                                        Ninguna
-                                    </label>
-                                    {{-- obstaculos --}}
-                                    <label for="obstaculo">
-                                        <input type="radio" name="imposibilidad" id="obstaculo" value="obstaculo"
-                                            class="px-2 mb-1">
-                                        Obstaculos
-                                    </label>
-                                    {{-- rejas --}}
-                                    <label>
-                                        <input type="radio" name="imposibilidad" id="reja" value="reja"
-                                            class="px-2 mb-1">
-                                        Rejas
-                                    </label>
-                                    {{-- no medidor --}}
-                                    <label>
-                                        <input type="radio" name="imposibilidad" id="medidor" value="medidor"
-                                            class="px-2 mb-1">
-                                        Sin Medidor
-                                    </label>
-                                    {{-- usuario no lectura --}}
-                                    <label>
-                                        <input type="radio" name="imposibilidad" id="lectura_m" value="lectura"
-                                            class="px-2">
-                                        Usuario no Permite Lectura
-                                    </label>
-                                </div>
+                                <select id="obstaculos" name="imposibilidad"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option selected>Selecione su inposibilidad</option>
+                                    @foreach ($imposibilidad as $id => $nombre)
+                                        <option value="{{ $id }}">{{ $nombre }}</option>
+                                    @endforeach
+                                </select>
+                                <x-input-error for="anomalia" />
                             </div>
                         </div>
                         <div class="mb-3">
-                            <div class="flex flex-wrap gap-2">
+
+                            <div id="video_evidencia" class=" hidden mb-3">
+                                <label for="video" class="file-label">Video evidencia de anomalia
+                                    <input capture="camera"
+                                        class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
+                                        id="video" name="video" type="file" accept="video/*"
+                                        aria-describedby="file_input_help7" />
+                                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_video">
+                                        MP4, WebM, QuickTime, AVI, MPEG, WMV .</p>
+                                    <x-input-error for="video" />
+                                </label>
+                            </div>
+
+                            <div id="fotos_inmueble">
                                 <label for="foto1" class="file-label">Foto del inmueble
                                     <input capture="camera"
                                         class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                        id="foto1" name="foto1" type="file" accept="image/*" />
+                                        id="foto1" name="foto1" type="file" accept="image/*"
+                                        aria-describedby="file_input_help1" />
+                                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help1">
+                                        SVG,
+                                        PNG, JPG or GIF (MAX. 800x400px).</p>
                                     <x-input-error for="foto1" />
                                 </label>
+                            </div>
+
+                            <div class=" flex-wrap gap-2 hidden" id="fotos_evidencia">
                                 <label for="foto2" class="file-label">Numero de Serial
                                     <input capture="camera"
                                         class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                        id="foto2" name="foto2" type="file" accept="image/*" />
+                                        id="foto2" name="foto2" type="file" accept="image/*"
+                                        aria-describedby="file_input_help" />
+                                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help2">
+                                        SVG,
+                                        PNG, JPG or GIF (MAX. 800x400px).</p>
                                     <x-input-error for="foto2" />
                                 </label>
                                 <label for="foto3" class="file-label">Numero de Lectura
                                     <input capture="camera"
                                         class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                        id="foto3" name="foto3" type="file" accept="image/*" />
+                                        id="foto3" name="foto3" type="file" accept="image/*"
+                                        aria-describedby="file_input_help" />
+                                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help3">
+                                        SVG,
+                                        PNG, JPG or GIF (MAX. 800x400px).</p>
                                     <x-input-error for="foto3" />
                                 </label>
                                 <label for="foto4" class="file-label">Numero del medidor
                                     <input capture="camera"
                                         class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                        id="foto4" name="foto4" type="file" accept="image/*" />
+                                        id="foto4" name="foto4" type="file" accept="image/*"
+                                        aria-describedby="file_input_help" />
+                                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help4">
+                                        SVG,
+                                        PNG, JPG or GIF (MAX. 800x400px).</p>
                                     <x-input-error for="foto4" />
                                 </label>
                                 <label for="foto5" class="file-label">Estado del Medidor
                                     <input capture="camera"
                                         class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                        id="foto5" name="foto5" type="file" accept="image/*" />
+                                        id="foto5" name="foto5" type="file" accept="image/*"
+                                        aria-describedby="file_input_help" />
+                                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help5">
+                                        SVG,
+                                        PNG, JPG or GIF (MAX. 800x400px).</p>
                                     <x-input-error for="foto5" />
                                 </label>
                                 <label for="foto6" class="file-label">Opcional
                                     <input capture="camera"
                                         class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                        id="foto6" name="foto6" type="file" accept="image/*" />
+                                        id="foto6" name="foto6" type="file" accept="image/*"
+                                        aria-describedby="file_input_help" />
+                                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help6">
+                                        SVG,
+                                        PNG, JPG or GIF (MAX. 800x400px).</p>
                                     <x-input-error for="foto6" />
                                 </label>
+
                             </div>
                         </div>
                         <x-button>
                             Enviar
                         </x-button>
                     </form>
+
                 </div>
             </div>
         </div>
     </div>
+
+
     @section('js')
+        <script src="{{ asset('plugins/sweetalert2/sweetalert2@11.js') }}"></script>
         <script>
-            // Obtén todos los botones de radio, los campos de entrada de archivos y las etiquetas
-            var radios = document.querySelectorAll('input[type=radio][name="imposibilidad"]');
-            var fileInputs = document.querySelectorAll('input[type=file]');
-            var fileLabels = document.querySelectorAll('.file-label');
-
-            // Función para manejar el cambio de estado de los botones de radio
-            function handleRadioChange(event) {
-                // Si el valor del botón de radio es 'ninguna', muestra todos los campos de entrada de archivos y sus etiquetas
-                if (event.target.value === 'ninguna') {
-                    fileInputs.forEach(function(input) {
-                        input.style.display = 'block';
-                    });
-                    fileLabels.forEach(function(label) {
-                        label.style.display = 'block';
-                    });
-                } else {
-                    // De lo contrario, solo muestra el primer campo de entrada de archivos y su etiqueta
-                    fileInputs.forEach(function(input, index) {
-                        if (index === 0) {
-                            input.style.display = 'block';
-                        } else {
-                            input.style.display = 'none';
-                        }
-                    });
-                    fileLabels.forEach(function(label, index) {
-                        if (index === 0) {
-                            label.style.display = 'block';
-                        } else {
-                            label.style.display = 'none';
-                        }
-                    });
-                }
-            }
-
-            // Agrega el controlador de eventos a todos los botones de radio
-            radios.forEach(function(radio) {
-                radio.addEventListener('change', handleRadioChange);
-            });
-
-            // Oculta todos los campos de entrada de archivos y sus etiquetas cuando la página se carga por primera vez
             document.addEventListener('DOMContentLoaded', function() {
-                fileInputs.forEach(function(input) {
-                    input.style.display = 'none';
-                });
-                fileLabels.forEach(function(label) {
-                    label.style.display = 'none';
+                Swal.fire({
+                    position: "top",
+                    icon: "info",
+                    title: "!anomalias!",
+                    text: " Recuerda que si hayas alguna anomalia debes subir un video de evidencia.",
+                    showConfirmButton: true,
+
                 });
             });
         </script>
+
+        {{-- This script adds an event listener to the 'anomalia' element and toggles the visibility of the 'video_evidencia' element based on the selected value.
+          @param {Event} event - The event object. --}}
+        <script>
+            document.getElementById('anomalia').addEventListener('change', function(event) {
+                var anomalia = document.getElementById('video_evidencia');
+
+                if (this.value == '8') {
+                    anomalia.classList.add('hidden');
+                } else {
+                    anomalia.classList.remove('hidden');
+                }
+            });
+        </script>
+
+        <script>
+            document.getElementById('obstaculos').addEventListener('change', function() {
+                var anomalia = document.getElementById('fotos_evidencia');
+
+                if (this.value == '46') {
+                    anomalia.classList.remove('hidden');
+                } else {
+                    anomalia.classList.add('hidden');
+                }
+            });
+        </script>
+
+        <script>
+            function validate(id, x) {
+                var fileInputHelp = document.getElementById(id);
+
+                if (x.files && x.files[0]) {
+                    fileInputHelp.textContent = 'Archivo cargado';
+                    fileInputHelp.classList.add('text-green-500');
+                } else {
+                    fileInputHelp.textContent = 'SVG, PNG, JPG or GIF (MAX. 800x400px).';
+                    fileInputHelp.classList.remove('text-green-500');
+                }
+            }
+
+            document.getElementById('foto1').addEventListener('change', function() {
+                validate('file_input_help1', this);
+            });
+
+            document.getElementById('foto2').addEventListener('change', function() {
+                validate('file_input_help2', this);
+            });
+
+            document.getElementById('foto3').addEventListener('change', function() {
+                validate('file_input_help3', this);
+            });
+
+            document.getElementById('foto4').addEventListener('change', function() {
+                validate('file_input_help4', this);
+            });
+
+            document.getElementById('foto5').addEventListener('change', function() {
+                validate('file_input_help5', this);
+            });
+
+            document.getElementById('foto6').addEventListener('change', function() {
+                validate('file_input_help6', this);
+            });
+            document.getElementById('video').addEventListener('change', function() {
+                validate('file_input_video', this);
+            });
+        </script>
+
+        <script>
+            document.getElementById('comercio').addEventListener('change', function() {
+                var inputComercio = document.getElementById('input-comercio');
+
+                if (this.value == '45') {
+                    inputComercio.hidden = false;
+                    inputComercio.name = "tipo_comercio";
+                    this.name = "";
+                } else {
+                    inputComercio.hidden = true;
+                    inputComercio.name = "";
+                    this.name = "tipo_comercio";
+                }
+            });
+        </script>
+
         <script>
             // Función para manejar la obtención de la ubicación actual
             function obtenerUbicacion() {

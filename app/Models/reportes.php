@@ -12,8 +12,9 @@ class reportes extends Model
 
     static $rules = [
         'contrato' => 'required',
+        'medidor' => 'required',
         'lectura' => 'required',
-        'anomalia' => 'required',
+        'tipo_comercio' => 'required',
         'foto1' => 'required|image|max:5120',
         'foto2' => 'image|max:5120',
         'foto3' => 'image|max:5120',
@@ -21,7 +22,7 @@ class reportes extends Model
         'foto5' => 'image|max:5120',
         'foto6' => 'image|max:5120'
     ];
-    
+
     static $rulesupdate = [
         'contrato' => 'required',
         'lectura' => 'required',
@@ -55,6 +56,7 @@ class reportes extends Model
         'foto4',
         'foto5',
         'foto6',
+        'video',
         'estado'
     ];
 
@@ -72,5 +74,10 @@ class reportes extends Model
     public function AnomaliaReporte()
     {
         return $this->hasOne(vs_anomalias::class, 'id', 'anomalia');
+    }
+
+    public function ComercioReporte()
+    {
+        return $this->hasOne(vs_comercios::class, 'id', 'tipo_comercio');
     }
 }

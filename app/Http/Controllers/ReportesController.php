@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use App\Models\reportes;
 use App\Models\vs_anomalias;
 use App\Models\vs_estado;
+use App\Models\vs_comercios;
+use App\Models\vs_imposibilidad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -41,7 +43,9 @@ class ReportesController extends Controller
     public function create()
     {
         $anomalias = vs_anomalias::pluck('nombre','id');
-        return view('agentes.create',compact('anomalias'));
+        $comercios = vs_comercios::pluck('nombre','id');
+        $imposibilidad = vs_imposibilidad::pluck('nombre','id');
+        return view('agentes.create',compact('anomalias','comercios','imposibilidad'));
     }
 
     /**
@@ -54,11 +58,11 @@ class ReportesController extends Controller
         $longitud = $request->input('longitud');
         $fontSize = 50;
 
+        $request->validate(reportes::$rules);
         $response = Http::withoutVerifying()->get("https://revgeocode.search.hereapi.com/v1/revgeocode?apikey=auuOOORgqWd_T4DFf0onY2JlvMDhz4tP0G0o7fRYDRU&at=$latitud,$longitud&lang=es-ES");
         $data = $response->json();
 
         $direccion = $data['items'][0]['address']['label'];
-        $request->validate(reportes::$rules);
 
         $reportes = $request->all();
 
@@ -175,6 +179,7 @@ class ReportesController extends Controller
             }
         }
 
+    
         $reportes->update($report);
         notify()->success('Registro Actualizado Con Exito');
         return redirect()->route('reportes.index');

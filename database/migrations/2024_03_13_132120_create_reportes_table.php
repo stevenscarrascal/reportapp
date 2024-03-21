@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('foto4')->nullable();
             $table->string('foto5')->nullable();
             $table->string('foto6')->nullable();
+            $table->string('video')->nullable();
             $table->string('estado')->default('5');
             $table->timestamps();
         });

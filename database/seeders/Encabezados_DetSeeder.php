@@ -120,6 +120,166 @@ class Encabezados_DetSeeder extends Seeder
             'nomenclatura'=>'MT'
         ]);
 
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Restaurante',
+            'nomenclatura'=>'RE'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Panaderia',
+            'nomenclatura'=>'PA'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Cafeteria',
+            'nomenclatura'=>'CA'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Bar',
+            'nomenclatura'=>'BA'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Heladeria',
+            'nomenclatura'=>'HE'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Tienda de Abarrotes',
+            'nomenclatura'=>'TA'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Tienda de Licores',
+            'nomenclatura'=>'TL'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Tienda de Carnes',
+            'nomenclatura'=>'TC'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Tienda de Frutas y Verduras',
+            'nomenclatura'=>'TFV'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Venta de Comidas Rapidas',
+            'nomenclatura'=>'VCR'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Tienda de Ropa',
+            'nomenclatura'=>'TR'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Tienda de Calzado',
+            'nomenclatura'=>'TC'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Tienda de Accesorios',
+            'nomenclatura'=>'TA'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Tienda de Tecnologia',
+            'nomenclatura'=>'TT'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Tienda de Electrodomesticos',
+            'nomenclatura'=>'TE'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Tienda de Muebles',
+            'nomenclatura'=>'TM'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Tienda de Decoracion',
+            'nomenclatura'=>'TD'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Tienda de Ferreteria',
+            'nomenclatura'=>'TF'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Tienda de Papeleria',
+            'nomenclatura'=>'TP'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Tienda de Juguetes',
+            'nomenclatura'=>'TJ'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Tienda de Mascotas',
+            'nomenclatura'=>'TM'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Tienda de Deportes',
+            'nomenclatura'=>'TD'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Tienda de Bicicletas',
+            'nomenclatura'=>'TB'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Tienda de Artesanias',
+            'nomenclatura'=>'TA'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Tienda de Plantas',
+            'nomenclatura'=>'TP'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Otros',
+            'nomenclatura'=>'OT'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '5',
+            'nombre' => 'Ninguna',
+            'nomenclatura'=>'OB'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '5',
+            'nombre' => 'Obstaculos (Poca Visibilidad)',
+            'nomenclatura'=>'OB'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '5',
+            'nombre' => 'Falta de Acceso (Rejas, Cerraduras, Etc)',
+            'nomenclatura'=>'FA'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '5',
+            'nombre' => 'Falta de Medidor',
+            'nomenclatura'=>'FD'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '5',
+            'nombre' => 'Usuario No Permite Lectura',
+            'nomenclatura'=>'UNP'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '5',
+            'nombre' => 'Lugar Deshabitado',
+            'nomenclatura'=>'LD'
+        ]);
 
     }
 }

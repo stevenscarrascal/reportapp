@@ -23,10 +23,12 @@
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
-        
+
+
         @notifyJs
         @stack('modals')
         @include('notify::components.notify')
         @livewireScripts
+        @yield('js')
     </body>
 </html>

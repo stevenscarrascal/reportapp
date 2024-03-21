@@ -75,22 +75,18 @@
 
                                                         </textarea>
                                                     </div>
-                                                    <div
-                                                        class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
-                                                        @if ($reporte->estado == 5)
+                                                    @if ($reporte->estado == 5)
+                                                        <div class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
                                                             <button type="submit" onclick="cambiarEstado(7)"
                                                                 class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-red-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-red-900 hover:bg-red-800">
                                                                 Rechazado
                                                             </button>
-                                                        @endif
-                                                        @if ($reporte->estado == 5)
                                                             <button type="submit" onclick="cambiarEstado(6)"
                                                                 class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-green-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-green-900 hover:bg-green-800">
                                                                 Revisado
                                                             </button>
-                                                        @endif
-
-                                                    </div>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                                 <p class="ms-auto text-xs text-gray-500 dark:text-gray-400">Aqui podra
                                                     colocar Las observaciones referentes a esta lectura</p>

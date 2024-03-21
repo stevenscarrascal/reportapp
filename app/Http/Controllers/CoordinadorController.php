@@ -8,6 +8,7 @@ use App\Models\reportes;
 use App\Models\User;
 use App\Models\vs_cargo;
 use App\Models\vs_tipo_documento;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class CoordinadorController extends Controller
@@ -15,7 +16,7 @@ class CoordinadorController extends Controller
     public function __construct()
     {
         $this->middleware('can:coordinador');
-       
+
     }
     /**
      * Display a listing of the resource.
@@ -56,7 +57,11 @@ class CoordinadorController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $reporte = reportes::find($id);
+        $pdf = Pdf::loadView('informepdf.index',compact('reporte')) ;
+
+
+        return $pdf->stream('invoice.pdf');
     }
 
     /**
@@ -65,6 +70,8 @@ class CoordinadorController extends Controller
     public function update(Request $request, string $id)
     {
         $estado = $request->estado;
+
+
         $reporte = reportes::find($id);
         if ($estado == 6) {
             $reporte->estado = $request->estado;
