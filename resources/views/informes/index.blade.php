@@ -13,7 +13,9 @@
                 <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
                     <div
                         class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl">
-                        <canvas id="myChart"></canvas>
+                        <div style="width:75%;">
+                            {!! $chartjs->render() !!}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,5 @@
 import './bootstrap';
+import { Chart } from 'chart.js';
 // Initialization for ES Users
 import {
     Modal,
