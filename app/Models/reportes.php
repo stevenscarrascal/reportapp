@@ -71,6 +71,11 @@ class reportes extends Model
         return $this->hasOne(vs_estado::class, 'id', 'estado');
     }
 
+    public function imposibilidadReporte()
+    {
+        return $this->hasOne(vs_imposibilidad::class, 'id', 'imposibilidad');
+    }
+
     public function AnomaliaReporte()
     {
         return $this->hasOne(vs_anomalias::class, 'id', 'anomalia');

@@ -121,8 +121,11 @@ class ReportesController extends Controller
      */
     public function edit($id)
     {
+        $anomalias = vs_anomalias::pluck('nombre','id');
+        $comercios = vs_comercios::pluck('nombre','id');
+        $imposibilidad = vs_imposibilidad::pluck('nombre','id');
         $reporte = reportes::find($id);
-        return view('agentes.edit', compact('reporte'));
+        return view('agentes.edit', compact('reporte','anomalias','comercios','imposibilidad'));
     }
     /**
      * Update the specified resource in storage.
@@ -179,7 +182,7 @@ class ReportesController extends Controller
             }
         }
 
-    
+
         $reportes->update($report);
         notify()->success('Registro Actualizado Con Exito');
         return redirect()->route('reportes.index');

@@ -1,21 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Registro de Leturas') }}
-            </h2>
-            <a href="{{ route('reportes.index') }}"
-                class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none mb-2">
-                <i class="fas fa-arrow-left"></i> Regresar
-            </a>
-        </div>
+            <x-breadcrumb :role="'Coordinador'" :reportTitle="'Creacion de Reportes'" />
+            <x-back-button route="{{ route('reportes.index') }}" />
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
                     <h1 class="mt-8 text-2xl font-medium text-gray-900 text-center mb-5">
-                        TOMA DE LECTURA COMERCIO ZONA MONTERIA
+                        TOMA DE LECTURA
                     </h1>
                     <form action="{{ route('reportes.store') }}" method="post" enctype="multipart/form-data">
                         @csrf

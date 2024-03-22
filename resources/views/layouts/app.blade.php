@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ asset('plugins/DataTables/datatables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/Select2/dist/css/select2.min.css') }}">
+    @yield('css')
     <!-- Styles -->
     @laravelPWA
     @livewireStyles
@@ -33,6 +34,7 @@
         @if (isset($header))
             <header class="bg-white shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+
                     {{ $header }}
                 </div>
             </header>

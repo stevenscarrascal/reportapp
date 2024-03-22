@@ -26,7 +26,35 @@ class CoordinadorController extends Controller
         $pendientes = reportes::where('estado', '5')->get();
         $revisados = reportes::where('estado', '6')->get();
         $rechazados = reportes::where('estado', '7')->get();
-        return view('coordinador.index', compact('pendientes', 'revisados', 'rechazados'));
+
+        $tabData = [
+            [
+                'id' => 'pendientes',
+                'opacity' => '100',
+                'data' => $pendientes,
+                'estado' => 5,
+                'estado_class' => 'text-white bg-yellow-500 rounded px-2 py-1',
+                'estado_text' => 'Pendiente',
+            ],
+            [
+                'id' => 'rechazados',
+                'opacity' => '0',
+                'data' => $rechazados,
+                'estado' => 7,
+                'estado_class' => 'text-white bg-danger rounded px-2 py-1',
+                'estado_text' => 'Rechazado',
+            ],
+            [
+                'id' => 'revisados',
+                'opacity' => '0',
+                'data' => $revisados,
+                'estado' => 6,
+                'estado_class' => 'text-white bg-success rounded px-2 py-1',
+                'estado_text' => 'Revisado',
+            ],
+        ];
+
+        return view('coordinador.index', compact('pendientes', 'revisados', 'rechazados', 'tabData'));
     }
 
     /**
@@ -70,6 +98,7 @@ class CoordinadorController extends Controller
     public function update(Request $request, string $id)
     {
         $estado = $request->estado;
+
 
 
         $reporte = reportes::find($id);

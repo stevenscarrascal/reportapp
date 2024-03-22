@@ -127,6 +127,11 @@ class Encabezados_DetSeeder extends Seeder
         ]);
         encabezados_dets::create([
             'encabezados_id' => '4',
+            'nombre' => 'Venta de Comidas Rapidas',
+            'nomenclatura'=>'VCR'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
             'nombre' => 'Panaderia',
             'nomenclatura'=>'PA'
         ]);
@@ -144,6 +149,11 @@ class Encabezados_DetSeeder extends Seeder
             'encabezados_id' => '4',
             'nombre' => 'Heladeria',
             'nomenclatura'=>'HE'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Bodegas',
+            'nomenclatura'=>'BO'
         ]);
         encabezados_dets::create([
             'encabezados_id' => '4',
@@ -167,11 +177,6 @@ class Encabezados_DetSeeder extends Seeder
         ]);
         encabezados_dets::create([
             'encabezados_id' => '4',
-            'nombre' => 'Venta de Comidas Rapidas',
-            'nomenclatura'=>'VCR'
-        ]);
-        encabezados_dets::create([
-            'encabezados_id' => '4',
             'nombre' => 'Tienda de Ropa',
             'nomenclatura'=>'TR'
         ]);
@@ -187,7 +192,7 @@ class Encabezados_DetSeeder extends Seeder
         ]);
         encabezados_dets::create([
             'encabezados_id' => '4',
-            'nombre' => 'Tienda de Tecnologia',
+            'nombre' => 'Tienda de Tecnologia y Celulares',
             'nomenclatura'=>'TT'
         ]);
         encabezados_dets::create([
@@ -202,17 +207,12 @@ class Encabezados_DetSeeder extends Seeder
         ]);
         encabezados_dets::create([
             'encabezados_id' => '4',
-            'nombre' => 'Tienda de Decoracion',
-            'nomenclatura'=>'TD'
-        ]);
-        encabezados_dets::create([
-            'encabezados_id' => '4',
             'nombre' => 'Tienda de Ferreteria',
             'nomenclatura'=>'TF'
         ]);
         encabezados_dets::create([
             'encabezados_id' => '4',
-            'nombre' => 'Tienda de Papeleria',
+            'nombre' => 'Tienda de Papeleria y Micelaneas',
             'nomenclatura'=>'TP'
         ]);
         encabezados_dets::create([
@@ -247,9 +247,20 @@ class Encabezados_DetSeeder extends Seeder
         ]);
         encabezados_dets::create([
             'encabezados_id' => '4',
+            'nombre' => 'Terreno Valdio',
+            'nomenclatura'=>'TV'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Tienda de Decoracion',
+            'nomenclatura'=>'TD'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
             'nombre' => 'Otros',
             'nomenclatura'=>'OT'
         ]);
+
         encabezados_dets::create([
             'encabezados_id' => '5',
             'nombre' => 'Ninguna',

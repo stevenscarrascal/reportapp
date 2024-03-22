@@ -1,142 +1,105 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Historial de Registros') }}
-        </h2>
+       <x-breadcrumb :role="'Agentes'" :reportTitle="' Toma de Lecturas '" />
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
-                    <div class="flex justify-between items-center">
-                        <a href="{{ route('reportes.create') }}"
-                            class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none mb-2"
-                            data-twe-toggle="tooltip" data-twe-placement="top" data-twe-ripple-init
-                            data-twe-ripple-color="light" title="Agregar Nuevo Reporte">
-                            <i class="fas fa-folder-plus"></i> Agregar Reporte
+                    <div>
+                        <a href="{{ route('reportes.create') }}" class="inline-flex mb-4 items-center px-4 py-2 bg-gradient-to-tl from-blue-500 to-green-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150">
+                            <i class="fas fa-folder-plus mr-2"></i> Agregar Reporte
                         </a>
                     </div>
-                    <!-- Versión de escritorio -->
-                    <div class="hidden sm:block overflow-auto">
-                        <table id="agente" class="w-full stripe order-column row-border compact hover"
-                            style="width:100%">
-                            <!-- Encabezado de la tabla -->
-                            <thead>
-                                <tr>
-                                    <th>Contrato</th>
-                                    <th>Fecha y hora</th>
-                                    <th>Estado</th>
-                                    <th>Accion</th>
-                                </tr>
-                            </thead>
-                            <!-- Cuerpo de la tabla -->
-                            <tbody>
-                                @foreach ($historiales as $historial)
-                                    <tr>
-                                        <td>N°: {{ $historial->contrato }}</td>
-                                        <td>{{ $historial->created_at }}</td>
-                                        <td>
-                                            @switch($historial->EstadoReporte->id)
-                                                @case(5)
-                                                    <strong class="text-white bg-yellow-500 rounded px-2 py-1">
-                                                        {{ $historial->EstadoReporte->nombre }}
-                                                    </strong>
-                                                @break
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-1">
 
-                                                @case(6)
-                                                    <strong class="text-white bg-green-500 rounded px-2 py-1">
-                                                        {{ $historial->EstadoReporte->nombre }}
-                                                    </strong>
-                                                @break
-
-                                                @case(7)
-                                                    <strong class="text-white bg-red-500 rounded px-2 py-1">
-                                                        {{ $historial->EstadoReporte->nombre }}
-                                                    </strong>
-                                                @break
-
-                                                @default
-                                                    {{ $historial->EstadoReporte->nombre }}
-                                            @endswitch
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('reportes.show', $historial->id) }}"
-                                                class="inline-block rounded bg-success p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-green-500 focus:outline-none focus:ring-0 active:bg-green-600"><i
-                                                    class="far fa-eye"></i>
-                                            </a>
-                                            @if ($historial->estado == 7)
-                                                <a href="{{ route('reportes.edit', $historial->id) }}"
-                                                    class="inline-block rounded bg-warning p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-yellow-500 focus:outline-none focus:ring-0 active:bg-yellow-600"><i
-                                                        class="far fa-edit"></i></a>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="block sm:hidden">
-                        <!-- Versión móvil -->
                         @if ($historiales->isEmpty())
                             <div class="text-center py-3">
                                 <p class="text-gray-500">No hay reportes activos</p>
                             </div>
                         @endif
                         @foreach ($historiales as $historial)
-                            <div
-                                class="block  mb-2 rounded-lg bg-white p-6 text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
-                                <h5 class="mb-2 text-xl font-medium leading-tight">Contrato N°:
-                                    {{ $historial->contrato }}</h5>
-                                <p class="mb-2 text-base">Fecha y hora: {{ $historial->created_at }}</p>
-                                <p class="mb-2 text-base">Estado: @switch($historial->EstadoReporte->id)
-                                        @case(5)
-                                            <strong class="text-white bg-yellow-500 rounded px-2 py-1">
-                                                {{ $historial->EstadoReporte->nombre }}
-                                            </strong>
-                                        @break
-                                        @case(7)
-                                            <strong class="text-white bg-red-500 rounded px-2 py-1">
-                                                {{ $historial->EstadoReporte->nombre }}
-                                            </strong>
-                                        @break
-                                        @default
-                                            {{ $historial->EstadoReporte->nombre }}
-                                    @endswitch
-                                </p>
-                                <a href="{{ route('reportes.show', $historial->id) }}"
-                                    class="inline-block rounded bg-success p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-green-500 focus:outline-none focus:ring-0 active:bg-green-600"><i
-                                        class="far fa-eye"></i>
-                                </a>
-
-                                @if ($historial->estado == 7)
-                                    <a href="{{ route('reportes.edit', $historial->id) }}"
-                                        class="inline-block rounded bg-warning p-2 text-white uppercase transition duration-150 ease-in-out hover:bg-yellow-500 focus:outline-none focus:ring-0 active:bg-yellow-600"><i
-                                            class="far fa-edit"></i></a>
-                                @endif
+                            <div class="w-full max-w-full px-2 mb-4 sm:w-full sm:flex-none xl:mb-0 xl:w-full">
+                                <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl  rounded-2xl bg-clip-border">
+                                    <div class="flex-auto p-4">
+                                        <div class="flex flex-row -mx-3">
+                                            <div class="flex-none w-2/3 max-w-full px-3">
+                                                <div>
+                                                    <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase "
+                                                        aria-describedby="contrato">Contrato N°:
+                                                        {{ $historial->contrato }}</p>
+                                                    <p class="mt-1 text-sm text-gray-500"
+                                                        id="contrato">Fecha: {{ $historial->created_at }}</p>
+                                                    <p class="mt-1 text-sm text-gray-500 mb-3"
+                                                        id="contrato">Estado: {{ $historial->EstadoReporte->nombre }}</p>
+                                                    <div class="flex">
+                                                        <p class="mb-0  mr-2">
+                                                            <a class="text-sm font-bold leading-normal text-emerald-500"
+                                                                href="{{ route('reportes.show', $historial->id) }}">
+                                                                <i class="far fa-eye"></i> Ver
+                                                            </a>
+                                                        </p>
+                                                        @if ($historial->estado == 7)
+                                                            <p class="mb-0 ">
+                                                                <a class="text-sm font-bold leading-normal text-orange-500"
+                                                                    href="{{ route('reportes.edit', $historial->id) }}">
+                                                                    <i class="fas fa-search"></i> Revisar
+                                                                </a>
+                                                            </p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @switch($historial->EstadoReporte->id)
+                                                @case(5)
+                                                    <div class="px-3 text-right basis-1/3">
+                                                        <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-orange-500 to-yellow-500">
+                                                            <i class="ni leading-none ni-money-coins text-lg relative top-3.5 text-white"></i>
+                                                            <i class="fas fa-history text-lg relative top-3.5 text-white"></i>
+                                                        </div>
+                                                    </div>
+                                                @break
+                                                @case(7)
+                                                    <div class="px-3 text-right basis-1/3">
+                                                        <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-red-500 to-orange-500">
+                                                            <i class="ni leading-none ni-money-coins text-lg relative top-3.5 text-white"></i>
+                                                            <i class="fas fa-exclamation-circle text-lg relative top-3.5 text-white"></i>
+                                                        </div>
+                                                    </div>
+                                                @break
+                                                @default
+                                                    <div class="px-3 text-right basis-1/3">
+                                                        <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-green-500 to-blue-500">
+                                                            <i class="fas fa-check-circle text-lg relative top-3.5 text-white"></i>
+                                                        </div>
+                                                    </div>
+                                            @endswitch
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         @endforeach
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    @section('js')
-        <script>
-            $(document).ready(function() {
-                var table = $('#agente').DataTable({
-                    dom: 'ftip',
-                    borderCollapse: true,
-                    "language": {
-                        "lengthMenu": "Mostrar _MENU_ registros por página",
-                        "zeroRecords": "No se encontraron resultados",
-                        "info": "Mostrando la página _PAGE_ de _PAGES_",
-                        "infoEmpty": "No hay registros disponibles",
-                        "infoFiltered": "(filtrado de _MAX_ registros totales)",
-                        "search": "Buscar:",
-                    }
+        @section('js')
+            <script>
+                $(document).ready(function() {
+                    var table = $('#agente').DataTable({
+                        dom: 'ftip',
+                        borderCollapse: true,
+                        "language": {
+                            "lengthMenu": "Mostrar _MENU_ registros por página",
+                            "zeroRecords": "No se encontraron resultados",
+                            "info": "Mostrando la página _PAGE_ de _PAGES_",
+                            "infoEmpty": "No hay registros disponibles",
+                            "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                            "search": "Buscar:",
+                        }
+                    });
                 });
-            });
-        </script>
-    @endsection
+            </script>
+        @endsection
 </x-app-layout>
