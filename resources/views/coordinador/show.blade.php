@@ -114,56 +114,57 @@
             </style>
         @endsection
         @section('js')
-            <script>
-                document.querySelectorAll('.grid img').forEach(img => {
-                    img.addEventListener('click', function() {
-                        openModal(this.src);
-                    });
+        <script>
+            document.querySelectorAll('.grid img').forEach(img => {
+                img.addEventListener('click', function() {
+                    openModal(this.src);
                 });
+            });
 
-                function openModal(imageSrc) {
-                    // Crear el modal
-                    let modal = document.createElement('div');
-                    modal.classList.add('modal');
-                    modal.style.display = 'flex';
-                    modal.style.position = 'fixed';
-                    modal.style.zIndex = '1000';
-                    modal.style.left = '0';
-                    modal.style.top = '0';
-                    modal.style.width = '100%';
-                    modal.style.height = '100%';
-                    modal.style.overflow = 'auto';
+            function openModal(imageSrc) {
+                // Crear el modal
+                let modal = document.createElement('div');
+                modal.classList.add('modal');
+                modal.style.display = 'flex';
+                modal.style.position = 'fixed';
+                modal.style.zIndex = '1000';
+                modal.style.left = '0';
+                modal.style.top = '0';
+                modal.style.width = '100%';
+                modal.style.height = '100%';
+                modal.style.overflow = 'auto';
+                modal.style.backgroundColor = 'rgba(0,0,0,0)';
+                modal.style.justifyContent = 'center';
+                modal.style.alignItems = 'center';
+
+                // Crear la imagen
+                let img = document.createElement('img');
+                img.src = imageSrc;
+                img.style.display = 'block';
+                img.style.margin = 'auto';
+                img.style.maxWidth = '80%';
+                img.style.maxHeight = '80%';
+                img.style.borderRadius = '10px'; // Agregar bordes redondeados a la imagen
+
+                // Agregar la imagen al modal
+                modal.appendChild(img);
+
+                // Agregar el modal al body
+                document.body.appendChild(modal);
+
+                // Cambiar la opacidad del modal a 1 para mostrarlo
+                setTimeout(function() {
+                    modal.style.backgroundColor = 'rgba(0,0,0,0.4)';
+                }, 0);
+
+                // Cerrar el modal cuando se hace clic en él
+                modal.addEventListener('click', function() {
                     modal.style.backgroundColor = 'rgba(0,0,0,0)';
-                    modal.style.justifyContent = 'center';
-                    modal.style.alignItems = 'center';
-
-                    // Crear la imagen
-                    let img = document.createElement('img');
-                    img.src = imageSrc;
-                    img.style.display = 'block';
-                    img.style.margin = 'auto';
-                    img.style.maxWidth = '80%';
-                    img.style.maxHeight = '80%';
-
-                    // Agregar la imagen al modal
-                    modal.appendChild(img);
-
-                    // Agregar el modal al body
-                    document.body.appendChild(modal);
-
-                    // Cambiar la opacidad del modal a 1 para mostrarlo
                     setTimeout(function() {
-                        modal.style.backgroundColor = 'rgba(0,0,0,0.4)';
-                    }, 0);
-
-                    // Cerrar el modal cuando se hace clic en él
-                    modal.addEventListener('click', function() {
-                        modal.style.backgroundColor = 'rgba(0,0,0,0)';
-                        setTimeout(function() {
-                            modal.style.display = 'none';
-                        }, 200);
-                    });
-                }
-            </script>
+                        modal.style.display = 'none';
+                    }, 200);
+                });
+            }
+        </script>
         @endsection
 </x-app-layout>

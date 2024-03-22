@@ -27,34 +27,8 @@ class CoordinadorController extends Controller
         $revisados = reportes::where('estado', '6')->get();
         $rechazados = reportes::where('estado', '7')->get();
 
-        $tabData = [
-            [
-                'id' => 'pendientes',
-                'opacity' => '100',
-                'data' => $pendientes,
-                'estado' => 5,
-                'estado_class' => 'text-white bg-yellow-500 rounded px-2 py-1',
-                'estado_text' => 'Pendiente',
-            ],
-            [
-                'id' => 'rechazados',
-                'opacity' => '0',
-                'data' => $rechazados,
-                'estado' => 7,
-                'estado_class' => 'text-white bg-danger rounded px-2 py-1',
-                'estado_text' => 'Rechazado',
-            ],
-            [
-                'id' => 'revisados',
-                'opacity' => '0',
-                'data' => $revisados,
-                'estado' => 6,
-                'estado_class' => 'text-white bg-success rounded px-2 py-1',
-                'estado_text' => 'Revisado',
-            ],
-        ];
 
-        return view('coordinador.index', compact('pendientes', 'revisados', 'rechazados', 'tabData'));
+        return view('coordinador.index', compact('pendientes', 'revisados', 'rechazados'));
     }
 
     /**
@@ -69,6 +43,7 @@ class CoordinadorController extends Controller
      */
     public function store(Request $request)
     {
+       
     }
 
     /**
