@@ -58,12 +58,16 @@ class ReportesController extends Controller
         $longitud = $request->input('longitud');
         $fontSize = 50;
 
+        if ($latitud == null || $longitud == null) {
+            notify()->error('No se pudo obtener la direccion , Active su GPS y vuelva a intentarlo');
+            return redirect()->route('reportes.create');
+        }else{
+            $response = Http::withoutVerifying()->get("https://revgeocode.search.hereapi.com/v1/revgeocode?apikey=auuOOORgqWd_T4DFf0onY2JlvMDhz4tP0G0o7fRYDRU&at=$latitud,$longitud&lang=es-ES");
+            $data = $response->json();
+            $direccion = $data['items'][0]['address']['label'];
+        }
+        
         $request->validate(reportes::$rules);
-        $response = Http::withoutVerifying()->get("https://revgeocode.search.hereapi.com/v1/revgeocode?apikey=auuOOORgqWd_T4DFf0onY2JlvMDhz4tP0G0o7fRYDRU&at=$latitud,$longitud&lang=es-ES");
-        $data = $response->json();
-
-        $direccion = $data['items'][0]['address']['label'];
-
         $reportes = $request->all();
 
         $reportes['latitud'] = $latitud;

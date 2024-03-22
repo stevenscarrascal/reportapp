@@ -55,6 +55,7 @@
     @stack('modals')
     @include('notify::components.notify')
     @livewireScripts
+    <script src="{{ asset('plugins/sweetalert2/sweetalert2@11.js') }}"></script>
     @yield('js')
 </body>
 

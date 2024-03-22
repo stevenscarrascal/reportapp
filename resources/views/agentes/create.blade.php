@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-            <x-breadcrumb :role="'Coordinador'" :reportTitle="'Creacion de Reportes'" />
-            <x-back-button route="{{ route('reportes.index') }}" />
+        <x-breadcrumb :role="'Coordinador'" :reportTitle="'Creacion de Reportes'" />
+        <x-back-button route="{{ route('reportes.index') }}" />
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -84,7 +84,6 @@
                             </div>
                         </div>
                         <div class="mb-3">
-
                             <div id="video_evidencia" class=" hidden mb-3">
                                 <label for="video" class="file-label">Video evidencia de anomalia
                                     <input capture="camera"
@@ -96,7 +95,6 @@
                                     <x-input-error for="video" />
                                 </label>
                             </div>
-
                             <div id="fotos_inmueble">
                                 <label for="foto1" class="file-label">Foto del inmueble
                                     <input capture="camera"
@@ -109,7 +107,6 @@
                                     <x-input-error for="foto1" />
                                 </label>
                             </div>
-
                             <div class=" flex-wrap gap-2 hidden" id="fotos_evidencia">
                                 <label for="foto2" class="file-label">Numero de Serial
                                     <input capture="camera"
@@ -176,20 +173,6 @@
 
 
     @section('js')
-        <script src="{{ asset('plugins/sweetalert2/sweetalert2@11.js') }}"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                Swal.fire({
-                    position: "top",
-                    icon: "info",
-                    title: "!anomalias!",
-                    text: " Recuerda que si hayas alguna anomalia debes subir un video de evidencia.",
-                    showConfirmButton: true,
-
-                });
-            });
-        </script>
-
         {{-- This script adds an event listener to the 'anomalia' element and toggles the visibility of the 'video_evidencia' element based on the selected value.
           @param {Event} event - The event object. --}}
         <script>
@@ -198,8 +181,16 @@
 
                 if (this.value == '8') {
                     anomalia.classList.add('hidden');
+
                 } else {
+                    Swal.fire({
+                        title: "Anomalia?",
+                        text: "Debes Subir el Video de Evidencia de la Anomalia",
+                        icon: "question"
+                    });
                     anomalia.classList.remove('hidden');
+
+
                 }
             });
         </script>
