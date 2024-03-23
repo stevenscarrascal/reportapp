@@ -11,6 +11,12 @@ use App\Models\vs_imposibilidad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use FFMpeg\FFMpeg;
+use FFMpeg\Coordinate\Dimension;
+use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Format\Video\X264;
+use FFMpeg\Format\Video\WMV;
+use FFMpeg\Format\Video\WebM;
 
 
 
@@ -74,13 +80,21 @@ class ReportesController extends Controller
         $reportes['longitud'] = $longitud;
         $reportes['direccion'] = $direccion;
 
-        if( $video = $request->file('video')){
+        if ($video = $request->file('video')) {
             $path = 'video/';
             $videoname = rand(1000, 9999) . "_" . date('YmdHis') . "." . $video->getClientOriginalExtension();
-            $video->move($path, $videoname);
-            $reportes['video'] = $videoname;
 
-        };
+            // Comprimir el video usando ffmpeg
+            $ffmpeg = FFMpeg::create();
+            $video = $ffmpeg->open($video->getRealPath());
+            $video
+                ->filters()
+                ->resize(new Dimension(320, 240))
+                ->synchronize();
+            $video
+                ->save(new WebM(), $path . $videoname);
+            $reportes['video'] = $videoname;
+        }
 
         foreach (range(1, 6) as $i) {
         if ($imagen = $request->file('foto'.$i)) {
