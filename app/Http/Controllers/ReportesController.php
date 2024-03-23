@@ -66,13 +66,21 @@ class ReportesController extends Controller
             $data = $response->json();
             $direccion = $data['items'][0]['address']['label'];
         }
-        
+
         $request->validate(reportes::$rules);
         $reportes = $request->all();
 
         $reportes['latitud'] = $latitud;
         $reportes['longitud'] = $longitud;
         $reportes['direccion'] = $direccion;
+
+        if( $video = $request->file('video')){
+            $path = 'video/';
+            $videoname = rand(1000, 9999) . "_" . date('YmdHis') . "." . $video->getClientOriginalExtension();
+            $video->move($path, $videoname);
+            $reportes['video'] = $videoname;
+
+        };
 
         foreach (range(1, 6) as $i) {
         if ($imagen = $request->file('foto'.$i)) {
