@@ -33,6 +33,7 @@
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <!-- Main Styling -->
     <link href="{{ asset('/assets/css/soft-ui-dashboard-tailwind.css?v=1.0.5') }}" rel="stylesheet" />
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <!-- personalizado CSS -->
     @yield('css')
     <!-- Nepcha Analytics (nepcha.com) -->
@@ -47,16 +48,14 @@
 
     <main class="ease-soft-in-out xl:ml-68.5 relative h-full max-h-screen rounded-xl transition-all duration-200">
         <!-- Navbar -->
-    @include('dashboard.nav')
+     @include('dashboard.nav')
         <!-- end Navbar -->
 
         <!-- Contenido -->
-        <main>
            @yield('content')
-        </main>
         <!-- end Contenido -->
     </main>
-    
+
 </body>
 <!-- plugin for charts  -->
 <script src="{{ asset('/assets/js/plugins/chartjs.min.js') }}" async></script>
