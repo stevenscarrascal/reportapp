@@ -10,6 +10,8 @@ use App\Models\vs_cargo;
 use App\Models\vs_tipo_documento;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use PhpOffice\PhpWord\TemplateProcessor;
+use PhpOffice\PhpWord\IOFactory;
 
 class CoordinadorController extends Controller
 {
@@ -43,7 +45,7 @@ class CoordinadorController extends Controller
      */
     public function store(Request $request)
     {
-       
+
     }
 
     /**
@@ -61,10 +63,51 @@ class CoordinadorController extends Controller
     public function edit(string $id)
     {
         $reporte = reportes::find($id);
-        $pdf = Pdf::loadView('informepdf.index',compact('reporte')) ;
+        // Ruta de la plantilla
+        $templateFile = public_path('template/temp.docx');
 
+        // Cargar la plantilla
+        $templateProcessor = new TemplateProcessor($templateFile);
 
-        return $pdf->stream('invoice.pdf');
+        // Reemplazar marcadores de posición con datos
+        $templateProcessor->setValue('contrato', $reporte->contrato);
+        $templateProcessor->setValue('fecha', $reporte->created_at);
+        $templateProcessor->setValue('direccion', $reporte->direccion);
+        $templateProcessor->setValue('medidor', $reporte->medidor);
+        $templateProcessor->setValue('lectura', $reporte->lectura);
+        $templateProcessor->setValue('comercio', $reporte->tipo_comercio);
+        $templateProcessor->setValue('anomalia', $reporte->anomalia);
+        $templateProcessor->setValue('imposibilidad', $reporte->imposibilidad);
+        $templateProcessor->setValue('observaciones', $reporte->observaciones);
+
+        for ($i=1; $i < 7; $i++) {
+            $foto = 'foto'.$i;
+            $this->ImgExist($reporte->$foto,$templateProcessor, $foto);
+        }
+
+        // $templateProcessor->setImageValue('foto_inmueble', array('path' => public_path('imagen/'.$reporte->foto1), 'width' => 400, 'height' => 400, 'ratio' => true));
+        // $templateProcessor->setImageValue('foto_serial', array('path' => public_path('imagen/'.$reporte->foto2), 'width' => 400, 'height' => 400, 'ratio' => true));
+        // $templateProcessor->setImageValue('foto_lectura', array('path' => public_path('imagen/'.$reporte->foto3), 'width' => 400, 'height' => 400, 'ratio' => true));
+        // $templateProcessor->setImageValue('foto_medidor', array('path' => public_path('imagen/'.$reporte->foto4), 'width' => 400, 'height' => 400, 'ratio' => true));
+        // $templateProcessor->setImageValue('foto_estado', array('path' => public_path('imagen/'.$reporte->foto5), 'width' => 400, 'height' => 400, 'ratio' => true));
+        // $templateProcessor->setImageValue('foto_opcional', array('path' => public_path('imagen/'.$reporte->foto6), 'width' => 400, 'height' => 400, 'ratio' => true));
+
+        $outputFile = public_path('template/Reporte del contrato '.$reporte->contrato.'.docx');
+        $templateProcessor->saveAs($outputFile);
+
+        // Descargar el documento
+        return response()->download($outputFile)->deleteFileAfterSend();
+    }
+
+    private function ImgExist($img,$templateProcessor, $var)
+    {
+        if( file_exists(public_path('imagen/'.$img)) and $img != null)
+        {
+            return $templateProcessor->setImageValue($var, array('path' => public_path('imagen/'.$img), 'width' => 400, 'height' => 400, 'ratio' => true));
+        }else
+        {
+           return $templateProcessor->setValue($var, 'Sin Registro Fotografico');
+        }
     }
 
     /**

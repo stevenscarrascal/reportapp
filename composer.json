@@ -20,6 +20,7 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.0",
         "mckenziearts/laravel-notify": "^2.4",
+        "phpoffice/phpword": "^1.2",
         "silviolleite/laravelpwa": "^2.0",
         "spatie/laravel-permission": "^6.4"
     },
