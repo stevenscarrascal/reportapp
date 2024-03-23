@@ -56,13 +56,7 @@
         </main>
         <!-- end Contenido -->
     </main>
-    <div fixed-plugin>
-        <a fixed-plugin-button
-            class="bottom-7.5 right-7.5 text-xl z-990 shadow-soft-lg rounded-circle fixed cursor-pointer bg-white px-4 py-2 text-slate-700">
-            <i class="py-2 pointer-events-none fa fa-cog"> </i>
-        </a>
-
-    </div>
+    
 </body>
 <!-- plugin for charts  -->
 <script src="{{ asset('/assets/js/plugins/chartjs.min.js') }}" async></script>
