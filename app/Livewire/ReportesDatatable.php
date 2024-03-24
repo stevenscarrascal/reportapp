@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
@@ -22,27 +23,21 @@ class ReportesDatatable extends DataTableComponent
 {
     return [
         SelectFilter::make('Estados')
-    ->options([
-        '' => 'All',
-        'pendiente' => 'Pendientes',
-        'rechazado' => 'Rechazados',
-        'revisado' => 'Revisados',
-    ])
-    ->filter(function(Builder $builder, string $value) {
-        if ($value === 'pendiente') {
-            $builder->whereHas('estado', function (Builder $query) {
-                $query->where('es', 'Pendiente');
-            });
-        } elseif ($value === 'rechazado') {
-            $builder->whereHas('EstadoReporte', function (Builder $query) {
-                $query->where('nombre', 'rechazado');
-            });
-        }elseif ($value === 'revisado') {
-            $builder->whereHas('EstadoReporte', function (Builder $query) {
-                $query->where('nombre','revisado');
-            });
-        }
-    }),
+            ->options([
+                '' => 'All',
+                '5' => 'Pendientes',
+                '6' => 'Revisados',
+                '7' => 'Rechazados',
+            ])
+            ->filter(function(Builder $builder, $value) {
+                if ($value === '5') {
+                    $builder->where('reportes.estado', '5');
+                } elseif ($value === '6') {
+                    $builder->where('reportes.estado', '6');
+                } elseif ($value === '7') {
+                    $builder->where('reportes.estado', '7');
+                }
+            }),
     ];
 }
 
@@ -63,9 +58,7 @@ class ReportesDatatable extends DataTableComponent
                 ->sortable(),
             Column::make("Tipo de comercio", "ComercioReporte.nombre")
                 ->sortable(),
-            Column::make("Estado", "EstadoReporte.nombre")
-                ->sortable(),
-
+            Column::make("Estado", "EstadoReporte.nombre"),
             Column::make("Fecha", "created_at")
                 ->sortable(),
         ];
