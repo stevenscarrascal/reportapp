@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\reportes;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\TemplateProcessor;
 use PhpOffice\PhpWord\IOFactory;
@@ -78,8 +79,11 @@ class CoordinadorController extends Controller
             $foto = 'foto' . $i;
             $this->ImgExist($reporte->$foto, $templateProcessor, $foto);
         }
-       
-        $outputFile = public_path('template/Reporte del contrato ' . $reporte->contrato . '.docx');
+
+        $rand = rand(600, 1000);
+        $fecha = Carbon::now()->format('d-m-Y');
+
+        $outputFile = public_path('template/Reporte del contrato ' . $reporte->contrato .'-'. $fecha.'-'.$rand .'.docx');
         $templateProcessor->saveAs($outputFile);
 
         // Descargar el documento
