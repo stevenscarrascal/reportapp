@@ -12,7 +12,7 @@ class PersonalsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:administrador,coordinador');
+        $this->middleware('can:coordinador');
     }
     /**
      * Display a listing of the resource.
@@ -30,7 +30,10 @@ class PersonalsController extends Controller
      */
     public function create()
     {
-        //
+        $tipodocumento = vs_tipo_documento::pluck('nombre', 'id');
+        $roles = Role::pluck('name', 'name')->all();
+        $userRoles = null;
+        return view('personals.create', compact('tipodocumento', 'roles','userRoles'));
     }
 
     /**
@@ -38,11 +41,11 @@ class PersonalsController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         // Validación de datos
         $request->validate(personals::$rules);
         // Validar existencia de personal por número de documento
         $userCorreo = $request['correo'];
-        $password = $request['password'];
         $userRol = $request['rol'];
 
         $existingPersonal = personals::where('numero_documento', $request->input('numero_documento'))->first();
@@ -59,7 +62,7 @@ class PersonalsController extends Controller
         // Crear usuario
         $user = new User([
             'email' => $userCorreo,
-            'password' => bcrypt($password),
+            'password' => bcrypt($request['numero_documento']),
         ]);
 
         // Asignar roles al usuario

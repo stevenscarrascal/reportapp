@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
 
     <!-- Scripts -->
-    @notifyCss
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="{{ asset('plugins/DataTables/datatables.min.css') }}">
@@ -47,11 +47,10 @@
     </div>
     <x-notify::notify />
  <!-- DataTables JS  y jquery 3.7 -->
-
     <script type="text/javascript" src="{{ asset('plugins/DataTables/datatables.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('plugins/Select2/dist/js/select2.min.js') }}"></script>
 
-    @notifyJs
+
     @stack('modals')
     @include('notify::components.notify')
     @livewireScripts
