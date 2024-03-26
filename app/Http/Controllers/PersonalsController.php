@@ -50,9 +50,9 @@ class PersonalsController extends Controller
 
         $existingPersonal = personals::where('numero_documento', $request->input('numero_documento'))->first();
         if ($existingPersonal) {
-            notify()->error('Ya existe un Agente con este número de documento.');
+        
             // Si ya existe personal con ese número de documento, muestra un mensaje de error y redirige
-            return redirect()->back();
+            return redirect()->back()->with('success', 'Ya existe un personal con este número de documento.')->with('title', 'Error');
         }
         // Si no existe, crea el personal
         $data = $request->all();
@@ -73,8 +73,9 @@ class PersonalsController extends Controller
         $user->personal_id = $personal_id; //
         $user->save();
 
-        notify()->success('Personal creado con éxito');
-        return  redirect()->route('personals.index');
+        
+        return  redirect()->route('personals.index')->with('icon', 'error')->with('success', 'Personal Creado con Exito')
+        ->with('title', 'Guardado');
     }
 
     /**
@@ -95,8 +96,8 @@ class PersonalsController extends Controller
         // Verificar si el registro "personals" existe
         if (!$personal) {
             // Redirige a una página de error o a otra página si el registro "personals" no se encuentra
-            notify()->error('Registro personal no encontrado.');
-            return redirect()->back();
+            
+            return redirect()->back()->with('success', 'Registro no Encontrado')->with('title', 'Error');
         }
 
         // Buscar el registro de usuario asociado con el registro personal

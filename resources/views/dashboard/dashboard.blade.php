@@ -78,6 +78,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset("assets/js/sbadmin2.min.js") }}"></script>
+    <script src="{{ asset('plugins/sweetalert2/sweetalert2@11.js') }}"></script>
     
 </body>
 
