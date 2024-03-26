@@ -14,6 +14,8 @@ class reportes extends Model
         'contrato' => 'required',
         'medidor' => 'required',
         'lectura' => 'required',
+        'anomalia' => 'required',
+        'imposibilidad' => 'required  ',
         'tipo_comercio' => 'required',
         'foto1' => 'required|image|max:5120',
         'foto2' => 'image|max:5120',

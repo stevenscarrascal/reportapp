@@ -89,7 +89,7 @@ class ReportesController extends Controller
             $video = $ffmpeg->open($video->getRealPath());
             $video
                 ->filters()
-                ->resize(new Dimension(320, 240))
+                ->resize(new Dimension(640, 480))
                 ->synchronize();
             $video
                 ->save(new WebM(), $path . $videoname);

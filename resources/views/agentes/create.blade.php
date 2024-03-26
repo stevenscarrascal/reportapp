@@ -10,7 +10,8 @@
                     <h1 class="mt-8 text-2xl font-medium text-gray-900 text-center mb-5">
                         TOMA DE LECTURA
                     </h1>
-                    <form action="{{ route('reportes.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('reportes.store') }}" method="post" enctype="multipart/form-data"
+                        id="myForm">
                         @csrf
                         <input type="text" hidden id="latitud" name="latitud" value="">
                         <input type="text" hidden id="longitud" name="longitud" value="">
@@ -44,7 +45,7 @@
                             <x-label for='comercio' class="mb-2" value="Tipo de Comercio" />
                             <select id="comercio" name="tipo_comercio"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3">
-                                <option selected>Seleccione tipo de Comercio</option>
+                                <option selected disabled>Seleccione tipo de Comercio</option>
                                 @foreach ($comercios as $id => $nombre)
                                     <option value="{{ $id }}">{{ $nombre }}</option>
                                 @endforeach
@@ -62,7 +63,7 @@
                                 Anomalia</label>
                             <select id="anomalia" name="anomalia"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option selected>Seleccione Su Anomalia</option>
+                                <option selected disabled>Seleccione Su Anomalia</option>
                                 @foreach ($anomalias as $id => $nombre)
                                     <option value="{{ $id }}">{{ $nombre }}</option>
                                 @endforeach
@@ -75,7 +76,7 @@
                             <div class="mb-3">
                                 <select id="obstaculos" name="imposibilidad"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option selected>Selecione su inposibilidad</option>
+                                    <option selected disabled>Selecione su inposibilidad</option>
                                     @foreach ($imposibilidad as $id => $nombre)
                                         <option value="{{ $id }}">{{ $nombre }}</option>
                                     @endforeach
@@ -161,7 +162,8 @@
 
                             </div>
                         </div>
-                        <x-button>
+                       
+                        <x-button id="submitButton">
                             Enviar
                         </x-button>
                     </form>
@@ -173,8 +175,8 @@
 
 
     @section('js')
-        {{-- This script adds an event listener to the 'anomalia' element and toggles the visibility of the 'video_evidencia' element based on the selected value.
-          @param {Event} event - The event object. --}}
+
+
         <script>
             document.getElementById('anomalia').addEventListener('change', function(event) {
                 var anomalia = document.getElementById('video_evidencia');

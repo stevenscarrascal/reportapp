@@ -26,7 +26,7 @@
 
                     </div>
                     <div class="px-5 py-4">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                             @foreach (range(1, 6) as $i)
                                 @if ($reporte->{'foto' . $i})
                                     <div class="relative">
@@ -56,6 +56,12 @@
                                     </div>
                                 @endif
                             @endforeach
+                        </div>
+                        <div class="w-full">
+                            <video width="50%" height="50%" controls>
+                                <source src="{{ asset('video/' . $reporte['video']) }}" type="video/mp4">
+                                Tu navegador no soporta el elemento de video.
+                            </video>
                         </div>
                     </div>
                 </div>
