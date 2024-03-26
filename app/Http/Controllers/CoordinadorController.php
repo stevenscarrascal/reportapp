@@ -53,7 +53,7 @@ class CoordinadorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(reportes $id)
+    public function edit(string $id)
     {
         $reporte = reportes::find($id);
         // Ruta de la plantilla
