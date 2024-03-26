@@ -68,9 +68,9 @@ class CoordinadorController extends Controller
         $templateProcessor->setValue('direccion', $reporte->direccion);
         $templateProcessor->setValue('medidor', $reporte->medidor);
         $templateProcessor->setValue('lectura', $reporte->lectura);
-        $templateProcessor->setValue('comercio', $reporte->tipo_comercio);
-        $templateProcessor->setValue('anomalia', $reporte->anomalia);
-        $templateProcessor->setValue('imposibilidad', $reporte->imposibilidad);
+        $templateProcessor->setValue('comercio', $reporte->ComercioReporte->nombre);
+        $templateProcessor->setValue('anomalia', $reporte->AnomaliaReporte->nombre);
+        $templateProcessor->setValue('imposibilidad', $reporte->imposibilidadReporte->nombre);
         $templateProcessor->setValue('observaciones', $reporte->observaciones);
 
         for ($i = 1; $i < 7; $i++) {
