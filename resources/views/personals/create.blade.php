@@ -34,7 +34,7 @@
                                     <div class="form-group">
                                         <label for="telefono">Telefono</label>
                                         <input type="text" class="form-control @error('telefono') is-invalid @enderror"
-                                            id="telefono" name="telefono" value="{{ old('telefono') }}">
+                                            id="telefono" name="telefono" oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="{{ old('telefono') }}">
                                         @error('telefono')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -45,7 +45,7 @@
                                     <div class="form-group">
                                         <label for="numero_documento">Número de Documento</label>
                                         <input type="tel" class="form-control" id="numero_documento"
-                                            name="numero_documento" value="{{ old('numero_documento') }}">
+                                            name="numero_documento"  oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="{{ old('numero_documento') }}">
                                         @error('numero_documento')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -95,3 +95,18 @@
             </div>
         </div>
     @endsection
+
+    @section('scripts')
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                @if (Session::has('success'))
+                    Swal.fire({
+                        icon: '{{ Session::get('icon') }}',
+                        title: '{{ Session::get('title') }}',
+                        text: '{{ Session::get('success') }}',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                @endif
+            });
+        </script>
