@@ -86,7 +86,7 @@ class ReportesController extends Controller
 
             // Comprimir el video usando ffmpeg
             $ffmpeg = FFMpeg::create();
-            $video = $ffmpeg->open($video->getRealPath());
+            $video = $ffmpeg->open($video->getRealPath());  
             $video
                 ->filters()
                 ->resize(new Dimension(640, 480))

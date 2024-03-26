@@ -162,7 +162,10 @@
 
                             </div>
                         </div>
-                       
+                        <!-- Barra de progreso -->
+                        <div id="progressBar" class="hidden h-2 mb-4 bg-gray-200 rounded">
+                            <div class="h-full bg-blue-500" style="width: 0;"></div>
+                        </div>
                         <x-button id="submitButton">
                             Enviar
                         </x-button>
@@ -175,7 +178,39 @@
 
 
     @section('js')
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Obtén los elementos del DOM
+            const form = document.querySelector('form');
+            const submitButton = document.querySelector('#submitButton');
+            const progressBar = document.querySelector('#progressBar');
+            const progress = progressBar.querySelector('div');
 
+            // Escucha el evento 'submit' del formulario
+            form.addEventListener('submit', (e) => {
+                // Evita el comportamiento predeterminado del formulario
+                e.preventDefault();
+
+                // Deshabilita el botón de envío y muestra la barra de progreso
+                submitButton.disabled = true;
+                progressBar.classList.remove('hidden');
+
+                // Simula el progreso de la barra de progreso
+                let width = 0;
+                const interval = setInterval(() => {
+                    if (width >= 100) {
+                        clearInterval(interval);
+                        // Habilita el botón de envío y oculta la barra de progreso
+                        submitButton.disabled = false;
+                        progressBar.classList.add('hidden');
+                    } else {
+                        width++;
+                        progress.style.width = width + '%';
+                    }
+                }, 100);
+            });
+        });
+    </script>
 
         <script>
             document.getElementById('anomalia').addEventListener('change', function(event) {
@@ -254,7 +289,7 @@
             document.getElementById('comercio').addEventListener('change', function() {
                 var inputComercio = document.getElementById('input-comercio');
 
-                if (this.value == '45') {
+                if (this.value == '47') {
                     inputComercio.hidden = false;
                     inputComercio.name = "tipo_comercio";
                     this.name = "";
