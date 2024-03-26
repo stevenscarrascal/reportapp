@@ -15,6 +15,7 @@ use App\Models\Reportes;
 class ReportesDatatable extends DataTableComponent
 {
     protected $model = Reportes::class;
+    public ?int $searchFilterDebounce = 500;
 
     public function configure(): void
     {
@@ -77,7 +78,7 @@ class ReportesDatatable extends DataTableComponent
                 ->collapseOnMobile(),
             Column::make('Acciones', 'id')
                 ->format(
-                    fn ($value, $row, Column $column) => view('dashboard.actions',compact('value'))
+                    fn ($value, $row, Column $column) => view('coordinador.actions',compact('value'))
                 ),
         ];
     }
