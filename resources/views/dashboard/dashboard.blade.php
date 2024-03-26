@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Blank</title>
+    <title>Q data Analytic</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('assets/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -18,6 +18,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
+    @notifyCss
     <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('plugins/bootstrap-5.2.3-dist/css/bootstrap.min.css') }}" rel="stylesheet">
 
@@ -66,7 +67,7 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-   
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset("assets/vendor/jquery/jquery.min.js") }}"></script>
@@ -77,7 +78,8 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset("assets/js/sbadmin2.min.js") }}"></script>
-
+    @include('notify::components.notify')
+    @notifyJs
 </body>
 
 </html>
