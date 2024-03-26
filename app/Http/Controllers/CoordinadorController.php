@@ -57,6 +57,7 @@ class CoordinadorController extends Controller
     {
         $reporte = reportes::find($id);
         // Ruta de la plantilla
+
         $templateFile = public_path('template/temp.docx');
 
         // Cargar la plantilla
@@ -77,13 +78,7 @@ class CoordinadorController extends Controller
             $foto = 'foto' . $i;
             $this->ImgExist($reporte->$foto, $templateProcessor, $foto);
         }
-
-        // $templateProcessor->setImageValue('foto_inmueble', array('path' => public_path('imagen/'.$reporte->foto1), 'width' => 400, 'height' => 400, 'ratio' => true));
-        // $templateProcessor->setImageValue('foto_serial', array('path' => public_path('imagen/'.$reporte->foto2), 'width' => 400, 'height' => 400, 'ratio' => true));
-        // $templateProcessor->setImageValue('foto_lectura', array('path' => public_path('imagen/'.$reporte->foto3), 'width' => 400, 'height' => 400, 'ratio' => true));
-        // $templateProcessor->setImageValue('foto_medidor', array('path' => public_path('imagen/'.$reporte->foto4), 'width' => 400, 'height' => 400, 'ratio' => true));
-        // $templateProcessor->setImageValue('foto_estado', array('path' => public_path('imagen/'.$reporte->foto5), 'width' => 400, 'height' => 400, 'ratio' => true));
-        // $templateProcessor->setImageValue('foto_opcional', array('path' => public_path('imagen/'.$reporte->foto6), 'width' => 400, 'height' => 400, 'ratio' => true));
+       
         $outputFile = public_path('template/Reporte del contrato ' . $reporte->contrato . '.docx');
         $templateProcessor->saveAs($outputFile);
 

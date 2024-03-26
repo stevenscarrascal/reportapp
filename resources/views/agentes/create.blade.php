@@ -199,7 +199,7 @@
             document.getElementById('obstaculos').addEventListener('change', function() {
                 var anomalia = document.getElementById('fotos_evidencia');
 
-                if (this.value == '46') {
+                if (this.value == '48') {
                     anomalia.classList.remove('hidden');
                 } else {
                     anomalia.classList.add('hidden');
