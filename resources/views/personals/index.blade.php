@@ -5,7 +5,7 @@
 
 <div class="card">
     <div class="card-body">
-        <livewire:personals-datatable />
+       @livewire('personal-datatable')
     </div>
 </div>
 @endsection
