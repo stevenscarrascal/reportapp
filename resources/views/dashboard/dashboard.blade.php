@@ -18,7 +18,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    @notifyCss
+   
     <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('plugins/bootstrap-5.2.3-dist/css/bootstrap.min.css') }}" rel="stylesheet">
 
@@ -78,8 +78,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset("assets/js/sbadmin2.min.js") }}"></script>
-    @include('notify::components.notify')
-    @notifyJs
+    
 </body>
 
 </html>

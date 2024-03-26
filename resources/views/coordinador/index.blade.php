@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <livewire:reportes-datatable />
+            @livewire('reporte-datatable')
         </div>
     </div>
 @endsection

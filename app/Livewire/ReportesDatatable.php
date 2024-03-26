@@ -21,7 +21,24 @@ class ReportesDatatable extends DataTableComponent
     {
         $this->setPrimaryKey('id');
         $this->setColumnSelectStatus(false);
-        $this->setPerPage(10);
+    }
+
+    public function bulkActions(): array
+    {
+        return [
+            'export' => 'Exportar a Excel',
+        ];
+    }
+
+    public function export()
+    {
+        $users = $this->getSelected();
+
+        $this->clearSelected();
+
+        $date = now()->format('Y-m-d H:i:s');
+
+        return Excel::download(new ReportExport($users), $date . '.xlsx');
     }
 
     public function filters(): array
@@ -83,21 +100,5 @@ class ReportesDatatable extends DataTableComponent
         ];
     }
 
-    public function bulkActions(): array
-    {
-        return [
-            'export' => 'Exportar a Excel',
-        ];
-    }
 
-    public function export()
-    {
-        $users = $this->getSelected();
-
-        $this->clearSelected();
-
-        $date = now()->format('Y-m-d H:i:s');
-
-        return Excel::download(new ReportExport($users), $date . '.xlsx');
-    }
 }
