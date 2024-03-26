@@ -16,7 +16,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="tipo_documento">Tipo de Documento</label>
-                                        <select class="form-select" aria-label="tipo_documento" name="tipo_documento">
+                                        <select class="form-select" aria-label="tipo_documento" name="tipo_documento" id="tipo_documento">
                                             <option selected>Seleccione tipo de documento</option>
                                             @foreach ($tipodocumento as $id => $nombre)
                                                 <option value="{{ $id }}">{{ $nombre }}</option>
