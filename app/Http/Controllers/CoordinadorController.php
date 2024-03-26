@@ -2,13 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Spatie\Permission\Models\Role;
-use App\Models\personals;
+
 use App\Models\reportes;
-use App\Models\User;
-use App\Models\vs_cargo;
-use App\Models\vs_tipo_documento;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\TemplateProcessor;
 use PhpOffice\PhpWord\IOFactory;
@@ -111,8 +106,6 @@ class CoordinadorController extends Controller
     public function update(Request $request, string $id)
     {
         $estado = $request->estado;
-
-
 
         $reporte = reportes::find($id);
         if ($estado == 6) {
