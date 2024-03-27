@@ -61,9 +61,9 @@
                             <label for="anomalia"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opciones de
                                 Anomalia</label>
-                            <select id="anomalia" name="anomalia"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option selected disabled>Seleccione Su Anomalia</option>
+                            <select id="anomalia" name="anomalia[]" multiple="multiple" 
+                                class="select2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3"
+                                placeholder="Seleccione su Anomalia">
                                 @foreach ($anomalias as $id => $nombre)
                                     <option value="{{ $id }}">{{ $nombre }}</option>
                                 @endforeach
@@ -162,10 +162,8 @@
 
                             </div>
                         </div>
-                        <!-- Barra de progreso -->
-                        <div id="progressBar" class="hidden h-2 mb-4 bg-gray-200 rounded">
-                            <div class="h-full bg-blue-500" style="width: 0;"></div>
-                        </div>
+
+
                         <x-button id="submitButton">
                             Enviar
                         </x-button>
@@ -178,57 +176,34 @@
 
 
     @section('js')
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            // Obtén los elementos del DOM
-            const form = document.querySelector('form');
-            const submitButton = document.querySelector('#submitButton');
-            const progressBar = document.querySelector('#progressBar');
-            const progress = progressBar.querySelector('div');
-
-            // Escucha el evento 'submit' del formulario
-            form.addEventListener('submit', (e) => {
-                // Evita el comportamiento predeterminado del formulario
-                e.preventDefault();
-
-                // Deshabilita el botón de envío y muestra la barra de progreso
-                submitButton.disabled = true;
-                progressBar.classList.remove('hidden');
-
-                // Simula el progreso de la barra de progreso
-                let width = 0;
-                const interval = setInterval(() => {
-                    if (width >= 100) {
-                        clearInterval(interval);
-                        // Habilita el botón de envío y oculta la barra de progreso
-                        submitButton.disabled = false;
-                        progressBar.classList.add('hidden');
-                    } else {
-                        width++;
-                        progress.style.width = width + '%';
-                    }
-                }, 100);
+        <script>
+            $(document).ready(function() {
+                $('.select2').select2();
             });
-        });
-    </script>
+        </script>
 
         <script>
-            document.getElementById('anomalia').addEventListener('change', function(event) {
-                var anomalia = document.getElementById('video_evidencia');
+            $(document).ready(function() {
+                var alertShown = false; // Variable de control
 
-                if (this.value == '8') {
-                    anomalia.classList.add('hidden');
+                $('#anomalia').on('select2:select', function(e) {
+                    var anomalia = document.getElementById('video_evidencia');
+                    var values = $(this).val();
 
-                } else {
-                    Swal.fire({
-                        title: "Anomalia?",
-                        text: "Debes Subir el Video de Evidencia de la Anomalia",
-                        icon: "question"
-                    });
-                    anomalia.classList.remove('hidden');
-
-
-                }
+                    if (values.includes('8')) {
+                        anomalia.classList.add('hidden');
+                        alertShown = false; // Resetea la variable de control cuando se selecciona '8'
+                    } else if (!alertShown) { // Solo muestra el alerta si no se ha mostrado antes
+                        Swal.fire({
+                            title: "Anomalia?",
+                            text: "Debes Subir el Video de Evidencia de la Anomalia",
+                            icon: "question"
+                        });
+                        anomalia.classList.remove('hidden');
+                        alertShown =
+                        true; // Marca la variable de control como verdadera después de mostrar el alerta
+                    }
+                });
             });
         </script>
 

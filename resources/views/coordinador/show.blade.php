@@ -1,177 +1,165 @@
-<x-app-layout>
-    <x-slot name="header">
-        <x-breadcrumb :role="'Coordinador'" :reportTitle="'Reportes Activos'" />
-        <a href="{{ route('coordinador.index') }}"
-            class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none mb-2">
-            <i class="fas fa-arrow-left"></i> Regresar
-        </a>
-    </x-slot>
+@extends('dashboard.dashboard')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="grid md:grid-cols-2 grid-cols-1 gap-4">
-                    {{-- Tarjeta --}}
-                    <div
-                        class="block mb-3 py-3  m-4 rounded-lg bg-white p-6 text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
-                        <h2 class="mb-2 text-lg text-center font-semibold ">Numero de Contrato: {{ $reporte->contrato }}
-                        </h2>
-                        <p class="mb-2 text-base">Lectura N°: {{ $reporte->lectura }}</p>
-                        <p class="mb-2 text-base">Fecha y Hora: {{ $reporte->created_at }}</p>
-                        <p class="mb-2 text-base">Direccion: {{ $reporte->direccion }}</p>
-                        <p class="mb-2 text-base">Anomalia Detectada: {{ $reporte->AnomaliaReporte->nombre }}</p>
-                        <p class="mb-3 text-base ">Imposibilidad: {{ $reporte->imposibilidadReporte->nombre }} </p>
-                        <h3 class="mb-2 mt-3 text-xl text-center font-medium leading-tight">Observaciones</h3>
-                        <p class="mb-4 text-base"> {{ $reporte->observaciones }}</p>
-                        @if ($reporte->estado == 5 || $reporte->estado == 7)
-                            <form action="{{ route('coordinador.update', $reporte) }}" method="post">
-                                @csrf
-                                @method('PUT')
-                                <input type="text" name="estado" value="" hidden>
-                                <div
-                                    class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
-                                    <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
-                                        <textarea id="comment" rows="4" name="observaciones"
-                                            class="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
-                                            placeholder="Escriba su observacion" @if ($reporte->estado == 6) readonly @endif>
-                                        </textarea>
-                                    </div>
-                                    @if ($reporte->estado == 5)
-                                        <div class="flex items-center gap-2 px-3 py-2 border-t">
-                                            <button type="submit"
-                                                class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800">
-                                                Enviar
-                                            </button>
-                                            <div class="mb-[0.125rem] block min-h-[1.5rem] ps-[1.5rem]">
-                                                <input
-                                                    class="relative float-left -ms-[1.5rem] me-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-secondary-500 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-checkbox before:shadow-transparent before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-black/60 focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-black/60 focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-checkbox checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] rtl:float-right dark:border-neutral-400 dark:checked:border-primary"
-                                                    type="radio" name="estado" id="radioDefault01" value="7" />
-                                                <label class="mt-px inline-block ps-[0.15rem] hover:cursor-pointer"
-                                                    for="radioDefault01">
-                                                    Rechazado
-                                                </label>
-                                            </div>
-                                            <div class="mb-[0.125rem] block min-h-[1.5rem] ps-[1.5rem]">
-                                                <input
-                                                    class="relative float-left -ms-[1.5rem] me-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-secondary-500 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-checkbox before:shadow-transparent before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-black/60 focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-black/60 focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-checkbox checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] rtl:float-right dark:border-neutral-400 dark:checked:border-primary"
-                                                    type="radio" name="estado" id="radioDefault02" value="6"
-                                                    checked />
-                                                <label class="mt-px inline-block ps-[0.15rem] hover:cursor-pointer"
-                                                    for="radioDefault02">
-                                                    Revisado
-                                                </label>
-                                            </div>
-                                        </div>
-                                    @endif
-                                </div>
-                                <p class="ms-auto text-xs text-gray-500">Aqui podra colocar Las observaciones referentes
-                                    a esta lectura</p>
-                            </form>
-                        @endif
+@section('content')
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title text-center">Informacion de Lectura</h3>
+            @if ($reporte->estado == 6)<a href="{{route('coordinador.index')}}" class="btn btn-outline-primary btn-sm float-end ">Regresar</a>@endif
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div>
+                    <p class="card-text text-center mb-4">Direccion: {{ $reporte->direccion }}</p>
+                </div>
+                <div class="col-md-6 text-center">
+                    <p class="card-text mb-2">Numero de contrato: {{ $reporte->contrato }}</p>
+                    <p class="card-text mb-2 ">Numero de Lectura: {{ $reporte->lectura }}</p>
+                    <p class="card-text">Tipo de Anomalia: {{ $reporte->AnomaliaReporte->nombre }}</p>
+                </div>
+                <div class="col-md-6 text-center">
+                    <p class="card-text mb-2 ">Numero de Medidor: {{ $reporte->medidor }}</p>
+                    <p class="card-text mb-2">Tipo de Comercio: {{ $reporte->ComercioReporte->nombre }}</p>
+                    <p class="card-text">Imposibilidad: {{ $reporte->imposibilidadReporte->nombre }}</p>
+                </div>
+            </div>
+            @if ($reporte->observaciones)
+                <div class="card mt-3 ">
+                    <div class="card-header">
+                        <h3 class="card-title text-center">Observaciones</h3>
+                        <div class="card-body">
+                            <p class="card-text text-center">{{ $reporte->observaciones }}</p>
+                        </div>
                     </div>
-                    <div class="px-5 py-4 ">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                            @foreach (range(1, 6) as $i)
-                                @if ($reporte->{'foto' . $i})
-                                    <div class="relative">
-                                        <img alt="gallery" class="h-auto max-w-full rounded-lg" src="/imagen/{{ $reporte->{'foto' . $i} }}" />
-                                        <div class="absolute top-0 left-0 bg-black bg-opacity-50 text-white p-2">
-                                            @switch($i)
-                                            @case(1)
-                                            <p class="text-sm">Foto del inmueble</p>
-                                                @break
-                                            @case(2)
-                                            <p class="text-sm">Numero del Serial</p>
-                                                @break
-                                            @case(3)
-                                            <p class="text-sm">Numero de Lectura</p>
-                                                @break
-                                            @case(4)
-                                            <p class="text-sm">Numero del Medidor</p>
-                                                @break
-                                            @case(5)
-                                            <p class="text-sm">Estado del Medidor</p>
-                                                @break
-                                            @case(6)
-                                            <p class="text-sm">Opcional</p>
-                                                @break
-                                        @endswitch
-                                        </div>
-                                    </div>
-                                @endif
-                            @endforeach
+            @endif
+        </div>
+        <div class="m-4">
+            <hr>
+            <h5 class="card-title text-center "> EVIDENCIAS</h5>
+            <hr>
+            <div class="d-flex justify-content-center">
+                <div class="btn-group" role="group" aria-label="">
+                    <!-- Button trigger modal fotografias -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fotos">
+                        Fotografias
+                    </button>
+                    <!-- Button trigger modal video -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#video">
+                        Video
+                    </button>
+                </div>
+            </div>
+            <!-- Modal video -->
+            <div class="modal fade" id="video" tabindex="-1" aria-labelledby="videolabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="w-full">
-                            <video width="50%" height="50%" controls>
-                                <source src="{{ asset('video/' . $reporte['video']) }}" type="video/mp4">
-                                Tu navegador no soporta el elemento de video.
-                            </video>
+                        <div class="modal-body">
+                            <div class="w-full">
+                                <video style="max-width: 100%;" controls>
+                                    <source src="{{ asset('video/' . $reporte['video']) }}" type="video/mp4">
+                                    Tu navegador no soporta el elemento de video.
+                                </video>
+                            </div>
                         </div>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Modal fotografias -->
+            <div class="modal fade" id="fotos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="fotoslabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid gap-1 ">
+                                <div class="row mb-2">
+                                    <div class="col-md-4 ms-auto position-relative">
+                                        <label for="foto1"
+                                            class="position-absolute top-0 start-50 translate-middle-x text-light ">Foto del
+                                            inmueble</label>
+                                        <img src="/imagen/{{ $reporte->{'foto1'} }}" alt="" id="foto1"
+                                            style="max-width: 100%;">
+                                    </div>
+                                    <div class="col-md-4 ms-auto position-relative">
+                                        <label for="foto2"
+                                            class="position-absolute top-0 start-50 translate-middle-x text-light ">Numero
+                                            del Serial</label>
+                                        <img src="/imagen/{{ $reporte->{'foto2'} }}" alt="" id="foto2"
+                                            style="max-width: 100%;">
+                                    </div>
+                                    <div class="col-md-4 ms-auto position-relative">
+                                        <label for="foto3"
+                                            class="position-absolute top-0 start-50 translate-middle-x text-light ">Numero
+                                            de Lectura</label>
+                                        <img src="/imagen/{{ $reporte->{'foto3'} }}" alt="" id="foto3"
+                                            style="max-width: 100%;">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 ms-auto position-relative">
+                                        <label for="foto4"
+                                            class="position-absolute top-0 start-50 translate-middle-x text-light ">Numero
+                                            del Medidor</label>
+                                        <img src="/imagen/{{ $reporte->{'foto4'} }}" alt="" id="foto4"
+                                            style="max-width: 100%;">
+                                    </div>
+                                    <div class="col-md-4 ms-auto position-relative">
+                                        <label for="foto5"
+                                            class="position-absolute top-0 start-50 translate-middle-x text-light ">Estado
+                                            del Medidor</label>
+                                        <img src="/imagen/{{ $reporte->{'foto5'} }}" alt="" id="foto5"
+                                            style="max-width: 100%;">
+                                    </div>
+                                    <div class="col-md-4 ms-auto position-relative">
+                                        <label for="foto6"
+                                            class="position-absolute top-0 start-50 translate-middle-x text-light ">Opcional</label>
+                                        <img src="/imagen/{{ $reporte->{'foto6'} }}" alt="" id="foto6"
+                                            style="max-width: 100%;">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        @section('css')
-            <style>
-                .modal {
-                    transition: background-color 0.7s ease;
-                }
-            </style>
-        @endsection
-        @section('js')
-        <script>
-            document.querySelectorAll('.grid img').forEach(img => {
-                img.addEventListener('click', function() {
-                    openModal(this.src);
-                });
-            });
+        @if ($reporte->estado != 6)
+        <div class="m-4">
+            <form action="{{ route('coordinador.update', $reporte->id) }}" method="post">
+                @csrf
+                @method('PUT')
+                <div class="mt-4">
+                    <label for="observaciones" class="form-label">Observaciones</label>
+                    <textarea class="form-control" id="observaciones" name="observaciones" rows="5"></textarea>
+                </div>
+                <div class="form-check mt-3 ">
+                    <input class="form-check-input" type="radio" name="estado" id="revisado" value="6">
+                    <label class="form-check-label" for="revisado">
+                        <span class="badge badge-success">Revisado</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="estado" id="rechazado" value="7">
+                    <label class="form-check-label" for="rechazado">
+                        <span class="badge badge-danger">Rechazado</span>
+                    </label>
+                </div>
+                <button type="submit" class=" float-end btn btn-primary btn-sm">Guardar</button>
+            </form>
+        </div>
+        @endif
 
-            function openModal(imageSrc) {
-                // Crear el modal
-                let modal = document.createElement('div');
-                modal.classList.add('modal');
-                modal.style.display = 'flex';
-                modal.style.position = 'fixed';
-                modal.style.zIndex = '1000';
-                modal.style.left = '0';
-                modal.style.top = '0';
-                modal.style.width = '100%';
-                modal.style.height = '100%';
-                modal.style.overflow = 'auto';
-                modal.style.backgroundColor = 'rgba(0,0,0,0)';
-                modal.style.justifyContent = 'center';
-                modal.style.alignItems = 'center';
+    @endsection
 
-                // Crear la imagen
-                let img = document.createElement('img');
-                img.src = imageSrc;
-                img.style.display = 'block';
-                img.style.margin = 'auto';
-                img.style.maxWidth = '80%';
-                img.style.maxHeight = '80%';
-                img.style.borderRadius = '10px'; // Agregar bordes redondeados a la imagen
-
-                // Agregar la imagen al modal
-                modal.appendChild(img);
-
-                // Agregar el modal al body
-                document.body.appendChild(modal);
-
-                // Cambiar la opacidad del modal a 1 para mostrarlo
-                setTimeout(function() {
-                    modal.style.backgroundColor = 'rgba(0,0,0,0.4)';
-                }, 0);
-
-                // Cerrar el modal cuando se hace clic en él
-                modal.addEventListener('click', function() {
-                    modal.style.backgroundColor = 'rgba(0,0,0,0)';
-                    setTimeout(function() {
-                        modal.style.display = 'none';
-                    }, 200);
-                });
-            }
-        </script>
-        @endsection
-</x-app-layout>
+    @section('js')
+    @endsection
