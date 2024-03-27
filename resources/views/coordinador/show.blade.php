@@ -14,7 +14,14 @@
                 <div class="col-md-6 text-center">
                     <p class="card-text mb-2">Numero de contrato: {{ $reporte->contrato }}</p>
                     <p class="card-text mb-2 ">Numero de Lectura: {{ $reporte->lectura }}</p>
-                    <p class="card-text">Tipo de Anomalia: {{ $reporte->AnomaliaReporte->nombre }}</p>
+                    <div class="">
+                        <p class="card-text">Anomalia Detectada</p>
+                        <ul>
+                            @foreach ($anomalias as $anomalia)
+                                <li>{{ $anomalia->nombre }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
                 <div class="col-md-6 text-center">
                     <p class="card-text mb-2 ">Numero de Medidor: {{ $reporte->medidor }}</p>

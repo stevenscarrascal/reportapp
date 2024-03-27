@@ -61,7 +61,7 @@
                             <label for="anomalia"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opciones de
                                 Anomalia</label>
-                            <select id="anomalia" name="anomalia[]" multiple="multiple" 
+                            <select id="anomalia" name="anomalia[]" multiple="multiple"
                                 class="select2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3"
                                 placeholder="Seleccione su Anomalia">
                                 @foreach ($anomalias as $id => $nombre)
@@ -211,7 +211,7 @@
             document.getElementById('obstaculos').addEventListener('change', function() {
                 var anomalia = document.getElementById('fotos_evidencia');
 
-                if (this.value == '48') {
+                if (this.value == '57') {
                     anomalia.classList.remove('hidden');
                 } else {
                     anomalia.classList.add('hidden');
@@ -264,7 +264,7 @@
             document.getElementById('comercio').addEventListener('change', function() {
                 var inputComercio = document.getElementById('input-comercio');
 
-                if (this.value == '47') {
+                if (this.value == '56') {
                     inputComercio.hidden = false;
                     inputComercio.name = "tipo_comercio";
                     this.name = "";

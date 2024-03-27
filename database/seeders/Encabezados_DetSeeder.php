@@ -59,23 +59,15 @@ class Encabezados_DetSeeder extends Seeder
             'nombre' => 'Bypass',
             'nomenclatura'=>'BY'
         ]);
-
         encabezados_dets::create([
             'encabezados_id' => '3',
-            'nombre' => 'Medidor al revés (invertido)',
-            'nomenclatura'=>'MRI'
+            'nombre' => 'Medidor con sellos manipulados',
+            'nomenclatura'=>'MCSM'
         ]);
-
         encabezados_dets::create([
             'encabezados_id' => '3',
-            'nombre' => 'Medidor manipulado (sellos)',
-            'nomenclatura'=>'MMS'
-        ]);
-
-        encabezados_dets::create([
-            'encabezados_id' => '3',
-            'nombre' => 'Medidor sin sellos o rotos',
-            'nomenclatura'=>'MSSR'
+            'nombre' => 'Medidor con digitos desalineados',
+            'nomenclatura'=>'MCDD'
         ]);
 
         encabezados_dets::create([
@@ -144,6 +136,56 @@ class Encabezados_DetSeeder extends Seeder
             'encabezados_id' => '4',
             'nombre' => 'Bar',
             'nomenclatura'=>'BA'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Lavanderia',
+            'nomenclatura'=>'LA'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Venta de Fritos',
+            'nomenclatura'=>'VF'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Asadero de Pollos',
+            'nomenclatura'=>'AP'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Industria',
+            'nomenclatura'=>'IN'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Productor de Quesos / leche',
+            'nomenclatura'=>'PQL'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Hotel/Motel',
+            'nomenclatura'=>'HM'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Centro recreacional',
+            'nomenclatura'=>'CR'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Institucion educativa',
+            'nomenclatura'=>'IE'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Hospital /Clinica',
+            'nomenclatura'=>'HC'
+        ]);
+        encabezados_dets::create([
+            'encabezados_id' => '4',
+            'nombre' => 'Fabrica de dulces',
+            'nomenclatura'=>'FD'
         ]);
         encabezados_dets::create([
             'encabezados_id' => '4',

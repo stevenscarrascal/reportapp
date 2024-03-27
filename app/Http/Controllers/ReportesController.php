@@ -59,7 +59,7 @@ class ReportesController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+
 
         $latitud = $request->input('latitud');
         $longitud = $request->input('longitud');
@@ -75,8 +75,11 @@ class ReportesController extends Controller
         }
 
         $request->validate(reportes::$rules);
+        $AnomaliaJson = json_encode($request->anomalia);
+
         $reportes = $request->all();
 
+        $reportes['anomalia'] = $AnomaliaJson;
         $reportes['latitud'] = $latitud;
         $reportes['longitud'] = $longitud;
         $reportes['direccion'] = $direccion;
@@ -90,7 +93,7 @@ class ReportesController extends Controller
             $video = $ffmpeg->open($video->getRealPath());
             $video
                 ->filters()
-                ->resize(new Dimension(640, 480))
+                ->resize(new Dimension(720, 1080))
                 ->synchronize();
             $video
                 ->save(new WebM(), $path . $videoname);
@@ -141,7 +144,9 @@ class ReportesController extends Controller
     public function show($id)
     {
         $reporte = reportes::find($id);
-        return view('agentes.show', compact('reporte'));
+        $anomaliasIds = json_decode($reporte->anomalia);
+        $anomalias = vs_anomalias::whereIn('id', $anomaliasIds)->get();
+        return view('agentes.show', compact('reporte','anomalias'));
     }
     /**
      * Show the form for editing the specified resource.
