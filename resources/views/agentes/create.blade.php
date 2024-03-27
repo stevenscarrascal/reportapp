@@ -184,6 +184,7 @@
                 $(document).ready(function() {
                     $('#submitButton').click(function() {
                         $('#submitButton').prop('disabled', true);
+                        $('#submitButton').css('background-color', '#D3D3D3');
                         $('#progressBar').css('display', 'block');
                         $('#myForm').submit();
                     });
