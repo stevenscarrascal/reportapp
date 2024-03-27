@@ -60,7 +60,6 @@ class ReportesController extends Controller
     public function store(Request $request)
     {
 
-
         $latitud = $request->input('latitud');
         $longitud = $request->input('longitud');
         $fontSize = 50;
@@ -91,12 +90,7 @@ class ReportesController extends Controller
             // Comprimir el video usando ffmpeg
             $ffmpeg = FFMpeg::create();
             $video = $ffmpeg->open($video->getRealPath());
-            $video
-                ->filters()
-                ->resize(new Dimension(720, 1080))
-                ->synchronize();
-            $video
-                ->save(new WebM(), $path . $videoname);
+            $video->save(new WebM(), $path . $videoname);
             $reportes['video'] = $videoname;
         }
 

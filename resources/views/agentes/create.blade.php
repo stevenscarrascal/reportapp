@@ -163,12 +163,15 @@
                             </div>
                         </div>
 
-
-                        <x-button id="submitButton">
-                            Enviar
-                        </x-button>
+                        <div class="flex items-center">
+                            <x-button id="submitButton">
+                                Enviar
+                            </x-button>
+                            <span id="progressBar" style="display: none;" class='text-md font-bold text-green-700  animate-pulse ml-2'>
+                                Cargando Archivos Porfavor Espere.....
+                            </span>
+                        </div>
                     </form>
-
                 </div>
             </div>
         </div>
@@ -176,6 +179,17 @@
 
 
     @section('js')
+
+            <script>
+                $(document).ready(function() {
+                    $('#submitButton').click(function() {
+                        $('#submitButton').prop('disabled', true);
+                        $('#progressBar').css('display', 'block');
+                        $('#myForm').submit();
+                    });
+                });
+            </script>
+
         <script>
             $(document).ready(function() {
                 $('.select2').select2();
@@ -201,7 +215,7 @@
                         });
                         anomalia.classList.remove('hidden');
                         alertShown =
-                        true; // Marca la variable de control como verdadera después de mostrar el alerta
+                            true; // Marca la variable de control como verdadera después de mostrar el alerta
                     }
                 });
             });
