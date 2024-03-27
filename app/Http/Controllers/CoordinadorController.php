@@ -61,11 +61,14 @@ class CoordinadorController extends Controller
     {
         $reporte = reportes::find($id);
         // Ruta de la plantilla
+        $anomaliasIds = json_decode($reporte->anomalia);
+        $anomalias = vs_anomalias::whereIn('id', $anomaliasIds)->get();
 
         $templateFile = public_path('template/temp.docx');
 
         // Cargar la plantilla
         $templateProcessor = new TemplateProcessor($templateFile);
+
 
         // Reemplazar marcadores de posición con datos
         $templateProcessor->setValue('contrato', $reporte->contrato);
@@ -74,7 +77,9 @@ class CoordinadorController extends Controller
         $templateProcessor->setValue('medidor', $reporte->medidor);
         $templateProcessor->setValue('lectura', $reporte->lectura);
         $templateProcessor->setValue('comercio', $reporte->ComercioReporte->nombre);
-        $templateProcessor->setValue('anomalia', $reporte->AnomaliaReporte->nombre);
+        foreach($anomalias as $anomalia) {
+            $templateProcessor->setValue('anomalia', $anomalia->nombre);
+        }
         $templateProcessor->setValue('imposibilidad', $reporte->imposibilidadReporte->nombre);
         $templateProcessor->setValue('observaciones', $reporte->observaciones);
         $templateProcessor->setValue('video', $reporte->video);

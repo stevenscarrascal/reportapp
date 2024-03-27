@@ -81,7 +81,7 @@
                                         <option value="{{ $id }}">{{ $nombre }}</option>
                                     @endforeach
                                 </select>
-                                <x-input-error for="anomalia" />
+                                <x-input-error for="obstaculos" />
                             </div>
                         </div>
                         <div class="mb-3">

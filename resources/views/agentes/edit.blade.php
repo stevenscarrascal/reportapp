@@ -33,7 +33,7 @@
                                     <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                                         <div class="overflow-hidden px-6">
                                             <form action="{{ route('reportes.update', $reporte) }}" method="post"
-                                                enctype="multipart/form-data">
+                                                enctype="multipart/form-data" id="myForm">
                                                 @method('PUT')
                                                 @csrf
                                                 <input type="text" hidden id="latitud" name="latitud"
@@ -98,17 +98,13 @@
                                                 </div>
                                                 <div class=" mb-3">
                                                     <label for="anomalia"
-                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opciones
-                                                        de
+                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opciones de
                                                         Anomalia</label>
-                                                    <select id="anomalia" name="anomalia"
-                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                        <option selected>Seleccione Su Anomalia</option>
+                                                    <select id="anomalia" name="anomalia[]" multiple="multiple"
+                                                        class="select2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3"
+                                                        placeholder="Seleccione su Anomalia">
                                                         @foreach ($anomalias as $id => $nombre)
-                                                            <option value="{{ $id }}"
-                                                                {{ $reporte->anomalia == $id ? 'selected' : '' }}>
-                                                                {{ $nombre }}
-                                                            </option>
+                                                            <option value="{{ $id }}">{{ $nombre }}</option>
                                                         @endforeach
                                                     </select>
                                                     <x-input-error for="anomalia" />
@@ -126,7 +122,7 @@
                                                                     {{ $nombre }}</option>
                                                             @endforeach
                                                         </select>
-                                                        <x-input-error for="anomalia" />
+                                                        <x-input-error for="obstaculos" />
                                                     </div>
                                                 </div>
                                                 <div class="mb-3">
@@ -220,9 +216,14 @@
 
                                                     </div>
                                                 </div>
-                                                <x-button class="mb-3">
-                                                    Enviar
-                                                </x-button>
+                                                <div class="flex items-center">
+                                                    <x-button id="submitButton">
+                                                        Enviar
+                                                    </x-button>
+                                                    <span id="progressBar" style="display: none;" class='text-md font-bold text-green-700  animate-pulse ml-2'>
+                                                        Cargando Archivos Porfavor Espere.....
+                                                    </span>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -284,104 +285,133 @@
         </div>
     </div>
     @section('js')
-        {{-- This script adds an event listener to the 'anomalia' element and toggles the visibility of the 'video_evidencia' element based on the selected value.
-          @param {Event} event - The event object. --}}
-        <script>
-            document.getElementById('anomalia').addEventListener('change', function(event) {
-                var anomalia = document.getElementById('video_evidencia');
 
-                if (this.value == '8') {
-                    anomalia.classList.add('hidden');
-                } else {
-                    anomalia.classList.remove('hidden');
-                }
+    <script>
+        $(document).ready(function() {
+            $('#submitButton').click(function() {
+                $('#submitButton').prop('disabled', true);
+                $('#submitButton').css('background-color', '#D3D3D3');
+                $('#progressBar').css('display', 'block');
+                $('#myForm').submit();
             });
-        </script>
+        });
+    </script>
 
-        <script>
-            document.getElementById('obstaculos').addEventListener('change', function() {
-                var anomalia = document.getElementById('fotos_evidencia');
+<script>
+    $(document).ready(function() {
+        $('.select2').select2();
+    });
+</script>
 
-                if (this.value == '46') {
-                    anomalia.classList.remove('hidden');
-                } else {
-                    anomalia.classList.add('hidden');
-                }
-            });
-        </script>
+<script>
+    $(document).ready(function() {
+        var alertShown = false; // Variable de control
 
-        <script>
-            function validate(id, x) {
-                var fileInputHelp = document.getElementById(id);
+        $('#anomalia').on('select2:select', function(e) {
+            var anomalia = document.getElementById('video_evidencia');
+            var values = $(this).val();
 
-                if (x.files && x.files[0]) {
-                    fileInputHelp.textContent = 'Archivo cargado';
-                    fileInputHelp.classList.add('text-green-500');
-                } else {
-                    fileInputHelp.textContent = 'SVG, PNG, JPG or GIF (MAX. 800x400px).';
-                    fileInputHelp.classList.remove('text-green-500');
-                }
-            }
-
-            document.getElementById('foto1').addEventListener('change', function() {
-                validate('file_input_help1', this);
-            });
-
-            document.getElementById('foto2').addEventListener('change', function() {
-                validate('file_input_help2', this);
-            });
-
-            document.getElementById('foto3').addEventListener('change', function() {
-                validate('file_input_help3', this);
-            });
-
-            document.getElementById('foto4').addEventListener('change', function() {
-                validate('file_input_help4', this);
-            });
-
-            document.getElementById('foto5').addEventListener('change', function() {
-                validate('file_input_help5', this);
-            });
-
-            document.getElementById('foto6').addEventListener('change', function() {
-                validate('file_input_help6', this);
-            });
-            document.getElementById('video').addEventListener('change', function() {
-                validate('file_input_video', this);
-            });
-        </script>
-
-        <script>
-            document.getElementById('comercio').addEventListener('change', function() {
-                var inputComercio = document.getElementById('input-comercio');
-
-                if (this.value == '45') {
-                    inputComercio.hidden = false;
-                    inputComercio.name = "tipo_comercio";
-                    this.name = "";
-                } else {
-                    inputComercio.hidden = true;
-                    inputComercio.name = "";
-                    this.name = "tipo_comercio";
-                }
-            });
-        </script>
-
-        <script>
-            // Función para manejar la obtención de la ubicación actual
-            function obtenerUbicacion() {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    // Obtener latitud y longitud
-                    var latitud = position.coords.latitude;
-                    var longitud = position.coords.longitude;
-
-                    // Colocar latitud y longitud en los elementos de entrada
-                    document.getElementById('latitud').value = latitud;
-                    document.getElementById('longitud').value = longitud;
+            if (values.includes('8')) {
+                anomalia.classList.add('hidden');
+                alertShown = false; // Resetea la variable de control cuando se selecciona '8'
+            } else if (!alertShown) { // Solo muestra el alerta si no se ha mostrado antes
+                Swal.fire({
+                    title: "Anomalia?",
+                    text: "Debes Subir el Video de Evidencia de la Anomalia",
+                    icon: "question"
                 });
+                anomalia.classList.remove('hidden');
+                alertShown =
+                    true; // Marca la variable de control como verdadera después de mostrar el alerta
             }
-            // Llamar a la función para obtener la ubicación al cargar la página
-            window.onload = obtenerUbicacion;
-        </script>
-    @endsection
+        });
+    });
+</script>
+
+<script>
+    document.getElementById('obstaculos').addEventListener('change', function() {
+        var anomalia = document.getElementById('fotos_evidencia');
+
+        if (this.value == '57') {
+            anomalia.classList.remove('hidden');
+        } else {
+            anomalia.classList.add('hidden');
+        }
+    });
+</script>
+
+<script>
+    function validate(id, x) {
+        var fileInputHelp = document.getElementById(id);
+
+        if (x.files && x.files[0]) {
+            fileInputHelp.textContent = 'Archivo cargado';
+            fileInputHelp.classList.add('text-green-500');
+        } else {
+            fileInputHelp.textContent = 'SVG, PNG, JPG or GIF (MAX. 800x400px).';
+            fileInputHelp.classList.remove('text-green-500');
+        }
+    }
+
+    document.getElementById('foto1').addEventListener('change', function() {
+        validate('file_input_help1', this);
+    });
+
+    document.getElementById('foto2').addEventListener('change', function() {
+        validate('file_input_help2', this);
+    });
+
+    document.getElementById('foto3').addEventListener('change', function() {
+        validate('file_input_help3', this);
+    });
+
+    document.getElementById('foto4').addEventListener('change', function() {
+        validate('file_input_help4', this);
+    });
+
+    document.getElementById('foto5').addEventListener('change', function() {
+        validate('file_input_help5', this);
+    });
+
+    document.getElementById('foto6').addEventListener('change', function() {
+        validate('file_input_help6', this);
+    });
+    document.getElementById('video').addEventListener('change', function() {
+        validate('file_input_video', this);
+    });
+</script>
+
+<script>
+    document.getElementById('comercio').addEventListener('change', function() {
+        var inputComercio = document.getElementById('input-comercio');
+
+        if (this.value == '56') {
+            inputComercio.hidden = false;
+            inputComercio.name = "tipo_comercio";
+            this.name = "";
+        } else {
+            inputComercio.hidden = true;
+            inputComercio.name = "";
+            this.name = "tipo_comercio";
+        }
+    });
+</script>
+
+<script>
+    // Función para manejar la obtención de la ubicación actual
+    function obtenerUbicacion() {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            // Obtener latitud y longitud
+            var latitud = position.coords.latitude;
+            var longitud = position.coords.longitude;
+
+            // Colocar latitud y longitud en los elementos de entrada
+            document.getElementById('latitud').value = latitud;
+            document.getElementById('longitud').value = longitud;
+        });
+    }
+    // Llamar a la función para obtener la ubicación al cargar la página
+    window.onload = obtenerUbicacion;
+</script>
+@endsection
 </x-app-layout>
