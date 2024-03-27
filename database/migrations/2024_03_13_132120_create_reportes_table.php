@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('lectura');
             $table->text('tipo_comercio');
             $table->string('direccion');
-            $table->string('anomalia');
+            $table->json('anomalia');
             $table->string('imposibilidad');
             $table->text('observaciones')->nullable();
             $table->string('latitud');

@@ -19,8 +19,16 @@
                         <p class="mb-2 text-base">Lectura N°: {{ $reporte->lectura }}</p>
                         <p class="mb-2 text-base">Fecha y Hora: {{ $reporte->created_at }}</p>
                         <p class="mb-2 text-base">Direccion: {{ $reporte->direccion }}</p>
-                        <p class="mb-2 text-base">Anomalia Detectada: {{ $reporte->AnomaliaReporte->nombre }}</p>
-                        <p class="mb-3 text-base ">Imposibilidad: {{ $reporte->imposibilidadReporte->nombre }} </p>
+                        <div class="mb-2">
+                            <h1 class="mb-2 text-base">Anomalia Detectada</h1>
+                            <ul>
+                                @foreach ($anomalias as $anomalia)
+                                    <li>{{ $anomalia->nombre }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+
+                        <p class="mb-3 text-base">Imposibilidad: {{ $reporte->imposibilidadReporte->nombre }} </p>
                         <h3 class="mb-2 mt-3 text-xl text-center font-medium leading-tight">Observaciones</h3>
                         <p class="mb-4 text-base"> {{ $reporte->observaciones }}</p>
 
@@ -30,28 +38,34 @@
                             @foreach (range(1, 6) as $i)
                                 @if ($reporte->{'foto' . $i})
                                     <div class="relative">
-                                        <img alt="gallery" class="h-auto max-w-full rounded-lg" src="/imagen/{{ $reporte->{'foto' . $i} }}" />
+                                        <img alt="gallery" class="h-auto max-w-full rounded-lg"
+                                            src="/imagen/{{ $reporte->{'foto' . $i} }}" />
                                         <div class="absolute top-0 left-0 bg-black bg-opacity-50 text-white p-2">
                                             @switch($i)
-                                            @case(1)
-                                            <p class="text-sm">Foto del inmueble</p>
+                                                @case(1)
+                                                    <p class="text-sm">Foto del inmueble</p>
                                                 @break
-                                            @case(2)
-                                            <p class="text-sm">Numero del Serial</p>
+
+                                                @case(2)
+                                                    <p class="text-sm">Numero del Serial</p>
                                                 @break
-                                            @case(3)
-                                            <p class="text-sm">Numero de Lectura</p>
+
+                                                @case(3)
+                                                    <p class="text-sm">Numero de Lectura</p>
                                                 @break
-                                            @case(4)
-                                            <p class="text-sm">Numero del Medidor</p>
+
+                                                @case(4)
+                                                    <p class="text-sm">Numero del Medidor</p>
                                                 @break
-                                            @case(5)
-                                            <p class="text-sm">Estado del Medidor</p>
+
+                                                @case(5)
+                                                    <p class="text-sm">Estado del Medidor</p>
                                                 @break
-                                            @case(6)
-                                            <p class="text-sm">Opcional</p>
+
+                                                @case(6)
+                                                    <p class="text-sm">Opcional</p>
                                                 @break
-                                        @endswitch
+                                            @endswitch
                                         </div>
                                     </div>
                                 @endif
@@ -76,58 +90,58 @@
             </style>
         @endsection
         @section('js')
-        <script>
-            document.querySelectorAll('.grid img').forEach(img => {
-                img.addEventListener('click', function() {
-                    openModal(this.src);
+            <script>
+                document.querySelectorAll('.grid img').forEach(img => {
+                    img.addEventListener('click', function() {
+                        openModal(this.src);
+                    });
                 });
-            });
 
-            function openModal(imageSrc) {
-                // Crear el modal
-                let modal = document.createElement('div');
-                modal.classList.add('modal');
-                modal.style.display = 'flex';
-                modal.style.position = 'fixed';
-                modal.style.zIndex = '1000';
-                modal.style.left = '0';
-                modal.style.top = '0';
-                modal.style.width = '100%';
-                modal.style.height = '100%';
-                modal.style.overflow = 'auto';
-                modal.style.backgroundColor = 'rgba(0,0,0,0)';
-                modal.style.justifyContent = 'center';
-                modal.style.alignItems = 'center';
-
-                // Crear la imagen
-                let img = document.createElement('img');
-                img.src = imageSrc;
-                img.style.display = 'block';
-                img.style.margin = 'auto';
-                img.style.maxWidth = '80%';
-                img.style.maxHeight = '80%';
-                img.style.borderRadius = '10px'; // Agregar bordes redondeados a la imagen
-                img.style.cursor = 'pointer'; // Cambiar el cursor a un puntero de mano
-
-                // Agregar la imagen al modal
-                modal.appendChild(img);
-
-                // Agregar el modal al body
-                document.body.appendChild(modal);
-
-                // Cambiar la opacidad del modal a 1 para mostrarlo
-                setTimeout(function() {
-                    modal.style.backgroundColor = 'rgba(0,0,0,0.4)';
-                }, 0);
-
-                // Cerrar el modal cuando se hace clic en él
-                modal.addEventListener('click', function() {
+                function openModal(imageSrc) {
+                    // Crear el modal
+                    let modal = document.createElement('div');
+                    modal.classList.add('modal');
+                    modal.style.display = 'flex';
+                    modal.style.position = 'fixed';
+                    modal.style.zIndex = '1000';
+                    modal.style.left = '0';
+                    modal.style.top = '0';
+                    modal.style.width = '100%';
+                    modal.style.height = '100%';
+                    modal.style.overflow = 'auto';
                     modal.style.backgroundColor = 'rgba(0,0,0,0)';
+                    modal.style.justifyContent = 'center';
+                    modal.style.alignItems = 'center';
+
+                    // Crear la imagen
+                    let img = document.createElement('img');
+                    img.src = imageSrc;
+                    img.style.display = 'block';
+                    img.style.margin = 'auto';
+                    img.style.maxWidth = '80%';
+                    img.style.maxHeight = '80%';
+                    img.style.borderRadius = '10px'; // Agregar bordes redondeados a la imagen
+                    img.style.cursor = 'pointer'; // Cambiar el cursor a un puntero de mano
+
+                    // Agregar la imagen al modal
+                    modal.appendChild(img);
+
+                    // Agregar el modal al body
+                    document.body.appendChild(modal);
+
+                    // Cambiar la opacidad del modal a 1 para mostrarlo
                     setTimeout(function() {
-                        modal.style.display = 'none';
-                    }, 200);
-                });
-            }
-        </script>
+                        modal.style.backgroundColor = 'rgba(0,0,0,0.4)';
+                    }, 0);
+
+                    // Cerrar el modal cuando se hace clic en él
+                    modal.addEventListener('click', function() {
+                        modal.style.backgroundColor = 'rgba(0,0,0,0)';
+                        setTimeout(function() {
+                            modal.style.display = 'none';
+                        }, 200);
+                    });
+                }
+            </script>
         @endsection
 </x-app-layout>

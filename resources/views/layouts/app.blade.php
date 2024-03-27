@@ -15,9 +15,10 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <!-- DataTables CSS -->
-    <link rel="stylesheet" href="{{ asset('plugins/DataTables/datatables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/Select2/dist/css/select2.min.css') }}">
+    <script src="{{asset('plugins/jquery-3.7.1/jquery-3.7.1.min.js')}}"></script>
+    <script src="{{asset('plugins/Select2/dist/js/select2.min.js')}}"></script>
     @yield('css')
     <!-- Styles -->
     @laravelPWA
@@ -47,11 +48,6 @@
     </div>
     <x-notify::notify />
  <!-- DataTables JS  y jquery 3.7 -->
-    <script type="text/javascript" src="{{ asset('plugins/DataTables/datatables.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('plugins/Select2/dist/js/select2.min.js') }}"></script>
-
-
-    @stack('modals')
     @include('notify::components.notify')
     @livewireScripts
     <script src="{{ asset('plugins/sweetalert2/sweetalert2@11.js') }}"></script>

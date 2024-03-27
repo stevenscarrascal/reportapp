@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\reportes;
+use App\Models\vs_anomalias;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\TemplateProcessor;
@@ -48,7 +49,9 @@ class CoordinadorController extends Controller
     public function show($id)
     {
         $reporte = reportes::find($id);
-        return view('coordinador.show', compact('reporte'));
+        $anomaliasIds = json_decode($reporte->anomalia);
+        $anomalias = vs_anomalias::whereIn('id', $anomaliasIds)->get();
+        return view('coordinador.show', compact('reporte', 'anomalias'));
     }
 
     /**
