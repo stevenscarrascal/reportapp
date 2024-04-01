@@ -82,11 +82,7 @@ class ReportesController extends Controller
         if ($video = $request->file('video')) {
             $path = 'video/';
             $videoname = rand(1000, 9999) . "_" . date('YmdHis') . "." . $video->getClientOriginalExtension();
-
-            // Comprimir el video usando ffmpeg
-            $ffmpeg = FFMpeg::create();
-            $video = $ffmpeg->open($video->getRealPath());
-            $video->save(new WebM(), $path . $videoname);
+            $video->move($path, $videoname);
             $reportes['video'] = $videoname;
         }
 
@@ -148,8 +144,7 @@ class ReportesController extends Controller
         $imposibilidad = vs_imposibilidad::pluck('nombre', 'id');
         $reporte = reportes::find($id);
         $anomaliasIds = json_decode($reporte->anomalia);
-        $anomaliasReporte = vs_anomalias::whereIn('id', $anomaliasIds)->get();
-        return view('agentes.edit', compact('reporte', 'anomalias', 'comercios', 'imposibilidad','anomaliasReporte'));
+        return view('agentes.edit', compact('reporte', 'anomalias', 'comercios', 'imposibilidad', 'anomaliasIds'));
     }
     /**
      * Update the specified resource in storage.
@@ -167,12 +162,6 @@ class ReportesController extends Controller
 
         if ($video = $request->file('video')) {
             $path = 'video/';
-            $videoname = rand(1000, 9999) . "_" . date('YmdHis') . "." . $video->getClientOriginalExtension();
-            // Comprimir el video usando ffmpeg
-            $ffmpeg = FFMpeg::create();
-            $video = $ffmpeg->open($video->getRealPath());
-            $video->save(new WebM(), $path . $videoname);
-            $report['video'] = $videoname;
             // Obtener el nombre del video anterior desde la base de datos
             $videoAnterior = $reportes->video;
             // Eliminar el video anterior si existe
@@ -182,9 +171,15 @@ class ReportesController extends Controller
                     unlink($rutaVideoAnterior);
                 }
             }
+            // Procesar y guardar el nuevo video
+            $videoname = rand(1000, 9999) . "_" . date('YmdHis') . "." . $video->getClientOriginalExtension();
+            $video->move($path, $videoname);
+            $report['video'] = $videoname; // Asegúrate de guardar el nombre del archivo, no el resultado de move()
+
         } else {
             unset($report['video']);
         }
+
         foreach (range(1, 6) as $i) {
             if ($imagen = $request->file('foto' . $i)) {
                 $path = 'imagen/';
