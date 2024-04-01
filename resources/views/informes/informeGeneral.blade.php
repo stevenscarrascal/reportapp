@@ -29,7 +29,7 @@
             <div class="card">
                 <div class="card-body">
                     <div style="width:100%;">
-                        {!! $chartjs2->render() !!}
+                       
                     </div>
                 </div>
             </div>
