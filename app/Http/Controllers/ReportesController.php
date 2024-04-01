@@ -174,7 +174,7 @@ class ReportesController extends Controller
             // Procesar y guardar el nuevo video
             $videoname = rand(1000, 9999) . "_" . date('YmdHis') . "." . $video->getClientOriginalExtension();
             $video->move($path, $videoname);
-            $report['video'] = $videoname; // Asegúrate de guardar el nombre del archivo, no el resultado de move()
+            $report['video'] = $videoname; 
 
         } else {
             unset($report['video']);

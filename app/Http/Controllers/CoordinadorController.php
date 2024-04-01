@@ -82,7 +82,7 @@ class CoordinadorController extends Controller
         }
         $templateProcessor->setValue('imposibilidad', $reporte->imposibilidadReporte->nombre);
         $templateProcessor->setValue('observaciones', $reporte->observaciones);
-        $templateProcessor->setValue('video', $reporte->video);
+        $templateProcessor->setValue('video', config('app.url').'/video/'. $reporte->video);
 
         for ($i = 1; $i < 7; $i++) {
             $foto = 'foto' . $i;
