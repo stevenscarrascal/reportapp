@@ -83,6 +83,16 @@ class InformesController extends Controller
                     "pointHoverBackgroundColor" => "#fff",
                     "pointHoverBorderColor" => "rgba(220,220,220,1)",
                     'data' => [12, 33, 44, 44, 55, 23, 40],
+                ],
+                [
+                    "label" => "My tree dataset",
+                    'backgroundColor' => "rgba(38, 185, 154, 0.31)",
+                    'borderColor' => "rgba(38, 185, 154, 0.7)",
+                    "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+                    "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+                    "pointHoverBackgroundColor" => "#fff",
+                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                    'data' => [12, 33, 44, 24, 55, 23, 70],
                 ]
             ])
             ->options([
@@ -95,7 +105,7 @@ class InformesController extends Controller
                     ]
                 ]
             ]);
-        return view('informes.index', compact('chartjs', 'chartjs2'));
+        return view('informes.informeGeneral', compact('chartjs', 'chartjs2'));
     }
 
     /**
