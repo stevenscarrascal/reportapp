@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\reportes;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Fx\Chartjs\Factory\Chartjs;
 use Illuminate\Support\Facades\DB;
@@ -58,41 +59,36 @@ class InformesController extends Controller
             ]);
 
 
+            $reports = reportes::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
+            ->get()
+            ->groupBy(function($date) {
+                return Carbon::parse($date->created_at)->format('l'); // Agrupa por día de la semana
+            });
+
+        // Prepara los datos para el gráfico
+        $labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        $data = [];
+
+        foreach ($labels as $label) {
+            $data[] = $reports->get($label) ? $reports->get($label)->count() : 0; // Si no hay informes para un día específico, añade 0
+        }
+
+        // Crea el gráfico
         $chartjs = app()->chartjs
             ->name('lineChartTest')
             ->type('bar')
             ->size(['width' => 400, 'height' => 200])
-            ->labels(['January', 'February', 'March', 'April', 'May', 'June', 'July'])
+            ->labels($labels)
             ->datasets([
                 [
-                    "label" => "My First dataset",
+                    "label" => "Reportes diarios",
                     'backgroundColor' => "rgba(38, 185, 154, 0.31)",
                     'borderColor' => "rgba(38, 185, 154, 0.7)",
                     "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
                     "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
                     "pointHoverBackgroundColor" => "#fff",
                     "pointHoverBorderColor" => "rgba(220,220,220,1)",
-                    'data' => [65, 59, 80, 81, 56, 55, 40],
-                ],
-                [
-                    "label" => "My Second dataset",
-                    'backgroundColor' => "rgba(38, 185, 154, 0.31)",
-                    'borderColor' => "rgba(38, 185, 154, 0.7)",
-                    "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
-                    "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
-                    "pointHoverBackgroundColor" => "#fff",
-                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
-                    'data' => [12, 33, 44, 44, 55, 23, 40],
-                ],
-                [
-                    "label" => "My tree dataset",
-                    'backgroundColor' => "rgba(38, 185, 154, 0.31)",
-                    'borderColor' => "rgba(38, 185, 154, 0.7)",
-                    "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
-                    "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
-                    "pointHoverBackgroundColor" => "#fff",
-                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
-                    'data' => [12, 33, 44, 24, 55, 23, 70],
+                    'data' => $data,
                 ]
             ])
             ->options([
@@ -100,7 +96,7 @@ class InformesController extends Controller
                     'x' => [
                         'title' => [
                             'display' => true,
-                            'text' => 'X Axis Title'
+                            'text' => 'Días de la semana'
                         ],
                     ]
                 ]
