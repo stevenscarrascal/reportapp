@@ -13,7 +13,7 @@ use App\Models\vs_anomalias;
 
 class ReportesDatatable extends DataTableComponent
 {
-    protected $model = Reportes::class;
+    protected $model = reportes::class;
     public ?int $searchFilterDebounce = 500;
     public ?string $defaultSortColumn = 'created_at';
 
