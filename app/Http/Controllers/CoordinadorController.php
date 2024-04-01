@@ -77,12 +77,16 @@ class CoordinadorController extends Controller
         $templateProcessor->setValue('medidor', $reporte->medidor);
         $templateProcessor->setValue('lectura', $reporte->lectura);
         $templateProcessor->setValue('comercio', $reporte->ComercioReporte->nombre);
-        foreach($anomalias as $anomalia) {
-            $templateProcessor->setValue('anomalia', $anomalia->nombre);
+        $nombresAnomalias = array();
+        foreach ($anomalias as $anomalia) {
+            $nombresAnomalias[] = $anomalia->nombre;
         }
+        $stringAnomalias = implode(", ", $nombresAnomalias);
+        $templateProcessor->setValue('anomalia', $stringAnomalias);
+
         $templateProcessor->setValue('imposibilidad', $reporte->imposibilidadReporte->nombre);
         $templateProcessor->setValue('observaciones', $reporte->observaciones);
-        $templateProcessor->setValue('video', config('app.url').'/video/'. $reporte->video);
+        $templateProcessor->setValue('video', config('app.url') . '/video/' . $reporte->video);
 
         for ($i = 1; $i < 7; $i++) {
             $foto = 'foto' . $i;
@@ -92,7 +96,7 @@ class CoordinadorController extends Controller
         $rand = rand(600, 1000);
         $fecha = Carbon::now()->format('d-m-Y');
 
-        $outputFile = public_path('template/Reporte del contrato ' . $reporte->contrato .'-'. $fecha.'-'.$rand .'.docx');
+        $outputFile = public_path('template/Reporte del contrato ' . $reporte->contrato . '-' . $fecha . '-' . $rand . '.docx');
         $templateProcessor->saveAs($outputFile);
 
         // Descargar el documento
