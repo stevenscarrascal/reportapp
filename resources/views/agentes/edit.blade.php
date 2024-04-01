@@ -128,7 +128,6 @@
                                                     </div>
                                                 </div>
                                                 <div class="mb-3">
-
                                                     <div id="video_evidencia" class=" hidden mb-3">
                                                         <label for="video" class="file-label">Video evidencia de
                                                             anomalia
