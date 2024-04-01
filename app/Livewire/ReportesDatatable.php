@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use App\Models\Reportes;
+use App\Models\reportes;
 use App\Models\vs_anomalias;
 
 class ReportesDatatable extends DataTableComponent
@@ -73,7 +73,7 @@ class ReportesDatatable extends DataTableComponent
                 ->searchable(),
             Column::make("Lectura", "lectura")
                 ->collapseOnMobile(),
-                Column::make("Anomalia", "anomalia")
+            Column::make("Anomalia", "anomalia")
                 ->format(function ($value) {
                     $ids = json_decode($value); // Decodifica el JSON
                     $nombres = [];

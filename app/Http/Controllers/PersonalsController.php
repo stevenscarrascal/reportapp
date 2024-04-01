@@ -38,7 +38,7 @@ class PersonalsController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         // Validación de datos
         $request->validate(personals::$rules);
         // Validar existencia de personal por número de documento
@@ -71,7 +71,7 @@ class PersonalsController extends Controller
         $user->save();
 
 
-        return  redirect()->route('personals.index')->with('icon', 'error')->with('success', 'Personal Creado con Exito')
+        return  redirect()->route('personals.index')->with('icon', 'success')->with('success', 'Personal Creado con Exito')
         ->with('title', 'Guardado');
     }
 
