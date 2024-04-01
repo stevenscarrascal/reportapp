@@ -9,8 +9,7 @@ use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Reportes;
-
-
+use App\Models\vs_anomalias;
 
 class ReportesDatatable extends DataTableComponent
 {
@@ -74,15 +73,19 @@ class ReportesDatatable extends DataTableComponent
                 ->searchable(),
             Column::make("Lectura", "lectura")
                 ->collapseOnMobile(),
-            Column::make("Anomalia", "anomalia")
-            ->format(function ($value, $row, Column $column) {
-                if ($value) {
-                    return '<span class="badge badge-danger">Si</span>';
-                } else {
-                    return '<span class="badge badge-success">No</span>';
-                }
-            }) ->html()
-                ->collapseOnMobile(),
+                Column::make("Anomalia", "anomalia")
+                ->format(function ($value) {
+                    $ids = json_decode($value); // Decodifica el JSON
+                    $nombres = [];
+                    foreach ($ids as $id) {
+                        $anomalia = vs_anomalias::find($id); // Busca la Anomalia por ID
+                        if ($anomalia) {
+                            $nombres[] = $anomalia->nombre; // Agrega el nombre a la lista
+                        }
+                    }
+                    return implode(', ', $nombres); // Devuelve los nombres como una cadena separada por comas
+                })
+                ->collapseAlways(),
             Column::make("Direccion", "direccion")
                 ->collapseAlways()
                 ->searchable(),
@@ -103,10 +106,8 @@ class ReportesDatatable extends DataTableComponent
                 ->collapseOnMobile(),
             Column::make('Acciones', 'id')
                 ->format(
-                    fn ($value, $row, Column $column) => view('coordinador.actions',compact('value'))
+                    fn ($value, $row, Column $column) => view('coordinador.actions', compact('value'))
                 ),
         ];
     }
-
-
 }
