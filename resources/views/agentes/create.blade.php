@@ -50,8 +50,8 @@
                                     <option value="{{ $id }}">{{ $nombre }}</option>
                                 @endforeach
                             </select>
-
                             <x-input-error for="comercio" />
+
                             <!-- Añade aquí tu input -->
                             <input id="input-comercio" placeholder="Ingrese el tipo de Comercio" name="tipo_Comercio"
                                 type="text" hidden
@@ -167,7 +167,8 @@
                             <x-button id="submitButton">
                                 Enviar
                             </x-button>
-                            <span id="progressBar" style="display: none;" class='text-md font-bold text-green-700  animate-pulse ml-2'>
+                            <span id="progressBar" style="display: none;"
+                                class='text-md font-bold text-green-700  animate-pulse ml-2'>
                                 Cargando Archivos Porfavor Espere.....
                             </span>
                         </div>
@@ -179,17 +180,16 @@
 
 
     @section('js')
-
-            <script>
-                $(document).ready(function() {
-                    $('#submitButton').click(function() {
-                        $('#submitButton').prop('disabled', true);
-                        $('#submitButton').css('background-color', '#D3D3D3');
-                        $('#progressBar').css('display', 'block');
-                        $('#myForm').submit();
-                    });
+        <script>
+            $(document).ready(function() {
+                $('#submitButton').click(function() {
+                    $('#submitButton').prop('disabled', true);
+                    $('#submitButton').css('background-color', '#D3D3D3');
+                    $('#progressBar').css('display', 'block');
+                    $('#myForm').submit();
                 });
-            </script>
+            });
+        </script>
 
         <script>
             $(document).ready(function() {
@@ -292,18 +292,38 @@
         </script>
 
         <script>
-            // Función para manejar la obtención de la ubicación actual
             function obtenerUbicacion() {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    // Obtener latitud y longitud
-                    var latitud = position.coords.latitude;
-                    var longitud = position.coords.longitude;
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        // Obtener latitud y longitud
+                        var latitud = position.coords.latitude;
+                        var longitud = position.coords.longitude;
 
-                    // Colocar latitud y longitud en los elementos de entrada
-                    document.getElementById('latitud').value = latitud;
-                    document.getElementById('longitud').value = longitud;
-                });
+                        // Colocar latitud y longitud en los elementos de entrada
+                        document.getElementById('latitud').value = latitud;
+                        document.getElementById('longitud').value = longitud;
+                    }, function(error) {
+                        // Manejar los errores
+                        switch (error.code) {
+                            case error.PERMISSION_DENIED:
+                                alert("El usuario no permitió la solicitud de geolocalización.");
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                alert("La información de ubicación no está disponible.");
+                                break;
+                            case error.TIMEOUT:
+                                alert("La solicitud para obtener la ubicación del usuario ha expirado.");
+                                break;
+                            case error.UNKNOWN_ERROR:
+                                alert("Ha ocurrido un error desconocido.");
+                                break;
+                        }
+                    });
+                } else {
+                    alert("Geolocalización no es soportada por este navegador.");
+                }
             }
+
             // Llamar a la función para obtener la ubicación al cargar la página
             window.onload = obtenerUbicacion;
         </script>

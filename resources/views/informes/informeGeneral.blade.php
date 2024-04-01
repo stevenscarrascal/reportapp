@@ -24,16 +24,27 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row gap-1 ">
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <div style="width:100%;">
-                       
+                    <div style="width:80%;">
+                        {!! $chartjs3->render() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <div style="width:80%;">
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
  @endsection

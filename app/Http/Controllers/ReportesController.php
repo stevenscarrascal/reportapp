@@ -56,6 +56,7 @@ class ReportesController extends Controller
     public function store(Request $request)
     {
 
+        
         $latitud = $request->input('latitud');
         $longitud = $request->input('longitud');
         $fontSize = 50;
@@ -174,8 +175,7 @@ class ReportesController extends Controller
             // Procesar y guardar el nuevo video
             $videoname = rand(1000, 9999) . "_" . date('YmdHis') . "." . $video->getClientOriginalExtension();
             $video->move($path, $videoname);
-            $report['video'] = $videoname; 
-
+            $report['video'] = $videoname;
         } else {
             unset($report['video']);
         }
