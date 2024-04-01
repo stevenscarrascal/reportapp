@@ -44,6 +44,16 @@
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
+    <li class="nav-item d-md-none">
+        <form method="POST" action="{{ route('logout') }}" x-data>
+            @csrf
+         <button type="submit" class=" btn nav-link" >
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Cerrar sesión</span>
+         </button>
+        </form>
+    </li>
+
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>

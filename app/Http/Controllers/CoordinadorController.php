@@ -21,12 +21,7 @@ class CoordinadorController extends Controller
      */
     public function index()
     {
-        $pendientes = reportes::where('estado', '5')->get();
-        $revisados = reportes::where('estado', '6')->get();
-        $rechazados = reportes::where('estado', '7')->get();
-
-
-        return view('coordinador.index', compact('pendientes', 'revisados', 'rechazados'));
+        return view('coordinador.index');
     }
 
     /**

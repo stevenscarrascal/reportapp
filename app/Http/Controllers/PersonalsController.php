@@ -19,10 +19,7 @@ class PersonalsController extends Controller
      */
     public function index()
     {
-        $personals = personals::with('estado', 'tipodocumento')->get();
-        $tipodocumento = vs_tipo_documento::pluck('nombre', 'id');
-        $roles = Role::pluck('name', 'name')->all();
-        return view('personals.index', compact('personals', 'tipodocumento', 'roles'));
+        return view('personals.index');
     }
 
     /**
@@ -41,7 +38,7 @@ class PersonalsController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        
         // Validación de datos
         $request->validate(personals::$rules);
         // Validar existencia de personal por número de documento
@@ -50,7 +47,7 @@ class PersonalsController extends Controller
 
         $existingPersonal = personals::where('numero_documento', $request->input('numero_documento'))->first();
         if ($existingPersonal) {
-        
+
             // Si ya existe personal con ese número de documento, muestra un mensaje de error y redirige
             return redirect()->back()->with('success', 'Ya existe un personal con este número de documento.')->with('title', 'Error');
         }
@@ -73,7 +70,7 @@ class PersonalsController extends Controller
         $user->personal_id = $personal_id; //
         $user->save();
 
-        
+
         return  redirect()->route('personals.index')->with('icon', 'error')->with('success', 'Personal Creado con Exito')
         ->with('title', 'Guardado');
     }
@@ -96,7 +93,7 @@ class PersonalsController extends Controller
         // Verificar si el registro "personals" existe
         if (!$personal) {
             // Redirige a una página de error o a otra página si el registro "personals" no se encuentra
-            
+
             return redirect()->back()->with('success', 'Registro no Encontrado')->with('title', 'Error');
         }
 

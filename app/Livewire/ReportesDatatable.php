@@ -70,6 +70,7 @@ class ReportesDatatable extends DataTableComponent
             Column::make("Nombres", "personal.nombres"),
             Column::make("Apellidos", "personal.apellidos"),
             Column::make("Contrato", "contrato")
+                ->collapseOnMobile()
                 ->searchable(),
             Column::make("Lectura", "lectura")
                 ->collapseOnMobile(),
