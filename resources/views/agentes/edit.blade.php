@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <x-breadcrumb :role="'Coordinador'" :reportTitle="'Edicion de Reportes'" />
-        <x-back-button route="{{ route('coordinador.index') }}" />
+        <x-breadcrumb :role="'Agente'" :reportTitle="'Edicion de Reportes'" />
+        <x-back-button route="{{ route('reportes.index') }}" />
     </x-slot>
 
     <div class="py-12">
@@ -19,7 +19,7 @@
                         <a href="#tabs-profile01"
                             class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[twe-nav-active]:border-primary data-[twe-nav-active]:text-primary dark:text-white/50 dark:hover:bg-neutral-700/60 dark:data-[twe-nav-active]:text-primary"
                             data-twe-toggle="pill" data-twe-target="#tabs-profile01" role="tab"
-                            aria-controls="tabs-profile01" aria-selected="false">Fotos</a>
+                            aria-controls="tabs-profile01" aria-selected="false">Evidencias</a>
                     </li>
                 </ul>
 
@@ -33,7 +33,7 @@
                                     <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                                         <div class="overflow-hidden px-6">
                                             <form action="{{ route('reportes.update', $reporte) }}" method="post"
-                                                enctype="multipart/form-data">
+                                                enctype="multipart/form-data" id="myForm">
                                                 @method('PUT')
                                                 @csrf
                                                 <input type="text" hidden id="latitud" name="latitud"
@@ -42,14 +42,14 @@
                                                     value="">
                                                 <input type="text" hidden name="personal_id"
                                                     value="{{ Auth::user()->personal->id }}">
-                                                    @if ($reporte->observaciones)
+                                                @if ($reporte->observaciones)
                                                     <button type="button"
                                                         class="mb-2 inline-block rounded border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-accent-300 hover:bg-danger-50/50 hover:text-danger-accent-300 focus:border-danger-600 focus:bg-danger-50/50 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 motion-reduce:transition-none"
                                                         data-twe-toggle="modal" data-twe-target="#exampleModalCenter"
                                                         data-twe-ripple-init data-twe-ripple-color="light">
                                                         Observaciones
                                                     </button>
-                                                    @endif
+                                                @endif
                                                 <div class=" mb-3">
                                                     <x-label for='contrato' value='Numero de contrato' class="mb-2" />
                                                     <input type="text"
@@ -96,19 +96,17 @@
                                                         name="tipo_Comercio" type="text" hidden
                                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full p-2.5  " />
                                                 </div>
-                                                <div class=" mb-3">
+                                                <div class="mb-3">
                                                     <label for="anomalia"
                                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opciones
-                                                        de
-                                                        Anomalia</label>
-                                                    <select id="anomalia" name="anomalia"
-                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                        <option selected>Seleccione Su Anomalia</option>
+                                                        de Anomalia</label>
+                                                    <select id="anomalia" name="anomalia[]" multiple="multiple"
+                                                        class="select2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3"
+                                                        placeholder="Seleccione su Anomalia">
                                                         @foreach ($anomalias as $id => $nombre)
                                                             <option value="{{ $id }}"
-                                                                {{ $reporte->anomalia == $id ? 'selected' : '' }}>
-                                                                {{ $nombre }}
-                                                            </option>
+                                                                {{ in_array($id, $anomaliasIds) ? 'selected' : '' }}>
+                                                                {{ $nombre }}</option>
                                                         @endforeach
                                                     </select>
                                                     <x-input-error for="anomalia" />
@@ -119,14 +117,14 @@
                                                     <div class="mb-3">
                                                         <select id="obstaculos" name="imposibilidad"
                                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                            <option selected>Selecione su inposibilidad</option>
+                                                            <option selected>Selecione su imposibilidad</option>
                                                             @foreach ($imposibilidad as $id => $nombre)
                                                                 <option value="{{ $id }}"
                                                                     {{ $reporte->imposibilidad == $id ? 'selected' : '' }}>
                                                                     {{ $nombre }}</option>
                                                             @endforeach
                                                         </select>
-                                                        <x-input-error for="anomalia" />
+                                                        <x-input-error for="obstaculos" />
                                                     </div>
                                                 </div>
                                                 <div class="mb-3">
@@ -220,9 +218,15 @@
 
                                                     </div>
                                                 </div>
-                                                <x-button class="mb-3">
-                                                    Enviar
-                                                </x-button>
+                                                <div class="flex items-center">
+                                                    <x-button id="submitButton">
+                                                        Enviar
+                                                    </x-button>
+                                                    <span id="progressBar" style="display: none;"
+                                                        class='text-md font-bold text-green-700  animate-pulse ml-2'>
+                                                        Cargando Archivos Porfavor Espere.....
+                                                    </span>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -232,15 +236,52 @@
                     </div>
                     <div class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
                         id="tabs-profile01" role="tabpanel" aria-labelledby="tabs-profile-tab01">
-                        {{-- Galery --}}
                         <div class="px-5 py-4">
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                                 @foreach (range(1, 6) as $i)
                                     @if ($reporte->{'foto' . $i})
-                                        <img alt="gallery" class="h-auto max-w-full rounded-lg"
-                                            src="/imagen/{{ $reporte->{'foto' . $i} }}" />
+                                        <div class="relative">
+                                            <img alt="gallery" class="h-auto max-w-full rounded-lg"
+                                                src="/imagen/{{ $reporte->{'foto' . $i} }}" />
+                                            <div class="absolute top-0 left-0 bg-black bg-opacity-50 text-white p-2">
+                                                @switch($i)
+                                                    @case(1)
+                                                        <p class="text-sm">Foto del inmueble</p>
+                                                    @break
+
+                                                    @case(2)
+                                                        <p class="text-sm">Numero del Serial</p>
+                                                    @break
+
+                                                    @case(3)
+                                                        <p class="text-sm">Numero de Lectura</p>
+                                                    @break
+
+                                                    @case(4)
+                                                        <p class="text-sm">Numero del Medidor</p>
+                                                    @break
+
+                                                    @case(5)
+                                                        <p class="text-sm">Estado del Medidor</p>
+                                                    @break
+
+                                                    @case(6)
+                                                        <p class="text-sm">Opcional</p>
+                                                    @break
+                                                @endswitch
+                                            </div>
+                                        </div>
                                     @endif
                                 @endforeach
+                            </div>
+                            <div class="w-full flex justify-center items-center">
+                                <div style="max-width: 50%;" class=" text-center">
+                                    <span class="mb-3">Video de Anomalias</span>
+                                    <video width="100%" height="auto" controls>
+                                        <source src="{{ asset('video/' . $reporte['video']) }}" type="video/mp4">
+                                        Tu navegador no soporta el elemento de video.
+                                    </video>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -264,7 +305,7 @@
                                 </div>
                                 <!-- Modal body -->
                                 <div class="relative p-4">
-                                    <p>{{$reporte->observaciones}}</p>
+                                    <p>{{ $reporte->observaciones }}</p>
                                 </div>
                                 <!-- Modal footer -->
                                 <div
@@ -284,29 +325,118 @@
         </div>
     </div>
     @section('js')
-        {{-- This script adds an event listener to the 'anomalia' element and toggles the visibility of the 'video_evidencia' element based on the selected value.
-          @param {Event} event - The event object. --}}
         <script>
-            document.getElementById('anomalia').addEventListener('change', function(event) {
-                var anomalia = document.getElementById('video_evidencia');
+            $(document).ready(function() {
+                $('#submitButton').click(function() {
+                    $('#submitButton').prop('disabled', true);
+                    $('#submitButton').css('background-color', '#D3D3D3');
+                    $('#progressBar').css('display', 'block');
+                    $('#myForm').submit();
+                });
+            });
+        </script>
+        <script>
+            document.querySelectorAll('.grid img').forEach(img => {
+                img.addEventListener('click', function() {
+                    openModal(this.src);
+                });
+            });
 
-                if (this.value == '8') {
-                    anomalia.classList.add('hidden');
-                } else {
-                    anomalia.classList.remove('hidden');
-                }
+            function openModal(imageSrc) {
+                // Crear el modal
+                let modal = document.createElement('div');
+                modal.classList.add('modal');
+                modal.style.display = 'flex';
+                modal.style.position = 'fixed';
+                modal.style.zIndex = '1000';
+                modal.style.left = '0';
+                modal.style.top = '0';
+                modal.style.width = '100%';
+                modal.style.height = '100%';
+                modal.style.overflow = 'auto';
+                modal.style.backgroundColor = 'rgba(0,0,0,0)';
+                modal.style.justifyContent = 'center';
+                modal.style.alignItems = 'center';
+
+                // Crear la imagen
+                let img = document.createElement('img');
+                img.src = imageSrc;
+                img.style.display = 'block';
+                img.style.margin = 'auto';
+                img.style.maxWidth = '80%';
+                img.style.maxHeight = '80%';
+                img.style.borderRadius = '10px'; // Agregar bordes redondeados a la imagen
+                img.style.cursor = 'pointer'; // Cambiar el cursor a un puntero de mano
+
+                // Agregar la imagen al modal
+                modal.appendChild(img);
+
+                // Agregar el modal al body
+                document.body.appendChild(modal);
+
+                // Cambiar la opacidad del modal a 1 para mostrarlo
+                setTimeout(function() {
+                    modal.style.backgroundColor = 'rgba(0,0,0,0.4)';
+                }, 0);
+
+                // Cerrar el modal cuando se hace clic en él
+                modal.addEventListener('click', function() {
+                    modal.style.backgroundColor = 'rgba(0,0,0,0)';
+                    setTimeout(function() {
+                        modal.style.display = 'none';
+                    }, 200);
+                });
+            }
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $('.select2').select2();
             });
         </script>
 
         <script>
-            document.getElementById('obstaculos').addEventListener('change', function() {
+            $(document).ready(function() {
+                var alertShown = false; // Variable de control
+
+                $('#anomalia').on('select2:select', function(e) {
+                    var anomalia = document.getElementById('video_evidencia');
+                    var values = $(this).val();
+
+                    if (values.includes('8')) {
+                        anomalia.classList.add('hidden');
+                        alertShown = false; // Resetea la variable de control cuando se selecciona '8'
+                    } else if (!alertShown) { // Solo muestra el alerta si no se ha mostrado antes
+                        Swal.fire({
+                            title: "Anomalia?",
+                            text: "Debes Subir el Video de Evidencia de la Anomalia",
+                            icon: "question"
+                        });
+                        anomalia.classList.remove('hidden');
+                        alertShown =
+                            true; // Marca la variable de control como verdadera después de mostrar el alerta
+                    }
+                }).trigger('select2:select');
+            });
+        </script>
+
+        <script>
+            function checkObstaculos() {
+                var obstaculos = document.getElementById('obstaculos');
                 var anomalia = document.getElementById('fotos_evidencia');
 
-                if (this.value == '46') {
+                if (obstaculos.value == '57') {
                     anomalia.classList.remove('hidden');
                 } else {
                     anomalia.classList.add('hidden');
                 }
+            }
+
+            document.getElementById('obstaculos').addEventListener('change', checkObstaculos);
+
+            // Check obstaculos on page load
+            document.addEventListener('DOMContentLoaded', function() {
+                checkObstaculos();
             });
         </script>
 
@@ -355,7 +485,7 @@
             document.getElementById('comercio').addEventListener('change', function() {
                 var inputComercio = document.getElementById('input-comercio');
 
-                if (this.value == '45') {
+                if (this.value == '56') {
                     inputComercio.hidden = false;
                     inputComercio.name = "tipo_comercio";
                     this.name = "";

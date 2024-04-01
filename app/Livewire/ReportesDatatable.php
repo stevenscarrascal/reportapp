@@ -73,7 +73,14 @@ class ReportesDatatable extends DataTableComponent
                 ->searchable(),
             Column::make("Lectura", "lectura")
                 ->collapseOnMobile(),
-            Column::make("Anomalia", "AnomaliaReporte.nombre")
+            Column::make("Anomalia", "anomalia")
+            ->format(function ($value, $row, Column $column) {
+                if ($value) {
+                    return '<span class="badge badge-danger">Si</span>';
+                } else {
+                    return '<span class="badge badge-success">No</span>';
+                }
+            }) ->html()
                 ->collapseOnMobile(),
             Column::make("Direccion", "direccion")
                 ->collapseAlways()
