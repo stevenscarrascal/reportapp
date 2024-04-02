@@ -61,7 +61,7 @@ class InformesController extends Controller
         ];
 
         // Crea el gráfico
-        $chartjs2 = app()->chartjs
+        $rpgenerales = app()->chartjs
             ->name('lineChartTest2')
             ->type('line')
             ->size(['width' => 400, 'height' => 200])
@@ -229,7 +229,71 @@ class InformesController extends Controller
                     ]
                 ]
             ]);
-        return view('informes.informeGeneral', compact('chartjs', 'chartjs2', 'chartjs3'));
+
+            $today = Carbon::now()->format('Y-m-d');
+           $reports = reportes::select(DB::raw('DATE(created_at) as date'), 'personal_id', DB::raw('count(*) as count'))
+            ->whereDate('created_at', $today)
+            ->groupBy('date', 'personal_id')
+            ->get();
+
+        // Prepara los datos para el gráfico
+        $labels = [];
+        $data = [];
+        foreach ($reports as $report) {
+            $labels[] = $report->personal->nombres . ' - ' . date('d-m-Y', strtotime($report->date)); // Convierte la fecha a formato día-mes-año
+            $data[] = $report->count;
+        }
+
+        $backgroundColors = [
+            "rgba(255, 99, 132, 0.2)", // Lunes
+            "rgba(54, 162, 235, 0.2)", // Martes
+            "rgba(255, 206, 86, 0.2)", // Miércoles
+            "rgba(75, 192, 192, 0.2)", // Jueves
+            "rgba(153, 102, 255, 0.2)", // Viernes
+            "rgba(255, 159, 64, 0.2)", // Sábado
+            "rgba(255, 99, 132, 0.2)" // Domingo
+        ];
+
+        $borderColors = [
+            "rgba(255, 99, 132, 1)", // Lunes
+            "rgba(54, 162, 235, 1)", // Martes
+            "rgba(255, 206, 86, 1)", // Miércoles
+            "rgba(75, 192, 192, 1)", // Jueves
+            "rgba(153, 102, 255, 1)", // Viernes
+            "rgba(255, 159, 64, 1)", // Sábado
+            "rgba(255, 99, 132, 1)" // Domingo
+        ];
+
+        // Crea el gráfico
+        $gfpersonald = app()->chartjs
+            ->name('lineChartTest4')
+            ->type('bar')
+            ->size(['width' => 400, 'height' => 200])
+            ->labels($labels)
+            ->datasets([
+                [
+                    "label" => "Reportes diarios",
+                    'backgroundColor' => $backgroundColors,
+                    'borderColor' => $borderColors,
+                    "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+                    "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+                    "pointHoverBackgroundColor" => "#fff",
+                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                    'data' => $data,
+                ]
+            ])
+            ->options([
+                'scales' => [
+                    'x' => [
+                        'title' => [
+                            'display' => true,
+                            'text' => 'Días de la semana'
+                        ],
+                    ]
+                ]
+            ]);
+
+        return view('informes.informeGeneral', compact('rpgenerales', 'chartjs', 'chartjs3','gfpersonald'));
     }
 
     /**
