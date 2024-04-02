@@ -19,7 +19,7 @@
 
                         <div class=" mb-3">
                             <x-label for='contrato' value='Numero de contrato' class="mb-2" />
-                            <input type="text"
+                            <input type="text" required
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                 name="contrato" id="contrato" placeholder="Ingrese su Numero de Contrato"
                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="{{ old('contrato') }}"  inputmode="numeric">
@@ -27,7 +27,7 @@
                         </div>
                         <div class=" mb-3">
                             <x-label for='medidor' value='Numero de medidor' class="mb-2" />
-                            <input type="text"
+                            <input type="text" required
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                 name="medidor" id="medidor" placeholder="Ingrese su Numero de Medidor"
                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="{{ old('medidor') }}"  inputmode="numeric">
@@ -35,7 +35,7 @@
                         </div>
                         <div class=" mb-3">
                             <x-label for='lectura' value='Numero de lectura' class="mb-2" />
-                            <input type="text"
+                            <input type="text" required
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                 name="lectura" id="lectura" placeholder="Ingrese su Numero de Lectura"
                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="{{ old('lectura') }}" inputmode="numeric">
@@ -43,7 +43,7 @@
                         </div>
                         <div class=" mb-3">
                             <x-label for='comercio' class="mb-2" value="Tipo de Comercios" />
-                            <select id="comercio" name="tipo_comercio"
+                            <select id="comercio" name="tipo_comercio" required
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3">
                                 <option selected disabled>Seleccione tipo de Comercio</option>
                                 @foreach ($comercios as $id => $nombre)
@@ -52,7 +52,7 @@
                             </select>
                             <x-input-error for="comercio" />
                             <div id="div-comercio-nuevo" style="display: none;" class=" flex">
-                                <input type="text" name="nueva_opcion" id="nueva_opcion"
+                                <input type="text" name="nueva_opcion" id="nueva_opcion" required
                                     class="w-1/2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                                 <button type="button" data-twe-ripple-init data-twe-ripple-color="light"
                                     id="agregarOpcionBtn"
@@ -65,7 +65,7 @@
                             <label for="anomalia"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opciones de
                                 Anomalia</label>
-                            <select id="anomalia" name="anomalia[]" multiple="multiple"
+                            <select id="anomalia" name="anomalia[]" multiple="multiple" required
                                 class="select2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3"
                                 placeholder="Seleccione su Anomalia">
                                 @foreach ($anomalias as $id => $nombre)
@@ -78,7 +78,7 @@
                             <label for="obstaculos" class="mb-4">Imposibilidad de toma de
                                 Lectura</label>
                             <div class="mb-3">
-                                <select id="obstaculos" name="imposibilidad"
+                                <select id="obstaculos" name="imposibilidad" required
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                     <option selected disabled>Selecione su imposibilidad</option>
                                     @foreach ($imposibilidad as $id => $nombre)

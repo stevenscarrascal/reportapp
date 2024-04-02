@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-body">
                     <div style="width:80%;">
-                        {!! $chartjs->render() !!}
+                        {!! $rpgenerales->render() !!}
                     </div>
                 </div>
             </div>
@@ -17,7 +17,7 @@
             <div class="card">
                 <div class="card-body">
                     <div style="width:80%;">
-                        {!! $chartjs2->render() !!}
+                        {!! $chartjs->render() !!}
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
             <div class="card">
                 <div class="card-body">
                     <div style="width:80%;">
-
+                        {!! $gfpersonald->render() !!}
                     </div>
                 </div>
             </div>
