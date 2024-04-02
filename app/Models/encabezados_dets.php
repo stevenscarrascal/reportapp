@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class encabezados_dets extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'encabezados_id',
+        'nombre',
+    ];
+
+    
 }

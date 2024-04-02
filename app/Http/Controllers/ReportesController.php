@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\encabezados_dets;
 use App\Models\reportes;
 use App\Models\vs_anomalias;
 use App\Models\vs_estado;
@@ -11,8 +11,6 @@ use App\Models\vs_imposibilidad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
-use FFMpeg\FFMpeg;
-use FFMpeg\Format\Video\WebM;
 
 
 
@@ -39,6 +37,7 @@ class ReportesController extends Controller
         return view('agentes.index', compact('historiales', 'estados'));
     }
 
+
     /**
      * Show the form for creating a new resource.
      */
@@ -56,7 +55,7 @@ class ReportesController extends Controller
     public function store(Request $request)
     {
 
-        
+
         $latitud = $request->input('latitud');
         $longitud = $request->input('longitud');
         $fontSize = 50;
@@ -235,5 +234,14 @@ class ReportesController extends Controller
     public function destroy(reportes $reportes)
     {
         //
+    }
+
+    public function addcomercio(Request $request)
+    {
+        $encabezados_dets = new encabezados_dets;
+        $encabezados_dets->encabezados_id = "5";
+        $encabezados_dets->nombre = $request->nombre;
+        $encabezados_dets->save();
+        return response()->json(['success' => true]);
     }
 }

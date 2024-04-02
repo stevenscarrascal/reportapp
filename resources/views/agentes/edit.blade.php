@@ -53,7 +53,7 @@
                                                 <div class=" mb-3">
                                                     <x-label for='contrato' value='Numero de contrato' class="mb-2" />
                                                     <input type="text"
-                                                        class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                                         name="contrato" id="contrato"
                                                         placeholder="Ingrese su Numero de Contrato"
                                                         value="{{ $reporte->contrato }}" readonly>
@@ -62,7 +62,7 @@
                                                 <div class=" mb-3">
                                                     <x-label for='medidor' value='Numero de medidor' class="mb-2" />
                                                     <input type="text"
-                                                        class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                                         name="medidor" id="medidor"
                                                         placeholder="Ingrese su Numero de Medidor"
                                                         value="{{ $reporte->medidor }}" readonly>
@@ -71,7 +71,7 @@
                                                 <div class=" mb-3">
                                                     <x-label for='lectura' value='Numero de lectura' class="mb-2" />
                                                     <input type="number"
-                                                        class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                                         name="lectura" id="lectura"
                                                         placeholder="Ingrese su Numero de Lectura"
                                                         oninput="this.value = this.value.replace(/[^0-9]/g, '')"
@@ -91,10 +91,15 @@
                                                     </select>
 
                                                     <x-input-error for="comercio" />
-                                                    <!-- Añade aquí tu input -->
-                                                    <input id="input-comercio" placeholder="Ingrese el tipo de Comercio"
-                                                        name="tipo_Comercio" type="text" hidden
-                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full p-2.5  " />
+                                                    <div id="div-comercio-nuevo" style="display: none;" class=" flex">
+                                                        <input type="text" name="nueva_opcion" id="nueva_opcion"
+                                                            class="w-1/2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                                        <button type="button" data-twe-ripple-init
+                                                            data-twe-ripple-color="light" id="agregarOpcionBtn"
+                                                            class="inline-block rounded-full bg-primary p-2 uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none">
+                                                            <i class="fas fa-plus"></i>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="anomalia"
@@ -127,94 +132,198 @@
                                                         <x-input-error for="obstaculos" />
                                                     </div>
                                                 </div>
+                                                <div class="mb-4">
+                                                    <div class="mb-3">
+                                                        <label for="comentarios"
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Observaciones</label>
+                                                        <textarea id="comentarios" name="comentarios" rows="4"
+                                                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                                                        <x-input-error for="comentarios" />
+                                                    </div>
+                                                </div>
                                                 <div class="mb-3">
                                                     <div id="video_evidencia" class=" hidden mb-3">
-                                                        <label for="video" class="file-label">Video evidencia de
-                                                            anomalia
-                                                            <input capture="camera"
-                                                                class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                                id="video" name="video" type="file"
-                                                                accept="video/*"
-                                                                aria-describedby="file_input_help7" />
-                                                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300"
-                                                                id="file_input_video">
-                                                                MP4, WebM, QuickTime, AVI, MPEG, WMV .</p>
-                                                            <x-input-error for="video" />
+                                                        <label for="foto7" id="label_help7"
+                                                            class="flex flex-col items-center w-full max-w-lg p-5 mx-auto mt-2 text-center bg-white border-2 border-gray-300 border-dashed cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                viewBox="0 0 24 24" stroke-width="1.5"
+                                                                stroke="currentColor"
+                                                                class="w-8 h-8 text-gray-500 dark:text-gray-400">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                                                            </svg>
+                                                            <h2
+                                                                class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">
+                                                                Video de Anomalia</h2>
+                                                            <p id="elemento_7"
+                                                                class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">
+                                                                sube tu video en formato MP4 </p>
+                                                            <input id="foto7" name="video" type="file"
+                                                                class="hidden" accept="video/*" />
                                                         </label>
                                                     </div>
+                                                    <div class="grid grid-cols-2 gap-4">
+                                                        <!-- Elemento 1 -->
+                                                        <div>
+                                                            <div>
+                                                                <label for="foto1" id="label_help1"
+                                                                    class="flex flex-col items-center w-full max-w-lg p-5 mx-auto mt-2 text-center bg-white border-2 border-gray-300 border-dashed cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                        fill="none" viewBox="0 0 24 24"
+                                                                        stroke-width="1.5" stroke="currentColor"
+                                                                        class="w-8 h-8 text-gray-500 dark:text-gray-400">
+                                                                        <path stroke-linecap="round"
+                                                                            stroke-linejoin="round"
+                                                                            d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                                                                    </svg>
+                                                                    <h2
+                                                                        class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">
+                                                                        Foto del Inmueble</h2>
+                                                                    <p id="elemento_1"
+                                                                        class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">
+                                                                        sube la foto en formato JPEG </p>
+                                                                    <input id="foto1" name="foto1"
+                                                                        type="file" class="hidden"
+                                                                        accept="image/jpeg;camara=user" />
+                                                                    <x-input-error for="foto1" />
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Elemento 2 -->
+                                                        <div>
+                                                            <div>
+                                                                <label for="foto2" id="label_help2"
+                                                                    class="flex flex-col items-center w-full max-w-lg p-5 mx-auto mt-2 text-center bg-white border-2 border-gray-300 border-dashed cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                        fill="none" viewBox="0 0 24 24"
+                                                                        stroke-width="1.5" stroke="currentColor"
+                                                                        class="w-8 h-8 text-gray-500 dark:text-gray-400">
+                                                                        <path stroke-linecap="round"
+                                                                            stroke-linejoin="round"
+                                                                            d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                                                                    </svg>
+                                                                    <h2
+                                                                        class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">
+                                                                        Numero de Serial</h2>
 
-                                                    <div id="fotos_inmueble">
-                                                        <label for="foto1" class="file-label">Foto del inmueble
-                                                            <input capture="camera"
-                                                                class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                                id="foto1" name="foto1" type="file"
-                                                                accept="image/*"
-                                                                aria-describedby="file_input_help1" />
-                                                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300"
-                                                                id="file_input_help1">
-                                                                SVG,
-                                                                PNG, JPG or GIF (MAX. 800x400px).</p>
-                                                            <x-input-error for="foto1" />
-                                                        </label>
-                                                    </div>
+                                                                    <p id="elemento_2"
+                                                                        class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">
+                                                                        Realiza la foto en formato JPEG </p>
 
-                                                    <div class=" flex-wrap gap-2 hidden" id="fotos_evidencia">
-                                                        <label for="foto2" class="file-label">Numero de Serial
-                                                            <input capture="camera"
-                                                                class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                                id="foto2" name="foto2" type="file"
-                                                                accept="image/*" aria-describedby="file_input_help" />
-                                                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300"
-                                                                id="file_input_help2">
-                                                                SVG,
-                                                                PNG, JPG or GIF (MAX. 800x400px).</p>
-                                                            <x-input-error for="foto2" />
-                                                        </label>
-                                                        <label for="foto3" class="file-label">Numero de Lectura
-                                                            <input capture="camera"
-                                                                class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                                id="foto3" name="foto3" type="file"
-                                                                accept="image/*" aria-describedby="file_input_help" />
-                                                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300"
-                                                                id="file_input_help3">
-                                                                SVG,
-                                                                PNG, JPG or GIF (MAX. 800x400px).</p>
-                                                            <x-input-error for="foto3" />
-                                                        </label>
-                                                        <label for="foto4" class="file-label">Numero del medidor
-                                                            <input capture="camera"
-                                                                class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                                id="foto4" name="foto4" type="file"
-                                                                accept="image/*" aria-describedby="file_input_help" />
-                                                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300"
-                                                                id="file_input_help4">
-                                                                SVG,
-                                                                PNG, JPG or GIF (MAX. 800x400px).</p>
-                                                            <x-input-error for="foto4" />
-                                                        </label>
-                                                        <label for="foto5" class="file-label">Estado del Medidor
-                                                            <input capture="camera"
-                                                                class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                                id="foto5" name="foto5" type="file"
-                                                                accept="image/*" aria-describedby="file_input_help" />
-                                                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300"
-                                                                id="file_input_help5">
-                                                                SVG,
-                                                                PNG, JPG or GIF (MAX. 800x400px).</p>
-                                                            <x-input-error for="foto5" />
-                                                        </label>
-                                                        <label for="foto6" class="file-label">Opcional
-                                                            <input capture="camera"
-                                                                class="mb-1 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                                                                id="foto6" name="foto6" type="file"
-                                                                accept="image/*" aria-describedby="file_input_help" />
-                                                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300"
-                                                                id="file_input_help6">
-                                                                SVG,
-                                                                PNG, JPG or GIF (MAX. 800x400px).</p>
-                                                            <x-input-error for="foto6" />
-                                                        </label>
+                                                                    <input id="foto2" name="foto2"
+                                                                        type="file" class="hidden"
+                                                                        capture="camera" accept="image/jpeg" />
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Elemento 3 -->
+                                                        <div>
+                                                            <div>
+                                                                <label for="foto3" id="label_help3"
+                                                                    class="flex flex-col items-center w-full max-w-lg p-5 mx-auto mt-2 text-center bg-white border-2 border-gray-300 border-dashed cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                        fill="none" viewBox="0 0 24 24"
+                                                                        stroke-width="1.5" stroke="currentColor"
+                                                                        class="w-8 h-8 text-gray-500 dark:text-gray-400">
+                                                                        <path stroke-linecap="round"
+                                                                            stroke-linejoin="round"
+                                                                            d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                                                                    </svg>
+                                                                    <h2
+                                                                        class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">
+                                                                        Numero de Lectura</h2>
 
+                                                                    <p id="elemento_3"
+                                                                        class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">
+                                                                        Realiza la foto en formato JPEG </p>
+
+                                                                    <input id="foto3" name="foto3"
+                                                                        type="file" class="hidden"
+                                                                        capture="camera" accept="image/*" />
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Elemento 4 -->
+                                                        <div>
+                                                            <div>
+                                                                <label for="foto4" id="label_help4"
+                                                                    class="flex flex-col items-center w-full max-w-lg p-5 mx-auto mt-2 text-center bg-white border-2 border-gray-300 border-dashed cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                        fill="none" viewBox="0 0 24 24"
+                                                                        stroke-width="1.5" stroke="currentColor"
+                                                                        class="w-8 h-8 text-gray-500 dark:text-gray-400">
+                                                                        <path stroke-linecap="round"
+                                                                            stroke-linejoin="round"
+                                                                            d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                                                                    </svg>
+                                                                    <h2
+                                                                        class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">
+                                                                        Numero del Medidor</h2>
+
+                                                                    <p id="elemento_4"
+                                                                        class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">
+                                                                        Realiza la foto en formato JPEG </p>
+
+                                                                    <input id="foto4" name="foto4"
+                                                                        type="file" class="hidden"
+                                                                        capture="camera" accept="image/*" />
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Elemento 5 -->
+                                                        <div>
+                                                            <div>
+                                                                <label for="foto5" id="label_help5"
+                                                                    class="flex flex-col items-center w-full max-w-lg p-5 mx-auto mt-2 text-center bg-white border-2 border-gray-300 border-dashed cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                        fill="none" viewBox="0 0 24 24"
+                                                                        stroke-width="1.5" stroke="currentColor"
+                                                                        class="w-8 h-8 text-gray-500 dark:text-gray-400">
+                                                                        <path stroke-linecap="round"
+                                                                            stroke-linejoin="round"
+                                                                            d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                                                                    </svg>
+                                                                    <h2
+                                                                        class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">
+                                                                        Estado del Medidor</h2>
+
+                                                                    <p id="elemento_5"
+                                                                        class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">
+                                                                        Realiza la foto en formato JPEG </p>
+
+                                                                    <input id="foto5" name="foto5"
+                                                                        type="file" class="hidden"
+                                                                        capture="camera" accept="image/*" />
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Elemento 6 -->
+                                                        <div>
+                                                            <div>
+                                                                <label for="foto6" id="label_help6"
+                                                                    class="flex flex-col items-center w-full max-w-lg p-5 mx-auto mt-2 text-center bg-white border-2 border-gray-300 border-dashed cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                        fill="none" viewBox="0 0 24 24"
+                                                                        stroke-width="1.5" stroke="currentColor"
+                                                                        class="w-8 h-8 text-gray-500 dark:text-gray-400">
+                                                                        <path stroke-linecap="round"
+                                                                            stroke-linejoin="round"
+                                                                            d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                                                                    </svg>
+                                                                    <h2
+                                                                        class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">
+                                                                        Opcional</h2>
+
+                                                                    <p id="elemento_6"
+                                                                        class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">
+                                                                        Realiza la foto en formato JPEG </p>
+
+                                                                    <input id="foto6" name="foto6"
+                                                                        type="file" class="hidden"
+                                                                        capture="camera" accept="image/*" />
+                                                                </label>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="flex items-center">
@@ -325,6 +434,54 @@
     </div>
     @section('js')
         <script>
+            document.getElementById("comercio").addEventListener("change", function() {
+                var divComercioNuevo = document.getElementById("div-comercio-nuevo");
+                if (this.value == "19") {
+                    divComercioNuevo.style.display = "block";
+                } else {
+                    divComercioNuevo.style.display = "none";
+                }
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+
+                $('#agregarOpcionBtn').click(function(e) {
+                    e.preventDefault();
+
+                    var nuevaOpcion = $('#nueva_opcion').val();
+
+                    $.ajax({
+                        url: '/addcomercio', // Reemplaza esto con la ruta correcta
+                        type: 'POST',
+                        data: {
+                            nombre: nuevaOpcion,
+                            _token: '{{ csrf_token() }}' // Asegúrate de que esto esté en tu archivo blade
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                Swal.fire({
+                                    title: "Exito!",
+                                    text: "Nuevo Comecio Agregado Exitosamente",
+                                    icon: "success"
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.reload(); // Recarga la página
+                                    }
+                                });
+                            }
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            // Aquí puedes manejar los errores
+                            console.error(textStatus, errorThrown);
+                        }
+                    });
+                });
+            });
+        </script>
+
+        <script>
             $(document).ready(function() {
                 $('#submitButton').click(function() {
                     $('#submitButton').prop('disabled', true);
@@ -334,6 +491,7 @@
                 });
             });
         </script>
+
         <script>
             document.querySelectorAll('.grid img').forEach(img => {
                 img.addEventListener('click', function() {
@@ -420,80 +578,26 @@
         </script>
 
         <script>
-            function checkObstaculos() {
-                var obstaculos = document.getElementById('obstaculos');
-                var anomalia = document.getElementById('fotos_evidencia');
+            for (let i = 1; i <= 7; i++) {
+                const fileInput = document.getElementById(`foto${i}`);
+                const fileInputHelp = document.getElementById(`elemento_${i}`);
+                const labelHelp = document.getElementById(`label_help${i}`);
+                const originalText = fileInputHelp.innerText;
 
-                if (obstaculos.value == '57') {
-                    anomalia.classList.remove('hidden');
-                } else {
-                    anomalia.classList.add('hidden');
-                }
+                fileInput.addEventListener('change', function() {
+                    if (this.files && this.files[0]) {
+                        fileInputHelp.innerText = 'Archivo cargado.';
+                        fileInputHelp.style.color = 'white';
+                        labelHelp.classList.remove('bg-white');
+                        labelHelp.classList.add('bg-green-500');
+                    } else {
+                        fileInputHelp.innerText = originalText;
+                        fileInputHelp.style.color = 'initial';
+                        labelHelp.classList.remove('bg-green-500');
+                        labelHelp.classList.add('bg-white');
+                    }
+                });
             }
-
-            document.getElementById('obstaculos').addEventListener('change', checkObstaculos);
-
-            // Check obstaculos on page load
-            document.addEventListener('DOMContentLoaded', function() {
-                checkObstaculos();
-            });
-        </script>
-
-        <script>
-            function validate(id, x) {
-                var fileInputHelp = document.getElementById(id);
-
-                if (x.files && x.files[0]) {
-                    fileInputHelp.textContent = 'Archivo cargado';
-                    fileInputHelp.classList.add('text-green-500');
-                } else {
-                    fileInputHelp.textContent = 'SVG, PNG, JPG or GIF (MAX. 800x400px).';
-                    fileInputHelp.classList.remove('text-green-500');
-                }
-            }
-
-            document.getElementById('foto1').addEventListener('change', function() {
-                validate('file_input_help1', this);
-            });
-
-            document.getElementById('foto2').addEventListener('change', function() {
-                validate('file_input_help2', this);
-            });
-
-            document.getElementById('foto3').addEventListener('change', function() {
-                validate('file_input_help3', this);
-            });
-
-            document.getElementById('foto4').addEventListener('change', function() {
-                validate('file_input_help4', this);
-            });
-
-            document.getElementById('foto5').addEventListener('change', function() {
-                validate('file_input_help5', this);
-            });
-
-            document.getElementById('foto6').addEventListener('change', function() {
-                validate('file_input_help6', this);
-            });
-            document.getElementById('video').addEventListener('change', function() {
-                validate('file_input_video', this);
-            });
-        </script>
-
-        <script>
-            document.getElementById('comercio').addEventListener('change', function() {
-                var inputComercio = document.getElementById('input-comercio');
-
-                if (this.value == '56') {
-                    inputComercio.hidden = false;
-                    inputComercio.name = "tipo_comercio";
-                    this.name = "";
-                } else {
-                    inputComercio.hidden = true;
-                    inputComercio.name = "";
-                    this.name = "tipo_comercio";
-                }
-            });
         </script>
 
         <script>

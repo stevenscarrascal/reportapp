@@ -29,5 +29,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::resource('/personals', PersonalsController::class)->names('personals');
         Route::resource('/informes', InformesController::class)->names('informes');
         Route::get('/admin', adminController::class)->name('admin');
+        Route::post('/addcomercio', [ReportesController::class, 'addcomercio'])->name('addcomercio');
     });
 });

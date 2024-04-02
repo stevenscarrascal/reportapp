@@ -49,6 +49,7 @@ class reportes extends Model
         'imposibilidad',
         'direccion',
         'tipo_comercio',
+        'comentarios',
         'observaciones',
         'latitud',
         'longitud',

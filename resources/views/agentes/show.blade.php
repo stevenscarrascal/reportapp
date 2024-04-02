@@ -19,6 +19,7 @@
                         <p class="mb-2 text-base">Lectura N°: {{ $reporte->lectura }}</p>
                         <p class="mb-2 text-base">Fecha y Hora: {{ $reporte->created_at }}</p>
                         <p class="mb-2 text-base">Direccion: {{ $reporte->direccion }}</p>
+                        <p class="mb-2 text-base">Tipo de Comercio: {{ $reporte->ComercioReporte->nombre }}</p>
                         <div class="mb-2">
                             <h1 class="mb-2 text-base">Anomalia Detectada</h1>
                             <ul>
@@ -71,12 +72,14 @@
                                 @endif
                             @endforeach
                         </div>
+                        @if ($reporte->video)
                         <div class="w-full">
                             <video width="50%" height="50%" controls>
                                 <source src="{{ asset('video/' . $reporte['video']) }}" type="video/mp4">
                                 Tu navegador no soporta el elemento de video.
                             </video>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

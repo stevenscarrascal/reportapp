@@ -15,7 +15,7 @@ return new class extends Migration
             $table->smallIncrements('id')->unsigned();
             $table->unsignedSmallInteger('encabezados_id');
             $table->string('nombre');
-            $table->string('nomenclatura');
+            $table->string('nomenclatura')->nullable();
             $table->foreign('encabezados_id')->references('id')->on('encabezados');
             $table->timestamps();
         });

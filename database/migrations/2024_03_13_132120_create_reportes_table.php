@@ -22,6 +22,7 @@ return new class extends Migration
             $table->json('anomalia');
             $table->string('imposibilidad');
             $table->text('observaciones')->nullable();
+            $table->text('comentarios')->nullable();
             $table->string('latitud');
             $table->string('longitud');
             $table->string('foto1')->nullable();
