@@ -22,7 +22,7 @@
                             <input type="text"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                 name="contrato" id="contrato" placeholder="Ingrese su Numero de Contrato"
-                                value="{{ old('contrato') }}">
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="{{ old('contrato') }}"  inputmode="numeric">
                             <x-input-error for="contrato" />
                         </div>
                         <div class=" mb-3">
@@ -30,7 +30,7 @@
                             <input type="text"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                 name="medidor" id="medidor" placeholder="Ingrese su Numero de Medidor"
-                                value="{{ old('medidor') }}">
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="{{ old('medidor') }}"  inputmode="numeric">
                             <x-input-error for="medidor" />
                         </div>
                         <div class=" mb-3">
@@ -38,7 +38,7 @@
                             <input type="text"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                 name="lectura" id="lectura" placeholder="Ingrese su Numero de Lectura"
-                                oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="{{ old('lectura') }}">
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="{{ old('lectura') }}" inputmode="numeric">
                             <x-input-error for="lectura" />
                         </div>
                         <div class=" mb-3">
@@ -291,7 +291,7 @@
                 }
             });
         </script>
-        
+
         <script>
             $(document).ready(function() {
 

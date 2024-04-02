@@ -41,12 +41,12 @@
 
                 <div class="col">
                     @if ($reporte->comentarios)
-                    <div class="card">
-                        <div class="card-body">
-                            <p class="card-title text-center mb-2">Observaciones Lector</p>
-                            <p class="card-text mb-2">{{ $reporte->comentarios }}</p>
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-title text-center mb-2">Observaciones Lector</p>
+                                <p class="card-text mb-2">{{ $reporte->comentarios }}</p>
+                            </div>
                         </div>
-                    </div>
                     @endif
                 </div>
 
@@ -74,9 +74,9 @@
                     </button>
                     <!-- Button trigger modal video -->
                     @if ($reporte->video)
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#video">
-                        Video
-                    </button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#video">
+                            Video
+                        </button>
                     @endif
                 </div>
             </div>
@@ -176,6 +176,7 @@
                     </div>
                     <div class="form-check mt-3 ">
                         <input class="form-check-input" type="radio" name="estado" id="revisado" value="6">
+                        <x-input-error for="revisado" />
                         <label class="form-check-label" for="revisado">
                             <span class="badge badge-success">Revisado</span>
                         </label>
@@ -186,6 +187,9 @@
                             <span class="badge badge-danger">Rechazado</span>
                         </label>
                     </div>
+                    @error('rechazado')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     <button type="submit" class=" float-end btn btn-primary btn-sm">Guardar</button>
                 </form>
             </div>
