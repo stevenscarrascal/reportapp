@@ -156,70 +156,55 @@ class InformesController extends Controller
         // Obtén los reportes
         $reportes = reportes::all();
 
-        // Inicializa un array para almacenar los conteos de anomalías
-        $anomaliesCounts = [];
+       // Inicializa un array para almacenar los conteos de anomalías
+$anomaliesCounts = [];
 
-        // Recorre los reportes
-        foreach ($reportes as $reporte) {
-            // Decodifica el campo de anomalías
-            $anomalies = json_decode($reporte->anomalia);
+// Recorre los reportes
+foreach ($reportes as $reporte) {
+    // Decodifica el campo de anomalías
+    $anomalies = json_decode($reporte->anomalia);
 
-            // Obtiene la fecha del reporte
-            $date = $reporte->created_at->toDateString();
-
-            // Inicializa un contador para las anomalías que no son "8"
-            $count = 0;
-
-            // Recorre las anomalías
-            foreach ($anomalies as $anomaly) {
-                // Si la anomalía no es "8", incrementa el contador
-                if ($anomaly != 8) {
-                    $count++;
-                }
+    // Recorre las anomalías
+    foreach ($anomalies as $anomaly) {
+        // Si la anomalía no es "8", la agrega al array
+        if ($anomaly != 8) {
+            // Si la anomalía ya existe en el array de conteos, incrementa el conteo
+            if (isset($anomaliesCounts[$anomaly])) {
+                $anomaliesCounts[$anomaly]++;
             }
-
-            // Si la fecha ya existe en el array de conteos, incrementa el conteo
-            // por el número de anomalías en este reporte que no son "8"
-            if (isset($anomaliesCounts[$date])) {
-                $anomaliesCounts[$date] += $count;
-            }
-            // Si no, inicializa el conteo para esa fecha con el número de anomalías que no son "8"
+            // Si no, inicializa el conteo para esa anomalía
             else {
-                $anomaliesCounts[$date] = $count;
+                $anomaliesCounts[$anomaly] = 1;
             }
         }
+    }
+}
 
-        // Ordena el array de conteos por fecha
-        ksort($anomaliesCounts);
+// Ordena el array de conteos por anomalía
+ksort($anomaliesCounts);
 
-        // Extrae las fechas y los conteos
-        $dates = array_keys($anomaliesCounts);
-        $counts = array_values($anomaliesCounts);
-        // Transforma las fechas en días de la semana
-        $daysOfWeek = array_map(function ($date) {
-            return date('l', strtotime($date));
-        }, $dates);
+// Extrae las anomalías y los conteos
+$anomalies = array_keys($anomaliesCounts);
+$counts = array_values($anomaliesCounts);
 
-
-        // Crea el gráfico
-        $chartjs3 = app()->chartjs
-            ->name('anomaliesChart')
-            ->type('line')
-            ->size(['width' => 400, 'height' => 200])
-            ->labels($daysOfWeek)
-            ->datasets([
-                [
-                    "label" => "Anomalías diarias",
-                    'backgroundColor' => "rgba(38, 185, 154, 0.31)",
-                    'borderColor' => "rgba(38, 185, 154, 0.7)",
-                    "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
-                    "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
-                    "pointHoverBackgroundColor" => "#fff",
-                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
-                    'data' => $counts,
-                ]
-            ])
-            ->options([
+// Crea el gráfico
+$chartjs3 = app()->chartjs
+    ->name('anomaliesChart')
+    ->type('bar') // Cambia a un gráfico de barras para mostrar las anomalías
+    ->size(['width' => 400, 'height' => 200])
+    ->labels($anomalies)
+    ->datasets([
+        [
+            "label" => "Anomalías por código",
+            'backgroundColor' => "rgba(38, 185, 154, 0.31)",
+            'borderColor' => "rgba(38, 185, 154, 0.7)",
+            "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+            "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+            "pointHoverBackgroundColor" => "#fff",
+            "pointHoverBorderColor" => "rgba(220,220,220,1)",
+            'data' => $counts,
+        ]
+    ])->options([
                 'scales' => [
                     'x' => [
                         'title' => [
@@ -230,8 +215,8 @@ class InformesController extends Controller
                 ]
             ]);
 
-            $today = Carbon::now()->format('Y-m-d');
-           $reports = reportes::select(DB::raw('DATE(created_at) as date'), 'personal_id', DB::raw('count(*) as count'))
+        $today = Carbon::now()->format('Y-m-d');
+        $reports = reportes::select(DB::raw('DATE(created_at) as date'), 'personal_id', DB::raw('count(*) as count'))
             ->whereDate('created_at', $today)
             ->groupBy('date', 'personal_id')
             ->get();
@@ -240,7 +225,7 @@ class InformesController extends Controller
         $labels = [];
         $data = [];
         foreach ($reports as $report) {
-            $labels[] = $report->personal->nombres . ' - ' . date('d-m-Y', strtotime($report->date)); // Convierte la fecha a formato día-mes-año
+            $labels[] = $report->personal->nombres; // Convierte la fecha a formato día-mes-año
             $data[] = $report->count;
         }
 
@@ -272,7 +257,7 @@ class InformesController extends Controller
             ->labels($labels)
             ->datasets([
                 [
-                    "label" => "Reportes diarios",
+                    "label" => "Reportes diarios por personal",
                     'backgroundColor' => $backgroundColors,
                     'borderColor' => $borderColors,
                     "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
@@ -287,13 +272,13 @@ class InformesController extends Controller
                     'x' => [
                         'title' => [
                             'display' => true,
-                            'text' => 'Días de la semana'
+                            'text' => 'personal'
                         ],
                     ]
                 ]
             ]);
 
-        return view('informes.informeGeneral', compact('rpgenerales', 'chartjs', 'chartjs3','gfpersonald'));
+        return view('informes.informeGeneral', compact('rpgenerales', 'chartjs', 'chartjs3', 'gfpersonald'));
     }
 
     /**
