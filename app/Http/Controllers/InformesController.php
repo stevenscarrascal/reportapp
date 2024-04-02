@@ -168,6 +168,8 @@ foreach ($reportes as $reporte) {
     foreach ($anomalies as $anomaly) {
         // Si la anomalía no es "8", la agrega al array
         if ($anomaly != 8) {
+             // Obtiene el nombre de la anomalía
+        $anomalyName = $reporte->AnomaliaReporte->where('id', $anomaly)->first()->nombre;
             // Si la anomalía ya existe en el array de conteos, incrementa el conteo
             if (isset($anomaliesCounts[$anomaly])) {
                 $anomaliesCounts[$anomaly]++;
