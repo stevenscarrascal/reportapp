@@ -112,6 +112,11 @@ class Encabezados_DetSeeder extends Seeder
             'nomenclatura'=>'MT'
         ]);
         encabezados_dets::create([
+            'encabezados_id' => '3',
+            'nombre' => 'Inactivo y en Consumo',
+            'nomenclatura'=>'IC'
+        ]);
+        encabezados_dets::create([
             'encabezados_id' => '5',
             'nombre' => 'Nuevo Comercio',
             'nomenclatura'=>'NC'

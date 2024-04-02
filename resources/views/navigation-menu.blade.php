@@ -181,14 +181,6 @@
                 </x-responsive-nav-link>
             </div>
         @endcan
-        @can('coordinador')
-            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                <x-nav-link href="{{ route('informes.index') }}" :active="request()->routeIs(['informes.index'])">
-                    {{ __('Informes') }}
-                </x-nav-link>
-            </div>
-        @endcan
-
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
