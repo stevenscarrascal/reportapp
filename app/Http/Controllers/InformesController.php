@@ -156,56 +156,56 @@ class InformesController extends Controller
         // Obtén los reportes
         $reportes = reportes::all();
 
-       // Inicializa un array para almacenar los conteos de anomalías
-$anomaliesCounts = [];
+        // Inicializa un array para almacenar los conteos de anomalías
+        $anomaliesCounts = [];
 
-// Recorre los reportes
-foreach ($reportes as $reporte) {
-    // Decodifica el campo de anomalías
-    $anomalies = json_decode($reporte->anomalia);
+        // Recorre los reportes
+        foreach ($reportes as $reporte) {
+            // Decodifica el campo de anomalías
+            $anomalies = json_decode($reporte->anomalia);
 
-    // Recorre las anomalías
-    foreach ($anomalies as $anomaly) {
-        // Si la anomalía no es "8", la agrega al array
-        if ($anomaly != 8) {
-             
-            // Si la anomalía ya existe en el array de conteos, incrementa el conteo
-            if (isset($anomaliesCounts[$anomaly])) {
-                $anomaliesCounts[$anomaly]++;
-            }
-            // Si no, inicializa el conteo para esa anomalía
-            else {
-                $anomaliesCounts[$anomaly] = 1;
+            // Recorre las anomalías
+            foreach ($anomalies as $anomaly) {
+                // Si la anomalía no es "8", la agrega al array
+                if ($anomaly != 8) {
+
+                    // Si la anomalía ya existe en el array de conteos, incrementa el conteo
+                    if (isset($anomaliesCounts[$anomaly])) {
+                        $anomaliesCounts[$anomaly]++;
+                    }
+                    // Si no, inicializa el conteo para esa anomalía
+                    else {
+                        $anomaliesCounts[$anomaly] = 1;
+                    }
+                }
             }
         }
-    }
-}
 
-// Ordena el array de conteos por anomalía
-ksort($anomaliesCounts);
+        // Ordena el array de conteos por anomalía
+        ksort($anomaliesCounts);
 
-// Extrae las anomalías y los conteos
-$anomalies = array_keys($anomaliesCounts);
-$counts = array_values($anomaliesCounts);
+        // Extrae las anomalías y los conteos
+        $anomalies = array_keys($anomaliesCounts);
+        $counts = array_values($anomaliesCounts);
 
-// Crea el gráfico
-$chartjs3 = app()->chartjs
-    ->name('anomaliesChart')
-    ->type('bar') // Cambia a un gráfico de barras para mostrar las anomalías
-    ->size(['width' => 400, 'height' => 200])
-    ->labels($anomalies)
-    ->datasets([
-        [
-            "label" => "Anomalías por código",
-            'backgroundColor' => "rgba(38, 185, 154, 0.31)",
-            'borderColor' => "rgba(38, 185, 154, 0.7)",
-            "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
-            "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
-            "pointHoverBackgroundColor" => "#fff",
-            "pointHoverBorderColor" => "rgba(220,220,220,1)",
-            'data' => $counts,
-        ]
-    ])->options([
+        // Crea el gráfico
+        $chartjs3 = app()->chartjs
+            ->name('anomaliesChart')
+            ->type('bar') // Cambia a un gráfico de barras para mostrar las anomalías
+            ->size(['width' => 400, 'height' => 200])
+            ->labels($anomalies)
+            ->datasets([
+                [
+                    "label" => "Anomalías por código",
+                    'backgroundColor' => "rgba(38, 185, 154, 0.31)",
+                    'borderColor' => "rgba(38, 185, 154, 0.7)",
+                    "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+                    "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+                    "pointHoverBackgroundColor" => "#fff",
+                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                    'data' => $counts,
+                ]
+            ])->options([
                 'scales' => [
                     'x' => [
                         'title' => [
