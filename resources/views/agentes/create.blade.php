@@ -45,14 +45,14 @@
                             <x-label for='comercio' class="mb-2" value="Tipo de Comercios" />
                             <select id="comercio" name="tipo_comercio" required
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3">
-                                <option selected disabled>Seleccione tipo de Comercio</option>
+                                <option selected value="" disabled>Seleccione tipo de Comercio</option>
                                 @foreach ($comercios as $id => $nombre)
                                     <option value="{{ $id }}">{{ $nombre }}</option>
                                 @endforeach
                             </select>
                             <x-input-error for="comercio" />
                             <div id="div-comercio-nuevo" style="display: none;" class=" flex">
-                                <input type="text" name="nueva_opcion" id="nueva_opcion" required
+                                <input type="text" name="nueva_opcion" id="nueva_opcion"
                                     class="w-1/2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                                 <button type="button" data-twe-ripple-init data-twe-ripple-color="light"
                                     id="agregarOpcionBtn"
@@ -80,7 +80,7 @@
                             <div class="mb-3">
                                 <select id="obstaculos" name="imposibilidad" required
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                                    <option selected disabled>Selecione su imposibilidad</option>
+                                    <option selected value="" disabled>Selecione su imposibilidad</option>
                                     @foreach ($imposibilidad as $id => $nombre)
                                         <option value="{{ $id }}">{{ $nombre }}</option>
                                     @endforeach
@@ -265,7 +265,7 @@
                         </div>
 
                         <div class="flex items-center">
-                            <x-button id="submitButton">
+                            <x-button type="submit" id="submitButton">
                                 Enviar
                             </x-button>
                             <span id="progressBar" style="display: none;"
@@ -291,7 +291,6 @@
                 }
             });
         </script>
-
         <script>
             $(document).ready(function() {
 
@@ -328,7 +327,6 @@
                 });
             });
         </script>
-
         <script>
             $(document).ready(function() {
                 $('#submitButton').click(function() {
@@ -368,7 +366,6 @@
                 });
             });
         </script>
-
         <script>
             for (let i = 1; i <= 7; i++) {
                 const fileInput = document.getElementById(`foto${i}`);

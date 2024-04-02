@@ -38,12 +38,7 @@ class ReportesFactory extends Factory
             'longitud' => $this->faker->longitude(),
             'tipo_comercio' => vs_comercios::all()->random()->id,
             'foto1' => $this->faker->image('public/imagen',640,480, null, false),
-            'foto2' => $this->faker->image('public/imagen',640,480, null, false),
-            'foto3' => $this->faker->image('public/imagen',640,480, null, false),
-            'foto4' => $this->faker->image('public/imagen',640,480, null, false),
-            'foto5' => $this->faker->image('public/imagen',640,480, null, false),
-            'foto6' => $this->faker->image('public/imagen',640,480, null, false),
-            'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'created_at' => $this->faker->dateTimeBetween('now'),
         ];
     }
 }
