@@ -141,7 +141,7 @@
                                                         <x-input-error for="comentarios" />
                                                     </div>
                                                 </div>
-                                                <div class="mb-3">
+                                                {{-- <div class="mb-3">
                                                     <div id="video_evidencia" class=" hidden mb-3">
                                                         <label for="foto7" id="label_help7"
                                                             class="flex flex-col items-center w-full max-w-lg p-5 mx-auto mt-2 text-center bg-white border-2 border-gray-300 border-dashed cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
@@ -325,7 +325,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="flex items-center">
                                                     <x-button id="submitButton">
                                                         Enviar
@@ -552,7 +552,7 @@
             });
         </script>
 
-        <script>
+        {{-- <script>
             $(document).ready(function() {
                 var alertShown = false; // Variable de control
 
@@ -575,7 +575,7 @@
                     }
                 }).trigger('select2:select');
             });
-        </script>
+        </script> --}}
 
         <script>
             for (let i = 1; i <= 7; i++) {
