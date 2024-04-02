@@ -333,7 +333,6 @@
                     $('#submitButton').prop('disabled', true);
                     $('#submitButton').css('background-color', '#D3D3D3');
                     $('#progressBar').css('display', 'block');
-                    $('#myForm').submit();
                 });
             });
         </script>
