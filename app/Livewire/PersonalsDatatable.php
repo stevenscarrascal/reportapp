@@ -4,11 +4,11 @@ namespace App\Livewire;
 
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use App\Models\Personals;
+use App\Models\personals;
 
 class PersonalsDatatable extends DataTableComponent
 {
-    protected $model = Personals::class;
+    protected $model = personals::class;
     public ?string $searchPlaceholder = 'Buscar por documento';
     public ?int $searchFilterDebounce = 500;
 

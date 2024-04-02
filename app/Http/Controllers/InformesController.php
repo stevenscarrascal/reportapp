@@ -29,6 +29,37 @@ class InformesController extends Controller
             $data[] = $report->count;
         }
 
+        // Define los colores para cada mes
+        $backgroundColors = [
+            "rgba(255, 99, 132, 0.2)", // Enero
+            "rgba(54, 162, 235, 0.2)", // Febrero
+            "rgba(255, 206, 86, 0.2)", // Marzo
+            "rgba(75, 192, 192, 0.2)", // Abril
+            "rgba(153, 102, 255, 0.2)", // Mayo
+            "rgba(255, 159, 64, 0.2)", // Junio
+            "rgba(255, 99, 132, 0.2)", // Julio
+            "rgba(54, 162, 235, 0.2)", // Agosto
+            "rgba(255, 206, 86, 0.2)", // Septiembre
+            "rgba(75, 192, 192, 0.2)", // Octubre
+            "rgba(153, 102, 255, 0.2)", // Noviembre
+            "rgba(255, 159, 64, 0.2)" // Diciembre
+        ];
+
+        $borderColors = [
+            "rgba(255, 99, 132, 1)", // Enero
+            "rgba(54, 162, 235, 1)", // Febrero
+            "rgba(255, 206, 86, 1)", // Marzo
+            "rgba(75, 192, 192, 1)", // Abril
+            "rgba(153, 102, 255, 1)", // Mayo
+            "rgba(255, 159, 64, 1)", // Junio
+            "rgba(255, 99, 132, 1)", // Julio
+            "rgba(54, 162, 235, 1)", // Agosto
+            "rgba(255, 206, 86, 1)", // Septiembre
+            "rgba(75, 192, 192, 1)", // Octubre
+            "rgba(153, 102, 255, 1)", // Noviembre
+            "rgba(255, 159, 64, 1)" // Diciembre
+        ];
+
         // Crea el gráfico
         $chartjs2 = app()->chartjs
             ->name('lineChartTest2')
@@ -38,8 +69,8 @@ class InformesController extends Controller
             ->datasets([
                 [
                     "label" => "Reportes por mes",
-                    'backgroundColor' => "rgba(38, 185, 154, 0.31)",
-                    'borderColor' => "rgba(38, 185, 154, 0.7)",
+                    'backgroundColor' => $backgroundColors,
+                    'borderColor' => $borderColors,
                     "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
                     "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
                     "pointHoverBackgroundColor" => "#fff",
@@ -59,9 +90,9 @@ class InformesController extends Controller
             ]);
 
 
-            $reports = reportes::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
+        $reports = reportes::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
             ->get()
-            ->groupBy(function($date) {
+            ->groupBy(function ($date) {
                 return Carbon::parse($date->created_at)->format('l'); // Agrupa por día de la semana
             });
 
@@ -73,6 +104,26 @@ class InformesController extends Controller
             $data[] = $reports->get($label) ? $reports->get($label)->count() : 0; // Si no hay informes para un día específico, añade 0
         }
 
+        $backgroundColors = [
+            "rgba(255, 99, 132, 0.2)", // Lunes
+            "rgba(54, 162, 235, 0.2)", // Martes
+            "rgba(255, 206, 86, 0.2)", // Miércoles
+            "rgba(75, 192, 192, 0.2)", // Jueves
+            "rgba(153, 102, 255, 0.2)", // Viernes
+            "rgba(255, 159, 64, 0.2)", // Sábado
+            "rgba(255, 99, 132, 0.2)" // Domingo
+        ];
+
+        $borderColors = [
+            "rgba(255, 99, 132, 1)", // Lunes
+            "rgba(54, 162, 235, 1)", // Martes
+            "rgba(255, 206, 86, 1)", // Miércoles
+            "rgba(75, 192, 192, 1)", // Jueves
+            "rgba(153, 102, 255, 1)", // Viernes
+            "rgba(255, 159, 64, 1)", // Sábado
+            "rgba(255, 99, 132, 1)" // Domingo
+        ];
+
         // Crea el gráfico
         $chartjs = app()->chartjs
             ->name('lineChartTest')
@@ -82,8 +133,8 @@ class InformesController extends Controller
             ->datasets([
                 [
                     "label" => "Reportes diarios",
-                    'backgroundColor' => "rgba(38, 185, 154, 0.31)",
-                    'borderColor' => "rgba(38, 185, 154, 0.7)",
+                    'backgroundColor' => $backgroundColors,
+                    'borderColor' => $borderColors,
                     "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
                     "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
                     "pointHoverBackgroundColor" => "#fff",
@@ -101,7 +152,84 @@ class InformesController extends Controller
                     ]
                 ]
             ]);
-        return view('informes.informeGeneral', compact('chartjs', 'chartjs2'));
+
+        // Obtén los reportes
+        $reportes = reportes::all();
+
+        // Inicializa un array para almacenar los conteos de anomalías
+        $anomaliesCounts = [];
+
+        // Recorre los reportes
+        foreach ($reportes as $reporte) {
+            // Decodifica el campo de anomalías
+            $anomalies = json_decode($reporte->anomalia);
+
+            // Obtiene la fecha del reporte
+            $date = $reporte->created_at->toDateString();
+
+            // Inicializa un contador para las anomalías que no son "8"
+            $count = 0;
+
+            // Recorre las anomalías
+            foreach ($anomalies as $anomaly) {
+                // Si la anomalía no es "8", incrementa el contador
+                if ($anomaly != 8) {
+                    $count++;
+                }
+            }
+
+            // Si la fecha ya existe en el array de conteos, incrementa el conteo
+            // por el número de anomalías en este reporte que no son "8"
+            if (isset($anomaliesCounts[$date])) {
+                $anomaliesCounts[$date] += $count;
+            }
+            // Si no, inicializa el conteo para esa fecha con el número de anomalías que no son "8"
+            else {
+                $anomaliesCounts[$date] = $count;
+            }
+        }
+
+        // Ordena el array de conteos por fecha
+        ksort($anomaliesCounts);
+
+        // Extrae las fechas y los conteos
+        $dates = array_keys($anomaliesCounts);
+        $counts = array_values($anomaliesCounts);
+        // Transforma las fechas en días de la semana
+        $daysOfWeek = array_map(function ($date) {
+            return date('l', strtotime($date));
+        }, $dates);
+
+
+        // Crea el gráfico
+        $chartjs3 = app()->chartjs
+            ->name('anomaliesChart')
+            ->type('line')
+            ->size(['width' => 400, 'height' => 200])
+            ->labels($daysOfWeek)
+            ->datasets([
+                [
+                    "label" => "Anomalías diarias",
+                    'backgroundColor' => "rgba(38, 185, 154, 0.31)",
+                    'borderColor' => "rgba(38, 185, 154, 0.7)",
+                    "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+                    "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+                    "pointHoverBackgroundColor" => "#fff",
+                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                    'data' => $counts,
+                ]
+            ])
+            ->options([
+                'scales' => [
+                    'x' => [
+                        'title' => [
+                            'display' => true,
+                            'text' => 'Días de la semana'
+                        ],
+                    ]
+                ]
+            ]);
+        return view('informes.informeGeneral', compact('chartjs', 'chartjs2', 'chartjs3'));
     }
 
     /**
