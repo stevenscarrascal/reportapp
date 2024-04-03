@@ -284,13 +284,14 @@
         <script>
             document.getElementById("comercio").addEventListener("change", function() {
                 var divComercioNuevo = document.getElementById("div-comercio-nuevo");
-                if (this.value == "19") {
+                if (this.value == "20") {
                     divComercioNuevo.style.display = "block";
                 } else {
                     divComercioNuevo.style.display = "none";
                 }
             });
         </script>
+
         <script>
             $(document).ready(function() {
 
@@ -327,6 +328,7 @@
                 });
             });
         </script>
+
          <script>
             $(document).ready(function() {
                 $('#myForm').submit(function() {
@@ -336,11 +338,13 @@
                 });
             });
         </script>
+
         <script>
             $(document).ready(function() {
                 $('.select2').select2();
             });
         </script>
+
         {{-- <script>
             $(document).ready(function() {
                 var alertShown = false; // Variable de control
@@ -365,7 +369,8 @@
                 });
             });
         </script> --}}
-        <script>
+
+        {{-- <script>
             for (let i = 1; i <= 7; i++) {
                 const fileInput = document.getElementById(`foto${i}`);
                 const fileInputHelp = document.getElementById(`elemento_${i}`);
@@ -386,7 +391,8 @@
                     }
                 });
             }
-        </script>
+        </script> --}}
+
         <script>
             function obtenerUbicacion() {
                 if (navigator.geolocation) {
@@ -423,5 +429,6 @@
             // Llamar a la función para obtener la ubicación al cargar la página
             window.onload = obtenerUbicacion;
         </script>
+
     @endsection
 </x-app-layout>

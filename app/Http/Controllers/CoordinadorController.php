@@ -36,6 +36,55 @@ class CoordinadorController extends Controller
      */
     public function store(Request $request)
     {
+        $fontSize = 50;
+        $reportes = reportes::find($request["id"]);
+        $report = $request->all();
+
+        if ($video = $request->file('video')) {
+            $path = 'video/';
+            $videoname = rand(1000, 9999) . "_" . date('YmdHis') . "." . $video->getClientOriginalExtension();
+            $video->move($path, $videoname);
+            $reportes['video'] = $videoname;
+        }
+
+        foreach (range(1, 6) as $i) {
+            if ($imagen = $request->file('foto' . $i)) {
+                $path = 'imagen/';
+                $foto = rand(1000, 9999) . "_" . date('YmdHis') . "." . $imagen->getClientOriginalExtension();
+                $imagen->move($path, $foto);
+                $reportes['foto' . $i] = $foto;
+                //  Abrir la imagen utilizando GD
+                $imagenGD = imagecreatefromjpeg(public_path($path . $foto));
+                // Añadir texto del contrato  a la imagen
+                $textoContrato = "Contrato N°:" . $reportes->contrato;
+                $colorTexto = imagecolorallocate($imagenGD, 255, 255, 255); // Color blanco
+                $posXContrato = 10; // Ajusta según tu diseño
+                $posYContrato = imagesy($imagenGD) - 170; // Ajusta según tu diseño
+                imagettftext($imagenGD, $fontSize, 0, $posXContrato, $posYContrato, $colorTexto, public_path('font/arial.ttf'), $textoContrato);
+                // Añadir texto de coordenadas a la imagen
+                $textoCoordenadas = "Direccion: " . $reportes->direccion;
+                $colorTexto = imagecolorallocate($imagenGD, 255, 255, 255); // Color blanco
+                $posXCoordenadas = 10; // Ajusta según tu diseño
+                $posYCoordenadas = imagesy($imagenGD) - 20; // Ajusta según tu diseño
+                imagettftext($imagenGD, $fontSize, 0, $posXCoordenadas, $posYCoordenadas, $colorTexto, public_path('font/arial.ttf'), $textoCoordenadas);
+
+                //Añadir texto de fecha a la imagen
+                $fechaActual = date("Y-m-d H:i:s");
+                $posXFecha = 10; // Ajusta según tu diseño
+                $posYFecha = imagesy($imagenGD) - 90; // Ajusta según tu diseño
+                imagettftext($imagenGD, $fontSize, 0, $posXFecha, $posYFecha, $colorTexto, public_path('font/arial.ttf'), "Fecha: $fechaActual");
+
+                // Guardar la imagen modificada
+                imagejpeg($imagenGD, public_path($path . $foto));
+
+                // Liberar la memoria
+                imagedestroy($imagenGD);
+            }
+        }
+        $reportes->save($report);
+
+        return redirect()->back()->with('success', 'Evidencias creadas con éxito')
+        ->with('title', 'éxito');
     }
 
     /**
@@ -112,9 +161,9 @@ class CoordinadorController extends Controller
      */
     public function update(Request $request, string $id)
     {
-            $request->validate([
-                'estado' => 'required',
-            ]);
+        $request->validate([
+            'estado' => 'required',
+        ]);
 
         $estado = $request->estado;
 
