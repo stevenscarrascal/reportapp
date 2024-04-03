@@ -70,35 +70,11 @@
                 <div class="btn-group" role="group" aria-label="">
                     <!-- Button trigger modal fotografias -->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fotos">
-                        Fotografias
+                        Subir Fotos y video
                     </button>
-                    <!-- Button trigger modal video -->
-                    @if ($reporte->video)
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#video">
-                            Video
-                        </button>
-                    @endif
-                </div>
-            </div>
-            <!-- Modal video -->
-            <div class="modal fade" id="video" tabindex="-1" aria-labelledby="videolabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="w-full">
-                                <video style="max-width: 100%;" controls>
-                                    <source src="{{ asset('video/' . $reporte['video']) }}" type="video/mp4">
-                                    Tu navegador no soporta el elemento de video.
-                                </video>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
+                </div>
+            </div>
             <!-- Modal fotografias -->
             <div class="modal fade" id="fotos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                 aria-labelledby="fotoslabel" aria-hidden="true">
@@ -107,59 +83,66 @@
                         <div class="modal-header">
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            <div class="container-fluid gap-1 ">
-                                <div class="row mb-2">
-                                    <div class="col-md-4 ms-auto position-relative">
-                                        <label for="foto1"
-                                            class="position-absolute top-0 start-50 translate-middle-x text-light ">Foto del
-                                            inmueble</label>
-                                        <img src="/imagen/{{ $reporte->{'foto1'} }}" alt="" id="foto1"
-                                            style="max-width: 100%;">
-                                    </div>
-                                    <div class="col-md-4 ms-auto position-relative">
-                                        <label for="foto2"
-                                            class="position-absolute top-0 start-50 translate-middle-x text-light ">Numero
-                                            del Serial</label>
-                                        <img src="/imagen/{{ $reporte->{'foto2'} }}" alt="" id="foto2"
-                                            style="max-width: 100%;">
-                                    </div>
-                                    <div class="col-md-4 ms-auto position-relative">
-                                        <label for="foto3"
-                                            class="position-absolute top-0 start-50 translate-middle-x text-light ">Numero
-                                            de Lectura</label>
-                                        <img src="/imagen/{{ $reporte->{'foto3'} }}" alt="" id="foto3"
-                                            style="max-width: 100%;">
-                                    </div>
-                                </div>
+                        <form action="{{ route('coordinador.store') }}" method="POST" enctype="multipart/form-data"
+                            id="myForm">
+                            @csrf
+                            <input type="text" value="{{ $reporte->id }}" name="id" hidden>
+                            <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-md-4 ms-auto position-relative">
-                                        <label for="foto4"
-                                            class="position-absolute top-0 start-50 translate-middle-x text-light ">Numero
-                                            del Medidor</label>
-                                        <img src="/imagen/{{ $reporte->{'foto4'} }}" alt="" id="foto4"
-                                            style="max-width: 100%;">
-                                    </div>
-                                    <div class="col-md-4 ms-auto position-relative">
-                                        <label for="foto5"
-                                            class="position-absolute top-0 start-50 translate-middle-x text-light ">Estado
-                                            del Medidor</label>
-                                        <img src="/imagen/{{ $reporte->{'foto5'} }}" alt="" id="foto5"
-                                            style="max-width: 100%;">
-                                    </div>
-                                    <div class="col-md-4 ms-auto position-relative">
-                                        <label for="foto6"
-                                            class="position-absolute top-0 start-50 translate-middle-x text-light ">Opcional</label>
-                                        <img src="/imagen/{{ $reporte->{'foto6'} }}" alt="" id="foto6"
-                                            style="max-width: 100%;">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="video">Video Anomalia</label>
+                                            <input type="file" class="form-control" id="video" accept="video/*"
+                                                name="video">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
+                                <div class="row mt-3">
+                                    <span class=" text-card text-center mb-2">Fotos Evidencias</span>
+                                    <div class="col">
+                                        <div class="input-group mb-2">
+                                            <label class="input-group-text" for="fotos">Inmueble</label>
+                                            <input type="file" class="form-control" id="fotos" accept="image/*"
+                                                name="foto1" multiple>
+                                        </div>
+                                        <div class="input-group mb-2">
+                                            <label class="input-group-text" for="fotos">Numero del Serial</label>
+                                            <input type="file" class="form-control" id="fotos" accept="image/*"
+                                                name="foto2" multiple>
+                                        </div>
+                                        <div class="input-group mb-2">
+                                            <label class="input-group-text" for="fotos">Numero de Lectura</label>
+                                            <input type="file" class="form-control" id="fotos" accept="image/*"
+                                                name="foto3" multiple>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group mb-2">
+                                            <label class="input-group-text" for="fotos">Numero del Medidor</label>
+                                            <input type="file" class="form-control" id="fotos" accept="image/*"
+                                                name="foto4" multiple>
+                                        </div>
+                                        <div class="input-group mb-2">
+                                            <label class="input-group-text" for="fotos">Estado del Medidor</label>
+                                            <input type="file" class="form-control" id="fotos" accept="image/*"
+                                                name="foto5" multiple>
+                                        </div>
+                                        <div class="input-group mb-2">
+                                            <label class="input-group-text" for="fotos">Opcional</label>
+                                            <input type="file" class="form-control" id="fotos" accept="image/*"
+                                                name="foto6" multiple>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <span id="progressBar" style="display: none;" class='text-md font-weight-bold text-success'>
+                                        Cargando Archivos Porfavor Espere.....
+                                    </span>
+                                    <button type="submit" class="btn btn-primary" id="submitButton">Guardar</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -197,4 +180,27 @@
     @endsection
 
     @section('js')
+        <script>
+            $(document).ready(function() {
+                $('#myForm').submit(function() {
+                    $('#submitButton').prop('disabled', true);
+                    $('#submitButton').removeClass('btn-primary').addClass('btn-secondary');
+                    $('#progressBar').css('display', 'block');
+                });
+            });
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                @if (Session::has('success'))
+                    Swal.fire({
+                        icon: 'success',
+                        title: '{{ Session::get('title') }}',
+                        text: '{{ Session::get('success') }}',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                @endif
+            });
+        </script>
     @endsection
