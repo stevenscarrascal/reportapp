@@ -130,7 +130,7 @@
                     <div class="card-header card-title text-bg-success text-center">
                         <span class="text-card">Evidencias</span>
                         <div class=" d-flex justify-content-end ">
-                            <a class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" href="#exampleModalToggle"
+                            <a class="btn btn-outline-light  btn-sm" data-bs-toggle="modal" href="#exampleModalToggle"
                                 role="button">Vista Previa</a>
                         </div>
                     </div>
