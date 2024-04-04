@@ -39,8 +39,7 @@
                             @foreach (range(1, 6) as $i)
                                 @if ($reporte->{'foto' . $i})
                                     <div class="relative">
-                                        <img alt="gallery" class="h-auto max-w-full rounded-lg"
-                                            src="/imagen/{{ $reporte->{'foto' . $i} }}" />
+                                        <img alt="gallery" class="h-auto max-w-full rounded-lg" src="/imagen/{{ $reporte->{'foto' . $i} }}" />
                                         <div class="absolute top-0 left-0 bg-black bg-opacity-50 text-white p-2">
                                             @switch($i)
                                                 @case(1)

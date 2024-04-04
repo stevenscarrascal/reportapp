@@ -1,6 +1,10 @@
 @extends('dashboard.dashboard')
 
 @section('content')
+    <div class="mb-4 d-flex justify-content-end">
+        <a href="{{ route('coordinador.index') }}" class="btn btn-primary btn-sm"> Regresar</a>
+    </div>
+
     <div class="row mb-4">
         <div class="col">
             <div class="card border-primary" style="height: 100%;">
@@ -84,7 +88,8 @@
                     </div>
                     <div class="card-body">
                         <div class="card p-3">
-                            <textarea id="editor" rows="10" name="observaciones" class="form-control mb-3" placeholder="Escriba Sus Observaciones" required {{ $reporte->estado == '6' ? 'readonly' : '' }}>   {{ $reporte->estado == '6' ? $reporte->observaciones : '' }}</textarea>
+                            <textarea id="editor" rows="10" name="observaciones" class="form-control mb-3"
+                                placeholder="Escriba Sus Observaciones" required {{ $reporte->estado == '6' ? 'readonly' : '' }}>   {{ $reporte->estado == '6' ? $reporte->observaciones : '' }}</textarea>
                             @if ($reporte->estado != '6')
                                 <div class="mb-2">
                                     <div class="form-check form-check-inline">
@@ -107,9 +112,10 @@
                                 <span class="text-sm">Guardando Cambios Porfavor Espere.....</span>
                             </div>
                             @if ($reporte->estado != '6')
-                            <div class=" d-flex justify-content-end">
-                                <button type="submit" id="submitButtonObservacion" class="btn btn-success">Guardar</button>
-                            </div>
+                                <div class=" d-flex justify-content-end">
+                                    <button type="submit" id="submitButtonObservacion"
+                                        class="btn btn-success">Guardar</button>
+                                </div>
                             @endif
                         </div>
                     </div>
@@ -123,6 +129,10 @@
                 <div class="card border-success" style="height: 500px;">
                     <div class="card-header card-title text-bg-success text-center">
                         <span class="text-card">Evidencias</span>
+                        <div class=" d-flex justify-content-end ">
+                            <a class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" href="#exampleModalToggle"
+                                role="button">Vista Previa</a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="input-group mb-2">
@@ -131,7 +141,8 @@
                         </div>
                         <hr>
                         <div class="input-group mb-2">
-                            <input type="file" class="form-control" id="foto1" name="foto1" accept="image/jpeg">
+                            <input type="file" class="form-control" id="foto1" name="foto1"
+                                accept="image/jpeg">
                             <label class="input-group-text" for="foto1">Inmueble</label>
                         </div>
                         <div class="input-group mb-2">
@@ -172,9 +183,83 @@
             </form>
         </div>
     </div>
+
+    {{-- Modal --}}
+    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+        tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Evidencias Fotograficas</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container text-center">
+                        <div class="row">
+                            @foreach (range(1, 6) as $i)
+                                    <div class="col-md-4 mb-2  ">
+                                        <img src="{{ $reporte->{'foto' . $i} ? '/imagen/' . $reporte->{'foto' . $i} : '#' }}" id="{{ 'fotoPreview' . $i }}" class="rounded float-start"
+                                            style="max-width: 100%;" alt=''>
+                                    </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"> Ver
+                        Video</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+        tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Evidencia Video</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                        <video id="videoPreview" style="max-width: 100%;" controls>
+                            <source src="{{ $reporte->video ? asset('video/' . $reporte->video) : '#' }}" type="video/mp4">
+                            Tu navegador no soporta el elemento de video.
+                        </video>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Regresar
+                        a las Fotos</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
+<script>
+    document.getElementById("video").addEventListener("change", function() {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            document.getElementById('videoPreview').src = e.target.result;
+        }
+
+        reader.readAsDataURL(this.files[0]);
+    });
+    </script>
+<script>
+    for (let i = 1; i <= 6; i++) {
+        document.getElementById("foto" + i).addEventListener("change", function() {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                document.getElementById('fotoPreview' + i).src = e.target.result;
+            }
+
+            reader.readAsDataURL(this.files[0]);
+        });
+    }
+    </script>
     <script>
         $(document).ready(function() {
             $('#observacion').submit(function() {
