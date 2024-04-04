@@ -11,6 +11,7 @@ class PersonalsDatatable extends DataTableComponent
     protected $model = personals::class;
     public ?string $searchPlaceholder = 'Buscar por documento';
     public ?int $searchFilterDebounce = 500;
+    public string $defaultSortDirection = 'desc';
 
     public bool $viewingModal = false;
     public $currentModal;
