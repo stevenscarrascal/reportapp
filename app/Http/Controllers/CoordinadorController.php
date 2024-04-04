@@ -83,8 +83,7 @@ class CoordinadorController extends Controller
         }
         $reportes->save($report);
 
-        return redirect()->back()->with('success', 'Evidencias creadas con éxito')
-        ->with('title', 'éxito');
+        return response()->json(['success' => 'Evidencias creadas con éxito']);
     }
 
     /**
