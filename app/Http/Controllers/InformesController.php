@@ -20,7 +20,6 @@ class InformesController extends Controller
         $reports = reportes::select(DB::raw('MONTH(created_at) as month'), DB::raw('count(*) as count'))
             ->groupBy('month')
             ->get();
-
         // Prepara los datos para el gráfico
         $labels = [];
         $data = [];
@@ -28,7 +27,6 @@ class InformesController extends Controller
             $labels[] = date('F', mktime(0, 0, 0, $report->month, 15)); // Convierte el número del mes a nombre del mes
             $data[] = $report->count;
         }
-
         // Define los colores para cada mes
         $backgroundColors = [
             "rgba(255, 99, 132, 0.2)", // Enero

@@ -78,6 +78,8 @@
     <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('assets/js/sbadmin2.min.js') }}"></script>
     <script src="{{ asset('plugins/sweetalert2/sweetalert2@11.js') }}"></script>
+    
+
 
     <!-- Custom scripts for all pages-->
     @yield('scripts')
