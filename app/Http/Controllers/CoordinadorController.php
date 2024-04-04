@@ -59,19 +59,13 @@ class CoordinadorController extends Controller
                 $textoContrato = "Contrato N°:" . $reportes->contrato;
                 $colorTexto = imagecolorallocate($imagenGD, 255, 255, 255); // Color blanco
                 $posXContrato = 10; // Ajusta según tu diseño
-                $posYContrato = imagesy($imagenGD) - 170; // Ajusta según tu diseño
+                $posYContrato = 60; // Ajusta según tu diseño
                 imagettftext($imagenGD, $fontSize, 0, $posXContrato, $posYContrato, $colorTexto, public_path('font/arial.ttf'), $textoContrato);
-                // Añadir texto de coordenadas a la imagen
-                $textoCoordenadas = "Direccion: " . $reportes->direccion;
-                $colorTexto = imagecolorallocate($imagenGD, 255, 255, 255); // Color blanco
-                $posXCoordenadas = 10; // Ajusta según tu diseño
-                $posYCoordenadas = imagesy($imagenGD) - 20; // Ajusta según tu diseño
-                imagettftext($imagenGD, $fontSize, 0, $posXCoordenadas, $posYCoordenadas, $colorTexto, public_path('font/arial.ttf'), $textoCoordenadas);
 
                 //Añadir texto de fecha a la imagen
                 $fechaActual = date("Y-m-d H:i:s");
                 $posXFecha = 10; // Ajusta según tu diseño
-                $posYFecha = imagesy($imagenGD) - 90; // Ajusta según tu diseño
+                $posYFecha = 120; // Ajusta según tu diseño
                 imagettftext($imagenGD, $fontSize, 0, $posXFecha, $posYFecha, $colorTexto, public_path('font/arial.ttf'), "Fecha: $fechaActual");
 
                 // Guardar la imagen modificada

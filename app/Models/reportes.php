@@ -84,6 +84,7 @@ class reportes extends Model
         return $this->hasOne(vs_anomalias::class, 'id', 'anomalia');
     }
 
+
     public function ComercioReporte()
     {
         return $this->hasOne(vs_comercios::class, 'id', 'tipo_comercio');
