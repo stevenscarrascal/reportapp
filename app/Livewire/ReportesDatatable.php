@@ -15,6 +15,7 @@ class ReportesDatatable extends DataTableComponent
 {
     protected $model = reportes::class;
     public ?int $searchFilterDebounce = 500;
+    public string $defaultSortDirection = 'desc';
     public ?string $defaultSortColumn = 'created_at';
 
     public function configure(): void
