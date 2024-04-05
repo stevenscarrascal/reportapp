@@ -80,7 +80,8 @@
     <script src="{{ asset('assets/js/sbadmin2.min.js') }}"></script>
     <script src="{{ asset('plugins/sweetalert2/sweetalert2@11.js') }}"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
-
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
 
     <!-- Custom scripts for all pages-->
     @yield('scripts')
