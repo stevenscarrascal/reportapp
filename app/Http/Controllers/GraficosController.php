@@ -47,31 +47,36 @@ class GraficosController extends Controller
 
     public function ConteoAnomaliasxMes()
     {
-        $reportes = reportes::select(DB::raw("DATE_FORMAT(created_at, '%M') as month, anomalia"))
-            ->get();
+        $result = DB::table('reportes')
+                    ->select('anomalia', 'created_at')
+                    ->get();
 
-        $anomalias = collect();
-        foreach ($reportes as $reporte) {
-            $anomaliasDecoded = json_decode($reporte->anomalia);
-            foreach ($anomaliasDecoded as $anomalia) {
-                if ($anomalia != 8) {
-                    $anomalias->push(['month' => $reporte->month, 'anomalia' => $anomalia]);
+        $counts = [];
+        $anomaliaNames = [];
+
+        foreach ($result as $row) {
+            $anomalias = json_decode($row->anomalia);
+            foreach ($anomalias as $anomalia) {
+                $fecha = date('Y-m-d', strtotime($row->created_at));
+                if (!isset($counts[$fecha][$anomalia])) {
+                    $counts[$fecha][$anomalia] = 0;
+                    // Aquí utilizamos la relación para obtener el nombre de la anomalía
+                    $anomaliaNames[$anomalia] = vs_anomalias::find($anomalia)->nombre;
                 }
+                $counts[$fecha][$anomalia]++;
             }
         }
 
-        $data = $anomalias->groupBy(['month', 'anomalia'])->map(function ($items, $key) {
-            return count($items);
-        });
+        // Aquí combinamos los nombres de las anomalías con sus respectivos conteos
+        $data = [];
+        foreach ($counts as $fecha => $anomalias) {
+            foreach ($anomalias as $anomalia => $count) {
+                $data[] = ['fecha' => $fecha, 'nombre' => $anomaliaNames[$anomalia], 'count' => $count];
+            }
+        }
 
-        $monthsInEnglish = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        $monthsInSpanish = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+        return json_encode(['data' => $data]);
 
-        $labels = $data->keys()->map(function ($month) use ($monthsInEnglish, $monthsInSpanish) {
-            $index = array_search($month, $monthsInEnglish);
-            return $monthsInSpanish[$index];
-        });
-        return response()->json(['data' => $data, 'labels' => $labels]);
     }
 
     public function ConteoPersonasDia()
