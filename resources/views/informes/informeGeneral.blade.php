@@ -1,7 +1,7 @@
 @extends('dashboard.dashboard')
 
-
 @section('content')
+
     <div class="row gap-1 mb-2">
         <div class="col">
             <div class="card">
@@ -23,6 +23,7 @@
             </div>
         </div>
     </div>
+
     <div class="row gap-1 ">
         <div class="col">
             <div class="card">
