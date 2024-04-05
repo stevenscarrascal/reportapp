@@ -148,7 +148,7 @@
                     data: {
                         labels: labels,
                         datasets: [{
-                            label: 'Anomalías',
+                            label: 'Anomalías Detectadas del Día',
                             data: conteo,
                             backgroundColor: colors,
                             borderColor: colors,
