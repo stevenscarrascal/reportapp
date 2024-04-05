@@ -26,6 +26,7 @@ class ReportesFactory extends Factory
      */
     public function definition()
     {
+        $year = date('Y');
         return [
             'contrato' => $this->faker->randomNumber(),
             'medidor' => $this->faker->randomNumber(),
@@ -38,7 +39,7 @@ class ReportesFactory extends Factory
             'longitud' => $this->faker->longitude(),
             'tipo_comercio' => vs_comercios::all()->random()->id,
             'foto1' => $this->faker->image('public/imagen',640,480, null, false),
-            'created_at' => $this->faker->dateTimeBetween('now'),
+           'created_at'=>$this->faker->dateTimeBetween("$year-01-01", "$year-12-31")->format('Y-m-d H:i:s')
         ];
     }
 }
