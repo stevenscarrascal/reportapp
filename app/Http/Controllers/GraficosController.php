@@ -47,7 +47,10 @@ class GraficosController extends Controller
 
     public function ConteoAnomaliasxMes()
     {
+        $today = date('Y-m-d');
+
         $result = DB::table('reportes')
+                    ->whereDate('created_at', $today)
                     ->select('anomalia', 'created_at')
                     ->get();
 
@@ -57,22 +60,19 @@ class GraficosController extends Controller
         foreach ($result as $row) {
             $anomalias = json_decode($row->anomalia);
             foreach ($anomalias as $anomalia) {
-                $fecha = date('Y-m-d', strtotime($row->created_at));
-                if (!isset($counts[$fecha][$anomalia])) {
-                    $counts[$fecha][$anomalia] = 0;
+                if (!isset($counts[$anomalia])) {
+                    $counts[$anomalia] = 0;
                     // Aquí utilizamos la relación para obtener el nombre de la anomalía
                     $anomaliaNames[$anomalia] = vs_anomalias::find($anomalia)->nombre;
                 }
-                $counts[$fecha][$anomalia]++;
+                $counts[$anomalia]++;
             }
         }
 
         // Aquí combinamos los nombres de las anomalías con sus respectivos conteos
         $data = [];
-        foreach ($counts as $fecha => $anomalias) {
-            foreach ($anomalias as $anomalia => $count) {
-                $data[] = ['fecha' => $fecha, 'nombre' => $anomaliaNames[$anomalia], 'count' => $count];
-            }
+        foreach ($counts as $anomalia => $count) {
+            $data[] = ['nombre' => $anomaliaNames[$anomalia], 'count' => $count];
         }
 
         return json_encode(['data' => $data]);
