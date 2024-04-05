@@ -27,7 +27,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <div style="width:80%;">
+                    <div style="width:100%;">
                         <canvas id="anomaliasActual" style="width:100%;"></canvas>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <div style="width:80%;">
+                    <div style="width:100%;">
                         <canvas id="conteoxpersonal" style="width:100%;"></canvas>
                     </div>
                 </div>
