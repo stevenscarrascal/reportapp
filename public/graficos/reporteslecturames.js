@@ -18,7 +18,7 @@ fetch('ConteoRegistros')
 
     var ctx = document.getElementById('conteomes').getContext('2d');
     var myChart = new Chart(ctx, {
-        type: 'pie',
+        type: 'bar',
         data: {
             labels: data.labels,
             datasets: [{

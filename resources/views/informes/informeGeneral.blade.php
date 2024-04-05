@@ -1,12 +1,11 @@
 @extends('dashboard.dashboard')
 
 @section('content')
-
     <div class="row gap-1 mb-2">
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <div style="width:50%;">
+                    <div style="width:100%;">
                         <canvas id="conteomes" style="width:100%;"></canvas>
                     </div>
                 </div>
@@ -29,7 +28,7 @@
             <div class="card">
                 <div class="card-body">
                     <div style="width:80%;">
-                        <canvas id="anomaliasXmes" style="width:100%;"></canvas>
+                        <canvas id="anomaliasActual" style="width:100%;"></canvas>
                     </div>
                 </div>
             </div>

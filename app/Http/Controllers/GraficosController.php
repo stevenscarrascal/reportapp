@@ -50,9 +50,9 @@ class GraficosController extends Controller
         $today = date('Y-m-d');
 
         $result = DB::table('reportes')
-                    ->whereDate('created_at', $today)
-                    ->select('anomalia', 'created_at')
-                    ->get();
+            ->whereDate('created_at', $today)
+            ->select('anomalia', 'created_at')
+            ->get();
 
         $counts = [];
         $anomaliaNames = [];
@@ -76,7 +76,6 @@ class GraficosController extends Controller
         }
 
         return json_encode(['data' => $data]);
-
     }
 
     public function ConteoPersonasDia()

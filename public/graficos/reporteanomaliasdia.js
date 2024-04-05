@@ -10,7 +10,7 @@ fetch('anomaliasMes')
         'rgba(153, 102, 255, 0.2)',
         'rgba(255, 159, 64, 0.2)'
     ];
-    const ctx = document.getElementById('anomaliasXmes').getContext('2d');
+    const ctx = document.getElementById('anomaliasActual').getContext('2d');
     // Extraemos los nombres y los conteos de los datos
     const labels = data.data.map(item => item.nombre);
     const conteo = data.data.map(item => item.count);
