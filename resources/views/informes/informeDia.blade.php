@@ -125,7 +125,7 @@
                         borderWidth: 0
                     }
                 },
-                series: data.map((item, index) => ({
+                 series: data.map((item, index) => ({
                     name: item.nombre,
                     data: [{
                         y: item.count
