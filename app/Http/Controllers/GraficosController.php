@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class GraficosController extends Controller
 {
-        public function ConteoRegistrosxDia()
+    public function ConteoRegistrosxDia()
     {
         //variables para obtener la fecha actual y el rango de la semana
         $today = date('Y-m-d');
@@ -33,6 +33,7 @@ class GraficosController extends Controller
             ->groupBy('day')
             ->get();
         // fin de la consulta
+
 
         //consulta para obtener el conteo de anomalías por día
         $anomalis = DB::table('reportes')
@@ -79,11 +80,26 @@ class GraficosController extends Controller
 
     public function ReportesTotalesxmes()
     {
-        $reportes = reportes::select(DB::raw('count(lectura) as total'), DB::raw('MONTH(created_at) as mes'))
+        $reportes =  DB::table('reportes')
+            ->select(DB::raw("count(lectura) as total,CASE
+        WHEN MONTH(created_at) = 1 THEN 'Enero'
+        WHEN MONTH(created_at) = 2 THEN 'Febrero'
+        WHEN MONTH(created_at) = 3 THEN 'Marzo'
+        WHEN MONTH(created_at) = 4 THEN 'Abril'
+        WHEN MONTH(created_at) = 5 THEN 'Mayo'
+        WHEN MONTH(created_at) = 6 THEN 'Junio'
+        WHEN MONTH(created_at) = 7 THEN 'Julio'
+        WHEN MONTH(created_at) = 8 THEN 'Agosto'
+        WHEN MONTH(created_at) = 9 THEN 'Septiembre'
+        WHEN MONTH(created_at) = 10 THEN 'Octubre'
+        WHEN MONTH(created_at) = 11 THEN 'Noviembre'
+        WHEN MONTH(created_at) = 12 THEN 'Diciembre'
+    END as month"))
             ->whereYear('created_at', date('Y'))
-            ->groupBy('mes')
+            ->groupBy('month')
             ->get();
 
+        
         return view('informes.informeGeneral', compact('reportes'));
     }
 }
