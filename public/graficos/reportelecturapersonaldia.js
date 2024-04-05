@@ -1,4 +1,4 @@
-fetch('ConteoPersonal')
+fetch('/informes/ConteoPersonal')
 .then(response => response.json())
 .then(data => {
     var colors = [

@@ -45,7 +45,7 @@ class GraficosController extends Controller
         return json_encode(['dia' => $dia, 'labels' => $labels]);
     }
 
-    public function ConteoAnomaliasxMes()
+    public function ConteoAnomaliasxDia()
     {
         $today = date('Y-m-d');
 
@@ -99,4 +99,40 @@ class GraficosController extends Controller
 
         return json_encode(['data' => $data, 'names' => $personalNames, 'label' => $labels]);
     }
+
+
+    public function ConteoAnomaliasPersonalRango(Request $request)
+    {
+        $result = DB::table('reportes')
+            ->join('personals', 'reportes.personal_id', '=', 'personals.id') // Unir con la tabla personals
+            ->where('reportes.personal_id', $request->personal) // Filtrar por personal_id
+            ->whereBetween('reportes.created_at', [$request->from, $request->to]) // Filtrar por el rango de fechas
+            ->select('anomalia', 'personals.nombres as personal_name') // Incluir el nombre del personal
+            ->get();
+        $counts = [];
+        $anomaliaNames = [];
+
+        foreach ($result as $row) {
+            $anomalias = json_decode($row->anomalia);
+            foreach ($anomalias as $anomalia) {
+                if (!isset($counts[$anomalia])) {
+                    $counts[$anomalia] = 0;
+                    // Aquí utilizamos la relación para obtener el nombre de la anomalía
+                    $anomaliaNames[$anomalia] = vs_anomalias::find($anomalia)->nombre;
+                }
+                $counts[$anomalia]++;
+            }
+        }
+
+        // Aquí combinamos los nombres de las anomalías con sus respectivos conteos
+        $data = [];
+        foreach ($counts as $anomalia => $count) {
+            $data[] = ['nombre' => $anomaliaNames[$anomalia], 'count' => $count];
+        }
+
+        return json_encode(['data' => $data]);
+    }
+
+
+
 }

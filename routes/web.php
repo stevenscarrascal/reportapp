@@ -28,15 +28,15 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::resource('/reportes', ReportesController::class)->names('reportes');
         Route::resource('/coordinador', CoordinadorController::class)->names('coordinador');
         Route::resource('/personals', PersonalsController::class)->names('personals');
-        Route::resource('/informes', InformesController::class)->names('informes')->only('index');
         Route::get('/admin', adminController::class)->name('admin');
         Route::post('/addcomercio', [ReportesController::class, 'addcomercio'])->name('addcomercio');
+        Route::prefix('informes')->group(function () {
+            Route::get('/', [InformesController::class, 'InfoGeneral'])->name('Infogeneral');
+            Route::get('/dia', [InformesController::class, 'InfoDia'])->name('InfoDia');
+            Route::get('/ConteoDia', [GraficosController::class, 'ConteoRegistrosxDia']);
+            Route::get('/anomaliasMes', [GraficosController::class, 'ConteoAnomaliasxDia']);
+            Route::get('/ConteoPersonal', [GraficosController::class, 'ConteoPersonasDia']);
+            Route::get('/ConteoFilter', [GraficosController::class, 'ConteoAnomaliasPersonalRango']);
+        });
     });
 });
-
-
-Route::get('/ConteoRegistros', [GraficosController::class, 'ConteoRegistrosxMes']);
-Route::get('/ConteoDia', [GraficosController::class, 'ConteoRegistrosxDia']);
-Route::get('/anomaliasMes', [GraficosController::class, 'ConteoAnomaliasxMes']);
-Route::get('/ConteoPersonal', [GraficosController::class, 'ConteoPersonasDia']);
-

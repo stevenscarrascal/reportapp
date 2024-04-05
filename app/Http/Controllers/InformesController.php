@@ -13,9 +13,13 @@ class InformesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function InfoGeneral()
     {
         return view('informes.informeGeneral');
+    }
+    public function InfoDia()
+    {
+        return view('informes.informeDia');
     }
 
 }
