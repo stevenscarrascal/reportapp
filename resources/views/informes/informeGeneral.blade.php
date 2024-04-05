@@ -2,8 +2,6 @@
 
 @section('content')
     <div class="row gap-1 mb-2">
-        <x-filters />
-
         <div class="col">
             <div class="card">
                 <div class="card-body">
