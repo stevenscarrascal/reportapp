@@ -24,7 +24,9 @@
                         text: 'Reportes totales Por mes'
                     },
                     xAxis: {
-                        categories: reportes.map(item => item.month)
+                        title: {
+                            text: 'Año 2024'
+                        }
                     },
                     yAxis: {
                         title: {
