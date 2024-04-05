@@ -31,12 +31,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::get('/admin', adminController::class)->name('admin');
         Route::post('/addcomercio', [ReportesController::class, 'addcomercio'])->name('addcomercio');
         Route::prefix('informes')->group(function () {
-            Route::get('/', [InformesController::class, 'InfoGeneral'])->name('Infogeneral');
-            Route::get('/dia', [InformesController::class, 'InfoDia'])->name('InfoDia');
-            Route::get('/ConteoDia', [GraficosController::class, 'ConteoRegistrosxDia']);
-            Route::get('/anomaliasMes', [GraficosController::class, 'ConteoAnomaliasxDia']);
-            Route::get('/ConteoPersonal', [GraficosController::class, 'ConteoPersonasDia']);
-            Route::get('/ConteoFilter', [GraficosController::class, 'ConteoAnomaliasPersonalRango']);
+            Route::get('/ConteoDia', [GraficosController::class, 'ConteoRegistrosxDia'])->name('ConteoDia');
+            Route::get('/General', [GraficosController::class, 'ReportesTotalesxmes'])->name('General');
         });
     });
 });

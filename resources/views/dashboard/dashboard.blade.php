@@ -22,6 +22,7 @@
     <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('plugins/bootstrap-5.2.3-dist/css/bootstrap.min.css') }}" rel="stylesheet">
 
+
 </head>
 
 <body id="page-top">
@@ -78,7 +79,7 @@
     <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('assets/js/sbadmin2.min.js') }}"></script>
     <script src="{{ asset('plugins/sweetalert2/sweetalert2@11.js') }}"></script>
-
+    <script src="https://code.highcharts.com/highcharts.js"></script>
 
 
     <!-- Custom scripts for all pages-->

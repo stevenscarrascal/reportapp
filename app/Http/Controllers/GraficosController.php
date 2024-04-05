@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\personals;
 use App\Models\reportes;
 use App\Models\vs_anomalias;
 use Illuminate\Http\Request;
@@ -9,47 +10,32 @@ use Illuminate\Support\Facades\DB;
 
 class GraficosController extends Controller
 {
-    public function ConteoRegistrosxMes()
+        public function ConteoRegistrosxDia()
     {
-        $mes = DB::table('reportes')
-            ->select(DB::raw("count(*) as count, DATE_FORMAT(created_at, '%M') as month"))
-            ->groupBy('month')
-            ->get();
+        //variables para obtener la fecha actual y el rango de la semana
+        $today = date('Y-m-d');
+        $inicioSemana = date('Y-m-d', strtotime('monday this week'));
+        $finSemana = date('Y-m-d', strtotime('sunday this week'));
 
-        $monthsInEnglish = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        $monthsInSpanish = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-
-        $labels = $mes->pluck('month')->map(function ($month) use ($monthsInEnglish, $monthsInSpanish) {
-            $index = array_search($month, $monthsInEnglish);
-            return $monthsInSpanish[$index];
-        });
-
-        return json_encode(['mes' => $mes, 'labels' => $labels]);
-    }
-
-    public function ConteoRegistrosxDia()
-    {
+        // Consulta para obtener el conteo de reportes por día de la semana
         $dia = DB::table('reportes')
-            ->select(DB::raw("count(*) as count, DATE_FORMAT(created_at, '%W') as day"))
+            ->select(DB::raw("count(*) as count,
+        CASE
+            WHEN DAYOFWEEK(created_at) = 1 THEN 'Domingo'
+            WHEN DAYOFWEEK(created_at) = 2 THEN 'Lunes'
+            WHEN DAYOFWEEK(created_at) = 3 THEN 'Martes'
+            WHEN DAYOFWEEK(created_at) = 4 THEN 'Miércoles'
+            WHEN DAYOFWEEK(created_at) = 5 THEN 'Jueves'
+            WHEN DAYOFWEEK(created_at) = 6 THEN 'Viernes'
+            WHEN DAYOFWEEK(created_at) = 7 THEN 'Sábado'
+        END as day"))
+            ->whereBetween('created_at', [$inicioSemana, $finSemana])
             ->groupBy('day')
             ->get();
+        // fin de la consulta
 
-        $daysInEnglish = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-        $daysInSpanish = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
-
-        $labels = $dia->pluck('day')->map(function ($day) use ($daysInEnglish, $daysInSpanish) {
-            $index = array_search($day, $daysInEnglish);
-            return $daysInSpanish[$index];
-        });
-
-        return json_encode(['dia' => $dia, 'labels' => $labels]);
-    }
-
-    public function ConteoAnomaliasxDia()
-    {
-        $today = date('Y-m-d');
-
-        $result = DB::table('reportes')
+        //consulta para obtener el conteo de anomalías por día
+        $anomalis = DB::table('reportes')
             ->whereDate('created_at', $today)
             ->select('anomalia', 'created_at')
             ->get();
@@ -57,7 +43,7 @@ class GraficosController extends Controller
         $counts = [];
         $anomaliaNames = [];
 
-        foreach ($result as $row) {
+        foreach ($anomalis as $row) {
             $anomalias = json_decode($row->anomalia);
             foreach ($anomalias as $anomalia) {
                 if (!isset($counts[$anomalia])) {
@@ -70,69 +56,34 @@ class GraficosController extends Controller
         }
 
         // Aquí combinamos los nombres de las anomalías con sus respectivos conteos
-        $data = [];
+        $anomalia = [];
         foreach ($counts as $anomalia => $count) {
-            $data[] = ['nombre' => $anomaliaNames[$anomalia], 'count' => $count];
+            $anomalies[] = ['nombre' => $anomaliaNames[$anomalia], 'count' => $count];
         }
+        // fin de la consulta
 
-        return json_encode(['data' => $data]);
-    }
-
-    public function ConteoPersonasDia()
-    {
-        $result = DB::table('reportes')
+        //consulta para obtener el conteo de reportes por personal
+        $personals = DB::table('reportes')
             ->join('personals', 'reportes.personal_id', '=', 'personals.id') // Unir con la tabla personals
             ->whereDate('reportes.created_at', '=', date('Y-m-d')) // Filtrar por la fecha actual
             ->select(DB::raw("count(*) as count, personal_id, personals.nombres as personal_name")) // Incluir el nombre del personal
             ->groupBy('personal_id')
             ->get();
 
-        $data = $result->pluck('count'); // Extraer solo el conteo
-        $personalNames = $result->pluck('personal_name'); // Extraer solo los nombres del personal
 
-        $daysInEnglish = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-        $daysInSpanish = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+        // fin de la consulta
+        // dd($personals);
 
-        $dayInEnglish = date('l'); // Obtener el día actual en inglés
-        $index = array_search($dayInEnglish, $daysInEnglish);
-        $labels = $daysInSpanish[$index]; // Traducir el día al español
-
-        return json_encode(['data' => $data, 'names' => $personalNames, 'label' => $labels]);
+        return view('informes.informeDia', compact('dia', 'anomalies', 'personals'));
     }
 
-
-    public function ConteoAnomaliasPersonalRango(Request $request)
+    public function ReportesTotalesxmes()
     {
-        $result = DB::table('reportes')
-            ->join('personals', 'reportes.personal_id', '=', 'personals.id') // Unir con la tabla personals
-            ->where('reportes.personal_id', $request->personal) // Filtrar por personal_id
-            ->whereBetween('reportes.created_at', [$request->from, $request->to]) // Filtrar por el rango de fechas
-            ->select('anomalia', 'personals.nombres as personal_name') // Incluir el nombre del personal
+        $reportes = reportes::select(DB::raw('count(lectura) as total'), DB::raw('MONTH(created_at) as mes'))
+            ->whereYear('created_at', date('Y'))
+            ->groupBy('mes')
             ->get();
-        $counts = [];
-        $anomaliaNames = [];
 
-        foreach ($result as $row) {
-            $anomalias = json_decode($row->anomalia);
-            foreach ($anomalias as $anomalia) {
-                if (!isset($counts[$anomalia])) {
-                    $counts[$anomalia] = 0;
-                    // Aquí utilizamos la relación para obtener el nombre de la anomalía
-                    $anomaliaNames[$anomalia] = vs_anomalias::find($anomalia)->nombre;
-                }
-                $counts[$anomalia]++;
-            }
-        }
-
-        // Aquí combinamos los nombres de las anomalías con sus respectivos conteos
-        $data = [];
-        foreach ($counts as $anomalia => $count) {
-            $data[] = ['nombre' => $anomaliaNames[$anomalia], 'count' => $count];
-        }
-
-        return json_encode(['data' => $data]);
+        return view('informes.informeGeneral', compact('reportes'));
     }
-
-
-
 }

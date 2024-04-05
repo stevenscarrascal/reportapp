@@ -57,8 +57,8 @@
         <div id="informes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Acciones</h6>
-                <a class="collapse-item" href="{{ route('Infogeneral') }}">Informes Generales</a>
-                <a class="collapse-item" href="{{ route('InfoDia') }}">Informes Por Dia</a>
+                <a class="collapse-item" href="{{ route('General') }}">Informes Generales</a>
+                <a class="collapse-item" href="{{ route('ConteoDia') }}">Informes Por Dia</a>
             </div>
         </div>
     </li>
