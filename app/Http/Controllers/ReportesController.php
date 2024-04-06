@@ -55,10 +55,19 @@ class ReportesController extends Controller
     public function store(Request $request)
     {
 
+        $request->validate(reportes::$rules);
 
         $latitud = $request->input('latitud');
         $longitud = $request->input('longitud');
         $fontSize = 50;
+
+        if ($request->input('contrato')) {
+            $contrato = reportes::where('contrato', $request->input('contrato'))->first();
+            if ($contrato) {
+                notify()->error('el Contrato ya fue registrado');
+                return redirect()->route('reportes.create');
+            }
+        }
 
         if ($latitud == null || $longitud == null) {
             notify()->error('No se pudo obtener la direccion , Active su GPS y vuelva a intentarlo');
@@ -69,7 +78,6 @@ class ReportesController extends Controller
             $direccion = $data['items'][0]['address']['label'];
         }
 
-        $request->validate(reportes::$rules);
         $AnomaliaJson = json_encode($request->anomalia);
 
         $reportes = $request->all();
