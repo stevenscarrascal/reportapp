@@ -57,8 +57,7 @@ class GraficosController extends Controller
         }
 
         // Aquí combinamos los nombres de las anomalías con sus respectivos conteos
-        $anomalies = [];
-
+        $anomalia = [];
         foreach ($counts as $anomalia => $count) {
             $anomalies[] = ['nombre' => $anomaliaNames[$anomalia], 'count' => $count];
         }
@@ -73,9 +72,8 @@ class GraficosController extends Controller
             ->get();
 
 
-
         // fin de la consulta
-        // dd($personals);
+         dd($dia, $anomalies, $personals);
 
         return view('informes.informeDia', compact('dia', 'anomalies', 'personals'));
     }
