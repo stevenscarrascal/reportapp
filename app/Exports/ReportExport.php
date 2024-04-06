@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\reportes;
+use App\Models\vs_anomalias;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
@@ -22,13 +23,20 @@ class ReportExport implements FromCollection,WithHeadings
         ->whereIn('id', $this->reporteIds)
         ->get()
         ->map(function ($reporte) {
+            // Decodifica el JSON a un array de PHP
+            $anomaliaIds = json_decode($reporte->anomalia);
+
+            // Busca los nombres de las anomalías correspondientes a los IDs
+            $anomaliaNombres = vs_anomalias::whereIn('id', $anomaliaIds)->pluck('nombre')->toArray();
+
             return [
                 $reporte->personal->nombres,
                 $reporte->personal->apellidos,
                 $reporte->contrato,
                 $reporte->lectura,
                 $reporte->direccion,
-                // $reporte->AnomaliaReporte->nombre,
+                // Une los nombres de las anomalías con comas
+                implode(', ', $anomaliaNombres),
                 $reporte->imposibilidadReporte->nombre,
                 $reporte->ComercioReporte->nombre,
                 $reporte->EstadoReporte->nombre,
