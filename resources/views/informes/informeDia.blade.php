@@ -98,7 +98,7 @@
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const data = {!! json_encode($anomalies) !!};
+            const data = {!! json_encode($anomalia) !!};
 
             // Definir una paleta de colores para las anomalías
             const colors = Highcharts.getOptions().colors.slice(0, data.length);
