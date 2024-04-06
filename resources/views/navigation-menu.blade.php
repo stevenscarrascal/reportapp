@@ -18,6 +18,13 @@
                         </x-nav-link>
                     @endcan
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    @can('agente')
+                        <x-nav-link href="{{ route('busqueda') }}" :active="request()->routeIs(['busqueda'])">
+                            {{ __('mapas') }}
+                        </x-nav-link>
+                    @endcan
+                </div>
                 @can('coordinador')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link href="{{ route('coordinador.index') }}" :active="request()->routeIs([
@@ -30,7 +37,7 @@
                         </x-nav-link>
                     </div>
                 @endcan
-               
+
 
             </div>
 
