@@ -28,7 +28,7 @@ class ReportExport implements FromCollection,WithHeadings
                 $reporte->contrato,
                 $reporte->lectura,
                 $reporte->direccion,
-                $reporte->AnomaliaReporte->nombre,
+                // $reporte->AnomaliaReporte->nombre,
                 $reporte->imposibilidadReporte->nombre,
                 $reporte->ComercioReporte->nombre,
                 $reporte->EstadoReporte->nombre,
