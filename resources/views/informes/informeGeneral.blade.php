@@ -11,14 +11,6 @@
             </div>
         </div>
     </div>
-    <div class="col">
-        <div class="card">
-            <div class="card-body">
-                {{-- <a href="https://www.google.com/maps/place/{{$latitud.','$longitud}}">Maps</a> --}}
-                  <a href="https://www.google.com/maps/place/10.404569,-75.521145" target="_blank" class="btn btn-primary ">Maps</a>
-            </div>
-        </div>
-    </div>
 @endsection
 
 @section('scripts')
