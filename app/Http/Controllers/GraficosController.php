@@ -60,7 +60,7 @@ class GraficosController extends Controller
         $anomalia = [];
         foreach ($counts as $anomalia => $count) {
 
-            $anomalia[] = ['nombre' => $anomaliaNames[$anomalia], 'count' => $count];
+            $anomalies[] = ['nombre' => $anomaliaNames[$anomalia], 'count' => $count];
         }
         // fin de la consulta
 
@@ -75,7 +75,8 @@ class GraficosController extends Controller
         // fin de la consulta
 
 
-        return view('informes.informeDia', compact('dia', 'anomalia', 'personals'));
+
+        return view('informes.informeDia', compact('dia', 'anomalies', 'personals'));
     }
 
     public function ReportesTotalesxmes( )
