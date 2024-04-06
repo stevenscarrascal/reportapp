@@ -57,7 +57,8 @@ class GraficosController extends Controller
         }
 
         // Aquí combinamos los nombres de las anomalías con sus respectivos conteos
-        $anomalia = [];
+        $anomalies = [];
+
         foreach ($counts as $anomalia => $count) {
             $anomalies[] = ['nombre' => $anomaliaNames[$anomalia], 'count' => $count];
         }
@@ -70,6 +71,7 @@ class GraficosController extends Controller
             ->select(DB::raw("count(*) as count, personal_id, personals.nombres as personal_name")) // Incluir el nombre del personal
             ->groupBy('personal_id')
             ->get();
+
 
 
         // fin de la consulta
