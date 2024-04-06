@@ -6,42 +6,51 @@
             <div class="card">
                 <div class="card-body">
                     <div id="container" style="width:100%; height:400px;"></div>
+                    <a class="btn btn-outline-primary " id="pdf"> Descargar Pdf</a>
                 </div>
             </div>
         </div>
     </div>
-    @endsection
+@endsection
 
-    @section('scripts')
-        <script type="text/javascript">
-            document.addEventListener('DOMContentLoaded', function() {
-                const reportes = {!! json_encode($reportes) !!};
+@section('scripts')
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            const reportes = {!! json_encode($reportes) !!};
 
-                const chart = Highcharts.chart('container', {
-                    chart: {
-                        type: 'bar'
-                    },
+            const chart = Highcharts.chart('container', {
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Reportes totales Por mes'
+                },
+                xAxis: {
                     title: {
-                        text: 'Reportes totales Por mes'
-                    },
-                    xAxis: {
-                        title: {
-                            text: 'Año 2024'
-                        }
-                    },
-                    yAxis: {
-                        title: {
-                            text: 'Cantidad de reportes'
-                        }
-                    },
+                        text: 'Año 2024'
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: 'Cantidad de reportes'
+                    }
+                },
 
-                    series: reportes.map((item, index) => ({
-                        name: item.month,
-                        data: [item.total],
-                        color: Highcharts.getOptions().colors[
-                            index] // Asigna un color diferente a cada barra
-                    }))
-                });
+                series: reportes.map((item, index) => ({
+                    name: item.month,
+                    data: [item.total],
+                    color: Highcharts.getOptions().colors[
+                        index] // Asigna un color diferente a cada barra
+                }))
             });
-        </script>
-    @endsection
+        });
+
+         // Activate the custom button
+         document.getElementById('pdf').addEventListener('click', function() {
+            Highcharts.charts[0].exportChart({
+                type: 'application/pdf'
+            });
+        });
+    </script>
+
+@endsection

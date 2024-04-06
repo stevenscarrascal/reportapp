@@ -6,6 +6,7 @@
             <div class="card">
                 <div class="card-body">
                     <div id="dia" style="width:100%; height:400px;"></div>
+                    <a class="btn btn-outline-primary " id="pdf"> Descargar Pdf</a>
                 </div>
             </div>
         </div>
@@ -14,6 +15,7 @@
             <div class="card">
                 <div class="card-body">
                     <div id="anomalias" style="width:100%; height:400px;"></div>
+                    <a class="btn btn-outline-primary " id="anomaliaspdf"> Descargar Pdf</a>
                 </div>
             </div>
         </div>
@@ -22,6 +24,7 @@
             <div class="card">
                 <div class="card-body">
                     <div id="personals" style="width:100%; height:400px;"></div>
+                    <a class="btn btn-outline-primary " id="personalspdf"> Descargar Pdf</a>
                 </div>
             </div>
         </div>
@@ -85,7 +88,12 @@
                     }
                 }]
             });
-
+        });
+         // Activate the custom button
+         document.getElementById('pdf').addEventListener('click', function() {
+            Highcharts.charts[0].exportChart({
+                type: 'application/pdf'
+            });
         });
     </script>
     <script>
@@ -134,6 +142,12 @@
                 }))
             });
         });
+        // Activate the custom button
+        document.getElementById('anomaliaspdf').addEventListener('click', function() {
+            Highcharts.charts[1].exportChart({
+                type: 'application/pdf'
+            });
+        });
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -179,5 +193,13 @@
             });
 
         })
+
+         // Activate the custom button
+         document.getElementById('personalspdf').addEventListener('click', function() {
+            Highcharts.charts[2].exportChart({
+                type: 'application/pdf'
+            });
+        });
     </script>
+
 @endsection

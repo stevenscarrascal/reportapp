@@ -78,7 +78,7 @@ class GraficosController extends Controller
         return view('informes.informeDia', compact('dia', 'anomalies', 'personals'));
     }
 
-    public function ReportesTotalesxmes()
+    public function ReportesTotalesxmes( )
     {
         $reportes =  DB::table('reportes')
             ->select(DB::raw("count(lectura) as total,CASE
@@ -99,7 +99,7 @@ class GraficosController extends Controller
             ->groupBy('month')
             ->get();
 
-        
+
         return view('informes.informeGeneral', compact('reportes'));
     }
 }
