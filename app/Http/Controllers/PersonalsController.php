@@ -38,16 +38,15 @@ class PersonalsController extends Controller
      */
     public function store(Request $request)
     {
-
         // Validación de datos
         $request->validate(personals::$rules);
+
         // Validar existencia de personal por número de documento
         $userCorreo = $request['correo'];
         $userRol = $request['rol'];
-
         $existingPersonal = personals::where('numero_documento', $request->input('numero_documento'))->first();
-        if ($existingPersonal) {
 
+        if ($existingPersonal) {
             // Si ya existe personal con ese número de documento, muestra un mensaje de error y redirige
             return redirect()->back()->with('success', 'Ya existe un personal con este número de documento.')->with('title', 'Error');
         }
@@ -88,6 +87,7 @@ class PersonalsController extends Controller
      */
     public function edit(string $id, User $user)
     {
+        // Buscar el registro personal
         $personal = personals::find($id);
 
         // Verificar si el registro "personals" existe
@@ -132,6 +132,7 @@ class PersonalsController extends Controller
                 $user->syncRoles($request['rol']);
             }
 
+
             return redirect()->route('personals.index')-> with('icon', 'success')->with('success', 'Personal Actualizado con Exito');
 
         } else {
@@ -170,7 +171,6 @@ class PersonalsController extends Controller
         // Actualizar la propiedad estado para ambos registros
         $personal->estado = 4;
         $personal->update();
-
         $usuario->estado = 0;
         $usuario->update();
 

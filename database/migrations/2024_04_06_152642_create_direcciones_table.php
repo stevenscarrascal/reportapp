@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('direccion', 100);
             $table->string('latitud', 100);
             $table->string('longitud', 100);
+            $table->string('ciclo', 100);
             $table->timestamps();
         });
     }

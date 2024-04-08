@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\vs_cargo;
+
 use App\Models\vs_tipo_documento;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -24,7 +24,7 @@ class personals extends Model
         'tipo_documento',
         'numero_documento',
         'nombres',
-        'telefono', 
+        'telefono',
         'apellidos',
         'correo',
         'estado',
