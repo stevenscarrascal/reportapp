@@ -33,8 +33,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::get('/busqueda', [DireccionesController::class, 'index'])->name('busqueda');
         Route::prefix('informes')->group(function () {
             Route::get('/ConteoDia', [GraficosController::class, 'ConteoRegistrosxDia'])->name('ConteoDia');
+            Route::get('/filtro', [GraficosController::class, 'ReportesFilter']);
             Route::get('/General', [GraficosController::class, 'ReportesTotalesxmes'])->name('General');
-
         });
     });
 });

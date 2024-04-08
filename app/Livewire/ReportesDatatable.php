@@ -68,8 +68,10 @@ class ReportesDatatable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Nombres", "personal.nombres"),
-            Column::make("Apellidos", "personal.apellidos"),
+            Column::make("Nombres", "personal.nombres")
+            ->searchable(),
+            Column::make("Apellidos", "personal.apellidos")
+            ->searchable(),
             Column::make("Contrato", "contrato")
                 ->collapseOnMobile()
                 ->searchable(),

@@ -61,7 +61,7 @@ class GraficosController extends Controller
         $anomalies = []; // Aquí guardaremos los datos de las anomalías
 
         foreach ($counts as $anomalia => $count) {
-         $anomalies[] = ['nombre' => $anomaliaNames[$anomalia], 'count' => $count];
+            $anomalies[] = ['nombre' => $anomaliaNames[$anomalia], 'count' => $count];
         }
         // fin de la consulta
 
@@ -76,10 +76,10 @@ class GraficosController extends Controller
         // fin de la consulta
 
 
-        return view('informes.informeDia', compact('dia', 'anomalies', 'personals'));
+        return view('informes.informeDia', compact('dia', 'anomalies', 'personals', 'today'));
     }
 
-    public function ReportesTotalesxmes( )
+    public function ReportesTotalesxmes()
     {
         $reportes =  DB::table('reportes')
             ->select(DB::raw("count(lectura) as total,CASE
@@ -102,5 +102,22 @@ class GraficosController extends Controller
 
 
         return view('informes.informeGeneral', compact('reportes'));
+    }
+
+    public function ReportesFilter(Request $request)
+    {
+        $personals = $request->personal;
+        $inicio = $request->inicio;
+        $fin = $request->fin;
+
+        $reportes =  DB::table('reportes')
+            ->select(DB::raw("count(lectura) as total"))
+            ->where('personal_id', $personals)
+            ->whereBetween('created_at', [$inicio, $fin])
+            ->groupBy('created_at')
+            ->get();
+
+            
+        return json_encode($reportes);
     }
 }
