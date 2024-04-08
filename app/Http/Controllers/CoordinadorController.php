@@ -166,7 +166,6 @@ class CoordinadorController extends Controller
             return redirect()->route('coordinador.index')->with('error', 'No se encontró el reporte');
         }
 
-
         if ($estado == 6) {
             $reporte->estado = $request->estado;
             $reporte->update();
