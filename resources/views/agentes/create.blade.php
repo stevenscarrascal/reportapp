@@ -297,7 +297,6 @@
         </div>
     </div>
 
-
     @section('js')
         <script>
             document.getElementById("comercio").addEventListener("change", function() {

@@ -1,8 +1,8 @@
 @extends('dashboard.dashboard')
 
 @section('content')
-    <div class="row gap-1 mb-2">
-        <div class="col">
+    <div class="row mb-2">
+        <div class="col ">
             <div class="card">
                 <div class="card-body">
                     <div id="dia" style="width:100%; height:400px;"></div>
@@ -11,7 +11,7 @@
             </div>
         </div>
 
-        <div class="col">
+        <div class="col ">
             <div class="card">
                 <div class="card-body">
                     <div id="anomalias" style="width:100%; height:400px;"></div>
@@ -30,9 +30,6 @@
         </div>
     </div>
 
-    <div class="row gap-1 ">
-
-    </div>
 @endsection
 
 @section('scripts')
