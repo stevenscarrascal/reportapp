@@ -104,6 +104,4 @@
             </div>
         </div>
     </div>
-        @section('js')
-        @endsection
 </x-app-layout>
