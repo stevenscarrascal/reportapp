@@ -13,7 +13,6 @@
                                 @endforeach
                             </select>
                         </label>
-
                         <label for="From">Desde
                             <input type="date" id="from" name="from" class="form-control" />
                         </label>
@@ -23,7 +22,6 @@
                         <input type="button" class="btn btn-primary" value="Filtrar" onclick="getData()" />
                     </div>
                 @endif
-                </div>
             </div>
         </div>
     </div>

@@ -29,7 +29,17 @@
             </div>
         </div>
     </div>
-
+    <div class="row mb-2">
+        <div class="col ">
+            <x-filters/>
+            <div class="card">
+                <div class="card-body">
+                    <div id="dia" style="width:100%; height:400px;"></div>
+                    <a class="btn btn-outline-primary " id="pdf"> Descargar Pdf</a>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -198,5 +208,4 @@
             });
         });
     </script>
-
 @endsection
