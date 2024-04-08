@@ -40,6 +40,9 @@ class ReportExport implements FromCollection,WithHeadings
                 $reporte->imposibilidadReporte->nombre,
                 $reporte->ComercioReporte->nombre,
                 $reporte->EstadoReporte->nombre,
+                $reporte->created_at->format('Y-m-d'),
+                $reporte->created_at->format('h:i:s A'),
+
             ];
         });
     }
@@ -56,6 +59,8 @@ class ReportExport implements FromCollection,WithHeadings
             'Imposibilidad',
             'Comercio',
             'Estado',
+            'Fecha de Creación',
+            'Hora de Creación',
         ];
     }
 }

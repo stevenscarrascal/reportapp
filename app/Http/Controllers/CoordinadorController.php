@@ -160,7 +160,13 @@ class CoordinadorController extends Controller
 
         $estado = $request->estado;
 
-        $reporte = reportes::find($id);
+        $reporte = reportes::find($id)->first();
+
+        if ($reporte == null) {
+            return redirect()->route('coordinador.index')->with('error', 'No se encontró el reporte');
+        }
+
+
         if ($estado == 6) {
             $reporte->estado = $request->estado;
             $reporte->update();
@@ -170,8 +176,8 @@ class CoordinadorController extends Controller
         $reporte->estado = $request->estado;
         $reporte->observaciones = $request->observaciones;
         $reporte->update();
-        notify()->success('Observacion creada con éxito');
-        return redirect()->route('coordinador.index');
+
+        return redirect()->route('coordinador.index')->with('success', 'Observacion creada con éxito');
     }
 
     /**
@@ -179,5 +185,16 @@ class CoordinadorController extends Controller
      */
     public function destroy(string $id)
     {
+        $reporte = reportes::find($id)->first();
+
+        if($reporte == null){
+
+            return redirect()->route('coordinador.index')->with('error', 'No se encontró el reporte');
+        }
+
+
+        $reporte->delete();
+
+        return redirect()->route('coordinador.index')->with('success', 'Reporte eliminado con éxito');
     }
 }

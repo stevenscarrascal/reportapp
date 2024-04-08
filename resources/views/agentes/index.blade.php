@@ -14,7 +14,6 @@
                         </a>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-1">
-
                         @if ($historiales->isEmpty())
                             <div class="text-center py-3">
                                 <p class="text-gray-500">No hay reportes activos</p>
@@ -104,6 +103,5 @@
                 </div>
             </div>
         </div>
-        @section('js')
-        @endsection
+    </div>
 </x-app-layout>

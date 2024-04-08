@@ -137,7 +137,8 @@
                     </div>
                     <div class="card-body">
                         <div class="input-group mb-2">
-                            <input class="form-control" type="file" id="video" name="video" accept="video/mp4">
+                            <input class="form-control" type="file" id="video" name="video"
+                                accept="video/mp4">
                             <label for="video" class="input-group-text">Video</label>
                         </div>
 
@@ -172,7 +173,7 @@
                                 accept="image/jpeg">
                             <label class="input-group-text" for="foto6">Opcional</label>
                         </div>
-                 
+
                         <div class="alert alert-success d-none alert-evidencia" role="alert" id="alert">
                         </div>
                         <div class="alert alert-warning d-none" role="alert" id="progressBarEvidencias">
@@ -201,10 +202,11 @@
                     <div class="container text-center">
                         <div class="row">
                             @foreach (range(1, 6) as $i)
-                                    <div class="col-md-4 mb-2  ">
-                                        <img src="{{ $reporte->{'foto' . $i} ? '/imagen/' . $reporte->{'foto' . $i} : '#' }}" id="{{ 'fotoPreview' . $i }}" class="rounded float-start"
-                                            style="max-width: 100%;" alt=''>
-                                    </div>
+                                <div class="col-md-4 mb-2  ">
+                                    <img src="{{ $reporte->{'foto' . $i} ? '/imagen/' . $reporte->{'foto' . $i} : '#' }}"
+                                        id="{{ 'fotoPreview' . $i }}" class="rounded float-start"
+                                        style="max-width: 100%;" alt=''>
+                                </div>
                             @endforeach
                         </div>
                     </div>
@@ -225,10 +227,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                        <video id="videoPreview" style="max-width: 100%;" controls>
-                            <source src="{{ $reporte->video ? asset('video/' . $reporte->video) : '#' }}" type="video/mp4">
-                            Tu navegador no soporta el elemento de video.
-                        </video>
+                    <video id="videoPreview" style="max-width: 100%;" controls>
+                        <source src="{{ $reporte->video ? asset('video/' . $reporte->video) : '#' }}" type="video/mp4">
+                        Tu navegador no soporta el elemento de video.
+                    </video>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Regresar
@@ -240,29 +242,29 @@
 @endsection
 
 @section('scripts')
-<script>
-    document.getElementById("video").addEventListener("change", function() {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            document.getElementById('videoPreview').src = e.target.result;
-        }
-
-        reader.readAsDataURL(this.files[0]);
-    });
-    </script>
-<script>
-    for (let i = 1; i <= 6; i++) {
-        document.getElementById("foto" + i).addEventListener("change", function() {
+    <script>
+        document.getElementById("video").addEventListener("change", function() {
             var reader = new FileReader();
 
-            reader.onload = function (e) {
-                document.getElementById('fotoPreview' + i).src = e.target.result;
+            reader.onload = function(e) {
+                document.getElementById('videoPreview').src = e.target.result;
             }
 
             reader.readAsDataURL(this.files[0]);
         });
-    }
+    </script>
+    <script>
+        for (let i = 1; i <= 6; i++) {
+            document.getElementById("foto" + i).addEventListener("change", function() {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    document.getElementById('fotoPreview' + i).src = e.target.result;
+                }
+
+                reader.readAsDataURL(this.files[0]);
+            });
+        }
     </script>
     <script>
         $(document).ready(function() {
@@ -302,4 +304,5 @@
             });
         });
     </script>
+    
 @endsection

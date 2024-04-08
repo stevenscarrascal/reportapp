@@ -22,7 +22,9 @@ class filters extends Component
      */
     public function render(): View|Closure|string
     {
+
         $personals = personals::all();
+        
         return view('components.filters',compact('personals'));
     }
 }
