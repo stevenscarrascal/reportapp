@@ -109,6 +109,7 @@
                                 </div>
                             @endif
                             <div class="alert alert-warning d-none" role="alert" id="progressBarObservacion">
+                                <div class="spinner-border ms-auto" aria-hidden="true"></div>
                                 <span class="text-sm">Guardando Cambios Porfavor Espere.....</span>
                             </div>
                             @if ($reporte->estado != '6')
@@ -175,6 +176,7 @@
                         <div class="alert alert-success d-none alert-evidencia" role="alert" id="alert">
                         </div>
                         <div class="alert alert-warning d-none" role="alert" id="progressBarEvidencias">
+                            <div class="spinner-border ms-auto" aria-hidden="true"></div>
                             <span class="text-sm">Cargando Archivos Porfavor Espere.....</span>
                         </div>
                         <div class="d-flex justify-content-end">
