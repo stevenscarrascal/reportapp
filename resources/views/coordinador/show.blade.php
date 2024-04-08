@@ -139,7 +139,8 @@
                             <input class="form-control" type="file" id="video" name="video" accept="video/mp4">
                             <label for="video" class="input-group-text">Video</label>
                         </div>
-                        {{-- <hr>
+                        @if (!$reporte->foto1)
+                        <hr>
                         <div class="input-group mb-2">
                             <input type="file" class="form-control" id="foto1" name="foto1"
                                 accept="image/jpeg">
@@ -169,7 +170,8 @@
                             <input type="file" class="form-control" id="foto6" name="foto6"
                                 accept="image/jpeg">
                             <label class="input-group-text" for="foto6">Opcional</label>
-                        </div> --}}
+                        </div>
+                        @endif
                         <div class="alert alert-success d-none alert-evidencia" role="alert" id="alert">
                         </div>
                         <div class="alert alert-warning d-none" role="alert" id="progressBarEvidencias">
