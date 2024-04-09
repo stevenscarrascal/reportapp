@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="row mb-2">
-        <div class="col ">
-            <div class="card">
+        <div class="col-md-4 ">
+            <div class="card shadow ">
                 <div class="card-body">
                     <div id="dia" style="width:100%; height:400px;"></div>
                     <a class="btn btn-outline-primary " id="pdf"> Descargar Pdf</a>
@@ -11,8 +11,8 @@
             </div>
         </div>
 
-        <div class="col ">
-            <div class="card">
+        <div class="col-md-4 ">
+            <div class="card shadow">
                 <div class="card-body">
                     <div id="anomalias" style="width:100%; height:400px;"></div>
                     <a class="btn btn-outline-primary " id="anomaliaspdf"> Descargar Pdf</a>
@@ -20,8 +20,8 @@
             </div>
         </div>
 
-        <div class="col">
-            <div class="card">
+        <div class="col-md-4">
+            <div class="card shadow ">
                 <div class="card-body">
                     <div id="personals" style="width:100%; height:400px;"></div>
                     <a class="btn btn-outline-primary " id="personalspdf"> Descargar Pdf</a>
@@ -31,11 +31,12 @@
     </div>
     <div class="row mb-2">
         <div class="col ">
-            <x-busqueda />
-            <div class="card">
+
+            <div class="card shadow ">
                 <div class="card-body">
-                    <div id="filters" style="width:100%; height:400px;"></div>
-                    <a class="btn btn-outline-primary " id="pdf"> Descargar Pdf</a>
+                    <x-busqueda />
+                    <div id="filters" style="width:100%; height:400px;" class="shadow rounded border-1 "></div>
+                    <a class="btn btn-outline-primary mt-3 " id="pdf"> Descargar Pdf</a>
                 </div>
             </div>
         </div>
