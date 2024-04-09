@@ -114,7 +114,8 @@ class GraficosController extends Controller
             ->select(DB::raw("count(lectura) as total,DATE(created_at) as fecha"))
             ->where('personal_id', $personals)
             ->whereBetween('created_at', [$inicio, $fin])
-            ->groupBy('created_at')
+            ->groupBy(DB::raw('DATE(created_at)'))
+            ->orderBy(DB::raw('DATE(created_at)'), 'asc')
             ->get();
 
         return json_encode($reportes);

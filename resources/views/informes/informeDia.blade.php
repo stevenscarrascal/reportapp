@@ -59,12 +59,7 @@
                         return item.total;
                     });
                     var seriesDate = data.map(function(item) {
-                        var date = new Date(item.fecha);
-                        var day = date.getDate();
-                        var month = date.getMonth() + 1; // Los meses en JavaScript empiezan en 0
-                        var year = date.getFullYear();
-
-                        return `${day}/${month}/${year}`;
+                        return item.fecha;
                     });
 
                     console.log(seriesData);
@@ -97,7 +92,7 @@
                             }
                         },
                         series: [{
-                            name: 'Nombre de la serie',
+                            name: 'Historial de reportes, por fecha y personal de lectura',
                             data: seriesData
                         }]
                     });
