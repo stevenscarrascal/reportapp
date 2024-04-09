@@ -31,11 +31,12 @@
     </div>
     <div class="row mb-2">
         <div class="col ">
-            <x-busqueda />
+
             <div class="card shadow ">
                 <div class="card-body">
-                    <div id="filters" style="width:100%; height:400px;"></div>
-                    <a class="btn btn-outline-primary " id="pdf"> Descargar Pdf</a>
+                    <x-busqueda />
+                    <div id="filters" style="width:100%; height:400px;" class="shadow rounded border-1 "></div>
+                    <a class="btn btn-outline-primary mt-3 " id="pdf"> Descargar Pdf</a>
                 </div>
             </div>
         </div>
