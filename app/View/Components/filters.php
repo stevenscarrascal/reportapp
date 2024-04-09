@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class filters extends Component
+class Filters extends Component
 {
     /**
      * Create a new component instance.
@@ -24,7 +24,7 @@ class filters extends Component
     {
 
         $personals = personals::all();
-        
+
         return view('components.filters',compact('personals'));
     }
 }
