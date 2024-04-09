@@ -106,18 +106,17 @@ class GraficosController extends Controller
 
     public function ReportesFilter(Request $request)
     {
-        $personals = $request->personal;
-        $inicio = $request->inicio;
-        $fin = $request->fin;
+        $personals = $request->input('personal');
+        $inicio = $request->input('desde');
+        $fin = $request->input('hasta');
 
         $reportes =  DB::table('reportes')
-            ->select(DB::raw("count(lectura) as total"))
+            ->select(DB::raw("count(lectura) as total,DATE(created_at) as fecha"))
             ->where('personal_id', $personals)
             ->whereBetween('created_at', [$inicio, $fin])
             ->groupBy('created_at')
             ->get();
 
-            
         return json_encode($reportes);
     }
 }

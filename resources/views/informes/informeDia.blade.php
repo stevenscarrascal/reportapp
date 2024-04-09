@@ -31,10 +31,10 @@
     </div>
     <div class="row mb-2">
         <div class="col ">
-            {{-- <x-filters /> --}}
+            <x-filters />
             <div class="card">
                 <div class="card-body">
-                    <div id="dia" style="width:100%; height:400px;"></div>
+                    <div id="filters" style="width:100%; height:400px;"></div>
                     <a class="btn btn-outline-primary " id="pdf"> Descargar Pdf</a>
                 </div>
             </div>
@@ -44,22 +44,69 @@
 
 @section('scripts')
     <script>
-        $.ajax({
-            url: '/informes/filtro',
-            type: 'GET',
-            dataType: 'json',
-            data: {
-                personal: $('#personal').val(),
-                desde: $('#desde').val(),
-                hasta: $('#hasta').val()
-            },
-            success: function(success) {
-                console.log(success);
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        })
+        function getData() {
+            $.ajax({
+                url: '/informes/filtro',
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    personal: $('#personal').val(),
+                    desde: $('#desde').val(),
+                    hasta: $('#hasta').val()
+                },
+                success: function(data) {
+                    var seriesData = data.map(function(item) {
+                        return item.total;
+                    });
+                    var seriesDate = data.map(function(item) {
+                        var date = new Date(item.fecha);
+                        var day = date.getDate();
+                        var month = date.getMonth() + 1; // Los meses en JavaScript empiezan en 0
+                        var year = date.getFullYear();
+
+                        return `${day}/${month}/${year}`;
+                    });
+
+                    console.log(seriesData);
+                    console.log(seriesDate);
+
+                    Highcharts.chart('filters', {
+                        chart: {
+                            type: 'line'
+                        },
+                        title: {
+                            text: 'Historial de reportes'
+                        },
+                        subtitle: {
+                            text: 'Por fecha y personal de lectura'
+                        },
+                        xAxis: {
+                            categories: seriesDate // Usar las fechas convertidas como categorías
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Cantidad de reportes por día'
+                            }
+                        },
+                        plotOptions: {
+                            line: {
+                                dataLabels: {
+                                    enabled: true
+                                },
+                                enableMouseTracking: false
+                            }
+                        },
+                        series: [{
+                            name: 'Nombre de la serie',
+                            data: seriesData
+                        }]
+                    });
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
     </script>
 
     <script>
@@ -180,8 +227,6 @@
             const personaldata = {!! json_encode($personals) !!};
             const dia = {!! json_encode($today) !!};
             const colors = Highcharts.getOptions().colors.slice(0, personaldata.length);
-
-            console.log(dia);
 
             Highcharts.chart('personals', {
                 chart: {
