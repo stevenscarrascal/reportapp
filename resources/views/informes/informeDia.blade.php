@@ -3,7 +3,7 @@
 @section('content')
     <div class="row mb-2">
         <div class="col-md-4 ">
-            <div class="card">
+            <div class="card shadow ">
                 <div class="card-body">
                     <div id="dia" style="width:100%; height:400px;"></div>
                     <a class="btn btn-outline-primary " id="pdf"> Descargar Pdf</a>
@@ -12,7 +12,7 @@
         </div>
 
         <div class="col-md-4 ">
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-body">
                     <div id="anomalias" style="width:100%; height:400px;"></div>
                     <a class="btn btn-outline-primary " id="anomaliaspdf"> Descargar Pdf</a>
@@ -21,7 +21,7 @@
         </div>
 
         <div class="col-md-4">
-            <div class="card">
+            <div class="card shadow ">
                 <div class="card-body">
                     <div id="personals" style="width:100%; height:400px;"></div>
                     <a class="btn btn-outline-primary " id="personalspdf"> Descargar Pdf</a>
@@ -32,7 +32,7 @@
     <div class="row mb-2">
         <div class="col ">
             <x-busqueda />
-            <div class="card">
+            <div class="card shadow ">
                 <div class="card-body">
                     <div id="filters" style="width:100%; height:400px;"></div>
                     <a class="btn btn-outline-primary " id="pdf"> Descargar Pdf</a>

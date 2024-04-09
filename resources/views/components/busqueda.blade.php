@@ -1,6 +1,6 @@
 <div>
     <div class="gap-1">
-        <div class="card mb-3">
+        <div class="card shadow mb-3">
             <div class="card-body">
                 <div class="row">
                     @if ($personals)
