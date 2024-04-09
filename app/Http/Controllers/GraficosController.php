@@ -111,7 +111,7 @@ class GraficosController extends Controller
         $fin = $request->input('hasta');
 
         $reportes =  DB::table('reportes')
-            ->select(DB::raw("count(lectura) as total,DATE(created_at) as fecha, personal_id as personal"))
+            ->select(DB::raw("count(lectura) as total,DATE(created_at) as fecha"))
             ->where('personal_id', $personals)
             ->whereBetween('created_at', [$inicio, $fin])
             ->groupBy(DB::raw('DATE(created_at)'))
