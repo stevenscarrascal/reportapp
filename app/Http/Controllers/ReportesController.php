@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\ProcessImage;
 use App\Models\encabezados_dets;
 use App\Models\reportes;
 use App\Models\vs_anomalias;
@@ -129,8 +128,6 @@ class ReportesController extends Controller
                 imagedestroy($imagenGD);
             }
         }
-
-
         reportes::create($reportes);
         notify()->success('Lectura Guardada Con Exito');
         return redirect()->route('reportes.index');
