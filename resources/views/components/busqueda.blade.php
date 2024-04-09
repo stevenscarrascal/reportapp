@@ -7,7 +7,7 @@
                         <div class="col">
                             <label for="personal">Personal
                                 <select class="form-control" id="personal">
-                                <option disabled selected>Seleccione el Personal</option>
+                                <option value="" selected>Seleccione el Personal</option>
                                     @foreach ($personals as $personal)
                                         <option value="{{ $personal->id }}">{{ $personal->nombres . ' ' . $personal->apellidos }}</option>
                                     @endforeach
