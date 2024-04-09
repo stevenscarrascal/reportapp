@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Filters extends Component
+class Busqueda extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class Filters extends Component
     public function render(): View|Closure|string
     {
         $personals = personals::all();
-        return view('components.filters', compact('personals'));
+        return view('components.busqueda',compact('personals'));
     }
 }
