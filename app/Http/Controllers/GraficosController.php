@@ -20,16 +20,16 @@ class GraficosController extends Controller
         // Consulta para obtener el conteo de reportes por día de la semana
         $dia = DB::table('reportes')
             ->select(DB::raw("count(*) as count,
-CASE
-    WHEN DAYOFWEEK(created_at) = 1 THEN 'Domingo'
-    WHEN DAYOFWEEK(created_at) = 2 THEN 'Lunes'
-    WHEN DAYOFWEEK(created_at) = 3 THEN 'Martes'
-    WHEN DAYOFWEEK(created_at) = 4 THEN 'Miércoles'
-    WHEN DAYOFWEEK(created_at) = 5 THEN 'Jueves'
-    WHEN DAYOFWEEK(created_at) = 6 THEN 'Viernes'
-    WHEN DAYOFWEEK(created_at) = 7 THEN 'Sábado'
-END as day,
-DAYOFWEEK(created_at) as day_number"))
+        CASE
+            WHEN DAYOFWEEK(created_at) = 1 THEN 'Domingo'
+            WHEN DAYOFWEEK(created_at) = 2 THEN 'Lunes'
+            WHEN DAYOFWEEK(created_at) = 3 THEN 'Martes'
+            WHEN DAYOFWEEK(created_at) = 4 THEN 'Miércoles'
+            WHEN DAYOFWEEK(created_at) = 5 THEN 'Jueves'
+            WHEN DAYOFWEEK(created_at) = 6 THEN 'Viernes'
+            WHEN DAYOFWEEK(created_at) = 7 THEN 'Sábado'
+        END as day,
+        DAYOFWEEK(created_at) as day_number"))
             ->whereBetween('created_at', [$inicioSemana, $finSemana])
             ->groupBy('day', 'day_number')
             ->orderBy('day_number', 'asc')
@@ -84,7 +84,8 @@ DAYOFWEEK(created_at) as day_number"))
     public function ReportesTotalesxmes()
     {
         $reportes =  DB::table('reportes')
-            ->select(DB::raw("count(lectura) as total,CASE
+    ->select(DB::raw("count(lectura) as total,
+    CASE
         WHEN MONTH(created_at) = 1 THEN 'Enero'
         WHEN MONTH(created_at) = 2 THEN 'Febrero'
         WHEN MONTH(created_at) = 3 THEN 'Marzo'
@@ -97,10 +98,12 @@ DAYOFWEEK(created_at) as day_number"))
         WHEN MONTH(created_at) = 10 THEN 'Octubre'
         WHEN MONTH(created_at) = 11 THEN 'Noviembre'
         WHEN MONTH(created_at) = 12 THEN 'Diciembre'
-    END as month"))
-            ->whereYear('created_at', date('Y'))
-            ->groupBy('month')
-            ->get();
+    END as month,
+    MONTH(created_at) as month_number"))
+    ->whereYear('created_at', date('Y'))
+    ->groupBy('month', 'month_number')
+    ->orderBy('month_number', 'asc')
+    ->get();
 
 
         return view('informes.informeGeneral', compact('reportes'));
