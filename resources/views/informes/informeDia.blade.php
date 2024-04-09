@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row mb-2">
-        <div class="col ">
+        <div class="col-md-4 ">
             <div class="card">
                 <div class="card-body">
                     <div id="dia" style="width:100%; height:400px;"></div>
@@ -11,7 +11,7 @@
             </div>
         </div>
 
-        <div class="col ">
+        <div class="col-md-4 ">
             <div class="card">
                 <div class="card-body">
                     <div id="anomalias" style="width:100%; height:400px;"></div>
@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        <div class="col">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
                     <div id="personals" style="width:100%; height:400px;"></div>
