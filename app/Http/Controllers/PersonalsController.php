@@ -160,7 +160,6 @@ class PersonalsController extends Controller
         // Buscar el registro de usuario asociado con el registro personal
         $usuario = User::where('personal_id', $personal->id)->first();
 
-        dd($usuario, $personal);
         // Verificar si el registro de usuario existe
         if (!$usuario) {
             // Manejar el caso cuando el registro no se encuentra
@@ -169,10 +168,9 @@ class PersonalsController extends Controller
         }
 
         // Actualizar la propiedad estado para ambos registros
-        $personal->estado = 4;
-        $personal->update();
-        $usuario->estado = 0;
-        $usuario->update();
+
+        $personal->delete();
+        $usuario->delete();
 
         // Redirigir a la ruta de índice
         return redirect()->route('personals.index')->with('icon', 'success')->with('success', 'Personal Eliminado con Exito');
