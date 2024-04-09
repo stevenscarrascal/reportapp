@@ -41,7 +41,7 @@ class ReportExport implements FromCollection,WithHeadings
                 $reporte->ComercioReporte->nombre,
                 $reporte->EstadoReporte->nombre,
                 $reporte->created_at->format('Y-m-d'),
-                $reporte->created_at->format('h:i:s A'),
+                $reporte->created_at->format('H:i:s '),
 
             ];
         });
