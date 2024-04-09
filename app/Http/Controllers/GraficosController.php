@@ -84,7 +84,7 @@ class GraficosController extends Controller
     public function ReportesTotalesxmes()
     {
         $reportes =  DB::table('reportes')
-    ->select(DB::raw("count(lectura) as total,
+            ->select(DB::raw("count(lectura) as total,
     CASE
         WHEN MONTH(created_at) = 1 THEN 'Enero'
         WHEN MONTH(created_at) = 2 THEN 'Febrero'
@@ -100,10 +100,10 @@ class GraficosController extends Controller
         WHEN MONTH(created_at) = 12 THEN 'Diciembre'
     END as month,
     MONTH(created_at) as month_number"))
-    ->whereYear('created_at', date('Y'))
-    ->groupBy('month', 'month_number')
-    ->orderBy('month_number', 'asc')
-    ->get();
+            ->whereYear('created_at', date('Y'))
+            ->groupBy('month', 'month_number')
+            ->orderBy('month_number', 'asc')
+            ->get();
 
 
         return view('informes.informeGeneral', compact('reportes'));
@@ -132,4 +132,25 @@ class GraficosController extends Controller
 
         return json_encode($reportes);
     }
+
+    public function TiempoPersonal(Request $request)
+    {
+            $personal_id = $request->input('personalMin');
+
+            $resultados = DB::select('
+            SELECT personal_id,
+                   AVG(TIMESTAMPDIFF(SECOND, created_at, previous_reading)) AS avg_time_between_readings
+            FROM (
+                SELECT personal_id,
+                       created_at,
+                       LAG(created_at) OVER (PARTITION BY personal_id ORDER BY created_at) AS previous_reading
+                FROM reportes
+            ) AS t
+            WHERE personal_id = ?
+            GROUP BY personal_id
+        ', [$personal_id]);
+
+            return json_encode($resultados);
+    }
+
 }

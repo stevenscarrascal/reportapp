@@ -3,8 +3,8 @@
         <div class="card-body">
             @if ($personals)
                 <div class="col">
-                    <label for="personal">Personal
-                        <select class="form-control" id="personal">
+                    <label for="personalMin">Personal
+                        <select class="form-control" id="personalMin">
                             <option value="" selected>Seleccione el Personal</option>
                             @foreach ($personals as $personal)
                                 <option value="{{ $personal->id }}">{{ $personal->nombres . ' ' . $personal->apellidos }}
@@ -12,13 +12,7 @@
                             @endforeach
                         </select>
                     </label>
-                    <label for="desde">Desde
-                        <input type="date" id="desde" name="from" class="form-control" />
-                    </label>
-                    <label for="hasta">Hasta
-                        <input type="date" id="hasta" name="to" class="form-control" />
-                    </label>
-                    <input type="button" class="btn btn-primary" value="Filtrar" onclick="getData()" />
+                    <a class="btn btn-outline-primary px-2 " onclick="getDataMin()"><i class="fas fa-filter"></i></a>
                 </div>
             @endif
         </div>
