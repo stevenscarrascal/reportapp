@@ -62,9 +62,6 @@
                         return item.fecha;
                     });
 
-                    console.log(seriesData);
-                    console.log(seriesDate);
-
                     Highcharts.chart('filters', {
                         chart: {
                             type: 'line'
