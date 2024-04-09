@@ -31,7 +31,7 @@
     </div>
     <div class="row mb-2">
         <div class="col ">
-            <x-filters />
+            <x-busqueda />
             <div class="card">
                 <div class="card-body">
                     <div id="filters" style="width:100%; height:400px;"></div>
