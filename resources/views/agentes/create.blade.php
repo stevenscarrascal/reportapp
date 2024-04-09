@@ -271,8 +271,7 @@
                             <button type="submit" id="submitButtonEvidencias"
                                 class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Enviar</button>
                             <div class="d-flex hidden w-full" role="alert" id="progressBarEvidencias">
-                                <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 flex items-center w-full"
-                                    role="alert">
+                                <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 flex items-center w-full" role="alert">
                                     <div role="status" class="flex items-center">
                                         <svg aria-hidden="true"
                                             class="inline w-10 h-10 text-gray-200 animate-spin dark:text-gray-600 fill-green-600"
@@ -323,9 +322,7 @@
 
                 $('#agregarOpcionBtn').click(function(e) {
                     e.preventDefault();
-
                     var nuevaOpcion = $('#nueva_opcion').val();
-
                     $.ajax({
                         url: '/addcomercio', // Reemplaza esto con la ruta correcta
                         type: 'POST',
