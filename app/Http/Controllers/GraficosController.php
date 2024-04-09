@@ -20,17 +20,19 @@ class GraficosController extends Controller
         // Consulta para obtener el conteo de reportes por día de la semana
         $dia = DB::table('reportes')
             ->select(DB::raw("count(*) as count,
-        CASE
-            WHEN DAYOFWEEK(created_at) = 1 THEN 'Domingo'
-            WHEN DAYOFWEEK(created_at) = 2 THEN 'Lunes'
-            WHEN DAYOFWEEK(created_at) = 3 THEN 'Martes'
-            WHEN DAYOFWEEK(created_at) = 4 THEN 'Miércoles'
-            WHEN DAYOFWEEK(created_at) = 5 THEN 'Jueves'
-            WHEN DAYOFWEEK(created_at) = 6 THEN 'Viernes'
-            WHEN DAYOFWEEK(created_at) = 7 THEN 'Sábado'
-        END as day"))
+CASE
+    WHEN DAYOFWEEK(created_at) = 1 THEN 'Domingo'
+    WHEN DAYOFWEEK(created_at) = 2 THEN 'Lunes'
+    WHEN DAYOFWEEK(created_at) = 3 THEN 'Martes'
+    WHEN DAYOFWEEK(created_at) = 4 THEN 'Miércoles'
+    WHEN DAYOFWEEK(created_at) = 5 THEN 'Jueves'
+    WHEN DAYOFWEEK(created_at) = 6 THEN 'Viernes'
+    WHEN DAYOFWEEK(created_at) = 7 THEN 'Sábado'
+END as day,
+DAYOFWEEK(created_at) as day_number"))
             ->whereBetween('created_at', [$inicioSemana, $finSemana])
-            ->groupBy('day')
+            ->groupBy('day', 'day_number')
+            ->orderBy('day_number', 'asc')
             ->get();
         // fin de la consulta
 
@@ -111,10 +113,17 @@ class GraficosController extends Controller
         $fin = $request->input('hasta');
 
         $reportes =  DB::table('reportes')
-            ->select(DB::raw("count(lectura) as total,DATE(created_at) as fecha"))
-            ->where('personal_id', $personals)
-            ->whereBetween('created_at', [$inicio, $fin])
-            ->groupBy(DB::raw('DATE(created_at)'))
+            ->select(DB::raw("count(lectura) as total,DATE(created_at) as fecha"));
+
+        if (!empty($personals)) {
+            $reportes = $reportes->where('personal_id', $personals);
+        }
+
+        if (!empty($inicio) && !empty($fin)) {
+            $reportes = $reportes->whereBetween('created_at', [$inicio, $fin]);
+        }
+
+        $reportes = $reportes->groupBy(DB::raw('DATE(created_at)'))
             ->orderBy(DB::raw('DATE(created_at)'), 'asc')
             ->get();
 
