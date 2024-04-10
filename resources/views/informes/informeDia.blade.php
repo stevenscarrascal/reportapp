@@ -37,6 +37,26 @@
                     <x-busqueda />
                     <div id="filters" style="width:100%; height:400px;" class="shadow rounded border-1 "></div>
                     <a class="btn btn-outline-primary mt-3 " id="pdf"> Descargar Pdf</a>
+                    <a class="btn btn-outline-primary mt-3 " id="time" data-bs-toggle="modal" data-bs-target="#timemodal"> Tiempo entre Reportes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="timemodal" tabindex="-1" aria-labelledby="timemodal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="timemodal">Reportes X Minuto</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <x-filtros />
+                    <div id="minuto" style="width:100%; height:400px;"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -44,6 +64,24 @@
 @endsection
 
 @section('scripts')
+<script>
+    function getDataMin() {
+        $.ajax({
+            url: '/informes/filtroMin',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                personal: $('#personalMin').val(),
+            },
+            success: function(data) {
+                console.log(data);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
     <script>
         function getData() {
             $.ajax({
@@ -101,7 +139,6 @@
             });
         }
     </script>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const data = {!! json_encode($dia) !!};
