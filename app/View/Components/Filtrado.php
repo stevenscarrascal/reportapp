@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class filtros extends Component
+class Filtrado extends Component
 {
     /**
      * Create a new component instance.
@@ -22,7 +22,8 @@ class filtros extends Component
      */
     public function render(): View|Closure|string
     {
+
         $personals = personals::all();
-        return view('components.filtros' , compact('personals'));
+        return view('components.filtrado',compact('personals'));
     }
 }
