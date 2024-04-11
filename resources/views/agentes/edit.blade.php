@@ -56,7 +56,7 @@
                                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                                         name="contrato" id="contrato"
                                                         placeholder="Ingrese su Numero de Contrato"
-                                                        value="{{ $reporte->contrato }}" readonly>
+                                                        value="{{ $reporte->contrato }}" >
                                                     <x-input-error for="contrato" />
                                                 </div>
                                                 <div class=" mb-3">
@@ -65,7 +65,7 @@
                                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                                         name="medidor" id="medidor"
                                                         placeholder="Ingrese su Numero de Medidor"
-                                                        value="{{ $reporte->medidor }}" readonly>
+                                                        value="{{ $reporte->medidor }}" >
                                                     <x-input-error for="medidor" />
                                                 </div>
                                                 <div class=" mb-3">
