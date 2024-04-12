@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,6 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css" />
+    <!-- Favicon -->
+    <link rel="icon" href="../assets/img/brand/favicon.png" type="image/png">
+
     <title>Q data Analtytics</title>
 </head>
 
@@ -35,14 +39,11 @@
                     <div class="w-full lg:w-4/12 px-4">
                         <div
                             class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
-                            <div class="rounded-t mb-0 px-6 py-6">
-                                <div class="text-center mb-3">
-                                    <h6 class="text-gray-600 text-sm font-bold">
-                                        <x-application-mark class="block h-9 w-auto" />
-                                    </h6>
+                            <div class="mb-0 px-6 py-6">
+                                <div class="mb-3 flex justify-center ">
+                                    <x-application-mark class="block h-9 w-auto" />
                                 </div>
                                 <div class="btn-wrapper text-center">
-
                                 </div>
                                 <hr class="mt-6 border-b-1 border-gray-400" />
                             </div>
