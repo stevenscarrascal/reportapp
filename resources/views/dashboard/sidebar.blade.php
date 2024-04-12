@@ -3,9 +3,9 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('coordinador.index') }}">
         <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-search"></i>
+            <img src="../assets/img/favicon.svg" alt="" style="width: 50px; high:50px">
         </div>
-        <div class="sidebar-brand-text mx-3"><sup> Data Analytics</sup></div>
+        <div class="sidebar-brand-text mx-3"> </div>
     </a>
 
     <!-- Divider -->
