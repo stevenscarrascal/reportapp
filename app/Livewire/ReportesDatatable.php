@@ -61,6 +61,56 @@ class ReportesDatatable extends DataTableComponent
                         $builder->where('reportes.estado', '7');
                     }
                 }),
+            // Aquí es donde agregas otro filtro
+            SelectFilter::make('Anomalias')
+                ->options([
+                    '' => 'All',
+                    '1' => 'Sin anomalias',
+                    '2' => 'Bypass',
+                    '3' => 'Medidor con sellos manipulados',
+                    '4' => 'Medidor con digitos desalineados',
+                    '5' => 'Medidor sin talco',
+                    '6' => 'Medidor enterrado',
+                    '7' => 'Conexión directa',
+                    '8' => 'Medidor frenado',
+                    '9' => 'Medidor gira hacia atrás',
+                    '10' => 'Medidor fuera de ruta',
+                    '11' => 'Medidor trocado',
+                    '12' => 'Inactivo y en Consumo',
+                    '13' => 'Medidor no encontrado',
+                    '14' => 'Medidor no concuerda con el contrato',
+                ])
+                ->filter(function (Builder $builder, $value) {
+                    if ($value === '1') {
+                        $builder->whereJsonContains('reportes.anomalia', '8');
+                    } elseif ($value === '2') {
+                        $builder->whereJsonContains('reportes.anomalia', '9');
+                    } elseif ($value === '3') {
+                        $builder->whereJsonContains('reportes.anomalia', '10');
+                    }elseif ($value === '4') {
+                        $builder->whereJsonContains('reportes.anomalia', '11');
+                    }elseif ($value === '5') {
+                        $builder->whereJsonContains('reportes.anomalia', '12');
+                    }elseif ($value === '6') {
+                        $builder->whereJsonContains('reportes.anomalia', '13');
+                    }elseif ($value === '7') {
+                        $builder->whereJsonContains('reportes.anomalia', '14');
+                    }elseif ($value === '8') {
+                        $builder->whereJsonContains('reportes.anomalia', '15');
+                    }elseif ($value === '9') {
+                        $builder->whereJsonContains('reportes.anomalia', '16');
+                    }elseif ($value === '10') {
+                        $builder->whereJsonContains('reportes.anomalia', '17');
+                    }elseif ($value === '11') {
+                        $builder->whereJsonContains('reportes.anomalia', '18');
+                    }elseif ($value === '12') {
+                        $builder->whereJsonContains('reportes.anomalia', '63');
+                    }elseif ($value === '13') {
+                        $builder->whereJsonContains('reportes.anomalia', '67');
+                    }elseif ($value === '14') {
+                        $builder->whereJsonContains('reportes.anomalia', '67');
+                    }
+                }),
         ];
     }
 
@@ -90,7 +140,7 @@ class ReportesDatatable extends DataTableComponent
                     return implode(', ', $nombres); // Devuelve los nombres como una cadena separada por comas
                 })
                 ->searchable()
-                ->collapseAlways(),
+                ->collapseOnMobile(),
             Column::make("Direccion", "direccion")
                 ->collapseAlways()
                 ->searchable(),
