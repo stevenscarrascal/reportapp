@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <!-- Favicon -->
-    <link rel="icon" href="../assets/img/brand/favicon.png" type="image/png">
+    <link rel="icon" href="../images/icons/icon-56x56.png" type="image/png">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Custom fonts for this template-->
     <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">

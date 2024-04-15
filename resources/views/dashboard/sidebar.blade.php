@@ -3,7 +3,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('coordinador.index') }}">
         <div class="sidebar-brand-icon rotate-n-15">
-            <img src="../assets/img/favicon.svg" alt="" style="width: 50px; high:50px">
+            <img src="../images/icons/icon-96x96.png" alt="" style="width: 50px; high:50px">
         </div>
         <div class="sidebar-brand-text mx-3"> </div>
     </a>

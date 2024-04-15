@@ -89,6 +89,7 @@ class ReportesDatatable extends DataTableComponent
                     }
                     return implode(', ', $nombres); // Devuelve los nombres como una cadena separada por comas
                 })
+                ->searchable()
                 ->collapseAlways(),
             Column::make("Direccion", "direccion")
                 ->collapseAlways()
