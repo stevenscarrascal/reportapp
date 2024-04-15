@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\direcciones;
 use App\Models\reportes;
 use App\Models\vs_anomalias;
 use Carbon\Carbon;
@@ -96,11 +96,16 @@ class CoordinadorController extends Controller
      */
     public function edit(string $id)
     {
+
         $reporte = reportes::find($id);
-        // Ruta de la plantilla
+
         $anomaliasIds = json_decode($reporte->anomalia);
+
         $anomalias = vs_anomalias::whereIn('id', $anomaliasIds)->get();
 
+        $direccion = direcciones::where('contrato', $reporte->contrato)->first();
+
+        // Ruta de la plantilla
         $templateFile = public_path('template/temp.docx');
 
         // Cargar la plantilla
@@ -109,8 +114,9 @@ class CoordinadorController extends Controller
         // Reemplazar marcadores de posición con datos
         $templateProcessor->setValue('contrato', $reporte->contrato);
         $templateProcessor->setValue('fecha', $reporte->created_at);
-        $templateProcessor->setValue('direccion', $reporte->direccion);
+        $templateProcessor->setValue('direccion', $direccion->direccion);
         $templateProcessor->setValue('medidor', $reporte->medidor);
+        $templateProcessor->setValue('medidor_anomalia', $reporte->medidor_anomalia);
         $templateProcessor->setValue('lectura', $reporte->lectura);
         $templateProcessor->setValue('comercio', $reporte->ComercioReporte->nombre);
         $nombresAnomalias = array();
@@ -177,7 +183,6 @@ class CoordinadorController extends Controller
             $reporte->update();
             return redirect()->route('coordinador.index')->with('success', 'Reporte rechazado con éxito');
         }
-
     }
 
     /**
@@ -187,7 +192,7 @@ class CoordinadorController extends Controller
     {
         $reporte = reportes::find($id);
 
-        if($reporte == null){
+        if ($reporte == null) {
 
             return redirect()->route('coordinador.index')->with('error', 'No se encontró el reporte');
         }
