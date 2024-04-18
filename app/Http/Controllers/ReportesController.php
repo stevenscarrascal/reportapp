@@ -77,6 +77,7 @@ class ReportesController extends Controller
 
         $reportes = $request->all();
 
+        $reportes['personal_id'] = Auth::user()->personal->id;
         $reportes['anomalia'] = $AnomaliaJson;
         $reportes['latitud'] = $latitud;
         $reportes['longitud'] = $longitud;
@@ -162,6 +163,7 @@ class ReportesController extends Controller
         $estado = '5';
         $fontSize = 50;
         $reportes['estado'] =  $estado;
+    
 
         if ($video = $request->file('video')) {
             $path = 'video/';

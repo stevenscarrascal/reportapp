@@ -33,6 +33,7 @@ class ReportExport implements FromCollection,WithHeadings
                 $reporte->personal->nombres,
                 $reporte->personal->apellidos,
                 $reporte->contrato,
+                $reporte->medidor,
                 $reporte->lectura,
                 $reporte->direccion,
                 // Une los nombres de las anomalías con comas
@@ -53,6 +54,7 @@ class ReportExport implements FromCollection,WithHeadings
             'Nombres',
             'Apellidos',
             'Contrato',
+            'Medidor',
             'Lectura',
             'Dirección',
             'Anomalía',
