@@ -15,8 +15,7 @@
                         @csrf
                         <input type="text" hidden id="latitud" name="latitud" value="">
                         <input type="text" hidden id="longitud" name="longitud" value="">
-                        <input type="text" hidden name="personal_id" value="{{ Auth::user()->personal->id }}">
-
+                      
                         <div class=" mb-3">
                             <x-label for='contrato' value='Numero de contrato' class="mb-2" />
                             <input type="text" required
@@ -33,21 +32,21 @@
                                 name="medidor" id="medidor" placeholder="Ingrese su Numero de Medidor"
                                 value="{{ old('medidor') }}">
                             <x-input-error for="medidor" />
-                            <div class="flex items-center mt-2 " >
+                            <div class="flex items-center mt-2 ">
                                 <input id="link" type="checkbox" value=""
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                 <label for="link"
                                     class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Medidor No
                                     Concuerda</label>
                             </div>
-                           <div id="medidor_anomalia" class="mt-2 hidden" >
-                            <x-label for='medidor2' value='Numero de medidor que No Concuerda' class="mb-2" />
-                            <input type="text"
-                                class="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500"
-                                name="medidor_anomalia" id="medidor_anomalia" placeholder="Ingrese su Numero de Medidor"
-                                value="{{ old('medidor_anomalia') }}">
-                            <x-input-error for="medidor_anomalia" />
-                           </div>
+                            <div id="medidor_anomalia" class="mt-2 hidden">
+                                <x-label for='medidor2' value='Numero de medidor que No Concuerda' class="mb-2" />
+                                <input type="text"
+                                    class="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500"
+                                    name="medidor_anomalia" id="medidor_anomalia"
+                                    placeholder="Ingrese su Numero de Medidor" value="{{ old('medidor_anomalia') }}">
+                                <x-input-error for="medidor_anomalia" />
+                            </div>
 
                         </div>
                         <div class=" mb-3">
@@ -316,7 +315,7 @@
         <script>
             document.getElementById("comercio").addEventListener("change", function() {
                 var divComercioNuevo = document.getElementById("div-comercio-nuevo");
-                if (this.value == "20") {
+                if (this.value == "19") {
                     divComercioNuevo.style.display = "block";
                 } else {
                     divComercioNuevo.style.display = "none";
@@ -364,16 +363,6 @@
                             console.error(textStatus, errorThrown);
                         }
                     });
-                });
-            });
-        </script>
-
-        <script>
-            $(document).ready(function() {
-                $('#myForm').submit(function() {
-                    $('#submitButton').prop('disabled', true);
-                    $('#submitButton').css('background-color', '#D3D3D3');
-                    $('#progressBar').css('display', 'block');
                 });
             });
         </script>
@@ -469,15 +458,16 @@
             window.onload = obtenerUbicacion;
         </script>
 
-<script>
-    document.getElementById('link').addEventListener('change', function() {
-        var medidorAnomalia = document.getElementById('medidor_anomalia');
-        if(this.checked) {
-            medidorAnomalia.classList.remove("hidden");
-        } else {
-            medidorAnomalia.classList.add("hidden");
-        }
-    });
-</script>
+        <script>
+            document.getElementById('link').addEventListener('change', function() {
+                var medidorAnomalia = document.getElementById('medidor_anomalia');
+                if (this.checked) {
+                    medidorAnomalia.classList.remove("hidden");
+                } else {
+                    medidorAnomalia.classList.add("hidden");
+                }
+            });
+        </script>
     @endsection
+
 </x-app-layout>
