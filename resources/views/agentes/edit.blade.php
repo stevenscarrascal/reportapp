@@ -136,7 +136,7 @@
                                                     <div class="mb-3">
                                                         <label for="comentarios"
                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Observaciones</label>
-                                                        <textarea id="comentarios" name="comentarios" rows="4"
+                                                        <textarea id="comentarios" name="comentarios" rows="4" disabled
                                                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500">{{$reporte->observaciones}}</textarea>
                                                         <x-input-error for="comentarios" />
                                                     </div>

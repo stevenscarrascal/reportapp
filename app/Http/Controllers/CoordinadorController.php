@@ -163,10 +163,10 @@ class CoordinadorController extends Controller
             'estado' => 'required',
         ]);
 
+
         $estado = $request->estado;
 
         $reporte = reportes::find($id);
-
 
         if ($reporte == null) {
             return redirect()->route('coordinador.index')->with('error', 'No se encontró el reporte');
@@ -174,12 +174,14 @@ class CoordinadorController extends Controller
 
         if ($estado == 6) {
             $reporte->estado = $request->estado;
+
             $reporte->update();
             return redirect()->route('coordinador.index')->with('success', 'Reporte cerrado con éxito');
         }
 
         if ($estado == 7) {
             $reporte->estado = $request->estado;
+            $reporte->observaciones = $request->observaciones;
             $reporte->update();
             return redirect()->route('coordinador.index')->with('success', 'Reporte rechazado con éxito');
         }
