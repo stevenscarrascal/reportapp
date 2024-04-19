@@ -137,7 +137,7 @@
                                                         <label for="comentarios"
                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Observaciones</label>
                                                         <textarea id="comentarios" name="comentarios" rows="4"
-                                                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                                                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500">{{$reporte->observaciones}}</textarea>
                                                         <x-input-error for="comentarios" />
                                                     </div>
                                                 </div>
@@ -407,41 +407,6 @@
                                         <source src="{{ asset('video/' . $reporte['video']) }}" type="video/mp4">
                                         Tu navegador no soporta el elemento de video.
                                     </video>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Vertically centered modal-->
-                    <div data-twe-modal-init
-                        class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
-                        id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
-                        aria-modal="true" role="dialog">
-                        <div data-twe-modal-dialog-ref
-                            class="pointer-events-none relative flex min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]">
-                            <div
-                                class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none dark:bg-surface-dark">
-                                <div
-                                    class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 p-4 dark:border-white/10">
-                                    <!-- Modal title -->
-                                    <h5 class="text-xl font-medium leading-normal text-surface dark:text-white"
-                                        id="exampleModalCenterTitle">
-                                        Observaciones
-                                    </h5>
-                                </div>
-                                <!-- Modal body -->
-                                <div class="relative p-4">
-                                    <p>{{ $reporte->observaciones }}</p>
-                                </div>
-                                <!-- Modal footer -->
-                                <div
-                                    class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 p-4 dark:border-white/10">
-                                    <button type="button"
-                                        class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-200 focus:bg-primary-accent-200 focus:outline-none focus:ring-0 active:bg-primary-accent-200 dark:bg-primary-300 dark:hover:bg-primary-400 dark:focus:bg-primary-400 dark:active:bg-primary-400"
-                                        data-twe-modal-dismiss data-twe-ripple-init data-twe-ripple-color="light">
-                                        Close
-                                    </button>
-
                                 </div>
                             </div>
                         </div>
