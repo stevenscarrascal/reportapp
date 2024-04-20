@@ -43,12 +43,9 @@
                                                 <input type="text" hidden name="personal_id"
                                                     value="{{ Auth::user()->personal->id }}">
                                                 @if ($reporte->observaciones)
-                                                    <button type="button"
-                                                        class="mb-2 inline-block rounded border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-accent-300 hover:bg-danger-50/50 hover:text-danger-accent-300 focus:border-danger-600 focus:bg-danger-50/50 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 motion-reduce:transition-none"
-                                                        data-twe-toggle="modal" data-twe-target="#exampleModalCenter"
-                                                        data-twe-ripple-init data-twe-ripple-color="light">
-                                                        Observaciones
-                                                    </button>
+                                                <x-label for='observacion' value='Observaciones del Coordinador' class="mb-2" />
+                                                <textarea id="observacion" rows="4" disabled
+                                                class="block mb-4  p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500">{{$reporte->observaciones}}</textarea>
                                                 @endif
                                                 <div class=" mb-3">
                                                     <x-label for='contrato' value='Numero de contrato' class="mb-2" />
@@ -135,9 +132,9 @@
                                                 <div class="mb-4">
                                                     <div class="mb-3">
                                                         <label for="comentarios"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Observaciones</label>
-                                                        <textarea id="comentarios" name="comentarios" rows="4" disabled
-                                                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500">{{$reporte->observaciones}}</textarea>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Comentarios </label>
+                                                        <textarea id="comentarios" name="comentarios" rows="4"
+                                                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"></textarea>
                                                         <x-input-error for="comentarios" />
                                                     </div>
                                                 </div>
