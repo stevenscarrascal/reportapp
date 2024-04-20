@@ -174,7 +174,6 @@ class CoordinadorController extends Controller
 
         if ($estado == 6) {
             $reporte->estado = $request->estado;
-
             $reporte->update();
             return redirect()->route('coordinador.index')->with('success', 'Reporte cerrado con éxito');
         }
