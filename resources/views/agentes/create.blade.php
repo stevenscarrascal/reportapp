@@ -69,13 +69,8 @@
                             </select>
                             <x-input-error for="comercio" />
                             <div id="div-comercio-nuevo" style="display: none;" class=" flex">
-                                <input type="text" name="nueva_opcion" id="nueva_opcion"
+                                <input type="text" name="nuevo_comercio" id="nueva_opcion"
                                     class="w-1/2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                                <button type="button" data-twe-ripple-init data-twe-ripple-color="light"
-                                    id="agregarOpcionBtn"
-                                    class="inline-block rounded-full bg-primary p-2 uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none">
-                                    <i class="fas fa-plus"></i>
-                                </button>
                             </div>
                         </div>
                         <div class=" mb-3">
@@ -332,40 +327,6 @@
             });
         </script>
 
-        {{-- <script>
-            $(document).ready(function() {
-
-                $('#agregarOpcionBtn').click(function(e) {
-                    e.preventDefault();
-                    var nuevaOpcion = $('#nueva_opcion').val();
-                    $.ajax({
-                        url: '/addcomercio', // Reemplaza esto con la ruta correcta
-                        type: 'POST',
-                        data: {
-                            nombre: nuevaOpcion,
-                            _token: '{{ csrf_token() }}' // Asegúrate de que esto esté en tu archivo blade
-                        },
-                        success: function(response) {
-                            if (response.success) {
-                                Swal.fire({
-                                    title: "Exito!",
-                                    text: "Nuevo Comecio Agregado Exitosamente",
-                                    icon: "success"
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        location.reload(); // Recarga la página
-                                    }
-                                });
-                            }
-                        },
-                        error: function(jqXHR, textStatus, errorThrown) {
-                            // Aquí puedes manejar los errores
-                            console.error(textStatus, errorThrown);
-                        }
-                    });
-                });
-            });
-        </script> --}}
 
         <script>
             $(document).ready(function() {
