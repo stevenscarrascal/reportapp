@@ -15,7 +15,7 @@
                         @csrf
                         <input type="text" hidden id="latitud" name="latitud" value="">
                         <input type="text" hidden id="longitud" name="longitud" value="">
-                      
+
                         <div class=" mb-3">
                             <x-label for='contrato' value='Numero de contrato' class="mb-2" />
                             <input type="text" required
@@ -315,7 +315,7 @@
         <script>
             document.getElementById("comercio").addEventListener("change", function() {
                 var divComercioNuevo = document.getElementById("div-comercio-nuevo");
-                if (this.value == "19") {
+                if (this.value == "56") {
                     divComercioNuevo.style.display = "block";
                 } else {
                     divComercioNuevo.style.display = "none";
@@ -332,7 +332,7 @@
             });
         </script>
 
-        <script>
+        {{-- <script>
             $(document).ready(function() {
 
                 $('#agregarOpcionBtn').click(function(e) {
@@ -365,7 +365,7 @@
                     });
                 });
             });
-        </script>
+        </script> --}}
 
         <script>
             $(document).ready(function() {
