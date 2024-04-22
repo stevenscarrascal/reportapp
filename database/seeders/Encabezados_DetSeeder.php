@@ -117,224 +117,224 @@ class Encabezados_DetSeeder extends Seeder
             'nomenclatura'=>'IC'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Nuevo Comercio',
             'nomenclatura'=>'NC'
         ]);
 
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Restaurante',
             'nomenclatura'=>'RE'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Venta de Comidas Rapidas',
             'nomenclatura'=>'VCR'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Panaderia',
             'nomenclatura'=>'PA'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Cafeteria',
             'nomenclatura'=>'CA'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Bar',
             'nomenclatura'=>'BA'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Lavanderia',
             'nomenclatura'=>'LA'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Venta de Fritos',
             'nomenclatura'=>'VF'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Asadero de Pollos',
             'nomenclatura'=>'AP'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Industria',
             'nomenclatura'=>'IN'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Productor de Quesos / leche',
             'nomenclatura'=>'PQL'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Hotel/Motel',
             'nomenclatura'=>'HM'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Centro recreacional',
             'nomenclatura'=>'CR'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Institucion educativa',
             'nomenclatura'=>'IE'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Hospital /Clinica',
             'nomenclatura'=>'HC'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Fabrica de dulces',
             'nomenclatura'=>'FD'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Heladeria',
             'nomenclatura'=>'HE'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Bodegas',
             'nomenclatura'=>'BO'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Tienda de Abarrotes',
             'nomenclatura'=>'TA'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Tienda de Licores',
             'nomenclatura'=>'TL'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Tienda de Carnes',
             'nomenclatura'=>'TC'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Tienda de Frutas y Verduras',
             'nomenclatura'=>'TFV'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Tienda de Ropa',
             'nomenclatura'=>'TR'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Tienda de Calzado',
             'nomenclatura'=>'TC'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Tienda de Accesorios',
             'nomenclatura'=>'TA'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Tienda de Tecnologia y Celulares',
             'nomenclatura'=>'TT'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Tienda de Electrodomesticos',
             'nomenclatura'=>'TE'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Tienda de Muebles',
             'nomenclatura'=>'TM'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Tienda de Ferreteria',
             'nomenclatura'=>'TF'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Tienda de Papeleria y Micelaneas',
             'nomenclatura'=>'TP'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Tienda de Juguetes',
             'nomenclatura'=>'TJ'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Tienda de Mascotas',
             'nomenclatura'=>'TM'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Tienda de Deportes',
             'nomenclatura'=>'TD'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Tienda de Bicicletas',
             'nomenclatura'=>'TB'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Tienda de Artesanias',
             'nomenclatura'=>'TA'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Tienda de Plantas',
             'nomenclatura'=>'TP'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Terreno Valdio',
             'nomenclatura'=>'TV'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '5',
+            'encabezados_id' => '4',
             'nombre' => 'Tienda de Decoracion',
             'nomenclatura'=>'TD'
         ]);
 
         encabezados_dets::create([
-            'encabezados_id' => '4',
+            'encabezados_id' => '5',
             'nombre' => 'Ninguna',
             'nomenclatura'=>'OB'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '4',
+            'encabezados_id' => '5',
             'nombre' => 'Obstaculos (Poca Visibilidad)',
             'nomenclatura'=>'OB'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '4',
+            'encabezados_id' => '5',
             'nombre' => 'Falta de Acceso (Rejas, Cerraduras, Etc)',
             'nomenclatura'=>'FA'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '4',
+            'encabezados_id' => '5',
             'nombre' => 'Falta de Medidor',
             'nomenclatura'=>'FD'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '4',
+            'encabezados_id' => '5',
             'nombre' => 'Usuario No Permite Lectura',
             'nomenclatura'=>'UNP'
         ]);
         encabezados_dets::create([
-            'encabezados_id' => '4',
+            'encabezados_id' => '5',
             'nombre' => 'Lugar Deshabitado',
             'nomenclatura'=>'LD'
         ]);

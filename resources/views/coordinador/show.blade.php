@@ -25,6 +25,9 @@
                         <li>
                             <span class="text-card text-sm"> Tipo de Comercio:
                                 {{ $reporte->ComercioReporte->nombre }}</span>
+                                @if ($reporte->nuevo_comercio)
+                                    <span class="text-card text-sm"> Comercio: {{ $reporte->nuevo_comercio }}</span>
+                                @endif
                         </li>
                     </ul>
 

@@ -24,10 +24,10 @@ class EncabezadosSeeder extends Seeder
             'nombre'=>'anomalia',
         ]);
         encabezados::create([
-            'nombre'=>'imposibilidad',
+            'nombre'=>'tipo_comercio',
         ]);
         encabezados::create([
-            'nombre'=>'tipo_comercio',
+            'nombre'=>'imposibilidad',
         ]);
 
         }
