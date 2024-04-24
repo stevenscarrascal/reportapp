@@ -55,7 +55,7 @@
                                                                 <i class="far fa-eye"></i> Ver
                                                             </a>
                                                         </p>
-                                                        @endif
+                                                        @endif 
                                                         @if ($historial->estado == 7)
                                                             <p class="mb-0 ">
                                                                 <a class="text-sm font-bold leading-normal text-orange-500"
