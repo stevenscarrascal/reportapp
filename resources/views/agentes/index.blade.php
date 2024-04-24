@@ -48,12 +48,14 @@
                                                         @endswitch
                                                     </p>
                                                     <div class="flex">
+                                                        @if ($historial->estado != 7)
                                                         <p class="mb-0  mr-2">
                                                             <a class="text-sm font-bold leading-normal text-emerald-500"
                                                                 href="{{ route('reportes.show', $historial->id) }}">
-                                                                <i class="far fa-eye"></i> Ver
+                                                                <i class="far fa-eye"></i> Ver informacion
                                                             </a>
                                                         </p>
+                                                        @endif
                                                         @if ($historial->estado == 7)
                                                             <p class="mb-0 ">
                                                                 <a class="text-sm font-bold leading-normal text-orange-500"
