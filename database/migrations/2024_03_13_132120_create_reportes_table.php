@@ -16,8 +16,10 @@ return new class extends Migration
             $table->string('personal_id');
             $table->string('contrato',125);
             $table->string('medidor',125);
+            $table->string('medidor_anomalia',125)->nullable();
             $table->integer('lectura');
-            $table->text('tipo_comercio');
+            $table->string('tipo_comercio');
+            $table->string('nuevo_comercio')->nullable();
             $table->string('direccion');
             $table->json('anomalia');
             $table->string('imposibilidad');

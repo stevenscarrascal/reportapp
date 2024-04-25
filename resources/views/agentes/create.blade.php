@@ -81,13 +81,8 @@
                             </select>
                             <x-input-error for="comercio" />
                             <div id="div-comercio-nuevo" style="display: none;" class=" flex">
-                                <input type="text" name="nueva_opcion" id="nueva_opcion"
+                                <input type="text" name="nuevo_comercio" id="nueva_opcion"
                                     class="w-1/2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                                <button type="button" data-twe-ripple-init data-twe-ripple-color="light"
-                                    id="agregarOpcionBtn"
-                                    class="inline-block rounded-full bg-primary p-2 uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none">
-                                    <i class="fas fa-plus"></i>
-                                </button>
                             </div>
                         </div>
                         <div class=" mb-3">
@@ -327,7 +322,7 @@
         <script>
             document.getElementById("comercio").addEventListener("change", function() {
                 var divComercioNuevo = document.getElementById("div-comercio-nuevo");
-                if (this.value == "19") {
+                if (this.value == "56") {
                     divComercioNuevo.style.display = "block";
                 } else {
                     divComercioNuevo.style.display = "none";

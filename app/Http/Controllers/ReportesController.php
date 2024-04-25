@@ -163,7 +163,7 @@ class ReportesController extends Controller
         $estado = '5';
         $fontSize = 50;
         $reportes['estado'] =  $estado;
-    
+
 
         if ($video = $request->file('video')) {
             $path = 'video/';
@@ -241,12 +241,12 @@ class ReportesController extends Controller
         //
     }
 
-    public function addcomercio(Request $request)
-    {
-        $encabezados_dets = new encabezados_dets;
-        $encabezados_dets->encabezados_id = "5";
-        $encabezados_dets->nombre = $request->nombre;
-        $encabezados_dets->save();
-        return response()->json(['success' => true]);
-    }
+    // public function addcomercio(Request $request)
+    // {
+    //     $encabezados_dets = new encabezados_dets;
+    //     $encabezados_dets->encabezados_id = "4";
+    //     $encabezados_dets->nombre = $request->nombre;
+    //     $encabezados_dets->save();
+    //     return response()->json(['success' => true]);
+    // }
 }

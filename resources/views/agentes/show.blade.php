@@ -20,6 +20,10 @@
                         <p class="mb-2 text-base">Fecha y Hora: {{ $reporte->created_at }}</p>
                         <p class="mb-2 text-base">Direccion: {{ $reporte->direccion }}</p>
                         <p class="mb-2 text-base">Tipo de Comercio: {{ $reporte->ComercioReporte->nombre }}</p>
+                        @if ($reporte->nuevo_comercio)
+                        <p class="mb-2 text-base">Comercio: {{ $reporte->nuevo_comercio}}</p>
+                        @endif
+
                         <div class="mb-2">
                             <h1 class="mb-2 text-base">Anomalia Detectada</h1>
                             <ul>
