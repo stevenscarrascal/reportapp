@@ -15,7 +15,7 @@
                         @csrf
                         <input type="text" hidden id="latitud" name="latitud" value="">
                         <input type="text" hidden id="longitud" name="longitud" value="">
-                      
+
                         <div class=" mb-3">
                             <x-label for='contrato' value='Numero de contrato' class="mb-2" />
                             <input type="text" required
@@ -36,16 +36,28 @@
                                 <input id="link" type="checkbox" value=""
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                 <label for="link"
-                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Medidor No
+                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">Medidor No
                                     Concuerda</label>
+                                    <input id="cambio" type="checkbox" value=""
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="cambio"
+                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cambio de Medidor</label>
                             </div>
                             <div id="medidor_anomalia" class="mt-2 hidden">
                                 <x-label for='medidor2' value='Numero de medidor que No Concuerda' class="mb-2" />
                                 <input type="text"
-                                    class="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500"
+                                    class="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 "
                                     name="medidor_anomalia" id="medidor_anomalia"
                                     placeholder="Ingrese su Numero de Medidor" value="{{ old('medidor_anomalia') }}">
                                 <x-input-error for="medidor_anomalia" />
+                            </div>
+                            <div id="medidor_cambio" class="mt-2 hidden">
+                                <x-label for='medidor_cambio' value='Motivo del Cambio de medidor' class="mb-2" />
+                                <input type="text"
+                                    class="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 "
+                                    name="medidor_cambio" id="medidor_cambio"
+                                    placeholder="Observaciones " value="{{ old('medidor_anomalia') }}">
+                                <x-input-error for="medidor_cambio" />
                             </div>
 
                         </div>
@@ -334,41 +346,6 @@
 
         <script>
             $(document).ready(function() {
-
-                $('#agregarOpcionBtn').click(function(e) {
-                    e.preventDefault();
-                    var nuevaOpcion = $('#nueva_opcion').val();
-                    $.ajax({
-                        url: '/addcomercio', // Reemplaza esto con la ruta correcta
-                        type: 'POST',
-                        data: {
-                            nombre: nuevaOpcion,
-                            _token: '{{ csrf_token() }}' // Asegúrate de que esto esté en tu archivo blade
-                        },
-                        success: function(response) {
-                            if (response.success) {
-                                Swal.fire({
-                                    title: "Exito!",
-                                    text: "Nuevo Comecio Agregado Exitosamente",
-                                    icon: "success"
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        location.reload(); // Recarga la página
-                                    }
-                                });
-                            }
-                        },
-                        error: function(jqXHR, textStatus, errorThrown) {
-                            // Aquí puedes manejar los errores
-                            console.error(textStatus, errorThrown);
-                        }
-                    });
-                });
-            });
-        </script>
-
-        <script>
-            $(document).ready(function() {
                 $('.select2').select2();
             });
         </script>
@@ -468,6 +445,17 @@
                 }
             });
         </script>
+
+<script>
+    document.getElementById('cambio').addEventListener('change', function() {
+        var medidorAnomalia = document.getElementById('medidor_cambio');
+        if (this.checked) {
+            medidorAnomalia.classList.remove("hidden");
+        } else {
+            medidorAnomalia.classList.add("hidden");
+        }
+    });
+</script>
     @endsection
 
 </x-app-layout>

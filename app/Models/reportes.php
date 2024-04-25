@@ -47,6 +47,7 @@ class reportes extends Model
         'lectura',
         'anomalia',
         'medidor_anomalia',
+        'medidor_cambio',
         'imposibilidad',
         'direccion',
         'tipo_comercio',
