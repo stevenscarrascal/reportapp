@@ -241,12 +241,5 @@ class ReportesController extends Controller
         //
     }
 
-    // public function addcomercio(Request $request)
-    // {
-    //     $encabezados_dets = new encabezados_dets;
-    //     $encabezados_dets->encabezados_id = "4";
-    //     $encabezados_dets->nombre = $request->nombre;
-    //     $encabezados_dets->save();
-    //     return response()->json(['success' => true]);
-    // }
+
 }
