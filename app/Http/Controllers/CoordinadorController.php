@@ -127,7 +127,7 @@ class CoordinadorController extends Controller
         $templateProcessor->setValue('anomalia', $stringAnomalias);
 
         $templateProcessor->setValue('imposibilidad', $reporte->imposibilidadReporte->nombre);
-        $templateProcessor->setValue('observaciones', $reporte->observaciones);
+        $templateProcessor->setValue('observaciones', $reporte->comentarios);
         $templateProcessor->setValue('video', config('app.url') . '/video/' . $reporte->video);
 
         for ($i = 1; $i < 7; $i++) {
