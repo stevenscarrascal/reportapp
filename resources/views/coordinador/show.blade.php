@@ -13,6 +13,13 @@
                 </div>
                 <div class="card-body">
                     <ul>
+                        @if ($validate === null)
+
+                            <div class="alert alert-danger" role="alert">
+                              <span>Contrato No REGISTRA en base de datos</span>
+                              </div>
+
+                        @endif
                         <li>
                             <span class="text-card text-sm"> Direccion: {{ $reporte->direccion }}</span>
                         </li>
@@ -133,7 +140,7 @@
                     <div class="card-header card-title text-bg-success text-center">
                         <span class="text-card">Evidencias</span>
                         <div class=" d-flex justify-content-end ">
-                            <a class="btn btn-outline-light  btn-sm" data-bs-toggle="modal" href="#exampleModalToggle"
+                            <a class="btn btn-outline-light  btn-sm" data-bs-toggle="modal" href="#modalevidencias"
                                 role="button">Vista Previa</a>
                         </div>
                     </div>
@@ -192,12 +199,12 @@
     </div>
 
     {{-- Modal --}}
-    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+    <div class="modal fade" id="modalevidencias" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
         tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Evidencias Fotograficas</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Contrato:<span class="text-danger"> {{$reporte->contrato}}</span> Medidor:<span class="text-danger"> {{$reporte->medidor}}</span> Lectura:<span class="text-danger"> {{$reporte->lectura}}</span></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
