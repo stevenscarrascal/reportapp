@@ -5,6 +5,7 @@ use App\Http\Controllers\PersonalsController;
 use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\DireccionesController;
+use App\Http\Controllers\FuntionController;
 use App\Http\Controllers\GraficosController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth.login');
 });
+Route::get('/funtion/busqueda/{id}', [FuntionController::class,'BuscarContrato'])->name('Contrato');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::middleware('check_user_status')->group(function () {

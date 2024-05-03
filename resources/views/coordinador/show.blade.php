@@ -83,6 +83,16 @@
                 </div>
             </div>
         </div>
+        <div class="col">
+            <div class="card border-info " style="height: 100%;">
+                <div class="card-header card-title text-bg-info text-center">
+                    <span class="text-card">Comentarios del Lector</span>
+                </div>
+                <div class="card-body ">
+                        <div class="text-card text-sm">{{ $reporte->comentarios }}</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="row">
