@@ -20,7 +20,7 @@ class PersonalsDatatable extends DataTableComponent
     {
         $this->setPrimaryKey('id');
         $this->setColumnSelectStatus(false);
-        $this->setPerPage(10);
+        $this->setPerPage(5);
         $this->setConfigurableAreas([
             'toolbar-left-end' => 'personals.drop',
         ]);
