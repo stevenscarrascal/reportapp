@@ -11,7 +11,7 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\reportes;
 use App\Models\vs_anomalias;
 
-class ReportesDatatable extends DataTableComponent
+class AuditoriaDatatable extends DataTableComponent
 {
     protected $model = reportes::class;
     public ?int $searchFilterDebounce = 500;
@@ -46,19 +46,6 @@ class ReportesDatatable extends DataTableComponent
     public function filters(): array
     {
         return [
-            SelectFilter::make('Estados')
-                ->options([
-                    '' => 'All',
-                    '5' => 'Pendientes',
-                    '7' => 'Rechazados',
-                ])
-                ->filter(function (Builder $builder, $value) {
-                    if ($value === '5') {
-                        $builder->where('reportes.estado', '5');
-                    } elseif ($value === '7') {
-                        $builder->where('reportes.estado', '7');
-                    }
-                }),
             // Aquí es donde agregas otro filtro
             SelectFilter::make('Anomalias')
                 ->options([
@@ -113,9 +100,8 @@ class ReportesDatatable extends DataTableComponent
     }
     public function builder(): Builder
     {
-        return reportes::query()->whereIn('reportes.estado', [5,7]);
+        return reportes::query()->where('reportes.estado', 6);
     }
-
 
     public function columns(): array
     {

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\auditoria;
+use App\Models\reportes;
+use App\Models\vs_anomalias;
+use App\Models\vs_estado;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuditoriaController extends Controller
 {
