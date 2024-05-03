@@ -14,11 +14,9 @@
                 <div class="card-body">
                     <ul>
                         @if ($validate === null)
-
                             <div class="alert alert-danger" role="alert">
-                              <span>Contrato No REGISTRA en base de datos</span>
-                              </div>
-
+                                <span>Contrato No REGISTRA en base de datos</span>
+                            </div>
                         @endif
                         <li>
                             <span class="text-card text-sm"> Direccion: {{ $reporte->direccion }}</span>
@@ -32,9 +30,9 @@
                         <li>
                             <span class="text-card text-sm"> Tipo de Comercio:
                                 {{ $reporte->ComercioReporte->nombre }}</span>
-                                @if ($reporte->nuevo_comercio)
-                                    <span class="text-card text-sm"> Comercio: {{ $reporte->nuevo_comercio }}</span>
-                                @endif
+                            @if ($reporte->nuevo_comercio)
+                                <span class="text-card text-sm"> Comercio: {{ $reporte->nuevo_comercio }}</span>
+                            @endif
                         </li>
                     </ul>
 
@@ -68,6 +66,11 @@
                                 <span class="text-card text-sm">{{ $anomalia->nombre }}</span>
                             </li>
                         @endforeach
+                        @if ($anomalias === 68)
+                            <li>
+                                <span class="text-card text-sm">Medidor Encontrado: {{ $reporte->medidor_anomalia }}</span>
+                            </li>
+                        @endif
                     </ul>
 
                 </div>
@@ -79,20 +82,11 @@
                     <span class="text-card">Comentarios del Lector</span>
                 </div>
                 <div class="card-body ">
-                        <div class="text-card text-sm">{{ $reporte->comentarios }}</div>
+                    <div class="text-card text-sm">{{ $reporte->comentarios }}</div>
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card border-info " style="height: 100%;">
-                <div class="card-header card-title text-bg-info text-center">
-                    <span class="text-card">Comentarios del Lector</span>
-                </div>
-                <div class="card-body ">
-                        <div class="text-card text-sm">{{ $reporte->comentarios }}</div>
-                </div>
-            </div>
-        </div>
+
     </div>
 
     <div class="row">
@@ -214,7 +208,10 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Contrato:<span class="text-danger"> {{$reporte->contrato}}</span> Medidor:<span class="text-danger"> {{$reporte->medidor}}</span> Lectura:<span class="text-danger"> {{$reporte->lectura}}</span></h1>
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Contrato:<span class="text-danger">
+                            {{ $reporte->contrato }}</span> Medidor:<span class="text-danger">
+                            {{ $reporte->medidor }}</span> Lectura:<span class="text-danger">
+                            {{ $reporte->lectura }}</span></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -323,5 +320,4 @@
             });
         });
     </script>
-
 @endsection
