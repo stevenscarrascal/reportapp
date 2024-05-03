@@ -66,6 +66,36 @@
                                                     <x-input-error for="medidor" />
                                                 </div>
                                                 <div class=" mb-3">
+                                                    <div class="flex items-center mt-2 ">
+                                                        <input id="medidor_noconcuerda" type="checkbox" value=""
+                                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                        <label for="medidor_noconcuerda"
+                                                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">Medidor No
+                                                            Concuerda</label>
+                                                        <input id="cambio" type="checkbox" value=""
+                                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                        <label for="cambio"
+                                                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cambio de
+                                                            Medidor</label>
+                                                    </div>
+                                                    <div id="medidor_anomalia" class="mt-2 hidden">
+                                                        <x-label for='medidor2' value='Numero de medidor que No Concuerda' class="mb-2" />
+                                                        <input type="text"
+                                                            class="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 "
+                                                            name="medidor_anomalia" id="medidor_anomalia"
+                                                            placeholder="Ingrese su Numero de Medidor" value="{{ old('medidor_anomalia') }}">
+                                                        <x-input-error for="medidor_anomalia" />
+                                                    </div>
+                                                    <div id="medidor_cambio" class="mt-2 hidden">
+                                                        <x-label for='medidor_cambio' value='Motivo del Cambio de medidor' class="mb-2" />
+                                                        <input type="text"
+                                                            class="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 "
+                                                            name="medidor_cambio" id="medidor_cambio" placeholder="Observaciones "
+                                                            value="{{ old('medidor_anomalia') }}">
+                                                        <x-input-error for="medidor_cambio" />
+                                                    </div>
+                                                </div>
+                                                <div class=" mb-3">
                                                     <x-label for='lectura' value='Numero de lectura' class="mb-2" />
                                                     <input type="number"
                                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -419,7 +449,7 @@
             });
         </script>
 
-       
+
         <script>
             $(document).ready(function() {
                 $('#myForm').submit(function(e) {
@@ -552,6 +582,27 @@
             }
             // Llamar a la función para obtener la ubicación al cargar la página
             window.onload = obtenerUbicacion;
+        </script>
+         <script>
+            document.getElementById('medidor_noconcuerda').addEventListener('change', function() {
+                var medidorAnomalia = document.getElementById('medidor_anomalia');
+                if (this.checked) {
+                    medidorAnomalia.classList.remove("hidden");
+                } else {
+                    medidorAnomalia.classList.add("hidden");
+                }
+            });
+        </script>
+
+        <script>
+            document.getElementById('cambio').addEventListener('change', function() {
+                var medidorAnomalia = document.getElementById('medidor_cambio');
+                if (this.checked) {
+                    medidorAnomalia.classList.remove("hidden");
+                } else {
+                    medidorAnomalia.classList.add("hidden");
+                }
+            });
         </script>
     @endsection
 </x-app-layout>

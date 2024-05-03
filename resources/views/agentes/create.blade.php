@@ -89,7 +89,6 @@
                                     value="{{ old('medidor_anomalia') }}">
                                 <x-input-error for="medidor_cambio" />
                             </div>
-
                         </div>
                         <div class=" mb-3">
                             <x-label for='lectura' value='Numero de lectura' class="mb-2" />

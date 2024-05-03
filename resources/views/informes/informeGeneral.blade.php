@@ -1,56 +1,17 @@
-@extends('dashboard.dashboard')
+@extends('layouts.frontpage.app')
 
 @section('content')
-    <div class="row gap-1 mb-2">
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <div id="container" style="width:100%; height:400px;"></div>
-                    <a class="btn btn-outline-primary " id="pdf"> Descargar Pdf</a>
-                </div>
+<div class="col">
+    <div class="widget widget-chart-three">
+        <div class="widget-heading">
+            <div class="widget-content">
+                <iframe title="qAnalitycreporte" width="100%" height="836" src="https://app.powerbi.com/view?r=eyJrIjoiMzY2NjhlNDAtNmQyZC00NDdmLWE4MzItZjFhMmM1Y2E1ZDVjIiwidCI6ImE3MDViNGI5LWE3Y2UtNDA3YS04YTdlLTY0NThlYjVkZDQxNiJ9" frameborder="0" allowFullScreen="true"></iframe>
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 @section('scripts')
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function() {
-            const reportes = {!! json_encode($reportes) !!};
-
-            const chart = Highcharts.chart('container', {
-                chart: {
-                    type: 'bar'
-                },
-                title: {
-                    text: 'Reportes totales Por mes'
-                },
-                xAxis: {
-                    title: {
-                        text: 'Año 2024'
-                    }
-                },
-                yAxis: {
-                    title: {
-                        text: 'Cantidad de reportes'
-                    }
-                },
-
-                series: reportes.map((item, index) => ({
-                    name: item.month,
-                    data: [item.total],
-                    color: Highcharts.getOptions().colors[
-                        index] // Asigna un color diferente a cada barra
-                }))
-            });
-        });
-
-         // Activate the custom button
-         document.getElementById('pdf').addEventListener('click', function() {
-            Highcharts.charts[0].exportChart({
-                type: 'application/pdf'
-            });
-        });
-    </script>
 
 @endsection

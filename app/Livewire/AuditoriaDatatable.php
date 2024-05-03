@@ -150,7 +150,7 @@ class AuditoriaDatatable extends DataTableComponent
                 ->collapseOnMobile(),
             Column::make('Acciones', 'id')
                 ->format(
-                    fn ($value, $row, Column $column) => view('coordinador.actions', compact('value'))
+                    fn ($value, $row, Column $column) => view('auditoria.actions', compact('value'))
                 ),
         ];
     }

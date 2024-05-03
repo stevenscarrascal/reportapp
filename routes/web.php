@@ -8,6 +8,7 @@ use App\Http\Controllers\AuditoriaController;
 use App\Http\Controllers\DireccionesController;
 use App\Http\Controllers\FuntionController;
 use App\Http\Controllers\GraficosController;
+use App\Http\Controllers\InformesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,12 +35,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::get('/admin', adminController::class)->name('admin');
         Route::post('/addcomercio', [ReportesController::class, 'addcomercio'])->name('addcomercio');
         Route::get('/busqueda', [DireccionesController::class, 'index'])->name('busqueda');
-        Route::prefix('informes')->group(function () {
-            Route::get('/ConteoDia', [GraficosController::class, 'ConteoRegistrosxDia'])->name('ConteoDia');
-            Route::get('/filtro', [GraficosController::class, 'ReportesFilter']);
-            Route::get('/filtroMin', [GraficosController::class, 'TiempoPersonal']);
-            Route::get('/General', [GraficosController::class, 'ReportesTotalesxmes'])->name('General');
-        });
+       Route::get('/informes', [InformesController::class, 'InfoGeneral'])->name('informes');
         Route::resource('/auditorias', AuditoriaController::class)->names('auditorias');
     });
 });
