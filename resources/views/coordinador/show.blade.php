@@ -66,11 +66,9 @@
                                 <span class="text-card text-sm">{{ $anomalia->nombre }}</span>
                             </li>
                         @endforeach
-                        @if ($anomalias === 68)
                             <li>
                                 <span class="text-card text-sm">Medidor Encontrado: {{ $reporte->medidor_anomalia }}</span>
                             </li>
-                        @endif
                     </ul>
 
                 </div>
