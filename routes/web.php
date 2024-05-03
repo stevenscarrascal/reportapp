@@ -4,6 +4,7 @@ use App\Http\Controllers\CoordinadorController;
 use App\Http\Controllers\PersonalsController;
 use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\AuditoriaController;
 use App\Http\Controllers\DireccionesController;
 use App\Http\Controllers\FuntionController;
 use App\Http\Controllers\GraficosController;
@@ -39,5 +40,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
             Route::get('/filtroMin', [GraficosController::class, 'TiempoPersonal']);
             Route::get('/General', [GraficosController::class, 'ReportesTotalesxmes'])->name('General');
         });
+        Route::resource('/auditorias', AuditoriaController::class)->names('auditorias');
     });
 });

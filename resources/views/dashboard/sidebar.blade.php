@@ -17,7 +17,24 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span class="active">Dashboard</span></a>
     </li>
-
+    <hr class="sidebar-divider">
+    <div class="sidebar-heading">
+        Auditoria
+    </div>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#auditoria"
+                aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-clipboard"></i>
+                <span>Auditoria</span>
+            </a>
+            <div id="auditoria" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Acciones</h6>
+                    <a class="collapse-item" href="{{ route('auditorias.index') }}">Revisiones</a>
+                </div>
+            </div>
+        </li>
     <!-- Divider -->
     <hr class="sidebar-divider">
 

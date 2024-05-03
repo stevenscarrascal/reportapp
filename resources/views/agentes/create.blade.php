@@ -16,15 +16,22 @@
                         <input type="text" hidden id="latitud" name="latitud" value="">
                         <input type="text" hidden id="longitud" name="longitud" value="">
 
-                        <label for="Contrato" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Numero de Contrato</label>
+                        <label for="Contrato"
+                            class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Numero de
+                            Contrato</label>
                         <div class="relative mb-3 ">
                             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                                 </svg>
                             </div>
-                            <input type="search" id="Contrato" name="contrato" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="ingrese su numero de contrato" required />
-                            <button onclick="BuscarContrato()" type="button" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Buscar</button>
+                            <input type="search" id="Contrato" name="contrato"
+                                class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
+                                placeholder="ingrese su numero de contrato" required />
+                            <button onclick="BuscarContrato()" type="button"
+                                class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Buscar</button>
 
                         </div>
                         <div class="mt-2 hidden" id="ubicacion">
@@ -41,8 +48,7 @@
                                         <p id="direccion"></p>
                                     </div>
                                 </div>
-                                <a type="button" id="link"
-                                    target="_blank"
+                                <a type="button" id="link" target="_blank"
                                     class="text-white bg-green-800 hover:bg-green-500/90 focus:ring-4 focus:outline-none focus:ring-green-800/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2">
                                     Ver en Maps
                                 </a>
@@ -56,15 +62,16 @@
                                 value="{{ old('medidor') }}">
                             <x-input-error for="medidor" />
                             <div class="flex items-center mt-2 ">
-                                <input id="link" type="checkbox" value=""
+                                <input id="medidor_noconcuerda" type="checkbox" value=""
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for="link"
+                                <label for="medidor_noconcuerda"
                                     class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">Medidor No
                                     Concuerda</label>
-                                    <input id="cambio" type="checkbox" value=""
+                                <input id="cambio" type="checkbox" value=""
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                 <label for="cambio"
-                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cambio de Medidor</label>
+                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cambio de
+                                    Medidor</label>
                             </div>
                             <div id="medidor_anomalia" class="mt-2 hidden">
                                 <x-label for='medidor2' value='Numero de medidor que No Concuerda' class="mb-2" />
@@ -78,8 +85,8 @@
                                 <x-label for='medidor_cambio' value='Motivo del Cambio de medidor' class="mb-2" />
                                 <input type="text"
                                     class="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 "
-                                    name="medidor_cambio" id="medidor_cambio"
-                                    placeholder="Observaciones " value="{{ old('medidor_anomalia') }}">
+                                    name="medidor_cambio" id="medidor_cambio" placeholder="Observaciones "
+                                    value="{{ old('medidor_anomalia') }}">
                                 <x-input-error for="medidor_cambio" />
                             </div>
 
@@ -342,43 +349,42 @@
     </div>
 
     @section('js')
-
-    <script>
-        function BuscarContrato() {
-            var id = $('#Contrato').val();
-            if (id) {
-                $.ajax({
-                    url: '/funtion/busqueda/' + id,
-                    type: 'GET',
-                    success: function(response) {
-                        // Aquí puedes manejar la respuesta del servidor
-                        console.log(response);
-                        $('#ubicacion').removeClass('hidden');
-                        $('#medidor').val(response.contrato.medidor);
-                        $('#Contrato').attr('readonly', true);
-                        $('#direccion').text(response.contrato.direccion);
-                        $('#link').attr('href', 'https://www.google.com/maps/place/' + response.src);
-                    },
-                    error: function(error) {
-                        console.log(error);
-                        if (error.responseJSON && error.responseJSON.error) {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: error.responseJSON.error,
-                            });
+        <script>
+            function BuscarContrato() {
+                var id = $('#Contrato').val();
+                if (id) {
+                    $.ajax({
+                        url: '/funtion/busqueda/' + id,
+                        type: 'GET',
+                        success: function(response) {
+                            // Aquí puedes manejar la respuesta del servidor
+                            console.log(response);
+                            $('#ubicacion').removeClass('hidden');
+                            $('#medidor').val(response.contrato.medidor);
+                            $('#Contrato').attr('readonly', true);
+                            $('#direccion').text(response.contrato.direccion);
+                            $('#link').attr('href', 'https://www.google.com/maps/place/' + response.src);
+                        },
+                        error: function(error) {
+                            console.log(error);
+                            if (error.responseJSON && error.responseJSON.error) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: error.responseJSON.error,
+                                });
+                            }
                         }
-                    }
-                });
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Ingrese un numero de contrato',
-                });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Ingrese un numero de contrato',
+                    });
+                }
             }
-        }
-    </script>
+        </script>
 
         <script>
             document.getElementById("comercio").addEventListener("change", function() {
@@ -467,7 +473,7 @@
         </script>
 
         <script>
-            document.getElementById('link').addEventListener('change', function() {
+            document.getElementById('medidor_noconcuerda').addEventListener('change', function() {
                 var medidorAnomalia = document.getElementById('medidor_anomalia');
                 if (this.checked) {
                     medidorAnomalia.classList.remove("hidden");
@@ -477,15 +483,15 @@
             });
         </script>
 
-<script>
-    document.getElementById('cambio').addEventListener('change', function() {
-        var medidorAnomalia = document.getElementById('medidor_cambio');
-        if (this.checked) {
-            medidorAnomalia.classList.remove("hidden");
-        } else {
-            medidorAnomalia.classList.add("hidden");
-        }
-    });
-</script>
-@endsection
+        <script>
+            document.getElementById('cambio').addEventListener('change', function() {
+                var medidorAnomalia = document.getElementById('medidor_cambio');
+                if (this.checked) {
+                    medidorAnomalia.classList.remove("hidden");
+                } else {
+                    medidorAnomalia.classList.add("hidden");
+                }
+            });
+        </script>
+    @endsection
 </x-app-layout>
