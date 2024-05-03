@@ -16,14 +16,37 @@
                         <input type="text" hidden id="latitud" name="latitud" value="">
                         <input type="text" hidden id="longitud" name="longitud" value="">
 
-                        <div class=" mb-3">
-                            <x-label for='contrato' value='Numero de contrato' class="mb-2" />
-                            <input type="text" required
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                name="contrato" id="contrato" placeholder="Ingrese su Numero de Contrato"
-                                oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="{{ old('contrato') }}"
-                                inputmode="numeric">
-                            <x-input-error for="contrato" />
+                        <label for="Contrato" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Numero de Contrato</label>
+                        <div class="relative mb-3 ">
+                            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                </svg>
+                            </div>
+                            <input type="search" id="Contrato" name="contrato" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="ingrese su numero de contrato" required />
+                            <button onclick="BuscarContrato()" type="button" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Buscar</button>
+
+                        </div>
+                        <div class="mt-2 hidden" id="ubicacion">
+                            <div class="flex justify-between items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800"
+                                role="alert">
+                                <div class="flex items-center">
+                                    <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                                    </svg>
+                                    <span class="sr-only">Info</span>
+                                    <div>
+                                        <p id="direccion"></p>
+                                    </div>
+                                </div>
+                                <a type="button" id="link"
+                                    target="_blank"
+                                    class="text-white bg-green-800 hover:bg-green-500/90 focus:ring-4 focus:outline-none focus:ring-green-800/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2">
+                                    Ver en Maps
+                                </a>
+                            </div>
                         </div>
                         <div class=" mb-3">
                             <x-label for='medidor' value='Numero de medidor' class="mb-2" />
@@ -319,6 +342,44 @@
     </div>
 
     @section('js')
+
+    <script>
+        function BuscarContrato() {
+            var id = $('#Contrato').val();
+            if (id) {
+                $.ajax({
+                    url: '/funtion/busqueda/' + id,
+                    type: 'GET',
+                    success: function(response) {
+                        // Aquí puedes manejar la respuesta del servidor
+                        console.log(response);
+                        $('#ubicacion').removeClass('hidden');
+                        $('#medidor').val(response.contrato.medidor);
+                        $('#Contrato').attr('readonly', true);
+                        $('#direccion').text(response.contrato.direccion);
+                        $('#link').attr('href', 'https://www.google.com/maps/place/' + response.src);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                        if (error.responseJSON && error.responseJSON.error) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: error.responseJSON.error,
+                            });
+                        }
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ingrese un numero de contrato',
+                });
+            }
+        }
+    </script>
+
         <script>
             document.getElementById("comercio").addEventListener("change", function() {
                 var divComercioNuevo = document.getElementById("div-comercio-nuevo");
@@ -344,31 +405,6 @@
                 $('.select2').select2();
             });
         </script>
-
-        {{-- <script>
-            $(document).ready(function() {
-                var alertShown = false; // Variable de control
-
-                $('#anomalia').on('select2:select', function(e) {
-                    var anomalia = document.getElementById('video_evidencia');
-                    var values = $(this).val();
-
-                    if (values.includes('8')) {
-                        anomalia.classList.add('hidden');
-                        alertShown = false; // Resetea la variable de control cuando se selecciona '8'
-                    } else if (!alertShown) { // Solo muestra el alerta si no se ha mostrado antes
-                        Swal.fire({
-                            title: "Anomalia?",
-                            text: "Debes Subir el Video de Evidencia de la Anomalia",
-                            icon: "question"
-                        });
-                        anomalia.classList.remove('hidden');
-                        alertShown =
-                            true; // Marca la variable de control como verdadera después de mostrar el alerta
-                    }
-                });
-            });
-        </script> --}}
 
         <script>
             for (let i = 1; i <= 7; i++) {
@@ -451,6 +487,5 @@
         }
     });
 </script>
-    @endsection
-
+@endsection
 </x-app-layout>

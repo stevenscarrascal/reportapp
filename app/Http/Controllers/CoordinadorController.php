@@ -85,10 +85,13 @@ class CoordinadorController extends Controller
      */
     public function show($id)
     {
+
         $reporte = reportes::find($id);
+        $contrato = $reporte->contrato;
+        $validate = direcciones::where('contrato',$contrato)->first();
         $anomaliasIds = json_decode($reporte->anomalia);
         $anomalias = vs_anomalias::whereIn('id', $anomaliasIds)->get();
-        return view('coordinador.show', compact('reporte', 'anomalias'));
+        return view('coordinador.show', compact('reporte', 'anomalias','validate'));
     }
 
     /**
