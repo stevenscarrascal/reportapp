@@ -20,6 +20,7 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('plugins/bootstrap-5.2.3-dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('plugins/Datatables/datatables.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -69,13 +70,14 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('plugins/jquery-3.7.1/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('plugins/bootstrap-5.2.3-dist/js/bootstrap.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Core plugin JavaScript-->
-    <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('assets/js/sbadmin2.min.js') }}"></script>
     <script src="{{ asset('plugins/sweetalert2/sweetalert2@11.js') }}"></script>
+    <script src="{{ asset('plugins/Datatables/datatables.min.js') }}"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
