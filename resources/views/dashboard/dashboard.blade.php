@@ -22,6 +22,7 @@
     <link href="{{ asset('plugins/bootstrap-5.2.3-dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('plugins/Datatables/datatables.min.css') }}" rel="stylesheet">
 
+
 </head>
 
 <body id="page-top">

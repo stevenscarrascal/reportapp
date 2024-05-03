@@ -68,7 +68,7 @@ class reportes extends Model
 
     public function personal()
     {
-        return $this->belongsTo(personals::class);
+        return $this->hasOne(personals::class,'id','personal_id');
     }
 
 

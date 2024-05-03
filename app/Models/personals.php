@@ -36,11 +36,16 @@ class personals extends Model
     }
 
 
-    public function tipodocumento(){
+    public function tipodocumento()
+    {
 
         return $this->hasOne(vs_tipo_documento::class, 'id', 'tipo_documento');
     }
 
+    public function reportes()
+    {
+        return $this->hasMany(reportes::class, 'id', 'personal_id');
+    }
 
     public function estado()
     {
@@ -48,9 +53,7 @@ class personals extends Model
     }
 
     public function roles()
-{
-    return $this->belongsToMany(Role::class);
-}
-
-
+    {
+        return $this->belongsToMany(Role::class);
+    }
 }
