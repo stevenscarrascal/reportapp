@@ -4,7 +4,6 @@
     <div class="mb-4 d-flex justify-content-end">
         <a href="{{ route('coordinador.index') }}" class="btn btn-primary btn-sm"> Regresar</a>
     </div>
-
     <div class="row mb-4">
         <div class="col">
             <div class="card border-primary" style="height: 100%;">
@@ -84,9 +83,7 @@
                 </div>
             </div>
         </div>
-
     </div>
-
     <div class="row">
         <div class="col-xl-6">
             <form action="{{ route('coordinador.update', $reporte->id) }}" method="post" id="observacion"
@@ -292,7 +289,6 @@
             </div>
         </div>
     </div>
-
     {{-- Modal --}}
     <div class="modal fade" id="modalevidencias" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -324,17 +320,6 @@
 @endsection
 
 @section('scripts')
-    <script>
-        document.getElementById("video").addEventListener("change", function() {
-            var reader = new FileReader();
-
-            reader.onload = function(e) {
-                document.getElementById('videoPreview').src = e.target.result;
-            }
-
-            reader.readAsDataURL(this.files[0]);
-        });
-    </script>
     <script>
         for (let i = 1; i <= 6; i++) {
             document.getElementById("foto" + i).addEventListener("change", function() {
