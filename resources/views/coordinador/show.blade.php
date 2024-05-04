@@ -66,9 +66,9 @@
                                 <span class="text-card text-sm">{{ $anomalia->nombre }}</span>
                             </li>
                         @endforeach
-                            <li>
-                                <span class="text-card text-sm">Medidor Encontrado: {{ $reporte->medidor_anomalia }}</span>
-                            </li>
+                        <li>
+                            <span class="text-card text-sm">Medidor Encontrado: {{ $reporte->medidor_anomalia }}</span>
+                        </li>
                     </ul>
 
                 </div>
@@ -93,201 +93,210 @@
                 enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
-                <div class="card border-success" style="height: 500px;">
+                <div class="card border-success" style="height:100%;">
                     <div class="card-header card-title text-bg-success text-center">
                         <span class="text-card">Observaciones</span>
                     </div>
                     <div class="card-body">
-                        <div class="card p-3">
-                            <textarea id="editor" rows="10" name="observaciones" class="form-control mb-3"
-                                placeholder="Escriba Sus Observaciones" required {{ $reporte->estado == '6' ? 'readonly' : '' }}>   {{ $reporte->estado == '6' ? $reporte->observaciones : '' }}</textarea>
-                            @if ($reporte->estado != '6')
-                                <div class="mb-2">
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label" for="inlineRadio1">
-                                            <span class="badge badge-success">Revisado</span>
-                                            <input class="form-check-input" type="radio" name="estado" id="inlineRadio1"
-                                                value="6">
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label" for="inlineRadio2">
-                                            <span class="badge badge-danger">Rechazado</span>
-                                            <input class="form-check-input" type="radio" name="estado" id="inlineRadio2"
-                                                value="7">
-                                        </label>
-                                    </div>
-                                </div>
-                            @endif
-                            <div class="alert alert-warning d-none" role="alert" id="progressBarObservacion">
-                                <div class="spinner-border ms-auto" aria-hidden="true"></div>
-                                <span class="text-sm">Guardando Cambios Porfavor Espere.....</span>
+                        <textarea id="editor" rows="10" name="observaciones" class="form-control mb-3"
+                        placeholder="Escriba Sus Observaciones" required {{ $reporte->estado == '6' ? 'readonly' : '' }}>   {{ $reporte->estado == '6' ? $reporte->observaciones : '' }}</textarea>
+                    @if ($reporte->estado != '6')
+                        <div class="mb-2">
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label" for="inlineRadio1">
+                                    <span class="badge badge-success">Revisado</span>
+                                    <input class="form-check-input" type="radio" name="estado" id="inlineRadio1"
+                                        value="6">
+                                </label>
                             </div>
-                            @if ($reporte->estado != '6')
-                                <div class=" d-flex justify-content-end">
-                                    <button type="submit" id="submitButtonObservacion"
-                                        class="btn btn-success">Guardar</button>
-                                </div>
-                            @endif
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label" for="inlineRadio2">
+                                    <span class="badge badge-danger">Rechazado</span>
+                                    <input class="form-check-input" type="radio" name="estado" id="inlineRadio2"
+                                        value="7">
+                                </label>
+                            </div>
                         </div>
+                    @endif
+                    <div class="alert alert-warning d-none" role="alert" id="progressBarObservacion">
+                        <div class="spinner-border ms-auto" aria-hidden="true"></div>
+                        <span class="text-sm">Guardando Cambios Porfavor Espere.....</span>
+                    </div>
+                    @if ($reporte->estado != '6')
+                        <div class=" d-flex justify-content-end">
+                            <button type="submit" id="submitButtonObservacion"
+                                class="btn btn-success">Guardar</button>
+                        </div>
+                    @endif
                     </div>
                 </div>
             </form>
         </div>
         <div class="col-xl-6">
-
             <div class="row">
-                <div id="flStackForm" class="col-lg-12 layout-spacing layout-top-spacing">
+                <div class="card border-success">
+                    <div class="card-title text-center mt-2">
+                        <span class="text-card">Evidencias</span>
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                <a class="btn btn-success  btn-sm mt-2" data-bs-toggle="modal" href="#modalevidencias"
+                                    role="button">Vista Previa</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('coordinador.store') }}" method="POST" enctype="multipart/form-data"
+                        id="evidencias">
+                        @csrf
+                        <input type="text" name="id" value="{{ $reporte->id }}" hidden>
+
+                        <div class="card-body">
+                            <div class="">
+                                <div class="input-group">
+                                    <input class="form-control" type="file" id="video" name="video"
+                                        accept="video/mp4">
+                                    <span class="input-group-text" id="video">video</span>
+                                </div>
+                                <hr>
+                                <div class="input-group mb-1 ">
+                                    <input type="file" class="form-control" id="foto1" name="foto1"
+                                        accept="image/jpeg">
+                                    <span class="input-group-text" id="foto1">Inmueble</span>
+                                </div>
+                                <div class="input-group mb-1">
+                                    <input type="file" class="form-control" id="foto2" name="foto2"
+                                        accept="image/jpeg">
+                                    <span class="input-group-text" for="foto2">Numero Serial</span>
+                                </div>
+                                <div class="input-group mb-1">
+                                    <input type="file" class="form-control" id="foto3" name="foto3"
+                                        accept="image/jpeg">
+                                    <spam class="input-group-text" for="foto3">Numero Lectura</spam>
+                                </div>
+                                <div class="input-group mb-1">
+                                    <input type="file" class="form-control" id="foto4" name="foto4"
+                                        accept="image/jpeg">
+                                    <spam class="input-group-text" for="foto4">Numero Medidor</spam>
+                                </div>
+                                <div class="input-group mb-1">
+                                    <input type="file" class="form-control" id="foto5" name="foto5"
+                                        accept="image/jpeg">
+                                    <spam class="input-group-text" for="foto5">Estado Medidor</spam>
+                                </div>
+                                <div class="input-group mb-1">
+                                    <input type="file" class="form-control" id="foto6" name="foto6"
+                                        accept="image/jpeg">
+                                    <spam class="input-group-text" for="foto6">Opcional</spam>
+                                </div>
+
+                                <div class="alert alert-success d-none alert-evidencia" role="alert"
+                                    id="alert">
+                                </div>
+                                <div class="alert alert-warning d-none" role="alert"
+                                    id="progressBarEvidencias">
+                                    <div class="spinner-border ms-auto" aria-hidden="true"></div>
+                                    <span class="text-sm">Cargando Archivos Porfavor Espere.....</span>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="d-flex justify-content-end">
+                                        <button type="submit" id="submitButtonEvidencias"
+                                            class="btn btn-success">Guardar</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </form>
+                    </div>
+                </div>
+                {{-- <div id="flStackForm" class="col-lg-12 layout-spacing layout-top-spacing">
                     <div class="statbox widget box box-shadow">
                         <div class="widget-header">
                             <div class="row">
                                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                        <a class="btn btn-success  btn-sm mt-2" data-bs-toggle="modal" href="#modalevidencias"
-                                            role="button">Vista Previa</a>
+                                    <a class="btn btn-success  btn-sm mt-2" data-bs-toggle="modal" href="#modalevidencias"
+                                        role="button">Vista Previa</a>
                                 </div>
                             </div>
                         </div>
                         <div class="widget-content widget-content-area">
-
-                            <form action="{{ route('coordinador.store') }}" method="POST" enctype="multipart/form-data" id="evidencias">
+                            <form action="{{ route('coordinador.store') }}" method="POST" enctype="multipart/form-data"
+                                id="evidencias">
                                 @csrf
                                 <input type="text" name="id" value="{{ $reporte->id }}" hidden>
 
-                                    <div class="card-body">
-                                        <div class="">
-                                            <div class="input-group">
-                                                <input class="form-control" type="file" id="video" name="video"
-                                                    accept="video/mp4">
-                                                    <span class="input-group-text" id="video">video</span>
-                                            </div>
-                                            <hr>
-                                            <div class="input-group">
-                                                <input type="file" class="form-control" id="foto1" name="foto1"
-                                                    accept="image/jpeg">
-                                                    <span class="input-group-text" id="foto1">Inmueble</span>
-                                            </div>
-                                            <div class="input-group mb-2">
-                                                <input type="file" class="form-control" id="foto2" name="foto2"
-                                                    accept="image/jpeg">
-                                                <label class="input-group-text" for="foto2">Numero Serial</label>
-                                            </div>
-                                            <div class="input-group">
-                                                <input type="file" class="form-control" id="foto3" name="foto3"
-                                                    accept="image/jpeg">
-                                                <label class="input-group-text" for="foto3">Numero Lectura</label>
-                                            </div>
-                                            <div class="input-group">
-                                                <input type="file" class="form-control" id="foto4" name="foto4"
-                                                    accept="image/jpeg">
-                                                <label class="input-group-text" for="foto4">Numero Medidor</label>
-                                            </div>
-                                            <div class="input-group">
-                                                <input type="file" class="form-control" id="foto5" name="foto5"
-                                                    accept="image/jpeg">
-                                                <label class="input-group-text" for="foto5">Estado Medidor</label>
-                                            </div>
-                                            <div class="input-group">
-                                                <input type="file" class="form-control" id="foto6" name="foto6"
-                                                    accept="image/jpeg">
-                                                <label class="input-group-text" for="foto6">Opcional</label>
-                                            </div>
-
-                                            <div class="alert alert-success d-none alert-evidencia" role="alert" id="alert">
-                                            </div>
-                                            <div class="alert alert-warning d-none" role="alert" id="progressBarEvidencias">
-                                                <div class="spinner-border ms-auto" aria-hidden="true"></div>
-                                                <span class="text-sm">Cargando Archivos Porfavor Espere.....</span>
-                                            </div>
-                                            <div class="card-footer">
-                                                <div class="d-flex justify-content-end">
-                                                    <button type="submit" id="submitButtonEvidencias" class="btn btn-success">Guardar</button>
-                                                </div>
-                                            </div>
-
+                                <div class="card-body">
+                                    <div class="">
+                                        <div class="input-group">
+                                            <input class="form-control" type="file" id="video" name="video"
+                                                accept="video/mp4">
+                                            <span class="input-group-text" id="video">video</span>
                                         </div>
+                                        <hr>
+                                        <div class="input-group mb-1 ">
+                                            <input type="file" class="form-control" id="foto1" name="foto1"
+                                                accept="image/jpeg">
+                                            <span class="input-group-text" id="foto1">Inmueble</span>
+                                        </div>
+                                        <div class="input-group mb-1">
+                                            <input type="file" class="form-control" id="foto2" name="foto2"
+                                                accept="image/jpeg">
+                                            <span class="input-group-text" for="foto2">Numero Serial</span>
+                                        </div>
+                                        <div class="input-group mb-1">
+                                            <input type="file" class="form-control" id="foto3" name="foto3"
+                                                accept="image/jpeg">
+                                            <spam class="input-group-text" for="foto3">Numero Lectura</spam>
+                                        </div>
+                                        <div class="input-group mb-1">
+                                            <input type="file" class="form-control" id="foto4" name="foto4"
+                                                accept="image/jpeg">
+                                            <spam class="input-group-text" for="foto4">Numero Medidor</spam>
+                                        </div>
+                                        <div class="input-group mb-1">
+                                            <input type="file" class="form-control" id="foto5" name="foto5"
+                                                accept="image/jpeg">
+                                            <spam class="input-group-text" for="foto5">Estado Medidor</spam>
+                                        </div>
+                                        <div class="input-group mb-1">
+                                            <input type="file" class="form-control" id="foto6" name="foto6"
+                                                accept="image/jpeg">
+                                            <spam class="input-group-text" for="foto6">Opcional</spam>
+                                        </div>
+
+                                        <div class="alert alert-success d-none alert-evidencia" role="alert"
+                                            id="alert">
+                                        </div>
+                                        <div class="alert alert-warning d-none" role="alert"
+                                            id="progressBarEvidencias">
+                                            <div class="spinner-border ms-auto" aria-hidden="true"></div>
+                                            <span class="text-sm">Cargando Archivos Porfavor Espere.....</span>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="d-flex justify-content-end">
+                                                <button type="submit" id="submitButtonEvidencias"
+                                                    class="btn btn-success">Guardar</button>
+                                            </div>
+                                        </div>
+
                                     </div>
+                                </div>
 
                             </form>
 
 
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
-            {{-- <form action="{{ route('coordinador.store') }}" method="POST" enctype="multipart/form-data" id="evidencias">
-                @csrf
-                <input type="text" name="id" value="{{ $reporte->id }}" hidden>
-                <div class="card border-success" style="height: 500px;">
-                    <div class="card-header card-title text-bg-success text-center">
-                        <span class="text-card">Evidencias</span>
-                        <div class=" d-flex justify-content-end ">
-                            <a class="btn btn-outline-light  btn-sm" data-bs-toggle="modal" href="#modalevidencias"
-                                role="button">Vista Previa</a>
-                        </div>
-                    </div>
-
-                    <div class="card-body">
-                        <div class="">
-                            <div class="input-group">
-                                <input class="form-control" type="file" id="video" name="video"
-                                    accept="video/mp4">
-                                <label for="video" class="input-group-text">Video</label>
-                            </div>
-                            <hr>
-                            <div class="input-group">
-                                <input type="file" class="form-control" id="foto1" name="foto1"
-                                    accept="image/jpeg">
-                                <label class="input-group-text" for="foto1">Inmueble</label>
-                            </div>
-                            <div class="input-group mb-2">
-                                <input type="file" class="form-control" id="foto2" name="foto2"
-                                    accept="image/jpeg">
-                                <label class="input-group-text" for="foto2">Numero Serial</label>
-                            </div>
-                            <div class="input-group">
-                                <input type="file" class="form-control" id="foto3" name="foto3"
-                                    accept="image/jpeg">
-                                <label class="input-group-text" for="foto3">Numero Lectura</label>
-                            </div>
-                            <div class="input-group">
-                                <input type="file" class="form-control" id="foto4" name="foto4"
-                                    accept="image/jpeg">
-                                <label class="input-group-text" for="foto4">Numero Medidor</label>
-                            </div>
-                            <div class="input-group">
-                                <input type="file" class="form-control" id="foto5" name="foto5"
-                                    accept="image/jpeg">
-                                <label class="input-group-text" for="foto5">Estado Medidor</label>
-                            </div>
-                            <div class="input-group">
-                                <input type="file" class="form-control" id="foto6" name="foto6"
-                                    accept="image/jpeg">
-                                <label class="input-group-text" for="foto6">Opcional</label>
-                            </div>
-
-                            <div class="alert alert-success d-none alert-evidencia" role="alert" id="alert">
-                            </div>
-                            <div class="alert alert-warning d-none" role="alert" id="progressBarEvidencias">
-                                <div class="spinner-border ms-auto" aria-hidden="true"></div>
-                                <span class="text-sm">Cargando Archivos Porfavor Espere.....</span>
-                            </div>
-                            <div class="card-footer">
-                                <div class="d-flex justify-content-end">
-                                    <button type="submit" id="submitButtonEvidencias" class="btn btn-success">Guardar</button>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </form> --}}
         </div>
     </div>
 
     {{-- Modal --}}
-    <div class="modal fade" id="modalevidencias" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-        tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal fade" id="modalevidencias" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Contrato:<span class="text-danger">
@@ -308,31 +317,6 @@
                             @endforeach
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"> Ver
-                        Video</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-        tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Evidencia Video</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <video id="videoPreview" style="max-width: 100%;" controls>
-                        <source src="{{ $reporte->video ? asset('video/' . $reporte->video) : '#' }}" type="video/mp4">
-                        Tu navegador no soporta el elemento de video.
-                    </video>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Regresar
-                        a las Fotos</button>
                 </div>
             </div>
         </div>

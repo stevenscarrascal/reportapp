@@ -9,8 +9,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
-
     <!-- Loader -->
     <link href="{{ asset('layouts/vertical-light-menu/css/light/loader.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('layouts/vertical-light-menu/css/dark/loader.css') }}" rel="stylesheet" type="text/css" />
@@ -57,7 +55,7 @@
 
 </head>
 
-<body class="layout-sidebar" page="starter-pack">
+<body class="layout-boxed" page="starter-pack">
 
     <!-- BEGIN LOADER -->
     <div id="load_screen">
@@ -95,44 +93,29 @@
                     <div class="row layout-top-spacing">
                         @yield('content')
                     </div>
-
                 </div>
-
             </div>
-
-
             @include('layouts.frontpage.footer')
         </div>
         <!--  END CONTENT AREA  -->
 
     </div>
     <!-- END MAIN CONTAINER -->
-
-    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-    <script src="{{ asset('src/plugins/src/tomSelect/tom-select.base.js') }}"></script>
-    <script src="{{ asset('src/plugins/src/tomSelect/custom-tom-select.js') }}"></script>
-    <script src="{{ asset('src/plugins/src/global/vendors.min.js') }}"></script>
-    <script src="{{ asset('src/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('src/plugins/src/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('src/plugins/src/mousetrap/mousetrap.min.js') }}"></script>
-    <script src="{{ asset('src/plugins/src/waves/waves.min.js') }}"></script>
-    <script src="{{ asset('src/plugins/src/highlight/highlight.pack.js') }}"></script>
-    <script src="{{ asset('src/plugins/src/sweetalerts2/sweetalerts2.min.js') }}"></script>
-    <script src="{{ asset('src/assets/js/custom.js') }}"></script>
-    <script src="{{ asset('layouts/vertical-light-menu/app.js') }}"></script>
-    <!-- END GLOBAL MANDATORY SCRIPTS -->
-    <!-- BEGIN PAGE LEVEL PLUGINS -->
-    <script src="{{asset('src/plugins/src/filepond/filepond.min.js')}}"></script>
-    <script src="{{asset('src/plugins/src/filepond/FilePondPluginFileValidateType.min.js')}}"></script>
-    <script src="{{asset('src/plugins/src/filepond/FilePondPluginImageExifOrientation.min.js')}}"></script>
-    <script src="{{asset('src/plugins/src/filepond/FilePondPluginImagePreview.min.js')}}"></script>
-    <script src="{{asset('src/plugins/src/filepond/FilePondPluginImageCrop.min.js')}}"></script>
-    <script src="{{asset('src/plugins/src/filepond/FilePondPluginImageResize.min.js')}}"></script>
-    <script src="{{asset('src/plugins/src/filepond/FilePondPluginImageTransform.min.js')}}"></script>
-    <script src="{{asset('src/plugins/src/filepond/filepondPluginFileValidateSize.min.js')}}"></script>
-
-    <!-- END PAGE LEVEL PLUGINS -->
+ <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+ <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+ <script src="{{ asset('src/plugins/src/tomSelect/tom-select.base.js') }}"></script>
+ <script src="{{ asset('src/plugins/src/tomSelect/custom-tom-select.js') }}"></script>
+ <script src="{{ asset('src/plugins/src/global/vendors.min.js') }}"></script>
+ <script src="{{ asset('src/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+ <script src="{{ asset('src/plugins/src/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+ <script src="{{ asset('src/plugins/src/mousetrap/mousetrap.min.js') }}"></script>
+ <script src="{{ asset('src/plugins/src/waves/waves.min.js') }}"></script>
+ <script src="{{ asset('src/plugins/src/highlight/highlight.pack.js') }}"></script>
+ <script src="{{ asset('src/plugins/src/sweetalerts2/sweetalerts2.min.js') }}"></script>
+ <script src="{{ asset('src/assets/js/custom.js') }}"></script>
+ <script src="{{ asset('layouts/vertical-light-menu/app.js') }}"></script>
+ <!-- END GLOBAL MANDATORY SCRIPTS -->
+ 
 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
     @yield('scripts')
