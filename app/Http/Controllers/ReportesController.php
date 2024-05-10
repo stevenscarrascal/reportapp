@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\direcciones;
 use App\Models\encabezados_dets;
 use App\Models\reportes;
 use App\Models\vs_anomalias;
@@ -57,6 +58,12 @@ class ReportesController extends Controller
         $fontSize = 50;
 
         if ($request->input('contrato')) {
+           $contrato = direcciones::where('contrato', $request->input('contrato'))->first();
+            if (!$contrato) {
+                notify()->error('el "Contrato" No esta en la Lista de Contratos');
+                return redirect()->route('reportes.create');
+            }
+        }elseif ($request->input('contrato')) {
             $contrato = reportes::where('contrato', $request->input('contrato'))->first();
             if ($contrato) {
                 notify()->error('el Contrato ya fue registrado');
@@ -73,10 +80,9 @@ class ReportesController extends Controller
             $direccion = $data['items'][0]['address']['label'];
         }
 
+
         $AnomaliaJson = json_encode($request->anomalia);
-
         $reportes = $request->all();
-
         $reportes['personal_id'] = Auth::user()->personal->id;
         $reportes['anomalia'] = $AnomaliaJson;
         $reportes['latitud'] = $latitud;
