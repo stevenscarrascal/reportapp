@@ -15,6 +15,12 @@
                             data-twe-toggle="pill" data-twe-target="#tabs-home01" data-twe-nav-active role="tab"
                             aria-controls="tabs-home01" aria-selected="true">Informacion</a>
                     </li>
+                    <li role="presentation" class="flex-auto text-center">
+                        <a href="#tabs-profile01"
+                            class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[twe-nav-active]:border-primary data-[twe-nav-active]:text-primary dark:text-white/50 dark:hover:bg-neutral-700/60 dark:data-[twe-nav-active]:text-primary"
+                            data-twe-toggle="pill" data-twe-target="#tabs-profile01" role="tab"
+                            aria-controls="tabs-profile01" aria-selected="false">Evidencias</a>
+                    </li>
                 </ul>
 
                 <!--Tabs content-->
@@ -34,12 +40,13 @@
                                                     value="">
                                                 <input type="text" hidden id="longitud" name="longitud"
                                                     value="">
-                                                <input type="text" hidden name="personal_id" value="{{ Auth::user()->personal->id }}">
-
+                                                <input type="text" hidden name="personal_id"
+                                                    value="{{ Auth::user()->personal->id }}">
+                                                @if ($reporte->observaciones)
                                                 <x-label for='observacion' value='Observaciones del Coordinador' class="mb-2" />
                                                 <textarea id="observacion" rows="4" disabled
                                                 class="block mb-4  p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500">{{$reporte->observaciones}}</textarea>
-
+                                                @endif
                                                 <div class=" mb-3">
                                                     <x-label for='contrato' value='Numero de contrato' class="mb-2" />
                                                     <input type="text"
@@ -375,7 +382,7 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
+                    <div class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
                         id="tabs-profile01" role="tabpanel" aria-labelledby="tabs-profile-tab01">
                         <div class="px-5 py-4">
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
@@ -425,7 +432,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
         </div>
@@ -511,6 +518,32 @@
                 $('.select2').select2();
             });
         </script>
+
+        {{-- <script>
+            $(document).ready(function() {
+                var alertShown = false; // Variable de control
+
+                $('#anomalia').on('select2:select', function(e) {
+                    var anomalia = document.getElementById('video_evidencia');
+                    var values = $(this).val();
+
+                    if (values.includes('8')) {
+                        anomalia.classList.add('hidden');
+                        alertShown = false; // Resetea la variable de control cuando se selecciona '8'
+                    } else if (!alertShown) { // Solo muestra el alerta si no se ha mostrado antes
+                        Swal.fire({
+                            title: "Anomalia?",
+                            text: "Debes Subir el Video de Evidencia de la Anomalia",
+                            icon: "question"
+                        });
+                        anomalia.classList.remove('hidden');
+                        alertShown =
+                            true; // Marca la variable de control como verdadera después de mostrar el alerta
+                    }
+                }).trigger('select2:select');
+            });
+        </script> --}}
+
         <script>
             for (let i = 1; i <= 7; i++) {
                 const fileInput = document.getElementById(`foto${i}`);
