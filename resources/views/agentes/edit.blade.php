@@ -83,7 +83,7 @@
                                                         <input type="text"
                                                             class="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 "
                                                             name="medidor_anomalia" id="medidor_anomalia"
-                                                            placeholder="Ingrese su Numero de Medidor" value="{{ old('medidor_anomalia') }}">
+                                                            placeholder="Ingrese su Numero de Medidor" value="{{ $reporte->medidor_anomalia}}">
                                                         <x-input-error for="medidor_anomalia" />
                                                     </div>
                                                     <div id="medidor_cambio" class="mt-2 hidden">
@@ -91,7 +91,7 @@
                                                         <input type="text"
                                                             class="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 "
                                                             name="medidor_cambio" id="medidor_cambio" placeholder="Observaciones "
-                                                            value="{{ old('medidor_anomalia') }}">
+                                                            value="{{ $reporte->medidor_cambio }}">
                                                         <x-input-error for="medidor_cambio" />
                                                     </div>
                                                 </div>
@@ -159,7 +159,7 @@
                                                         <label for="comentarios"
                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Comentarios </label>
                                                         <textarea id="comentarios" name="comentarios" rows="4"
-                                                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                                                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500">{{$reporte->comentarios}}</textarea>
                                                         <x-input-error for="comentarios" />
                                                     </div>
                                                 </div>
@@ -518,31 +518,6 @@
                 $('.select2').select2();
             });
         </script>
-
-        {{-- <script>
-            $(document).ready(function() {
-                var alertShown = false; // Variable de control
-
-                $('#anomalia').on('select2:select', function(e) {
-                    var anomalia = document.getElementById('video_evidencia');
-                    var values = $(this).val();
-
-                    if (values.includes('8')) {
-                        anomalia.classList.add('hidden');
-                        alertShown = false; // Resetea la variable de control cuando se selecciona '8'
-                    } else if (!alertShown) { // Solo muestra el alerta si no se ha mostrado antes
-                        Swal.fire({
-                            title: "Anomalia?",
-                            text: "Debes Subir el Video de Evidencia de la Anomalia",
-                            icon: "question"
-                        });
-                        anomalia.classList.remove('hidden');
-                        alertShown =
-                            true; // Marca la variable de control como verdadera después de mostrar el alerta
-                    }
-                }).trigger('select2:select');
-            });
-        </script> --}}
 
         <script>
             for (let i = 1; i <= 7; i++) {

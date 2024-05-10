@@ -89,13 +89,6 @@ class ReportesController extends Controller
         $reportes['longitud'] = $longitud;
         $reportes['direccion'] = $direccion;
 
-        if ($video = $request->file('video')) {
-            $path = 'video/';
-            $videoname = rand(1000, 9999) . "_" . date('YmdHis') . "." . $video->getClientOriginalExtension();
-            $video->move($path, $videoname);
-            $reportes['video'] = $videoname;
-        }
-
         foreach (range(1, 6) as $i) {
             if ($imagen = $request->file('foto' . $i)) {
                 $path = 'imagen/';
@@ -170,25 +163,6 @@ class ReportesController extends Controller
         $fontSize = 50;
         $reportes['estado'] =  $estado;
 
-
-        if ($video = $request->file('video')) {
-            $path = 'video/';
-            // Obtener el nombre del video anterior desde la base de datos
-            $videoAnterior = $reportes->video;
-            // Eliminar el video anterior si existe
-            if ($videoAnterior) {
-                $rutaVideoAnterior = public_path($path . $videoAnterior);
-                if (file_exists($rutaVideoAnterior)) {
-                    unlink($rutaVideoAnterior);
-                }
-            }
-            // Procesar y guardar el nuevo video
-            $videoname = rand(1000, 9999) . "_" . date('YmdHis') . "." . $video->getClientOriginalExtension();
-            $video->move($path, $videoname);
-            $report['video'] = $videoname;
-        } else {
-            unset($report['video']);
-        }
 
         foreach (range(1, 6) as $i) {
             if ($imagen = $request->file('foto' . $i)) {
