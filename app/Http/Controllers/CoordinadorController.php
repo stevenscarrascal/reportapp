@@ -36,7 +36,8 @@ class CoordinadorController extends Controller
      */
     public function store(Request $request)
     {
-        $fontSize = 50;
+
+           $fontSize = 50;
         $reportes = reportes::find($request["id"]);
         $report = $request->all();
 
