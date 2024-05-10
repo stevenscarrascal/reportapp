@@ -37,7 +37,7 @@ class CoordinadorController extends Controller
     public function store(Request $request)
     {
 
-           $fontSize = 50;
+        $fontSize = 50;
         $reportes = reportes::find($request["id"]);
         $report = $request->all();
 
@@ -76,6 +76,7 @@ class CoordinadorController extends Controller
                 imagedestroy($imagenGD);
             }
         }
+
         $reportes->save($report);
 
         return response()->json(['success' => 'Evidencias creadas con éxito']);
@@ -165,24 +166,26 @@ class CoordinadorController extends Controller
     {
         $request->validate([
             'estado' => 'required',
+        ], [
+            'estado.required' => 'Por favor, selecciona una opción.',
         ]);
 
-
+       
         $estado = $request->estado;
-
         $reporte = reportes::find($id);
 
         if ($reporte == null) {
             return redirect()->route('coordinador.index')->with('error', 'No se encontró el reporte');
         }
 
-        if ($estado == 6) {
+        if ( $reporte && $estado == 6) {
             $reporte->estado = $request->estado;
+            $reporte->observaciones = $request->observaciones;
             $reporte->update();
             return redirect()->route('coordinador.index')->with('success', 'Reporte cerrado con éxito');
         }
 
-        if ($estado == 7) {
+        if ($reporte && $estado == 7) {
             $reporte->estado = $request->estado;
             $reporte->observaciones = $request->observaciones;
             $reporte->update();

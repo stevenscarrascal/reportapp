@@ -30,20 +30,9 @@
 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
     <link href="{{ asset('src/plugins/src/sweetalerts2/sweetalerts2.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('src/plugins/src/filepond/filepond.min.css')}}">
-    <link rel="stylesheet" href="{{asset('src/plugins/src/filepond/FilePondPluginImagePreview.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('src/assets/css/light/elements/alert.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('src/assets/css/dark/elements/alert.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/src/tomSelect/tom-select.default.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/css/light/tomSelect/custom-tomSelect.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/css/dark/tomSelect/custom-tomSelect.css') }}">
-    <link href="{{asset('src/plugins/css/light/filepond/custom-filepond.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('src/plugins/css/dark/filepond/custom-filepond.css')}}" rel="stylesheet" type="text/css" />
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{asset('src/plugins/src/glightbox/glightbox.min.css')}}">
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
 
     <style>
@@ -103,8 +92,6 @@
     <!-- END MAIN CONTAINER -->
  <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
- <script src="{{ asset('src/plugins/src/tomSelect/tom-select.base.js') }}"></script>
- <script src="{{ asset('src/plugins/src/tomSelect/custom-tom-select.js') }}"></script>
  <script src="{{ asset('src/plugins/src/global/vendors.min.js') }}"></script>
  <script src="{{ asset('src/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
  <script src="{{ asset('src/plugins/src/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
@@ -114,8 +101,10 @@
  <script src="{{ asset('src/plugins/src/sweetalerts2/sweetalerts2.min.js') }}"></script>
  <script src="{{ asset('src/assets/js/custom.js') }}"></script>
  <script src="{{ asset('layouts/vertical-light-menu/app.js') }}"></script>
+ <script src="{{ asset('src/plugins/src/glightbox/glightbox.min.js')}}"></script>
+ <script src="{{ asset('src/plugins/src/glightbox/custom-glightbox.min.js')}}"></script>
  <!-- END GLOBAL MANDATORY SCRIPTS -->
- 
+
 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
     @yield('scripts')
