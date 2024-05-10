@@ -170,7 +170,6 @@ class CoordinadorController extends Controller
             'estado.required' => 'Por favor, selecciona una opción.',
         ]);
 
-       
         $estado = $request->estado;
         $reporte = reportes::find($id);
 

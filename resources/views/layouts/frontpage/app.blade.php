@@ -32,7 +32,10 @@
     <link href="{{ asset('src/plugins/src/sweetalerts2/sweetalerts2.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('src/assets/css/light/elements/alert.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('src/assets/css/dark/elements/alert.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{asset('src/plugins/src/glightbox/glightbox.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/src/glightbox/glightbox.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/src/plugins/src/tomSelect/tom-select.default.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/src/plugins/css/light/tomSelect/custom-tomSelect.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/src/plugins/css/dark/tomSelect/custom-tomSelect.css')}}">
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
 
     <style>
@@ -103,6 +106,8 @@
  <script src="{{ asset('layouts/vertical-light-menu/app.js') }}"></script>
  <script src="{{ asset('src/plugins/src/glightbox/glightbox.min.js')}}"></script>
  <script src="{{ asset('src/plugins/src/glightbox/custom-glightbox.min.js')}}"></script>
+ <script src="{{ asset('src/plugins/src/tomSelect/tom-select.base.js')}}"></script>
+ <script src="{{ asset('src/plugins/src/tomSelect/custom-tom-select.js')}}"></script>
  <!-- END GLOBAL MANDATORY SCRIPTS -->
 
 

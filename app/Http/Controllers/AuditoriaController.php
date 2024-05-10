@@ -6,7 +6,9 @@ use App\Models\auditoria;
 use App\Models\direcciones;
 use App\Models\reportes;
 use App\Models\vs_anomalias;
+use App\Models\vs_comercios;
 use App\Models\vs_estado;
+use App\Models\vs_imposibilidad;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,12 +45,15 @@ class AuditoriaController extends Controller
      */
     public function show(string $id)
     {
+        $anomaliasver = vs_anomalias::pluck('nombre', 'id');
+        $comercios = vs_comercios::pluck('nombre', 'id');
+        $imposibilidad = vs_imposibilidad::pluck('nombre', 'id');
         $reporte = reportes::find($id);
         $contrato = $reporte->contrato;
         $validate = direcciones::where('contrato',$contrato)->first();
         $anomaliasIds = json_decode($reporte->anomalia);
         $anomalias = vs_anomalias::whereIn('id', $anomaliasIds)->get();
-        return view('auditoria.show', compact('reporte', 'anomalias','validate'));
+        return view('auditoria.show', compact('reporte', 'anomalias','validate','anomaliasver', 'comercios', 'imposibilidad','anomaliasIds'));
     }
 
     /**
@@ -117,9 +122,13 @@ class AuditoriaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, auditoria $auditoria)
+    public function update(Request $request, string $id)
     {
-        //
+
+        $reporte = reportes::find($id);
+        $reportes = $request->all();
+        $reporte->update($reportes);
+        return redirect()->route('auditorias.index')->with('success', 'Reporte Actualizado');
     }
 
     /**
