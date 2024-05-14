@@ -35,10 +35,10 @@
                     </div>
                 </a>
                 <ul class="collapse submenu list-unstyled" id="Auditoria" data-bs-parent="#accordionExample">
-                    <li>
+                    <li >
                         <a href="{{ route('auditorias.index') }}">Pendientes</a>
                     </li>
-                    <li>
+                    <li class="{{Route::currentRouteName() == 'auditorias.create' ? 'active' : ''}}">
                         <a href="{{ route('auditorias.create') }}">Revisados</a>
                     </li>
                 </ul>
