@@ -74,7 +74,7 @@
                             <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        @if ($reporte->revisado === 0)
+                        @if ($reporte->revisado === 0 || $reporte->revisado === null)
                         <form action="{{ route('auditorias.update', $reporte->id) }}" method="post">
                             @csrf
                             @method('PUT')
