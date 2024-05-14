@@ -100,7 +100,9 @@ class AuditoriaDatatable extends DataTableComponent
     }
     public function builder(): Builder
     {
-        return reportes::query()->where('reportes.estado', 6);
+        return reportes::query()
+        ->where('reportes.estado', 6)
+        ->where('reportes.revisado', 0);
     }
 
     public function columns(): array
@@ -135,16 +137,12 @@ class AuditoriaDatatable extends DataTableComponent
                 ->searchable(),
             Column::make("Comercio", "ComercioReporte.nombre")
                 ->collapseAlways(),
-            Column::make("Estado", "estado")
-                ->format(
-                    fn ($value, $row, Column $column) => match ($value) {
-                        '5' => '<span class="badge badge-warning">Pendiente</span>',
-                        '6' => '<span class="badge badge-success">Revisado</span>',
-                        '7' => '<span class="badge badge-danger">Rechazado</span>',
-                    }
-                )
-                ->html()
-                ->collapseOnMobile(),
+            Column::make("Estado", "revisado")
+            ->format(
+                fn ($value) => $value == 0 ? '<span class="badge badge-warning">Pendiente por auditar</span>' : 'No Revisado'
+            )
+            ->html()
+            ->collapseOnMobile(),
             Column::make("Fecha", "created_at")
                 ->format(fn ($value) => $value->format('d/M/Y'))
                 ->collapseOnMobile(),

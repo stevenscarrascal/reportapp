@@ -62,7 +62,8 @@ class reportes extends Model
         'foto6',
         'video',
         'estado',
-        'nuevo_comercio'
+        'nuevo_comercio',
+        'revisado'
     ];
 
     public function personal()
