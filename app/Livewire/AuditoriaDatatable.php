@@ -11,6 +11,8 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\reportes;
 use App\Models\vs_anomalias;
 
+
+
 class AuditoriaDatatable extends DataTableComponent
 {
     protected $model = reportes::class;
@@ -46,7 +48,6 @@ class AuditoriaDatatable extends DataTableComponent
     public function filters(): array
     {
         return [
-            // Aquí es donde agregas otro filtro
             SelectFilter::make('Anomalias')
                 ->options([
                     '' => 'All',
@@ -98,12 +99,15 @@ class AuditoriaDatatable extends DataTableComponent
                 }),
         ];
     }
+
     public function builder(): Builder
     {
         return reportes::query()
         ->where('reportes.estado', 6)
-        ->Where('reportes.revisado', null)
-        ->orWhere('reportes.revisado', 0);
+        ->where(function ($query) {
+            $query->whereNull('reportes.revisado')
+                  ->orWhere('reportes.revisado', 0);
+        });
     }
 
     public function columns(): array
