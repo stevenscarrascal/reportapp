@@ -11,6 +11,8 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\reportes;
 use App\Models\vs_anomalias;
 
+
+
 class AuditoriaDatatable extends DataTableComponent
 {
     protected $model = reportes::class;
