@@ -106,7 +106,6 @@ class RevisadosDatatable extends DataTableComponent
 
     public function columns(): array
     {
-
         return [
             Column::make("Nombres", "personal.nombres")
                 ->searchable(),

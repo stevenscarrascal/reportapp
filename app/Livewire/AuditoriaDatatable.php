@@ -15,7 +15,7 @@ class AuditoriaDatatable extends DataTableComponent
 {
     protected $model = reportes::class;
     public ?int $searchFilterDebounce = 500;
-    public string $defaultSortDirection = 'desc';
+    public string $defaultSortDirection = 'Asc';
     public ?string $defaultSortColumn = 'created_at';
 
 
@@ -102,7 +102,8 @@ class AuditoriaDatatable extends DataTableComponent
     {
         return reportes::query()
         ->where('reportes.estado', 6)
-        ->where('reportes.revisado', 0);
+        ->orWhere('reportes.revisado', 0)
+        ->orWhere('reportes.revisado', null);
     }
 
     public function columns(): array
