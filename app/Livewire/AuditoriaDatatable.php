@@ -102,18 +102,16 @@ class AuditoriaDatatable extends DataTableComponent
     {
         return reportes::query()
         ->where('reportes.estado', 6)
-        ->orWhere('reportes.revisado', 0)
-        ->orWhere('reportes.revisado', null);
+        ->Where('reportes.revisado', null)
+        ->orWhere('reportes.revisado', 0);
     }
 
     public function columns(): array
     {
 
         return [
-            Column::make("Nombres", "personal.nombres")
-                ->searchable(),
-            Column::make("Apellidos", "personal.apellidos")
-                ->searchable(),
+            Column::make("Nombres", "personal.nombres"),
+            Column::make("Apellidos", "personal.apellidos"),
             Column::make("Contrato", "contrato")
                 ->collapseOnMobile()
                 ->searchable(),
@@ -131,16 +129,14 @@ class AuditoriaDatatable extends DataTableComponent
                     }
                     return implode(', ', $nombres); // Devuelve los nombres como una cadena separada por comas
                 })
-                ->searchable()
                 ->collapseOnMobile(),
             Column::make("Direccion", "direccion")
-                ->collapseAlways()
-                ->searchable(),
+                ->collapseAlways(),
             Column::make("Comercio", "ComercioReporte.nombre")
                 ->collapseAlways(),
             Column::make("Estado", "revisado")
             ->format(
-                fn ($value) => $value == 0 ? '<span class="badge badge-warning">Pendiente por auditar</span>' : 'No Revisado'
+                fn ($value) => $value == 0 || $value === null ? '<span class="badge badge-warning">Pendiente por auditar</span>' : 'No Revisado'
             )
             ->html()
             ->collapseOnMobile(),
