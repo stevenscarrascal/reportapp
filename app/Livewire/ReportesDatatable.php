@@ -59,7 +59,7 @@ class ReportesDatatable extends DataTableComponent
                         $builder->where('reportes.estado', '7');
                     }
                 }),
-            
+
             SelectFilter::make('Anomalias')
                 ->options([
                     '' => 'All',
@@ -119,12 +119,9 @@ class ReportesDatatable extends DataTableComponent
 
     public function columns(): array
     {
-
         return [
-            Column::make("Nombres", "personal.nombres")
-                ->searchable(),
-            Column::make("Apellidos", "personal.apellidos")
-                ->searchable(),
+            Column::make("Nombres", "personal.nombres"),
+            Column::make("Apellidos", "personal.apellidos"),
             Column::make("Contrato", "contrato")
                 ->collapseOnMobile()
                 ->searchable(),
@@ -142,11 +139,9 @@ class ReportesDatatable extends DataTableComponent
                     }
                     return implode(', ', $nombres); // Devuelve los nombres como una cadena separada por comas
                 })
-                ->searchable()
                 ->collapseOnMobile(),
             Column::make("Direccion", "direccion")
-                ->collapseAlways()
-                ->searchable(),
+                ->collapseAlways(),
             Column::make("Comercio", "ComercioReporte.nombre")
                 ->collapseAlways(),
             Column::make("Estado", "estado")
