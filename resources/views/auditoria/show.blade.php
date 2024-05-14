@@ -74,6 +74,29 @@
                             <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
+                        @if ($reporte->revisado === 0)
+                        <form action="{{ route('auditorias.update', $reporte->id) }}" method="post">
+                            @csrf
+                            @method('PUT')
+                            <div class="form-check form-check-success form-check-inline">
+                                <input class="form-check-input" type="radio" name="revisado" id="form-check-radio-success"
+                                    value="1">
+                                <label class="form-check-label" for="form-check-radio-success">
+                                    Revisado
+                                </label>
+                            </div>
+                            <div class=" d-flex justify-content-end">
+                                <button type="submit" id="submitButtonRevisado"
+                                    class="btn btn-success">Guardar</button>
+                            </div>
+                        </form>
+                        @endif
+
+                        @if ($reporte->revisado === 1)
+                            <div class="alert alert-success" role="alert">
+                                <span class="text-sm">Este reporte ya ha sido Auditado</span>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -103,11 +126,17 @@
                             <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
+                        @if ($reporte->revisado === 1)
+                        <div class="alert alert-success" role="alert">
+                            <span class="text-sm">Revisado</span>
+                        </div>
+                    @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    @if ($reporte->revisado === 0)
     <div class="widget-content widget-content-area mt-2 ">
         <div class="row">
             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 ">
@@ -146,7 +175,7 @@
                                         <div class="form-group mb-1 ">
                                             <label for="exampleFormControlInput1">Numero de Lectura</label>
                                             <input type="text" class="form-control" id="lectura" name="lectura"
-                                                value="{{$reporte->lectura}}">
+                                                value="{{ $reporte->lectura }}">
                                         </div>
                                         <div class="form-group mb-1 ">
                                             <label for="imposibilidad" class="form-label">Imposibilidad</label>
@@ -163,7 +192,8 @@
                                     <div class="col-md-6">
                                         <div class="form-group mb-1 ">
                                             <label for="medidor" class="form-label text-danger ">Medidor Anomalia</label>
-                                            <input type="text" class="form-control" id="medidor_anomalia" name="medidor_anomalia" value="{{$reporte->medidor_anomalia}}">
+                                            <input type="text" class="form-control" id="medidor_anomalia"
+                                                name="medidor_anomalia" value="{{ $reporte->medidor_anomalia }}">
                                         </div>
                                         <div class="form-group mb-1 ">
                                             <label for="comercio" class="form-label">Tipo de Comercio</label>
@@ -286,6 +316,7 @@
             </div>
         </div>
     </div>
+    @endif
     <div class="widget-content widget-content-area mt-2 ">
         <div class="row">
             @foreach (range(1, 6) as $i)
