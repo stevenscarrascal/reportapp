@@ -118,7 +118,7 @@
                             <x-label for='nombre_comercio' value='Nombre Del Comercio' class="mb-2" />
                             <input type="text"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                name="nombre_comercio" id="nombre_comercio" placeholder="Nombre Del Comercio "
+                                name="nombre_comercio" id="nombre_comercio" placeholder="Ingrese el Nombre Del Comercio Si lo requiere "
                                 value="{{ old('nombre_comercio') }}">
                             <x-input-error for="nombre_comercio" />
                         </div>
@@ -128,7 +128,7 @@
                                 Anomalia</label>
                             <select id="anomalia" name="anomalia[]" multiple="multiple" required
                                 class="select2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3"
-                                placeholder="Seleccione su Anomalia">
+                                >
                                 @foreach ($anomalias as $id => $nombre)
                                     <option value="{{ $id }}">{{ $nombre }}</option>
                                 @endforeach
