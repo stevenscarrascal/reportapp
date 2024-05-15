@@ -284,7 +284,7 @@
                                             </svg>
                                             <h2
                                                 class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">
-                                                Opcional</h2>
+                                                Sellos Manipulados</h2>
 
                                             <p id="elemento_6"
                                                 class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">

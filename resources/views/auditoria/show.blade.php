@@ -85,11 +85,14 @@
                                     Revisado
                                 </label>
                             </div>
-                            <div class=" d-flex justify-content-end">
-                                <button type="submit" id="submitButtonRevisado"
-                                    class="btn btn-success">Guardar</button>
+                            <div class=" d-flex justify-content-between ">
+                                <a href="{{route('auditorias.edit',$reporte->id)}}" class="btn text-success bs-tooltip rounded  me-4" data-bs-placement="top" title="Descargar Informe">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" id="Download--Streamline-Blocks---Free" height="16" width="16"><desc>Download Streamline Icon: https://streamlinehq.com</desc><path fill="#0fcceb" d="M11 0H5v4H1l7 7 7 -7h-4V0Z" stroke-width="1"></path><path fill="#0fcceb" d="M16 13v3H0v-3h16Z" stroke-width="1"></path></svg>
+                                </a>
+                                <button type="submit" id="submitButtonRevisado" class="btn btn-success">Guardar</button>
                             </div>
                         </form>
+
                         @endif
 
                         @if ($reporte->revisado === 1)
@@ -326,7 +329,7 @@
                             class="withDescriptionGlightbox glightbox-content"
                             data-glightbox="title: Contrato y medidor; description: Contrato #:{{ $reporte->contrato }} - Medidor #:{{ $reporte->medidor }};">
                             <img src="/imagen/{{ $reporte->{'foto' . $i} }}" alt="image" class="img-fluid"
-                                style="width: 289;height: 162;" />
+                            style="width:350px; height:250px; object-fit: cover;" />
                         </a>
                     </div>
                 @endif
@@ -336,7 +339,7 @@
                     <a href="{{ asset('video/' . $reporte['video']) }}"
                         class="withDescriptionGlightbox glightbox-content">
                         <img src="{{ asset('src/image/video.jpeg') }}" alt="image" class="img-fluid"
-                            style="width: 289;height: 162;" />
+                        style="width:350px; height:250px; object-fit: cover;" />
                     </a>
                 @endif
             </div>

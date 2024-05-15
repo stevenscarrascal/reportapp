@@ -256,7 +256,7 @@
                             class="withDescriptionGlightbox glightbox-content"
                             data-glightbox="title: Contrato y medidor; description: Contrato #:{{ $reporte->contrato }} - Medidor #:{{ $reporte->medidor }};">
                             <img src="/imagen/{{ $reporte->{'foto' . $i} }}" alt="image" class="img-fluid"
-                                style="width: 289;height: 162;" />
+                            style="width:350px; height:250px; object-fit: cover;" />
                         </a>
                     </div>
                 @endif
@@ -266,7 +266,7 @@
                     <a href="{{ asset('video/' . $reporte['video']) }}"
                         class="withDescriptionGlightbox glightbox-content">
                         <img src="{{ asset('src/image/video.jpeg') }}" alt="image" class="img-fluid"
-                            style="width: 289;height: 162;" />
+                        style="width:350px; height:250px; object-fit: cover;" />
                     </a>
                 @endif
             </div>
