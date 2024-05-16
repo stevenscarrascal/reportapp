@@ -12,10 +12,6 @@ use PhpOffice\PhpWord\IOFactory;
 
 class CoordinadorController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('can:coordinador');
-    }
     /**
      * Display a listing of the resource.
      */
