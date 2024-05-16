@@ -63,7 +63,8 @@ class reportes extends Model
         'video',
         'estado',
         'nuevo_comercio',
-        'revisado'
+        'revisado',
+        'nombre_comercio'
     ];
 
     public function personal()
@@ -93,8 +94,5 @@ class reportes extends Model
         return $this->hasOne(vs_comercios::class, 'id', 'tipo_comercio');
     }
 
-    public function auditoria()
-    {
-        return $this->hasOne(auditoria::class);
-    }
+
 }
