@@ -29,5 +29,10 @@ class PermisosSeeder extends Seeder
             'guard_name' => 'web',
             'estado' => 1, // Ajusta el valor según tus necesidades
         ]);
+        Permission::create([
+            'name' => 'pno',
+            'guard_name' => 'web',
+            'estado' => 1, // Ajusta el valor según tus necesidades
+        ]);
     }
 }

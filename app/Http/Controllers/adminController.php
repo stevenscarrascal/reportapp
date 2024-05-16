@@ -19,6 +19,9 @@ class adminController extends Controller
         if ($request->user()->hasRole('Coordinador')) {
             return redirect()->action([CoordinadorController::class, 'index']);
         }
+        if ($request->user()->hasRole('Pno')) {
+            return redirect()->action([AuditoriaController::class, 'index']);
+        }
 
         if ($request->user()->hasRole('Administrador')) {
             return redirect()->action([ReportesController::class, 'index']);
