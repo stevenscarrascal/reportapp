@@ -17,12 +17,12 @@ class reportes extends Model
         'anomalia' => 'required',
         'imposibilidad' => 'required  ',
         'tipo_comercio' => 'required',
-        'foto1' => 'required|image|max:5120',
-        'foto2' => 'image|max:5120',
-        'foto3' => 'image|max:5120',
-        'foto4' => 'image|max:5120',
-        'foto5' => 'image|max:5120',
-        'foto6' => 'image|max:5120'
+        'foto1' => 'image|max:7120',
+        'foto2' => 'image|max:7120',
+        'foto3' => 'image|max:7120',
+        'foto4' => 'image|max:7120',
+        'foto5' => 'image|max:7120',
+        'foto6' => 'image|max:7120'
     ];
 
     static $rulesupdate = [
@@ -31,12 +31,12 @@ class reportes extends Model
         'anomalia' => 'required',
         'imposibilidad' => 'required',
         'tipo_comercio' => 'required',
-        'foto1' => 'image|max:5120',
-        'foto2' => 'image|max:5120',
-        'foto3' => 'image|max:5120',
-        'foto4' => 'image|max:5120',
-        'foto5' => 'image|max:5120',
-        'foto6' => 'image|max:5120',
+        'foto1' => 'image|max:7120',
+        'foto2' => 'image|max:7120',
+        'foto3' => 'image|max:7120',
+        'foto4' => 'image|max:7120',
+        'foto5' => 'image|max:7120',
+        'foto6' => 'image|max:7120',
     ];
 
     protected $fillable = [
