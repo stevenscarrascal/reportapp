@@ -17,6 +17,7 @@
             @php
                 $user = Auth::user();
             @endphp
+
             @if ($user->hasRole('Administrador') || $user->hasRole('Coordinador'))
                 <li
                     class="menu {{ Route::currentRouteName() == 'coordinador.index' || Route::currentRouteName() == 'coordinador.show' ? 'active' : '' }}">
@@ -36,6 +37,7 @@
                     </a>
                 </li>
             @endif
+            
             @if ($user->hasRole('Pno') || $user->hasRole('Administrador') || $user->hasRole('Coordinador'))
                 <li
                     class="menu {{ Route::currentRouteName() == 'auditorias.index' || Route::currentRouteName() == 'auditorias.show' || Route::currentRouteName() == 'auditorias.create' ? 'active' : '' }}">

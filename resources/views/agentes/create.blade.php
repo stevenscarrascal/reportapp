@@ -118,7 +118,8 @@
                             <x-label for='nombre_comercio' value='Nombre Del Comercio' class="mb-2" />
                             <input type="text"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                name="nombre_comercio" id="nombre_comercio" placeholder="Ingrese el Nombre Del Comercio Si lo requiere "
+                                name="nombre_comercio" id="nombre_comercio"
+                                placeholder="Ingrese el Nombre Del Comercio Si lo requiere "
                                 value="{{ old('nombre_comercio') }}">
                             <x-input-error for="nombre_comercio" />
                         </div>
@@ -127,8 +128,7 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opciones de
                                 Anomalia</label>
                             <select id="anomalia" name="anomalia[]" multiple="multiple" required
-                                class="select2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3"
-                                >
+                                class="select2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3">
                                 @foreach ($anomalias as $id => $nombre)
                                     <option value="{{ $id }}">{{ $nombre }}</option>
                                 @endforeach
@@ -480,6 +480,42 @@
                     medidorAnomalia.classList.add("hidden");
                 }
             });
+        </script>
+
+        <script>
+            function checkInternetConnection() {
+                const xhr = new XMLHttpRequest();
+                const url = 'https://api.ipify.org?format=json'; // API pública para obtener la dirección IP
+
+                xhr.onload = function() {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        // La conexión a internet es exitosa
+                        const response = JSON.parse(xhr.responseText);
+                    } else {
+                        // Error en la conexión a internet
+                        notify('Error de conexión a internet', 'error');
+                    }
+                };
+
+                xhr.onerror = function() {
+                    // Error en la conexión a internet
+                    notify('Error de conexión a internet', 'error');
+                };
+
+                xhr.open('GET', url, true);
+                xhr.send();
+            }
+
+            function notify(message, type) {
+                Swal.fire({
+                    title: 'Atención',
+                    text: message,
+                    icon: type === 'error' ? 'error' : 'info', // Ajusta el ícono según el tipo
+                    confirmButtonText: 'Ok'
+                });
+            }
+            // Llama a la función para comprobar la conexión a internet
+            checkInternetConnection();
         </script>
     @endsection
 </x-app-layout>
