@@ -179,8 +179,8 @@
                                                 sube la foto en formato JPEG </p>
                                             <input id="foto1" name="foto1" type="file" class="hidden"
                                                 accept="image/*" capture="camera" />
+                                            </label>
                                             <x-input-error for="foto1" />
-                                        </label>
                                     </div>
                                 </div>
                                 <!-- Elemento 2 -->
@@ -205,6 +205,7 @@
                                             <input id="foto2" name="foto2" type="file" class="hidden"
                                                 capture="camera" accept="image/*" />
                                         </label>
+                                        <x-input-error for="foto2" />
                                     </div>
                                 </div>
                                 <!-- Elemento 3 -->
@@ -229,6 +230,7 @@
                                             <input id="foto3" name="foto3" type="file" class="hidden"
                                                 capture="camera" accept="image/*" />
                                         </label>
+                                        <x-input-error for="foto3" />
                                     </div>
                                 </div>
                                 <!-- Elemento 4 -->
@@ -253,6 +255,7 @@
                                             <input id="foto4" name="foto4" type="file" class="hidden"
                                                 capture="camera" accept="image/*" />
                                         </label>
+                                        <x-input-error for="foto4" />
                                     </div>
                                 </div>
                                 <!-- Elemento 5 -->
@@ -277,6 +280,7 @@
                                             <input id="foto5" name="foto5" type="file" class="hidden"
                                                 capture="camera" accept="image/*" />
                                         </label>
+                                        <x-input-error for="foto5" />
                                     </div>
                                 </div>
                                 <!-- Elemento 6 -->
@@ -301,6 +305,7 @@
                                             <input id="foto6" name="foto6" type="file" class="hidden"
                                                 capture="camera" accept="image/*" />
                                         </label>
+                                        <x-input-error for="foto6" />
                                     </div>
                                 </div>
                             </div>
