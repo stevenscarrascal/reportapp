@@ -94,7 +94,7 @@ class AuditoriaDatatable extends DataTableComponent
                     } elseif ($value === '13') {
                         $builder->whereJsonContains('reportes.anomalia', '67');
                     } elseif ($value === '14') {
-                        $builder->whereJsonContains('reportes.anomalia', '67');
+                        $builder->whereJsonContains('reportes.anomalia', '68');
                     }
                 }),
                 SelectFilter::make('Imposibilidades')
