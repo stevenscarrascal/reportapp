@@ -37,7 +37,7 @@
                     </a>
                 </li>
             @endif
-            
+
             @if ($user->hasRole('Pno') || $user->hasRole('Administrador') || $user->hasRole('Coordinador'))
                 <li
                     class="menu {{ Route::currentRouteName() == 'auditorias.index' || Route::currentRouteName() == 'auditorias.show' || Route::currentRouteName() == 'auditorias.create' ? 'active' : '' }}">
@@ -74,7 +74,7 @@
                 </li>
             @endif
 
-            @if ($user->hasRole('Administrador') || $user->hasRole('Coordinador'))
+            @if ($user->hasRole('Administrador'))
                 @if ($user->hasRole('Administrador'))
                     <li class="menu {{ Route::currentRouteName() == 'personals.index' ? 'active' : '' }}">
                         <a href="#Personal" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
