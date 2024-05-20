@@ -116,14 +116,18 @@
         document.getElementById(collapseID).classList.toggle("block");
     }
 </script>
+
+
+   @if (session('error'))
 <script>
-    @if ($errors->any())
-        Swal.fire({
-            title: "Error",
-            text: "{{ $errors->first() }}",
-            icon: "error"
-        });
-    @endif
+    Swal.fire({
+        title: '¡Alto!',
+        text: '{{ session('error') }}',
+        icon: 'warning',
+        confirmButtonText: 'OK'
+    });
 </script>
+@endif
+
 
 </html>
