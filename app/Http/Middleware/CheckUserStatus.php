@@ -11,12 +11,10 @@ class CheckUserStatus
 {
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->estado == 0) {
-            Auth::logout(); // Desconectamos al usuario si el estado es 0
-            notify()->error('Tu cuenta está deshabilitada. Contacta con el Coordinador.');
-            return redirect()->route('login');
+        if (Auth::check() && Auth::user()->estado === 0) {
+            Auth::logout(); //Desconectamos al usuario si el estado es 0
+            return redirect()->route('login')->with('error', 'Tu cuenta está deshabilitada. Contacta con el Coordinador.');
         }
-
         return $next($request);
     }
 }

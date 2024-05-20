@@ -30,7 +30,7 @@ class PersonalsController extends Controller
         $tipodocumento = vs_tipo_documento::pluck('nombre', 'id');
         $roles = Role::pluck('name', 'name')->all();
         $userRoles = null;
-        return view('personals.create', compact('tipodocumento', 'roles','userRoles'));
+        return view('personals.create', compact('tipodocumento', 'roles', 'userRoles'));
     }
 
     /**
@@ -71,7 +71,7 @@ class PersonalsController extends Controller
 
 
         return  redirect()->route('personals.index')->with('icon', 'success')->with('success', 'Personal Creado con Exito')
-        ->with('title', 'Guardado');
+            ->with('title', 'Guardado');
     }
 
     /**
@@ -133,13 +133,11 @@ class PersonalsController extends Controller
             }
 
 
-            return redirect()->route('personals.index')-> with('icon', 'success')->with('success', 'Personal Actualizado con Exito');
-
+            return redirect()->route('personals.index')->with('icon', 'success')->with('success', 'Personal Actualizado con Exito');
         } else {
 
             return redirect()->back()->with('icon', 'error')->with('success', 'Registro no encontrado');
         }
-
     }
 
     /**
@@ -154,7 +152,7 @@ class PersonalsController extends Controller
         if (!$personal) {
             // Manejar el caso cuando el registro no se encuentra
             // Por ejemplo, puedes redirigir de vuelta con un mensaje de error
-            return redirect()->back()->with('icon', 'error')->with('success', 'Registro no encontrado')   ;
+            return redirect()->back()->with('icon', 'error')->with('success', 'Registro no encontrado');
         }
 
         // Buscar el registro de usuario asociado con el registro personal
@@ -168,9 +166,12 @@ class PersonalsController extends Controller
         }
 
         // Actualizar la propiedad estado para ambos registros
+        // Actualizar la propiedad estado para ambos registros
+        $personal->estado = 0;
+        $personal->save();
 
-        $personal->delete();
-        $usuario->delete();
+        $usuario->estado = 0;
+        $usuario->save();
 
         // Redirigir a la ruta de índice
         return redirect()->route('personals.index')->with('icon', 'success')->with('success', 'Personal Eliminado con Exito');

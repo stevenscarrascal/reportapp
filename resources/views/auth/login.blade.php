@@ -9,8 +9,8 @@
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css" />
     <!-- Favicon -->
-    <link rel="icon" href="../assets/img/brand/favicon.png" type="image/png">
-
+    <link rel="icon" href="{{asset('/assets/img/brand/favicon.png')}}" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Q data Analtytics</title>
 </head>
 
@@ -109,11 +109,21 @@
         </section>
     </main>
 </body>
+
 <script>
     function toggleNavbar(collapseID) {
         document.getElementById(collapseID).classList.toggle("hidden");
         document.getElementById(collapseID).classList.toggle("block");
     }
+</script>
+<script>
+    @if ($errors->any())
+        Swal.fire({
+            title: "Error",
+            text: "{{ $errors->first() }}",
+            icon: "error"
+        });
+    @endif
 </script>
 
 </html>
