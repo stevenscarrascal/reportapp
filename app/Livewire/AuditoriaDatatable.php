@@ -94,7 +94,29 @@ class AuditoriaDatatable extends DataTableComponent
                     } elseif ($value === '13') {
                         $builder->whereJsonContains('reportes.anomalia', '67');
                     } elseif ($value === '14') {
-                        $builder->whereJsonContains('reportes.anomalia', '67');
+                        $builder->whereJsonContains('reportes.anomalia', '68');
+                    }
+                }),
+                SelectFilter::make('Imposibilidades')
+                ->options([
+                    '' => 'All',
+                    '1' => 'Obstaculos (Poca Visibilidad)',
+                    '2' => 'Falta de Acceso (Rejas, Cerraduras, Etc)',
+                    '3' => 'Falta de Medidor',
+                    '4' => 'Usuario No Permite Lectura',
+                    '5' => 'Lugar Deshabitado',
+                ])
+                ->filter(function (Builder $builder, $value) {
+                    if ($value === '1') {
+                        $builder->whereJsonContains('reportes.imposibilidad', '58');
+                    } elseif ($value === '2') {
+                        $builder->whereJsonContains('reportes.imposibilidad', '59');
+                    } elseif ($value === '3') {
+                        $builder->whereJsonContains('reportes.imposibilidad', '60');
+                    } elseif ($value === '4') {
+                        $builder->whereJsonContains('reportes.imposibilidad', '61');
+                    } elseif ($value === '5') {
+                        $builder->whereJsonContains('reportes.imposibilidad', '62');
                     }
                 }),
         ];

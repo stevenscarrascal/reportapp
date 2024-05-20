@@ -3,6 +3,7 @@
         <x-breadcrumb :role="'Coordinador'" :reportTitle="'Creacion de Reportes'" />
         <x-back-button route="{{ route('reportes.index') }}" />
     </x-slot>
+    
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -15,7 +16,6 @@
                         @csrf
                         <input type="text" hidden id="latitud" name="latitud" value="">
                         <input type="text" hidden id="longitud" name="longitud" value="">
-
                         <label for="Contrato"
                             class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Numero de
                             Contrato</label>
@@ -342,6 +342,7 @@
     </div>
 
     @section('js')
+
         <script>
             function BuscarContrato() {
                 var id = $('#Contrato').val();
@@ -522,5 +523,6 @@
             // Llama a la función para comprobar la conexión a internet
             checkInternetConnection();
         </script>
+
     @endsection
 </x-app-layout>

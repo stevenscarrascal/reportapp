@@ -44,6 +44,7 @@ class PersonalsDatatable extends DataTableComponent
             Column::make("Estado", "estado")
                 ->format(
                     fn ($value, $row, Column $column) => match ($value) {
+                        '0' =>'<span class="badge badge-danger">Cuenta Desactivada</span>',
                         '3' => '<span class="badge badge-success">Activo</span>',
                         '4' => '<span class="badge badge-danger">Inactivo</span>',
                     }
