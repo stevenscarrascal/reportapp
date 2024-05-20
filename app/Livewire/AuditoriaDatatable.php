@@ -108,15 +108,15 @@ class AuditoriaDatatable extends DataTableComponent
                 ])
                 ->filter(function (Builder $builder, $value) {
                     if ($value === '1') {
-                        $builder->whereJsonContains('reportes.imposibilidad', '58');
+                        $builder->where('reportes.imposibilidad', '58');
                     } elseif ($value === '2') {
-                        $builder->whereJsonContains('reportes.imposibilidad', '59');
+                        $builder->where('reportes.imposibilidad', '59');
                     } elseif ($value === '3') {
-                        $builder->whereJsonContains('reportes.imposibilidad', '60');
+                        $builder->where('reportes.imposibilidad', '60');
                     } elseif ($value === '4') {
-                        $builder->whereJsonContains('reportes.imposibilidad', '61');
+                        $builder->where('reportes.imposibilidad', '61');
                     } elseif ($value === '5') {
-                        $builder->whereJsonContains('reportes.imposibilidad', '62');
+                        $builder->where('reportes.imposibilidad', '62');
                     }
                 }),
         ];
