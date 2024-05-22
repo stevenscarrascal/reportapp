@@ -136,7 +136,8 @@ class AuditoriaDatatable extends DataTableComponent
     {
 
         return [
-            Column::make("Nombres", "personal.nombres"),
+            Column::make("Nombres", "personal.nombres")
+            ->searchable(),
             Column::make("Apellidos", "personal.apellidos"),
             Column::make("Contrato", "contrato")
                 ->collapseOnMobile()
