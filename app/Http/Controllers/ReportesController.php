@@ -63,7 +63,9 @@ class ReportesController extends Controller
                     notify()->error('el "Contrato" No esta en la Lista de Contratos');
                     return redirect()->route('reportes.create');
                 }
-            } elseif ($request->input('contrato')) {
+            }
+
+            if ($request->input('contrato')) {
                 $contrato = reportes::where('contrato', $request->input('contrato'))->first();
                 if ($contrato) {
                     notify()->error('el Contrato ya fue registrado');
