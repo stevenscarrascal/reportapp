@@ -65,6 +65,10 @@ class AuditoriaDatatable extends DataTableComponent
                     '12' => 'Inactivo y en Consumo',
                     '13' => 'Medidor no encontrado',
                     '14' => 'Medidor no concuerda con el contrato',
+                    '15' => 'Posible fuga',
+                    '16' => 'Pendiente de Retiro/Revision',
+                    '17' => 'Medidor con doble Local Comercial',
+                    '18' => 'Inspeccion y Revision',
                 ])
                 ->filter(function (Builder $builder, $value) {
                     if ($value === '1') {
@@ -95,9 +99,17 @@ class AuditoriaDatatable extends DataTableComponent
                         $builder->whereJsonContains('reportes.anomalia', '67');
                     } elseif ($value === '14') {
                         $builder->whereJsonContains('reportes.anomalia', '68');
+                    } elseif ($value === '15') {
+                        $builder->whereJsonContains('reportes.anomalia', '71');
+                    } elseif ($value === '16') {
+                        $builder->whereJsonContains('reportes.anomalia', '72');
+                    } elseif ($value === '17') {
+                        $builder->whereJsonContains('reportes.anomalia', '73');
+                    } elseif ($value === '18') {
+                        $builder->whereJsonContains('reportes.anomalia', '74');
                     }
                 }),
-                SelectFilter::make('Imposibilidades')
+            SelectFilter::make('Imposibilidades')
                 ->options([
                     '' => 'All',
                     '1' => 'Obstaculos (Poca Visibilidad)',
@@ -125,11 +137,11 @@ class AuditoriaDatatable extends DataTableComponent
     public function builder(): Builder
     {
         return reportes::query()
-        ->where('reportes.estado', 6)
-        ->where(function ($query) {
-            $query->whereNull('reportes.revisado')
-                  ->orWhere('reportes.revisado', 0);
-        });
+            ->where('reportes.estado', 6)
+            ->where(function ($query) {
+                $query->whereNull('reportes.revisado')
+                    ->orWhere('reportes.revisado', 0);
+            });
     }
 
     public function columns(): array
@@ -137,7 +149,7 @@ class AuditoriaDatatable extends DataTableComponent
 
         return [
             Column::make("Nombres", "personal.nombres")
-            ->searchable(),
+                ->searchable(),
             Column::make("Apellidos", "personal.apellidos"),
             Column::make("Contrato", "contrato")
                 ->collapseOnMobile()
@@ -162,11 +174,11 @@ class AuditoriaDatatable extends DataTableComponent
             Column::make("Comercio", "ComercioReporte.nombre")
                 ->collapseAlways(),
             Column::make("Estado", "revisado")
-            ->format(
-                fn ($value) => $value == 0 || $value === null ? '<span class="badge badge-warning">Pendiente por auditar</span>' : 'No Revisado'
-            )
-            ->html()
-            ->collapseOnMobile(),
+                ->format(
+                    fn ($value) => $value == 0 || $value === null ? '<span class="badge badge-warning">Pendiente por auditar</span>' : 'No Revisado'
+                )
+                ->html()
+                ->collapseOnMobile(),
             Column::make("Fecha", "created_at")
                 ->format(fn ($value) => $value->format('d/M/Y'))
                 ->collapseOnMobile(),
