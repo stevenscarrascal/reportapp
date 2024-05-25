@@ -68,7 +68,10 @@ class ReportesController extends Controller
             if ($request->input('contrato')) {
                 $contrato = reportes::where('contrato', $request->input('contrato'))->first();
                 if ($contrato) {
-                    notify()->error('el Contrato ya fue registrado');
+                    $fechaCreacion = $contrato->created_at->format('d-m-Y'); // Formato de fecha
+                    $nombreCreador = $contrato->personal->nombres; // Nombre del creador
+                    $mensaje = "El contrato ya fue registrado. Fecha de Registro: $fechaCreacion, Registrado por: $nombreCreador";
+                    notify()->error($mensaje);
                     return redirect()->route('reportes.create');
                 }
             }
