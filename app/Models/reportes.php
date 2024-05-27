@@ -64,7 +64,8 @@ class reportes extends Model
         'estado',
         'nuevo_comercio',
         'revisado',
-        'nombre_comercio'
+        'nombre_comercio',
+        'confirmado_anomalia'
     ];
 
     public function personal()
