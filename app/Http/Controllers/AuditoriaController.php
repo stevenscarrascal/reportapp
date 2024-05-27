@@ -124,17 +124,18 @@ class AuditoriaController extends Controller
     {
 
         $revisado = $request->revisado;
+        $anomalia_confirmada = $request->confirmado_anomalia;
         $reporte = reportes::find($id);
 
-     
+dd($request->all());
 
-        // if (!$revisado == 0) {
-        //     $reporte->update(['revisado' => $request->revisado]);
-        //     return redirect()->route('auditorias.index')->with('success', 'Reporte Revisado');
-        // }
+        if ($revisado == 1) {
+            $reporte->update(['revisado' => $request->revisado]);
+        }
+        if ($anomalia_confirmada == 1) {
+            $reporte->update(['confirmado_anomalia' => $request->confirmado_anomalia]);
+        }
 
-        $reportes = $request->all();
-        $reporte->update($reportes);
         return redirect()->route('auditorias.index')->with('success', 'Reporte Actualizado');
     }
 
