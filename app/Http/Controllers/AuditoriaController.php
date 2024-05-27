@@ -127,7 +127,7 @@ class AuditoriaController extends Controller
         $anomalia_confirmada = $request->confirmado_anomalia;
         $reporte = reportes::find($id);
 
-dd($request->all());
+
 
         if ($revisado == 1) {
             $reporte->update(['revisado' => $request->revisado]);
